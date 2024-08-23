@@ -1,0 +1,114 @@
+$azienda-color: #bb6604;
+$residenziale-color: #019214;
+$grigino: #3f3f3f;
+
+.tcrs-box-dettaglio-offerta {
+  border: 1px solid #181818;
+  width: 100%;
+  padding: 2rem;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .nome-offerta {
+    text-transform: uppercase;
+  }
+
+  .note {
+    margin-top: 24px;
+    color: $grigino;
+    font-size: 14px;
+  }
+
+  .caratteristiche-offerta {
+    margin: 0 0 16px 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+      display: block;
+      line-height: 32px;
+
+      &::before {
+        content: url("../tick-box.svg");
+        display: inline-block;
+        zoom: 50%;
+        margin-right: 20px;
+        position: relative;
+        top: 7px;
+      }
+    }
+  }
+
+  .dettaglio-top {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ccc;
+  }
+  .dettaglio-bottom {
+    padding: 24px 0;
+  }
+
+  .disclaimer {
+    background: lighten($grigino, 65%);
+    padding: 10px;
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  .btn-offerta {
+    display: inline-block;
+    padding: 10px 16px;
+    width: max-content;
+    max-width: 320px;
+    margin-top: 16px;
+    text-decoration: none !important;
+    font-weight: bold;
+  }
+
+  &.offerta-azienda {
+    .btn-offerta {
+      background-color: $azienda-color;
+      color: white;
+
+      &:hover {
+        background-color: darken($azienda-color, 10%);
+      }
+    }
+  }
+
+  &.offerta-residenziale {
+    .btn-offerta {
+      background-color: $residenziale-color;
+      color: white;
+
+      &:hover {
+        background-color: darken($residenziale-color, 10%);
+      }
+    }
+  }
+
+  div#costi-opzioni {
+    margin: 12px 0;
+  }
+
+  .riga-costo {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #3f3f3f;
+    font-weight: bold;
+  }
+
+  .riga-costo#totale {
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #333;
+  }
+  .riga-costo img {
+    position: relative;
+    top: -2px;
+    width: 14px;
+  }
+}

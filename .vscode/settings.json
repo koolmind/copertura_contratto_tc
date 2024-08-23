@@ -1,0 +1,22 @@
+{
+  "editor.fontSize": 15,
+  "windows.zoomLevel": 1,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "workbench.editor.empty.hint": "hidden",
+  "security.allowedUNCHosts": ["ubuntu20"],
+  "git.enableSmartCommit": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "security.workspace.trust.untrustedFiles": "open",
+  "liveServer.settings.donotShowInfoMsg": true,
+  //"liveSassCompile.settings.forceBaseDirectory": "/css",
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/css",
+      "savePathReplacementPairs": null
+    }
+  ],
+  "liveSassCompile.settings.generateMap": false
+}

@@ -1,0 +1,2 @@
+<h2>Il tuo indirizzo "<?php echo $indirizzo; ?>" non è ancora raggiunto dalla fibra.</h2>
+<p>La rete di Terrecablate è in continua e costante espansione... <br />ti invitiamo a riprovare prossimamente per verificare se ci sono state aggiornamenti nella tua zona.</p>

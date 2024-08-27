@@ -63,11 +63,26 @@ switch ($tecnologia) {
         <div id="result-details">
             <?php if($prods->have_posts()): ?>
                 
-                <div id="offers-list" class="offer-box">        
+                <div id="offers-list">        
             
-                <?php while($prods->have_posts()): $prods->the_post(); ?>
+                <?php while($prods->have_posts()): 
+                    $prods->the_post(); 
+                    $offerID = get_the_ID(); 
+                    $titolo = get_the_title();
+                    $prezzo = get_post_meta( $offerID, "prezzo", true );
+                    $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
+                    // $note = trim(get_post_meta( $offerID, "note", true ));
+                    $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
+                    // $disclaimer = get_post_meta( $offerID, "disclaimer", true );
+                    ?>
 
-                    <div id="offer-details" class="offer-box">
+                    <div class="offer-single offer-box offer-details" 
+                        id="offer-<?php echo $offerID; ?>" 
+                        data-offer="<?php echo $offerID; ?>"
+                        data-name="<?php echo $titolo; ?>"
+                        data-price="<?php echo $prezzo; ?>"
+                        data-attivazione="<?php echo $attivazione; ?>"
+                        >
                     <h2><?php echo get_the_title(); ?></h2>
                     </div>
                 <?php endwhile; ?>
@@ -135,28 +150,34 @@ switch ($tecnologia) {
             
             <?php //echo do_shortcode('[tcrs_offer_details id="2529"  target="cnt" color_theme="azienda"]'); ?>
 
-            <div class="tcrs-box-dettaglio-offerta offerta-azienda">
+            <div class="tcrs-box-dettaglio-offerta">
             
             <div class="dettaglio-top">                
                 <h3 id="cart-nome-offerta">NOME OFFERTA SCELTA</h3>
 
-                <ul id="caratteristiche-offerta">
+                <ul id="cart-caratteristiche-offerta">
                     <li>Fibra ultraveloce</li>
                     <li>Internet fino a 1Gbps</li>
                     <li>Router Zyxel WiFi 6</li>
                     <li>Attivazione linea gratuita</li>
                 </ul>    
 
-                <p class="flex-space-between riga-costo" id="cart-canone">
-                    <span>Costo mensile: </span>
-                    <span>38,00 €</span>
-                </p>
-                <p class="flex-space-between riga-costo" id="cart-attivazione">
-                    <span>Costo attivazione: </span>
-                    <span>25,00 €</span>
+                <p class="flex-space-between riga-costo">
+                    <span>Canone mensile base: </span>
+                    <span id="cart-canone"> - €</span>
                 </p>
 
-                <p id="cart-note">Altri costi: Chiamate da fisso verso fissi e mobili nazionali 15 cent/min</p>				
+                <p class="flex-space-between riga-costo">
+                    <span>OPZIONI AGGIUNTIVE: </span>
+                    <span id="cart-x"> - €</span>
+                </p>
+
+                <p class="flex-space-between riga-costo">
+                    <span>Costo attivazione: </span>
+                    <span id="cart-attivazione"> - €</span>
+                </p>
+
+                <p id="cart-note">...</p>				
 				
                 <div id="costi-opzioni"></div>
 				

@@ -571,22 +571,6 @@
       window.location.href = encodeURI(finalUrl);
       return;
 
-      // let bannerAreaBianca = "";
-      // if (esito.mostraAvviso) {
-      //   bannerAreaBianca = `<div class="bannerAreaBianca col-sm-12">
-      //         <div class="col-sm-2"><span class="glyphicon glyphicon-alert" id="alert-sign"></span></div>
-      //         <div class="col-sm-10"><strong>Il tuo indirizzo si trova all'interno della copertura in "aree bianche"</strong>.<br>
-      //         Le <strong>aree bianche</strong> sono quelle porzioni di territorio dove per i nuovi allacciamenti alla rete FTTH potrebbero essere necessarie <strong>opere più complesse e tempi più lunghi.</strong></div></div>`;
-      // }
-
-      // if (tipoCli == "residenziali") {
-      //   btnContratto = " btn-residenziali";
-      //   //contratto = CONTRATTO_HOME;
-      // } else {
-      //   btnContratto = esito.ftth ? "btn-ftth" : "btn-azienda";
-      //   //contratto = esito.ftth ? CONTRATTO_OFFICE_FTTH : CONTRATTO_OFFICE;
-      // }
-
       var listProd = "";
 
       // prodotto 1

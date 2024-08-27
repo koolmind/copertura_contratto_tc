@@ -44,6 +44,7 @@
   }
 }
 
+.offer-box,
 .offer-option {
   border: 1px solid $grigino;
   box-shadow: 4px 4px 6px 0 rgba(50, 50, 50, 0.3);
@@ -54,4 +55,25 @@
   -ms-border-radius: 16px;
   -o-border-radius: 16px;
   margin: 2rem 0;
+}
+
+.offer-single {
+  cursor: pointer;
+  transition: transform 300ms ease;
+  -webkit-transition: transform 300ms ease;
+  -moz-transition: transform 300ms ease;
+  -ms-transition: transform 300ms ease;
+  -o-transition: transform 300ms ease;
+
+  &:hover {
+    transform: scale(1.01);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    -o-transform: scale(1.01);
+  }
+
+  &.active {
+    background-color: pink;
+  }
 }

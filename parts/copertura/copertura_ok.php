@@ -71,7 +71,7 @@ switch ($tecnologia) {
                     $titolo = get_the_title();
                     $prezzo = get_post_meta( $offerID, "prezzo", true );
                     $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
-                    // $note = trim(get_post_meta( $offerID, "note", true ));
+                    $note = trim(get_post_meta( $offerID, "note", true ));
                     $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
                     // $disclaimer = get_post_meta( $offerID, "disclaimer", true );
                     ?>
@@ -82,6 +82,7 @@ switch ($tecnologia) {
                         data-name="<?php echo $titolo; ?>"
                         data-price="<?php echo $prezzo; ?>"
                         data-attivazione="<?php echo $attivazione; ?>"
+                        data-note="<?php echo $note; ?>"
                         >
                     <h2><?php echo get_the_title(); ?></h2>
                     </div>
@@ -91,7 +92,7 @@ switch ($tecnologia) {
             <?php endif; wp_reset_postdata(); ?>
 
             
-            <div id="offer-options">
+            <div id="offer-options" class="hide">
                 <h3>SERVIZI OPZIONALI</h3>
                 <?php // recupero le opzioni disponibili per il prodotto in base al target residenziale / azienda. Poi nascondo quelle che non servono col JS (non ho altro modo)    
                 
@@ -132,7 +133,14 @@ switch ($tecnologia) {
                     <h3><?php echo $title; ?></h3>
                     <h4><?php echo $prezzo; ?> euro/mese</h4>
                     <?php echo $desc; ?>
-                    <button role="button" class="btn-offer-option offer-option-add" data-cost="<?php echo $prezzo; ?>" data-id="<?php echo $slug;?>" data-name="<?php echo $title;?>" data-action="add">+ aggiungi</button>
+                    <button role="button" class="btn-offer-option offer-option-add js-btn-cart-add"  id="btn-opt-<?php echo $slug;?>" 
+                        data-cost="<?php echo $prezzo; ?>" 
+                        data-id="<?php echo $slug;?>" 
+                        data-name="<?php echo $title;?>" 
+                        data-multi="<?php echo $isMultipla; ?>" 
+                        data-action="add">
+                        + aggiungi
+                    </button>
                 </div>
 
                 <?php
@@ -155,42 +163,42 @@ switch ($tecnologia) {
             <div class="dettaglio-top">                
                 <h3 id="cart-nome-offerta">NOME OFFERTA SCELTA</h3>
 
-                <ul id="cart-caratteristiche-offerta">
+                <!-- <ul id="cart-caratteristiche-offerta">
                     <li>Fibra ultraveloce</li>
                     <li>Internet fino a 1Gbps</li>
                     <li>Router Zyxel WiFi 6</li>
                     <li>Attivazione linea gratuita</li>
-                </ul>    
+                </ul>     -->
 
                 <p class="flex-space-between riga-costo">
                     <span>Canone mensile base: </span>
-                    <span id="cart-canone"> - €</span>
+                    <span id="cart-canone">0 €</span>
                 </p>
 
                 <p class="flex-space-between riga-costo">
                     <span>OPZIONI AGGIUNTIVE: </span>
-                    <span id="cart-x"> - €</span>
+                    <div id="costi-opzioni">nessuna opzione selezionata</div>
                 </p>
 
-                <p class="flex-space-between riga-costo">
-                    <span>Costo attivazione: </span>
-                    <span id="cart-attivazione"> - €</span>
-                </p>
+                <hr />
 
-                <p id="cart-note">...</p>				
-				
-                <div id="costi-opzioni"></div>
+                <p id="cart-note"></p>		
 				
             </div>
 
             <div class="dettaglio-bottom">
                 <p class="flex-space-between riga-costo" id="cart-totale">
-                    <span>Totale: </span>
-                    <span class="costo">63,00 €</span>
+                    <span>Canone mensile: </span>
+                    <span class="costo">0 €</span>
                 </p>
-                <div class="disclaimer">
+                <p class="flex-space-between riga-costo">
+                    <span class="costo-label">Costo attivazione: </span>
+                    <span id="cart-attivazione">0 €</span>
+                </p>
+
+                <!-- <div class="disclaimer">
                     <p>Hai 14 giorni dall'attivazione per cambiare idea e richiedere la disattivazione della linea.<br>Pensaci!</p>
-                </div>
+                </div> -->
 
                 <div class="flex-align-center">
                     <a class="btn-offerta" href="/abbonati/?parametro2=y">ACQUISTA</a>

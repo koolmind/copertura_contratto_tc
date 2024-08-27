@@ -1,5 +1,9 @@
 @import "variables";
 
+.hide {
+  display: none !important;
+}
+
 .copertura-result-header {
   &.copertura-ok {
     color: green !important;

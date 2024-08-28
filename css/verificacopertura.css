@@ -40,7 +40,7 @@
 }
 @media screen and (min-width: 768px) {
   #result-cart {
-    max-width: 320px;
+    max-width: 480px;
   }
 }
 
@@ -74,4 +74,17 @@
 }
 .offer-single.active {
   background-color: pink;
+}
+
+.riga-costo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.js-btn-cart-del {
+  background-color: transparent;
+}
+.js-btn-cart-del svg path {
+  stroke: firebrick;
 }

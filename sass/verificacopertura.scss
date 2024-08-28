@@ -44,7 +44,7 @@
   align-items: flex-start;
 
   @media screen and (min-width: $tablet) {
-    max-width: 320px;
+    max-width: 480px;
   }
 }
 
@@ -79,5 +79,19 @@
 
   &.active {
     background-color: pink;
+  }
+}
+
+.riga-costo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.js-btn-cart-del {
+  background-color: transparent;
+
+  svg path {
+    stroke: firebrick;
   }
 }

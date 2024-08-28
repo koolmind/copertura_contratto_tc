@@ -1,13 +1,28 @@
+const minusSvg = `<svg width="20px" height="20px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+<g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-152.000000, -1035.000000)" fill="#000000">
+<path d="M174,1050 L162,1050 C161.448,1050 161,1050.45 161,1051 C161,1051.55 161.448,1052 162,1052 L174,1052 C174.552,1052 175,1051.55 175,1051 C175,1050.45 174.552,1050 174,1050 L174,1050 Z M182,1063 C182,1064.1 181.104,1065 180,1065 L156,1065 C154.896,1065 154,1064.1 154,1063 L154,1039 C154,1037.9 154.896,1037 156,1037 L180,1037 C181.104,1037 182,1037.9 182,1039 L182,1063 L182,1063 Z M180,1035 L156,1035 C153.791,1035 152,1036.79 152,1039 L152,1063 C152,1065.21 153.791,1067 156,1067 L180,1067 C182.209,1067 184,1065.21 184,1063 L184,1039 C184,1036.79 182.209,1035 180,1035 L180,1035 Z" id="minus-square" sketch:type="MSShapeGroup">
+</path></g></g></svg>`;
+
 const offerte = document.querySelectorAll(".offer-single");
 const opzioni = document.querySelectorAll("[data-prodotti]");
 const optionsContainer = document.querySelector(`#offer-options`);
 
 const cartContainer = document.querySelector(`#result-cart`);
+
 const cartNome = document.querySelector(`#cart-nome-offerta`);
 const cartFeatures = document.querySelector(`#cart-caratteristiche-offerta`);
 const cartCanone = document.querySelector(`#cart-canone`);
 const cartAttivazione = document.querySelector(`#cart-attivazione`);
 const cartNote = document.querySelector(`#cart-note`);
+
+// cart form fields
+const cntNome = document.querySelector(`#cnt-nomeofferta`);
+//const cartFeatures = document.querySelector(`#cart-caratteristiche-offerta`);
+const cntCanone = document.querySelector(`#cnt-canone`);
+const cntAttivazione = document.querySelector(`#cnt-attivazione`);
+const cntCosto = document.querySelector(`#cnt-costo`);
+//const cartNote = document.querySelector(`#cart-note`);
 
 const optionalCostsContainer = document.querySelector(`#costi-opzioni`);
 const totaleContainer = document.querySelector(`#cart-totale > span.costo`);
@@ -48,12 +63,21 @@ updateOfferData = () => {
   const offerNote = selectedOffer.dataset.note;
 
   let offerAttivazione = selectedOffer.dataset.attivazione;
-  if (offerAttivazione == 0) offerAttivazione = "GRATUITA";
 
   cartNome.textContent = offerName;
-  cartCanone.textContent = offerPrice;
-  cartAttivazione.textContent = `${offerAttivazione} €`;
+  cartCanone.textContent = offerPrice + " €";
+  cartAttivazione.textContent =
+    offerAttivazione == 0 ? "GRATUITA" : offerAttivazione + " €";
   cartNote.textContent = offerNote;
+
+  cntNome.value = offerName;
+  cntCanone.value = offerPrice;
+  cntAttivazione.value = offerAttivazione;
+
+  console.log("nascosti", document.querySelectorAll(".js_offer_selected_only"));
+  document
+    .querySelectorAll(".js_offer_selected_only")
+    .forEach((item) => item.classList.remove("hide"));
 };
 
 offerte.forEach((offerta) => {
@@ -96,18 +120,22 @@ const handleOptionClicked = (evt) => {
   const optName = btnData.name;
   const optAction = btnData.action;
   const optMulti = btnData.multi == "1";
+  const optQMax = btnData.qmax || null;
 
   if (optAction == "add") {
     let objInCart = null;
 
     if (optMulti) {
-      console.log("multi:", optId);
       // inserisco nuovo o aggiorno quantità
       objInCart = addedOptions.find((option) => option.id === optId);
 
       if (objInCart) {
-        console.log("trovato", objInCart);
         objInCart.qty += 1;
+        if (objInCart.qty == optQMax) {
+          // disabilita il bottone per l'aggiunta e mostra un alert
+          btn.classList.add("hide");
+          alert("Hai raggiunto il valore massimo per questa opzione");
+        }
       }
     }
 
@@ -139,23 +167,28 @@ const updateCartTotal = () => {
 };
 
 const renderOptionsContent = () => {
-  //addedOptions.push({ id: optId, name: optName, cost: optCost, qty: 1 });
   console.log(`rendering opt`);
   const renderedOutput = addedOptions
-    .map((option) => {
-      return `<p class="flex-space-between riga-costo" id="row-opt-${
-        option.id
-      }">
-                <button role="button" class="js-btn-cart-del" 
+    .map((option, idx) => {
+      return `<p class="riga-costo" id="row-opt-${option.id}">
+                <span><button role="button" class="js-btn-cart-del" 
                     data-id="${option.id}" 
                     data-action="del">
-                    <img src="${
-                      esito_params.TC_ADDONS_ROOT_URL
-                    }/img/plus-square.svg"  alt="" width="24" heigth="24" /></button>
-                    <span>(${option.qty}x) ${
+                    ${minusSvg}
+                    </button>                    
+                    <span>(${option.qty}x) ${option.name} </span></span>
+      <span class="costo">
+      ${(option.cost * option.qty).toFixed(2)} &euro;</span>
+      <input type="hidden" name="cnt-options[${idx}][name]" value="${
         option.name
-      } </span><span class="costo">
-      ${(option.cost * option.qty).toFixed(2)} &euro;</span></p>`;
+      }" />
+      <input type="hidden" name="cnt-options[${idx}][cost]" value="${
+        option.cost
+      }" />
+      <input type="hidden" name="cnt-options[${idx}][qty]" value="${
+        option.qty
+      }" />
+      </p>`;
     })
     .join("");
 

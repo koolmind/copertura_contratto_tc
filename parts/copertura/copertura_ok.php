@@ -123,6 +123,7 @@ switch ($tecnologia) {
                         $desc = get_the_content();
                         $prezzo = get_post_meta($postID,'opzione_prezzo', true);
                         $isMultipla = get_post_meta($postID, 'opzione_multipla', true);
+                        $quantitaMax = get_post_meta($postID, 'quantita_max', true);
                         $prodotti_collegati = get_post_meta($postID, 'prodotti_collegati', false);
                         
                         
@@ -138,6 +139,7 @@ switch ($tecnologia) {
                         data-id="<?php echo $slug;?>" 
                         data-name="<?php echo $title;?>" 
                         data-multi="<?php echo $isMultipla; ?>" 
+                        <?php if($quantitaMax) echo 'data-qmax="'. $quantitaMax . '"'; ?>
                         data-action="add">
                         + aggiungi
                     </button>
@@ -156,55 +158,60 @@ switch ($tecnologia) {
 
         <div id="result-cart" class="offer-box">
             
-            <?php //echo do_shortcode('[tcrs_offer_details id="2529"  target="cnt" color_theme="azienda"]'); ?>
+            <form action="http://tcdev.terrecablate.it/tester.php" method="POST">
 
-            <div class="tcrs-box-dettaglio-offerta">
-            
-            <div class="dettaglio-top">                
-                <h3 id="cart-nome-offerta">NOME OFFERTA SCELTA</h3>
-
-                <!-- <ul id="cart-caratteristiche-offerta">
-                    <li>Fibra ultraveloce</li>
-                    <li>Internet fino a 1Gbps</li>
-                    <li>Router Zyxel WiFi 6</li>
-                    <li>Attivazione linea gratuita</li>
-                </ul>     -->
-
-                <p class="flex-space-between riga-costo">
-                    <span>Canone mensile base: </span>
-                    <span id="cart-canone">0 €</span>
-                </p>
-
-                <p class="flex-space-between riga-costo">
-                    <span>OPZIONI AGGIUNTIVE: </span>
-                    <div id="costi-opzioni">nessuna opzione selezionata</div>
-                </p>
-
-                <hr />
-
-                <p id="cart-note"></p>		
-				
-            </div>
-
-            <div class="dettaglio-bottom">
-                <p class="flex-space-between riga-costo" id="cart-totale">
-                    <span>Canone mensile: </span>
-                    <span class="costo">0 €</span>
-                </p>
-                <p class="flex-space-between riga-costo">
-                    <span class="costo-label">Costo attivazione: </span>
-                    <span id="cart-attivazione">0 €</span>
-                </p>
-
-                <!-- <div class="disclaimer">
-                    <p>Hai 14 giorni dall'attivazione per cambiare idea e richiedere la disattivazione della linea.<br>Pensaci!</p>
-                </div> -->
-
-                <div class="flex-align-center">
-                    <a class="btn-offerta" href="/abbonati/?parametro2=y">ACQUISTA</a>
+                <div id="dettaglio-title">                
+                    <h3 id="cart-nome-offerta">COMPONI LA TUA OFFERTA <br><small>selezionandone una tra quelle suggerite</small></h3>
+                    <input type="hidden" name="cnt-nomeofferta" id="cnt-nomeofferta" value="" />  
+                    <ul id="cart-caratteristiche-offerta" class="js_offer_selected_only hide">
+                        <li>Fibra ultraveloce</li>
+                        <li>Internet fino a 1Gbps</li>
+                        <li>Router Zyxel WiFi 6</li>
+                        <li>Attivazione linea gratuita</li>
+                    </ul>
                 </div>
-            </div>
 
+                <div id="dettaglio-mensili">
+                    <div class="riga-costo js_offer_selected_only hide">
+                        <span>CANONE MENSILE BASE: </span>
+                        <span id="cart-canone">0 €</span>
+                        <input type="hidden" name="cnt-canone" id="cnt-canone" value="" />  
+                    </div>
+
+                    <hr class="js_offer_selected_only hide" />
+
+                    <div class="js_offer_selected_only hide">
+                        <span>OPZIONI AGGIUNTIVE: </span>
+                        <div id="costi-opzioni">nessuna opzione selezionata</div>
+                    </div>
+
+                    <hr class="js_offer_selected_only hide" />
+
+                    <div id="cart-note" class="js_offer_selected_only hide"></div>		            
+                </div>
+
+                <div class="dettaglio-bottom js_offer_selected_only hide">
+                    <div class="flex-space-between riga-costo" id="cart-totale">
+                        <span>Canone mensile: </span>
+                        <span class="costo">0 €</span>
+                        <input type="hidden" name="cnt-costo" id="cnt-costo" value="" />  
+                    </div>
+                    <div class="riga-costo">
+                        <span class="costo-label">Costo attivazione: </span>
+                        <span id="cart-attivazione">0 €</span>
+                        <input type="hidden" name="cnt-attivazione" id="cnt-attivazione" value="" />  
+                    </div>
+
+                    <!-- <div class="disclaimer">
+                        <p>Hai 14 giorni dall'attivazione per cambiare idea e richiedere la disattivazione della linea.<br>Pensaci!</p>
+                    </div> -->
+
+                    <div class="flex-align-center js_offer_selected_only hide">
+                        <button type="submit" class="btn-offerta" name="btn_acquista_offerta">ACQUISTA</a>
+                    </div>
+                </div>
+                
+            </form>
         </div>
         <!-- /result cart -->
 

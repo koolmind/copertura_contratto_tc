@@ -4,19 +4,73 @@
   display: none !important;
 }
 
-.copertura-result-header {
-  &.copertura-ok {
-    color: green !important;
-  }
+.my-1 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
 
-  &.copertura-ko {
-    color: red !important;
-  }
+.my-2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
-  .ico-esito {
-    width: 50px;
-    height: 50px;
-  }
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+body.page-template-tpl-risultato-copertura .site-content {
+  background-color: $viola;
+  background-image: linear-gradient(
+    90deg,
+    $viola 0%,
+    $viola 70%,
+    $blu-medio 100%
+  );
+  padding: 2rem 0;
 }
 
 .copertura-result {
@@ -24,8 +78,38 @@
   flex-direction: column;
   gap: 2rem;
   justify-content: flex-start;
-  padding: 1rem;
 
+  @media screen and (min-width: $tablet) {
+    flex-direction: row;
+  }
+}
+
+.copertura-result-header {
+  display: flex;
+  flex-direction: column;
+  background: #f4f4f4;
+  border-radius: $b-radius;
+  -webkit-border-radius: $b-radius;
+  -moz-border-radius: $b-radius;
+  -ms-border-radius: $b-radius;
+  -o-border-radius: $b-radius;
+  padding: 1.5rem;
+  gap: 30px;
+  align-items: center;
+  justify-content: flex-start;
+
+  &.copertura-ok {
+    border: 6px solid green;
+  }
+
+  &.copertura-ko {
+    border: 6px solid red;
+  }
+
+  .ico-esito {
+    width: 50px;
+    height: 50px;
+  }
   @media screen and (min-width: $tablet) {
     flex-direction: row;
   }
@@ -42,22 +126,35 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  padding: 2rem;
+
+  #offer-composer-form {
+    width: 100%;
+  }
 
   @media screen and (min-width: $tablet) {
     max-width: 480px;
   }
 }
 
+.result-text {
+  color: #f4f4f4;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
 .offer-box,
 .offer-option {
+  background-color: #f4f4f4;
   border: 1px solid $grigino;
-  box-shadow: 4px 4px 6px 0 rgba(50, 50, 50, 0.3);
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.4);
   padding: 1rem;
-  border-radius: 16px;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  -ms-border-radius: 16px;
-  -o-border-radius: 16px;
+  border-radius: $b-radius;
+  -webkit-border-radius: $b-radius;
+  -moz-border-radius: $b-radius;
+  -ms-border-radius: $b-radius;
+  -o-border-radius: $b-radius;
+  -webkit-border-radius: $b-radius;
   margin: 2rem 0;
 }
 
@@ -78,7 +175,108 @@
   }
 
   &.active {
-    background-color: pink;
+    border: 2px solid $blu-scuro;
+    outline-color: $viola-chiaro;
+    outline-offset: 0px;
+    outline-width: 4px;
+    outline-style: solid;
+
+    h2 {
+      color: $viola !important;
+    }
+  }
+}
+
+.esito-section-title {
+  color: #f4f4f4;
+  font-weight: bold;
+  background-color: $blu-scuro;
+  border: 2px solid #f4f4f4;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+}
+
+.offer-option {
+  display: grid;
+  grid-template-areas:
+    "titolo titolo"
+    "desc desc"
+    "prezzo bottone";
+  grid-template-columns: 1fr 1fr;
+
+  @media screen and (min-width: $tablet) {
+    grid-template-areas:
+      "titolo prezzo"
+      "desc bottone";
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .option-title {
+    grid-area: titolo;
+  }
+
+  .option-desc {
+    grid-area: desc;
+  }
+
+  .option-price {
+    grid-area: prezzo;
+    text-align: center;
+  }
+
+  .offer-option-add {
+    grid-area: bottone;
+    text-align: center;
+  }
+}
+
+.btn-standard {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  font-size: 1rem;
+  padding: 0.5em;
+  background-color: $blu-scuro;
+  border: 2px solid $blu-scuro;
+  color: white;
+  height: 2.5rem;
+  outline: solid 3px $blu-scuro;
+  outline-offset: 2px;
+  border-radius: $b-radius;
+  -webkit-border-radius: $b-radius;
+  -moz-border-radius: $b-radius;
+  -ms-border-radius: $b-radius;
+  -o-border-radius: $b-radius;
+
+  &:hover,
+  &:focus {
+    background-color: $viola;
+  }
+}
+
+#btn-conferma-offerta .btn-standard {
+  padding: 0.5em 2.5em;
+}
+
+.btn-option-small {
+  color: $viola;
+  background: transparent !important;
+  &:hover,
+  &:focus {
+    color: $blu-medio;
+    background: transparent !important;
+  }
+}
+
+ul#cart-caratteristiche-offerta {
+  padding: 0;
+  margin: 16px 0 32px 16px;
+  list-style: none;
+
+  i.fas,
+  i.far,
+  i.fa {
+    color: $blu-medio;
   }
 }
 
@@ -86,6 +284,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid $grigino;
 }
 
 .js-btn-cart-del {

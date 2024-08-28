@@ -63,37 +63,40 @@ switch ($tecnologia) {
         <div id="result-details">
             <?php if($prods->have_posts()): ?>
                 
-                <div id="offers-list">        
-            
-                <?php while($prods->have_posts()): 
-                    $prods->the_post(); 
-                    $offerID = get_the_ID(); 
-                    $titolo = get_the_title();
-                    $prezzo = get_post_meta( $offerID, "prezzo", true );
-                    $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
-                    $note = trim(get_post_meta( $offerID, "note", true ));
-                    $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
-                    // $disclaimer = get_post_meta( $offerID, "disclaimer", true );
-                    ?>
+                <p class="result-text mt-4">Seleziona una delle offerte di seguito riportate e personalizzala con i servizi opzionali che reputi utili.</p>
 
-                    <div class="offer-single offer-box offer-details" 
-                        id="offer-<?php echo $offerID; ?>" 
-                        data-offer="<?php echo $offerID; ?>"
-                        data-name="<?php echo $titolo; ?>"
-                        data-price="<?php echo $prezzo; ?>"
-                        data-attivazione="<?php echo $attivazione; ?>"
-                        data-note="<?php echo $note; ?>"
-                        >
-                    <h2><?php echo get_the_title(); ?></h2>
-                    </div>
-                <?php endwhile; ?>
+                <div id="offers-list">       
+                    
+                    <?php while($prods->have_posts()): 
+                        $prods->the_post(); 
+                        $offerID = get_the_ID(); 
+                        $titolo = get_the_title();
+                        $prezzo = get_post_meta( $offerID, "prezzo", true );
+                        $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
+                        $note = trim(get_post_meta( $offerID, "note", true ));
+                        $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
+                        // $disclaimer = get_post_meta( $offerID, "disclaimer", true );
+                        ?>
+
+                        <div class="offer-single offer-box offer-details" 
+                            id="offer-<?php echo $offerID; ?>" 
+                            data-offer="<?php echo $offerID; ?>"
+                            data-name="<?php echo $titolo; ?>"
+                            data-price="<?php echo $prezzo; ?>"
+                            data-attivazione="<?php echo $attivazione; ?>"
+                            data-note="<?php echo $note; ?>"
+                            data-features="<?php echo $caratteristiche; ?>"                            
+                            >
+                        <h2><?php echo get_the_title(); ?></h2>
+                        </div>
+                    <?php endwhile; ?>
 
                 </div>
             <?php endif; wp_reset_postdata(); ?>
 
             
             <div id="offer-options" class="hide">
-                <h3>SERVIZI OPZIONALI</h3>
+                <h3 class="esito-section-title">SERVIZI OPZIONALI</h3>
                 <?php // recupero le opzioni disponibili per il prodotto in base al target residenziale / azienda. Poi nascondo quelle che non servono col JS (non ho altro modo)    
                 
                 $optArgs = array(
@@ -131,18 +134,22 @@ switch ($tecnologia) {
                 
                 <div class="offer-option offer-box" id="opt-<?php echo $slug;?>" data-prodotti="<?php echo implode(";", $prodotti_collegati[0]); ?>">
                     
-                    <h3><?php echo $title; ?></h3>
-                    <h4><?php echo $prezzo; ?> euro/mese</h4>
-                    <?php echo $desc; ?>
-                    <button role="button" class="btn-offer-option offer-option-add js-btn-cart-add"  id="btn-opt-<?php echo $slug;?>" 
+                    <h3 class="option-title"><?php echo $title; ?></h3>
+                    
+                    <div class="option-desc"><?php echo $desc; ?></div>
+                    
+                    <h4 class="option-price"><?php echo $prezzo; ?> <small>€/mese</small></h4>
+
+                    <button role="button" class="btn-standard offer-option-add js-btn-cart-add my-2"  id="btn-opt-<?php echo $slug;?>" 
                         data-cost="<?php echo $prezzo; ?>" 
                         data-id="<?php echo $slug;?>" 
                         data-name="<?php echo $title;?>" 
                         data-multi="<?php echo $isMultipla; ?>" 
                         <?php if($quantitaMax) echo 'data-qmax="'. $quantitaMax . '"'; ?>
                         data-action="add">
-                        + aggiungi
+                        <i class="fas fa-plus"></i> <span>aggiungi</span>
                     </button>
+
                 </div>
 
                 <?php
@@ -158,47 +165,42 @@ switch ($tecnologia) {
 
         <div id="result-cart" class="offer-box">
             
-            <form action="http://tcdev.terrecablate.it/tester.php" method="POST">
+            <form action="http://tcdev.terrecablate.it/tester.php" method="POST" id="offer-composer-form">
 
-                <div id="dettaglio-title">                
+                <div id="dettaglio-titolo">                
                     <h3 id="cart-nome-offerta">COMPONI LA TUA OFFERTA <br><small>selezionandone una tra quelle suggerite</small></h3>
                     <input type="hidden" name="cnt-nomeofferta" id="cnt-nomeofferta" value="" />  
-                    <ul id="cart-caratteristiche-offerta" class="js_offer_selected_only hide">
-                        <li>Fibra ultraveloce</li>
-                        <li>Internet fino a 1Gbps</li>
-                        <li>Router Zyxel WiFi 6</li>
-                        <li>Attivazione linea gratuita</li>
-                    </ul>
+                    <ul id="cart-caratteristiche-offerta" class="js_offer_selected_only hide"></ul>
                 </div>
 
                 <div id="dettaglio-mensili">
                     <div class="riga-costo js_offer_selected_only hide">
                         <span>CANONE MENSILE BASE: </span>
-                        <span id="cart-canone">0 €</span>
+                        <span id="cart-canone" class="text-bold">-</span>
                         <input type="hidden" name="cnt-canone" id="cnt-canone" value="" />  
                     </div>
 
-                    <hr class="js_offer_selected_only hide" />
+                    
 
-                    <div class="js_offer_selected_only hide">
+                    <div class="mt-3 js_offer_selected_only hide">
                         <span>OPZIONI AGGIUNTIVE: </span>
                         <div id="costi-opzioni">nessuna opzione selezionata</div>
                     </div>
 
-                    <hr class="js_offer_selected_only hide" />
+                    
 
-                    <div id="cart-note" class="js_offer_selected_only hide"></div>		            
+                    <div id="cart-note" class="my-2 js_offer_selected_only hide"></div>		            
                 </div>
 
                 <div class="dettaglio-bottom js_offer_selected_only hide">
                     <div class="flex-space-between riga-costo" id="cart-totale">
-                        <span>Canone mensile: </span>
-                        <span class="costo">0 €</span>
+                        <span>Canone mensile:</span>
+                        <span class="costo text-bold">-</span>
                         <input type="hidden" name="cnt-costo" id="cnt-costo" value="" />  
                     </div>
                     <div class="riga-costo">
                         <span class="costo-label">Costo attivazione: </span>
-                        <span id="cart-attivazione">0 €</span>
+                        <span id="cart-attivazione" class="text-bold">-</span>
                         <input type="hidden" name="cnt-attivazione" id="cnt-attivazione" value="" />  
                     </div>
 
@@ -206,8 +208,8 @@ switch ($tecnologia) {
                         <p>Hai 14 giorni dall'attivazione per cambiare idea e richiedere la disattivazione della linea.<br>Pensaci!</p>
                     </div> -->
 
-                    <div class="flex-align-center js_offer_selected_only hide">
-                        <button type="submit" class="btn-offerta" name="btn_acquista_offerta">ACQUISTA</a>
+                    <div id="btn-conferma-offerta" class="js_offer_selected_only hide my-2 text-right">
+                        <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 

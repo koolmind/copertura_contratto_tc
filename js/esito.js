@@ -18,7 +18,7 @@ const cartNote = document.querySelector(`#cart-note`);
 
 // cart form fields
 const cntNome = document.querySelector(`#cnt-nomeofferta`);
-//const cartFeatures = document.querySelector(`#cart-caratteristiche-offerta`);
+//const cntFeatures = document.querySelector(`#cart-caratteristiche-offerta`);
 const cntCanone = document.querySelector(`#cnt-canone`);
 const cntAttivazione = document.querySelector(`#cnt-attivazione`);
 const cntCosto = document.querySelector(`#cnt-costo`);
@@ -35,6 +35,8 @@ let addedOptions = [];
 const selezionaOfferta = (evt) => {
   selectedOffer = evt.target.closest(".offer-single");
   selectedOffer.classList.add("active");
+
+  resetOptionContent();
   updateCartTotal();
 };
 
@@ -61,20 +63,30 @@ updateOfferData = () => {
   const offerName = selectedOffer.dataset.name;
   const offerPrice = selectedOffer.dataset.price;
   const offerNote = selectedOffer.dataset.note;
-
+  const offerFeatures = selectedOffer.dataset.features;
   let offerAttivazione = selectedOffer.dataset.attivazione;
+
+  const features = offerFeatures.split(/;/);
+  const formattedFeaturesList = features
+    .map((feat) => {
+      return `<li class="feature-line">
+        <i class="fas fa-check"></i>
+        <span>${feat}</span>
+        </li>`;
+    })
+    .join("");
 
   cartNome.textContent = offerName;
   cartCanone.textContent = offerPrice + " €";
-  cartAttivazione.textContent =
+  cartAttivazione.innerText =
     offerAttivazione == 0 ? "GRATUITA" : offerAttivazione + " €";
   cartNote.textContent = offerNote;
+  cartFeatures.innerHTML = formattedFeaturesList;
 
   cntNome.value = offerName;
   cntCanone.value = offerPrice;
   cntAttivazione.value = offerAttivazione;
 
-  console.log("nascosti", document.querySelectorAll(".js_offer_selected_only"));
   document
     .querySelectorAll(".js_offer_selected_only")
     .forEach((item) => item.classList.remove("hide"));
@@ -171,10 +183,10 @@ const renderOptionsContent = () => {
   const renderedOutput = addedOptions
     .map((option, idx) => {
       return `<p class="riga-costo" id="row-opt-${option.id}">
-                <span><button role="button" class="js-btn-cart-del" 
+                <span><button role="button" class="js-btn-cart-del btn-option-small" 
                     data-id="${option.id}" 
                     data-action="del">
-                    ${minusSvg}
+                    <i class="far fa-minus-square"></i>
                     </button>                    
                     <span>(${option.qty}x) ${option.name} </span></span>
       <span class="costo">
@@ -193,4 +205,9 @@ const renderOptionsContent = () => {
     .join("");
 
   optionalCostsContainer.innerHTML = renderedOutput;
+};
+
+resetOptionContent = () => {
+  addedOptions = [];
+  optionalCostsContainer.innerHTML = "no option";
 };

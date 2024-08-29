@@ -1,66 +1,5 @@
 @import "variables";
-
-.hide {
-  display: none !important;
-}
-
-.my-1 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.my-2 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.mt-1 {
-  margin-top: 0.5rem;
-}
-
-.mt-2 {
-  margin-top: 1rem;
-}
-
-.mt-3 {
-  margin-top: 1.5rem;
-}
-
-.mt-4 {
-  margin-top: 2rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-2 {
-  margin-bottom: 1rem;
-}
-
-.mb-3 {
-  margin-bottom: 1.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 2rem;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-bold {
-  font-weight: bold;
-}
+@import "helpers";
 
 body.page-template-tpl-risultato-copertura .site-content {
   background-color: $viola;
@@ -104,6 +43,10 @@ body.page-template-tpl-risultato-copertura .site-content {
 
   &.copertura-ko {
     border: 6px solid red;
+  }
+
+  &.copertura-wrong {
+    border: 6px solid $viola-chiaro;
   }
 
   .ico-esito {
@@ -230,30 +173,6 @@ body.page-template-tpl-risultato-copertura .site-content {
   }
 }
 
-.btn-standard {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 20px;
-  font-size: 1rem;
-  padding: 0.5em;
-  background-color: $blu-scuro;
-  border: 2px solid $blu-scuro;
-  color: white;
-  height: 2.5rem;
-  outline: solid 3px $blu-scuro;
-  outline-offset: 2px;
-  border-radius: $b-radius;
-  -webkit-border-radius: $b-radius;
-  -moz-border-radius: $b-radius;
-  -ms-border-radius: $b-radius;
-  -o-border-radius: $b-radius;
-
-  &:hover,
-  &:focus {
-    background-color: $viola;
-  }
-}
-
 #btn-conferma-offerta .btn-standard {
   padding: 0.5em 2.5em;
 }
@@ -292,5 +211,181 @@ ul#cart-caratteristiche-offerta {
 
   svg path {
     stroke: firebrick;
+  }
+}
+
+.messaggio-info {
+  text-align: center;
+  color: white;
+  font-size: 1.25em;
+  margin: 2em 1em;
+}
+
+/* --------------- VERIFICA COPERTURA ----------------- */
+
+/* ----- SWITCH BUTTON ----*/
+.switch-field {
+  display: flex;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  background-color: #e4e4e4;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  padding: 8px 16px;
+  margin-right: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  color: #fff;
+  box-shadow: none;
+}
+
+.switch-field input:checked + label#label-azienda {
+  background-color: $azienda-color;
+}
+
+.switch-field input:checked + label#label-residenziale {
+  background-color: $residenziale-color;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 12px 0 0 12px;
+  -webkit-border-radius: 12px 0 0 12px;
+  -moz-border-radius: 12px 0 0 12px;
+  -ms-border-radius: 12px 0 0 12px;
+  -o-border-radius: 12px 0 0 12px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 12px 12px 0;
+  -webkit-border-radius: 0 12px 12px 0;
+  -moz-border-radius: 0 12px 12px 0;
+  -ms-border-radius: 0 12px 12px 0;
+  -o-border-radius: 0 12px 12px 0;
+}
+
+/* ********************************************
+ * *************** PRELOADER ****************** */
+#preloader {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 54px;
+  height: 54px;
+}
+#preloader div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 10px;
+  background: #fff;
+  animation: pulse 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  -webkit-animation: pulse 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+#preloader div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+  background-color: $viola-chiaro;
+}
+#preloader div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+  background-color: #666688;
+}
+#preloader div:nth-child(3) {
+  left: 42px;
+  animation-delay: 0;
+  background-color: #e9e9e9;
+}
+@keyframes pulse {
+  0% {
+    top: 8px;
+    height: 40px;
+  }
+  50%,
+  100% {
+    top: 24px;
+    height: 24px;
+  }
+}
+
+/* ************************************************
+ * *************** START STANDARD CSS ****************** */
+
+/* CSS per la form di copertura */
+.copertura {
+  position: relative;
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0px;
+    margin-bottom: 20px;
+  }
+
+  .form-row > label {
+    width: 160px;
+    text-align: left;
+    font-size: 12px;
+    padding-left: 12px;
+  }
+
+  .input-wrapper {
+    width: 100%;
+    background-color: #e6e6e6;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+
+    &:has(input[disabled="disabled"]),
+    &:has(select[disabled="disabled"]) {
+      background-color: #939393;
+    }
+  }
+
+  .form-row input,
+  .form-row select {
+    width: 96%;
+    margin: 0 2%;
+    min-width: 230px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .help {
+    color: #9b9b9b;
+    font-style: italic;
+    padding-left: 12px;
   }
 }

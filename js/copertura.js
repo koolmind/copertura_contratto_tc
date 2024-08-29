@@ -450,8 +450,28 @@
   }
 
   function analizza_dati(dati, tipocliente) {
+    console.log("PIPPO", dati);
     const consigliata = dati.TIPOLOGIA_ACCESSO_CONSIGLIATA[tipocliente];
     let puntoGeo = null;
+
+    const tipologieNonOfferte = [
+      "Bitstream",
+      "Bitstream Ethernet",
+      "ULL",
+      "Rame su AI",
+    ];
+
+    if (tipologieNonOfferte.contains(consigliata.tipo)) {
+      return {
+        tipoCli: tipocliente,
+        prodotto: null,
+        connessione: false,
+        ftth: false,
+        mostraAvviso: false,
+        effSpeed: null,
+        mappa: null,
+      };
+    }
 
     // controllo se esiste una posizione GPS per l'apparato. se c'è è nella sezione relativa all'operatore (TCRS, OF,...)
     if (consigliata.tipo === "OF_FTTH") {
@@ -494,9 +514,7 @@
         consigliata.tipo,
         consigliata.maxspeed
       ),
-      //connessione: prodotti[tipocliente][riferimento_prodotto],
       ftth: isFtth,
-      //sceltaFtth: multiListino,
       mostraAvviso: showAlert,
       effSpeed: consigliata.effspeed,
       mappa: puntoGeo && indirizziTrovati > 1 ? puntoGeo : null,
@@ -535,21 +553,19 @@
   }
 
   function renderEsito() {
-    // let effSpeedMsg = "";
-    // if (esito.effSpeed) {
-    //   const effSpeedValues = esito.effSpeed.split("/");
-    //   effSpeedMsg = `<li><span class="glyphicon glyphicon-globe"></span>Velocità media: ${effSpeedValues[0]} Mbps / ${effSpeedValues[1]} Mbps</li>`;
-    // }
-
     let out = "";
     let tpl = undefined;
+
+    urlParams = {
+      ...urlParams,
+      tipoCliente: tipoCli,
+      indirizzo: `${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})`,
+    };
 
     if (esito.connessione) {
       urlParams = {
         ...urlParams,
         copertura: "ok",
-        tipoCliente: tipoCli,
-        indirizzo: `${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})`,
       };
 
       let [tec, vel] = esito.prodotto.split(/-/i);
@@ -563,86 +579,19 @@
         urlParams = { ...urlParams, effSpeed: esito.effSpeed };
 
       if (esito.mostraAvviso) urlParams = { ...urlParams, alert: 1 };
-
-      // compongo l'url per la pagina del risultato
-      let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
-      finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&ind=${urlParams.indirizzo}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
-
-      window.location.href = encodeURI(finalUrl);
-      return;
-
-      var listProd = "";
-
-      // prodotto 1
-      // listProd += createProduct(
-      //   esito.connessione,
-      //   0,
-      //   effSpeedMsg,
-      //   btnContratto,
-      //   contratto
-      // );
-
-      listProd = "<h2>PRODOTTO</h2>";
-      /** *******************************
-       *  ********* FINE LISTA PRODOTTI
-       * ********************************
-       */
-
-      tpl = `
-            ${bannerAreaBianca}
-            <p>&nbsp;</p>
-           
-            <div class="copertura_dati">${listProd}</div>
-            <p>&nbsp;</p>           
-            
-            
-            <div class="bottom_info">
-              <p class="copertura_blue testo_std mtop">
-                Puoi procedere direttamente con l'acquisto di uno dei nostri servizi,<br />
-                scaricando il <a href="${contratto}" target="_blank"><strong>modulo contrattuale</strong></a>, compilandolo ed inviandolo, <br />
-                corredato da un copia del tuo documento di identità all’indirizzo email <a href="mailto:info@terrecablate.it">info@terrecablate.it</a> o per fax al numero 0577 047497.
-              </p>
-              <img src="${copertura_params.TCRS_WS_ROOT}img/contratto.png" class="mtop mbott" />
-              <p class="copertura_blue testo_std mbott">
-                Per qualsiasi approfondimento o richiesta di informazioni ti invitiamo<br />
-                a scrivere all'indirizzo email <a href="mailto:info@terrecablate.it">info@terrecablate.it</a> o a contattare il nostro numero verde 800 078 100.
-              </p>
-              <img src="${copertura_params.TCRS_WS_ROOT}img/telefono.png" class="mbott" />
-            </div>`;
     } else {
-      tpl = `
-            <div class="bottom_info">
-              <p class="copertura_blue testo_std mtop">
-                La rete di Terrecablate è in continua e costante espansione quindi <br />ti invitiamo a riprovare prossimamente per verificare se ci sono state variazioni sulla copertura.
-              </p>
-              <p>&nbsp;</p>
-              <img src="${copertura_params.TCRS_WS_ROOT}img/rotella.png" class="mtop" /> 
-              <p>&nbsp;</p>
-            </div>`;
+      urlParams = {
+        ...urlParams,
+        copertura: "ko",
+      };
     }
 
-    // output del risultato
-    var icoEsito = "";
-    let testoEsito =
-      tipoCli == "aziende" ? `La tua azienda` : `La tua abitazione`;
-    testoEsito += ` in <span>${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})</span>`;
+    // compongo l'url per la pagina del risultato
+    let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
+    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&ind=${urlParams.indirizzo}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
 
-    if (esito.connessione) {
-      icoEsito = "<span class='fa fa-check-circle'></span> ";
-      testoEsito += ` risulta coperta da `;
-    } else {
-      icoEsito = "<span class='fa fa-times-circle'></span> ";
-      testoEsito = ` non risulta ancora coperto.<br>La nostra rete è in continua espansione! Ripeti la ricerca tra un po' di tempo.`;
-    }
-    sDatiCop = `
-      <div class="ico-esito">${icoEsito}</div>
-      <div class="testo-esito">${testoEsito}</div>`;
-
-    datiCopertura.html(sDatiCop);
-    esitoCoperturaContent.html(tpl);
-    frmVerificaCop.slideUp();
-    mappaApparato.addClass("nascondi");
-    esitoCopertura.removeClass("nascondi");
+    window.location.href = encodeURI(finalUrl);
+    return;
   }
 
   function renderMap(geoocoords) {
@@ -663,16 +612,5 @@
     `;
 
     theMap.innerHTML = mapHtml;
-    // [lat, lng] = geoocoords.split(", ");
-
-    // map = L.map("map").setView([lat, lng], 16);
-
-    // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    //   attribution:
-    //     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    // }).addTo(map);
-
-    // var marker = L.marker([lat, lng]).addTo(map);
-    // marker.bindPopup("<b>Apparato di rete</b>").openPopup();
   }
 })(jQuery);

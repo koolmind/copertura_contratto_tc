@@ -54,14 +54,14 @@ class PangeaTerrecablateAddons {
         add_action( 'wp_enqueue_scripts', function(){
             wp_enqueue_script('sweetalert', 'https://cdn.jsdelivr.net/npm/sweetalert2@10?ver=2.0.0', array(), '2.0', true);
             // MY SCRIPTS
-            wp_register_style("pangeatcrs", plugins_url('css/copertura.css', __FILE__ ));
-            //wp_register_style("offer-details", plugins_url('css/offer-details.css', __FILE__ ));            
             wp_register_style("verificacopertura", plugins_url('css/verificacopertura.css', __FILE__ ), array('font-awesome-cop'));
+            wp_register_style( 'font-awesome-cop', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css", array(), '5.15.4', 'all' ); 
 
             wp_register_script("scc-coperturatcrs", plugins_url( 'js/copertura.js', __FILE__ ), array('jquery','sweetalert','leaflet','easy-autocomplete','axios'), self::VERSION, true);
             wp_register_script("scc-esitocoperturatcrs", plugins_url( 'js/esito.js', __FILE__ ), array(), self::VERSION, true);
 
-            if ( is_page( 'copertura' ) ) {
+
+            if ( is_page( 'copertura' ) ) {                
                 // THIRD PARTY SCRIPTS
                 wp_enqueue_style( 'easy-autocomplete', plugins_url( 'vendor/easy-autocomplete/jquery.easy-autocomplete.min.css', __FILE__ ), array(), '1.3.3', 'all' ); 
                 wp_enqueue_style( 'leaflet', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css', array(), '1.7.1', 'all' ); 
@@ -70,17 +70,17 @@ class PangeaTerrecablateAddons {
                 wp_enqueue_script('leaflet', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', array(), '1.7.1', true);      
 
                 // CUSTOM SCRIPTS
-                wp_enqueue_style('pangeatcrs' );
+                wp_enqueue_style( 'font-awesome-cop' );
                 wp_enqueue_style( 'verificacopertura' );
-                wp_enqueue_script('scc-coperturatcrs');
 
+                wp_enqueue_script('scc-coperturatcrs');
                 wp_localize_script( 'scc-coperturatcrs', 'copertura_params',array('TCRS_WS_ROOT' => trailingslashit( plugins_url( 'ws', __FILE__ ) ) ) );
             }
 
             if( is_page( 'esito-copertura' ) ) {
-                wp_enqueue_style( 'font-awesome-cop', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css", array(), '5.15.4', 'all' ); 
-                
+                wp_enqueue_style( 'font-awesome-cop' );
                 wp_enqueue_style( 'verificacopertura' );
+
                 wp_enqueue_script('scc-esitocoperturatcrs');
                 wp_localize_script('scc-esitocoperturatcrs', 'esito_params', array('TC_ADDONS_ROOT_URL'=>TC_ADDONS_ROOT_URL));
             }

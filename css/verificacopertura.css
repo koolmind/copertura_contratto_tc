@@ -1,4 +1,5 @@
-.hide {
+.hide,
+.nascondi {
   display: none !important;
 }
 
@@ -60,6 +61,29 @@
   font-weight: bold;
 }
 
+/* BOTTONI */
+.btn-standard {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  font-size: 1rem;
+  padding: 0.5em;
+  background-color: #202b49;
+  border: 2px solid #202b49;
+  color: white;
+  height: 2.5rem;
+  outline: solid 3px #202b49;
+  outline-offset: 2px;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+}
+.btn-standard:hover, .btn-standard:focus {
+  background-color: #794084;
+}
+
 body.page-template-tpl-risultato-copertura .site-content {
   background-color: #794084;
   background-image: linear-gradient(90deg, #794084 0%, #794084 70%, #005985 100%);
@@ -97,6 +121,9 @@ body.page-template-tpl-risultato-copertura .site-content {
 }
 .copertura-result-header.copertura-ko {
   border: 6px solid red;
+}
+.copertura-result-header.copertura-wrong {
+  border: 6px solid #e390f3;
 }
 .copertura-result-header .ico-esito {
   width: 50px;
@@ -213,28 +240,6 @@ body.page-template-tpl-risultato-copertura .site-content {
   text-align: center;
 }
 
-.btn-standard {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 20px;
-  font-size: 1rem;
-  padding: 0.5em;
-  background-color: #202b49;
-  border: 2px solid #202b49;
-  color: white;
-  height: 2.5rem;
-  outline: solid 3px #202b49;
-  outline-offset: 2px;
-  border-radius: 16px;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
-  -ms-border-radius: 16px;
-  -o-border-radius: 16px;
-}
-.btn-standard:hover, .btn-standard:focus {
-  background-color: #794084;
-}
-
 #btn-conferma-offerta .btn-standard {
   padding: 0.5em 2.5em;
 }
@@ -271,4 +276,174 @@ ul#cart-caratteristiche-offerta i.fa {
 }
 .js-btn-cart-del svg path {
   stroke: firebrick;
+}
+
+.messaggio-info {
+  text-align: center;
+  color: white;
+  font-size: 1.25em;
+  margin: 2em 1em;
+}
+
+/* --------------- VERIFICA COPERTURA ----------------- */
+/* ----- SWITCH BUTTON ----*/
+.switch-field {
+  display: flex;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.switch-field input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+
+.switch-field label {
+  background-color: #e4e4e4;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  line-height: 1;
+  text-align: center;
+  padding: 8px 16px;
+  margin-right: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  color: #fff;
+  box-shadow: none;
+}
+
+.switch-field input:checked + label#label-azienda {
+  background-color: #bb6604;
+}
+
+.switch-field input:checked + label#label-residenziale {
+  background-color: #019214;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 12px 0 0 12px;
+  -webkit-border-radius: 12px 0 0 12px;
+  -moz-border-radius: 12px 0 0 12px;
+  -ms-border-radius: 12px 0 0 12px;
+  -o-border-radius: 12px 0 0 12px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 12px 12px 0;
+  -webkit-border-radius: 0 12px 12px 0;
+  -moz-border-radius: 0 12px 12px 0;
+  -ms-border-radius: 0 12px 12px 0;
+  -o-border-radius: 0 12px 12px 0;
+}
+
+/* ********************************************
+ * *************** PRELOADER ****************** */
+#preloader {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 54px;
+  height: 54px;
+}
+
+#preloader div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 10px;
+  background: #fff;
+  animation: pulse 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  -webkit-animation: pulse 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+#preloader div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+  background-color: #e390f3;
+}
+
+#preloader div:nth-child(2) {
+  left: 26px;
+  animation-delay: -0.12s;
+  background-color: #666688;
+}
+
+#preloader div:nth-child(3) {
+  left: 42px;
+  animation-delay: 0;
+  background-color: #e9e9e9;
+}
+
+@keyframes pulse {
+  0% {
+    top: 8px;
+    height: 40px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 24px;
+  }
+}
+/* ************************************************
+ * *************** START STANDARD CSS ****************** */
+/* CSS per la form di copertura */
+.copertura {
+  position: relative;
+}
+.copertura .form-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0px;
+  margin-bottom: 20px;
+}
+.copertura .form-row > label {
+  width: 160px;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 12px;
+}
+.copertura .input-wrapper {
+  width: 100%;
+  background-color: #e6e6e6;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.copertura .input-wrapper:has(input[disabled=disabled]), .copertura .input-wrapper:has(select[disabled=disabled]) {
+  background-color: #939393;
+}
+.copertura .form-row input,
+.copertura .form-row select {
+  width: 96%;
+  margin: 0 2%;
+  min-width: 230px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+.copertura .help {
+  color: #9b9b9b;
+  font-style: italic;
+  padding-left: 12px;
 }

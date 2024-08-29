@@ -56,19 +56,19 @@
 }
 
 .switch-field label:first-of-type {
-  border-radius: 4px 0 0 4px;
-  -webkit-border-radius: 4px 0 0 4px;
-  -moz-border-radius: 4px 0 0 4px;
-  -ms-border-radius: 4px 0 0 4px;
-  -o-border-radius: 4px 0 0 4px;
+  border-radius: 12px 0 0 12px;
+  -webkit-border-radius: 12px 0 0 12px;
+  -moz-border-radius: 12px 0 0 12px;
+  -ms-border-radius: 12px 0 0 12px;
+  -o-border-radius: 12px 0 0 12px;
 }
 
 .switch-field label:last-of-type {
-  border-radius: 0 4px 4px 0;
-  -webkit-border-radius: 0 4px 4px 0;
-  -moz-border-radius: 0 4px 4px 0;
-  -ms-border-radius: 0 4px 4px 0;
-  -o-border-radius: 0 4px 4px 0;
+  border-radius: 0 12px 12px 0;
+  -webkit-border-radius: 0 12px 12px 0;
+  -moz-border-radius: 0 12px 12px 0;
+  -ms-border-radius: 0 12px 12px 0;
+  -o-border-radius: 0 12px 12px 0;
 }
 
 /* ********************************************
@@ -131,22 +131,43 @@
 
 .copertura .form-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  gap: 30px;
+  align-items: flex-start;
+  gap: 0px;
   margin-bottom: 20px;
 }
 
-.copertura .form-row label {
+.copertura .form-row > label {
   width: 160px;
-  text-align: right;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 12px;
+}
+
+.copertura .input-wrapper {
+  width: 100%;
+  background-color: #e6e6e6;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.copertura .input-wrapper:has(input[disabled="disabled"]),
+.copertura .input-wrapper:has(select[disabled="disabled"]) {
+  background-color: #939393;
 }
 
 .copertura .form-row input,
 .copertura .form-row select {
-  width: auto;
+  width: 96%;
+  margin: 0 2%;
   min-width: 230px;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 .copertura .help {
@@ -442,6 +463,30 @@ button#btnVerifica {
   margin-top: 36px;
 }
 
+.btn-standard {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  font-size: 1rem;
+  padding: 0.5em;
+  background-color: #202b49;
+  border: 2px solid #202b49;
+  color: white;
+  height: 2.5rem;
+  outline: solid 3px #202b49;
+  outline-offset: 2px;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+}
+
+.btn-standard:hover,
+.btn-standard:focus {
+  background-color: #794084;
+}
+
 @media (max-width: 768px) {
   div#dati-copertura-intro {
     -webkit-box-orient: vertical;
@@ -498,15 +543,16 @@ button#btnVerifica {
     margin-bottom: 24px;
   }
 
-  .copertura .form-row label {
+  .copertura .form-row > label {
     width: auto;
     text-align: center;
   }
 
-  .copertura .form-row input,
+  /* .copertura .form-row input,
   .copertura .form-row select {
-    width: 100%;
-  }
+    width: auto;
+    margin: 0;
+  } */
 }
 
 #map {

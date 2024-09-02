@@ -29,6 +29,7 @@
   const mappaApparato = $("#mappa_apparato");
   const preloader = $("#preloader");
   const btnNewVerifica = $("#btnNewVerifica");
+  const theMap = $("#map");
   const btnBadMap = $("#btnBadMap");
   const btnGoodMap = $("#btnGoodMap");
 
@@ -108,7 +109,8 @@
     esitoCoperturaContent.html("");
     esitoCopertura.addClass("nascondi");
     mappaApparato.addClass("nascondi");
-    map.remove();
+    theMap.html("");
+    console.log("reset e vedo form");
     frmVerificaCop.slideDown();
 
     loadProvince();
@@ -587,7 +589,8 @@
     }
 
     // compongo l'url per la pagina del risultato
-    let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
+    //let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
+    let finalUrl = `${copertura_params.TCRS_SITE_URL}esito-copertura/?`;
     finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&ind=${urlParams.indirizzo}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
 
     window.location.href = encodeURI(finalUrl);
@@ -595,7 +598,6 @@
   }
 
   function renderMap(geoocoords) {
-    const theMap = document.querySelector("#map");
     let mapHtml = `
     <iframe
     width="600"
@@ -611,6 +613,6 @@
     </iframe>
     `;
 
-    theMap.innerHTML = mapHtml;
+    theMap.html(mapHtml);
   }
 })(jQuery);

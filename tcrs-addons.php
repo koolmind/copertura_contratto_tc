@@ -26,7 +26,7 @@ class PangeaTerrecablateAddons {
 
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 
-    const MINIMUM_PHP_VERSION = '7.2';
+    const MINIMUM_PHP_VERSION = '8.0';
 
     private static $_instance = null;
 
@@ -83,6 +83,9 @@ class PangeaTerrecablateAddons {
             wp_enqueue_script('sweetalert', 'https://cdn.jsdelivr.net/npm/sweetalert2@10?ver=2.0.0', array(), '2.0', true);
             wp_register_style( 'font-awesome-cop', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css", array(), '5.15.4', 'all' ); 
             
+            // boostrap 5.3.3
+            wp_register_style('bootstrap5css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css?ver=5.3.3', array(), '5.3.3');
+            wp_register_style('bootstrap5js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), '5.3.3', true);
             
             wp_register_style("verificacopertura", plugins_url('css/verificacopertura.css', __FILE__ ), array('font-awesome-cop'));
             wp_register_script("scc-coperturatcrs", plugins_url( 'js/copertura.js', __FILE__ ), array('jquery','sweetalert','leaflet','easy-autocomplete','axios'), self::VERSION, true);
@@ -112,6 +115,11 @@ class PangeaTerrecablateAddons {
 
                 wp_enqueue_script('scc-esitocoperturatcrs');
                 wp_localize_script('scc-esitocoperturatcrs', 'esito_params', array('TC_ADDONS_ROOT_URL'=>TC_ADDONS_ROOT_URL));
+            }
+
+            if (is_page('contratto') ) {
+                wp_enqueue_style( 'bootstrap5css' );
+                wp_enqueue_script('bootstrap5js');
             }
             
         });
@@ -195,12 +203,17 @@ class PangeaTerrecablateAddons {
 
     public function register_custom_template($templates) {
         $templates['tpl-risultato-copertura.php'] = 'Risultato copertura';
+        $templates['tpl-contratto.php'] = 'Contratto on line';
         return $templates;
     }
 
     public function load_custom_template($template) {
         if (get_page_template_slug() === 'tpl-risultato-copertura.php') {
             $template = plugin_dir_path(__FILE__) . 'tpl-risultato-copertura.php';
+        }
+
+        if (get_page_template_slug() === 'tpl-contratto.php') {
+            $template = plugin_dir_path(__FILE__) . 'tpl-contratto.php';
         }
         return $template;
     }

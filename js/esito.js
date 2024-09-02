@@ -86,6 +86,7 @@ updateOfferData = () => {
   cntNome.value = offerName;
   cntCanone.value = offerPrice;
   cntAttivazione.value = offerAttivazione;
+  cntCosto.value = offerPrice;
 
   document
     .querySelectorAll(".js_offer_selected_only")
@@ -176,6 +177,7 @@ const updateCartTotal = () => {
   );
 
   totaleContainer.innerHTML = total.toFixed(2) + "&euro;";
+  cntCosto.value = total.toFixed(2);
 };
 
 const renderOptionsContent = () => {

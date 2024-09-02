@@ -165,7 +165,7 @@ switch ($tecnologia) {
 
         <div id="result-cart" class="offer-box">
             
-            <form action="http://tcdev.terrecablate.it/tester.php" method="POST" id="offer-composer-form">
+            <form action="<?php echo home_url( $path = '/contratto'); ?>" method="POST" id="offer-composer-form">
 
                 <div id="dettaglio-titolo">                
                     <h3 id="cart-nome-offerta">COMPONI LA TUA OFFERTA <br><small>selezionandone una tra quelle suggerite</small></h3>
@@ -209,6 +209,8 @@ switch ($tecnologia) {
                     </div> -->
 
                     <div id="btn-conferma-offerta" class="js_offer_selected_only hide my-2 text-right">
+                        <input type="hidden" name="target" value="<?php echo $tipoCli; ?>" />
+                        <input type="hidden" name="contratto_unique_id" value="C-<?php echo uniqid(); ?>" />
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>

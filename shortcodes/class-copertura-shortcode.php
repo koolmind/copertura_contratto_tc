@@ -31,8 +31,7 @@ class CoperturaShortcode {
         ob_start();
         include TC_ADDONS_ROOT."parts/copertura/form.php";
 	    include TC_ADDONS_ROOT."parts/copertura/map.php";
-        //include TC_ADDONS_ROOT."views/result.php";
-        
+       
         return ob_get_clean(); 
     }
 }

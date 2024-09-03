@@ -78,7 +78,7 @@ get_header(); ?>
                 // }
                 $section = $contrattoData['offerta']['target'];
                 
-                include(plugin_dir_path(__FILE__) . "parts/contratto/{$section}/step-{$step}.php");
+                include(TC_ADDONS_ROOT . "parts/contratto/{$section}/step-{$step}.php");
             ?>
         </div>
 

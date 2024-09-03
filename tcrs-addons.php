@@ -16,8 +16,12 @@
  
  include_once __DIR__ .'/shortcodes/class-offers-shortcode.php';
  include_once __DIR__ .'/shortcodes/class-copertura-shortcode.php';
+ include_once __DIR__ .'/shortcodes/class-esito-copertura-shortcode.php';
+ include_once __DIR__ .'/shortcodes/class-contratto-shortcode.php';
+
  include_once __DIR__ . '/elementor/class-tcrs-widgets.php';
  //include_once __DIR__ . '/includes/settings-contratto.php';
+ include_once __DIR__ . '/includes/contratto-form-handler.php';
  include_once __DIR__ . '/settings/options-tcrs.php';
 
 
@@ -126,6 +130,8 @@ class PangeaTerrecablateAddons {
 
         OffersShortcode::instance();
         CoperturaShortcode::instance();
+        EsitoCoperturaShortcode::instance();
+        ContrattoOnLineShortcode::instance();
 
         if($this->is_compatible()) {
             add_action('elementor/init',[$this,'load_widgets']);
@@ -208,9 +214,9 @@ class PangeaTerrecablateAddons {
     }
 
     public function load_custom_template($template) {
-        if (get_page_template_slug() === 'tpl-risultato-copertura.php') {
-            $template = plugin_dir_path(__FILE__) . 'tpl-risultato-copertura.php';
-        }
+        // if (get_page_template_slug() === 'tpl-risultato-copertura.php') {
+        //     $template = plugin_dir_path(__FILE__) . 'tpl-risultato-copertura.php';
+        // }
 
         if (get_page_template_slug() === 'tpl-contratto.php') {
             $template = plugin_dir_path(__FILE__) . 'tpl-contratto.php';

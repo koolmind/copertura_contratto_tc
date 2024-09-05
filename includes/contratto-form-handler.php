@@ -15,7 +15,7 @@ function tcGetFieldValue( $haystack, $needle, $output=true ) {
 
 
 function handle_contratto_aziende() {
-    $contrattoUID = sanitize_text_field($_POST['ccuid']);
+    $contrattoUID = sanitize_text_field($_POST['cuid']);
     $sezione = sanitize_text_field($_POST['section']);
     $goBack = (bool) isset($_POST['btnContrattoPrev']);
  
@@ -40,9 +40,7 @@ function handle_contratto_aziende() {
         $data['path'][] = $data['step'];
 
         // potrei aver inserito uno step nel posto sbagliato, perché magari sono tornato indietro e avevo saltato uno step non necessario (es: prima 1 2 4, adesso 1 2 4 3). Riordino!
-        //$toSort = isset($data['path']) ? $data['path'] : [];
         asort($data['path'], SORT_NUMERIC);
-        //$data['path'] = $toSort;        
     }
     
     

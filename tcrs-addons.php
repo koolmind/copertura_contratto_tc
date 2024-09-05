@@ -22,11 +22,12 @@
  include_once __DIR__ . '/elementor/class-tcrs-widgets.php';
  //include_once __DIR__ . '/includes/settings-contratto.php';
  include_once __DIR__ . '/includes/contratto-form-handler.php';
+ include_once __DIR__ . '/includes/ajax-handler.php';
  include_once __DIR__ . '/settings/options-tcrs.php';
 
 
 class PangeaTerrecablateAddons {
-    const VERSION = "1.0.2c";
+    const VERSION = "1.1.1";
 
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 
@@ -94,6 +95,7 @@ class PangeaTerrecablateAddons {
             wp_register_style("verificacopertura", plugins_url('css/verificacopertura.css', __FILE__ ), array('font-awesome-cop'));
             wp_register_script("scc-coperturatcrs", plugins_url( 'js/copertura.js', __FILE__ ), array('jquery','sweetalert','leaflet','easy-autocomplete','axios'), self::VERSION, true);
             wp_register_script("scc-esitocoperturatcrs", plugins_url( 'js/esito.js', __FILE__ ), array(), self::VERSION, true);
+            wp_register_script("scc-contratto", plugins_url( 'js/contratto.js', __FILE__ ), array('jquery'), rand(1,32000), true);
 
 
             if ( is_page( 'copertura' ) ) {                
@@ -124,6 +126,11 @@ class PangeaTerrecablateAddons {
             if (is_page('contratto') ) {
                 wp_enqueue_style( 'bootstrap5css' );
                 wp_enqueue_script('bootstrap5js');
+                wp_enqueue_script('scc-contratto');
+                wp_localize_script('scc-contratto', 'contratto_utils', array(
+                    'nonce' => wp_create_nonce('contratto_nonce'),
+                    'ajax_url' => admin_url( 'admin-ajax.php')
+                ));
             }
             
         });
@@ -223,6 +230,7 @@ class PangeaTerrecablateAddons {
         }
         return $template;
     }
+
 }
  
 PangeaTerrecablateAddons::instance();

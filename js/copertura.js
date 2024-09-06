@@ -452,7 +452,6 @@
   }
 
   function analizza_dati(dati, tipocliente) {
-    console.log("PIPPO", dati);
     const consigliata = dati.TIPOLOGIA_ACCESSO_CONSIGLIATA[tipocliente];
     let puntoGeo = null;
 

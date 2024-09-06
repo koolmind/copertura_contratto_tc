@@ -1,40 +1,42 @@
 <?php 
-    $fields = @$this->contrattoData['consegna']; 
+    $fields = @$this->contrattoData['servizi']; 
 ?>
 
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
     <input type="hidden" name="action" value="submit_contratto_aziende">
     <input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
+    <input type="hidden" id="section" name="section" value="servizi">
+    <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
-    <fieldset id="fields-indirizzo-attivazione">
+    <fieldset id="fields-indirizzo-dispositivo">
         <legend>Servizi richiesti</legend>
         
-        <button type="button">stesso indirizzo attivazione</button>
+        <button type="button" id="fill-from-stored-data" data-sourcesection="attivazione">come attivazione</button>
 
         <div class="form-group col-md-9">
-            <label for="indirizzo_dispositivo">Indirizzo (via/piazza)</label>
-            <input type="text" name="dati[indirizzo_dispositivo]" id="indirizzo_dispositivo" class="form-control" placeholder="via/piazza" value="<?php echo ( @$fields['indirizzo_dispositivo'] ) ? $fields['indirizzo_dispositivo'] : ''; ?>" >
+            <label for="servizi_indirizzo">Indirizzo (via/piazza)</label>
+            <input type="text" name="dati[servizi_indirizzo]" id="servizi_indirizzo" class="form-control" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'servizi_indirizzo'); ?>">
         </div>
 
         <div class="form-group col-md-3">
-            <label for="numero_civico_dispositivo">Numero civico</label>
-            <input type="text" name="dati[numero_civico_dispositivo]" id="numero_civico_dispositivo" class="form-control" placeholder="n. civico"  value="<?php echo ( @$fields['numero_civico_dispositivo'] ) ? $fields['numero_civico_dispositivo'] : ''; ?>" >
+            <label for="servizi_civico">Numero civico</label>
+            <input type="text" name="dati[servizi_civico]" id="servizi_civico" class="form-control" placeholder="n. civico"  value="<?php tcGetFieldValue($fields,'servizi_civico'); ?>">
         </div>
 
         <div class="form-group col-md-4">
-            <label for="citta_dispositivo">Città</label>
-            <input type="text" name="dati[citta_dispositivo]" id="citta_dispositivo" class="form-control" placeholder="città"  value="<?php echo ( @$fields['citta_dispositivo'] ) ? $fields['citta_dispositivo'] : ''; ?>" >
+            <label for="servizi_citta">Città</label>
+            <input type="text" name="dati[servizi_citta]" id="servizi_citta" class="form-control" placeholder="città"  value="<?php tcGetFieldValue($fields,'servizi_citta'); ?>">
         </div>
 
         <div class="form-group col-md-4">
-            <label for="provincia_dispositivo">Provincia</label>
-            <input type="text" name="dati[provincia_dispositivo]" id="provincia_dispositivo" class="form-control" placeholder="provincia" value="<?php echo ( @$fields['provincia_dispositivo'] ) ? $fields['provincia_dispositivo'] : ''; ?>" >
+            <label for="servizi_provincia">Provincia</label>
+            <input type="text" name="dati[servizi_provincia]" id="servizi_provincia" class="form-control" placeholder="provincia" value="<?php tcGetFieldValue($fields,'servizi_provincia'); ?>">
         </div>
 
         <div class="form-group col-md-4">
-            <label for="cap_dispositivo">CAP</label>
-            <input type="text" name="dati[cap_dispositivo]" id="cap_dispositivo" class="form-control" placeholder="c.a.p." value="<?php echo ( @$fields['cap_dispositivo'] ) ? $fields['cap_dispositivo'] : ''; ?>" >
+            <label for="servizi_cap">CAP</label>
+            <input type="text" name="dati[servizi_cap]" id="servizi_cap" class="form-control" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'servizi_cap'); ?>">
         </div>
     </fieldset>
 

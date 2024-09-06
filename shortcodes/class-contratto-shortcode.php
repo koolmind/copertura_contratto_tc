@@ -32,8 +32,7 @@ class ContrattoOnLineShortcode {
             // CARICO I DATI DAL TRANSIENT
             $this->contrattoData = $this->loadContrattoData($this->contrattoUID);
 
-            echo "<p>DEBUG</p>";
-            var_dump($this->contrattoData);
+            
             
 
             // recupero e aggiorno i dati della copertura da POST
@@ -52,15 +51,29 @@ class ContrattoOnLineShortcode {
                 $this->contrattoData['offerta'] = $composizione_offerta;
                 $this->contrattoData['step'] = 1;
                 $this->contrattoData['path'][] = 1; // array contenente tutti gli step che mano mano vengono completati, per tenere traccia di eventuali salti
-                $this->contrattoData['anagrafica']['rag_sociale'] = "società pippo";
-
+                
                 set_transient( $this->contrattoUID, $this->contrattoData, 0);
+
+                // ob_start();
                 
-                printf("<a href='%s' class='' id='cnt_redir'>skip.</a>", home_url('/contratto/?cuid='.$this->contrattoUID) );
-                echo "<script> document.getElementById('cnt_redir').click(); </script>";
+                // echo "<div class='contratto-form-wrapper'>";
                 
-                exit;
-            }  else {
+                // include(TC_ADDONS_ROOT .  "parts/contratto/aziende/step-1.php");
+
+                // echo "</div>";
+
+                // return ob_get_clean(); 
+
+                
+                //printf("<a href='%s' class='' id='cnt_redir'>skip.</a>", home_url('/contratto/?cuid='.$this->contrattoUID) );
+                //echo "<script> document.getElementById('cnt_redir').click(); </script>";
+                
+                //exit;
+            }  //else {
+
+                echo "<p>DEBUG</p>";
+                var_dump($this->contrattoData);
+                
                 ob_start();
                 
                 echo "<div class='contratto-form-wrapper'>";
@@ -69,14 +82,14 @@ class ContrattoOnLineShortcode {
                 // if($step=='x'){
                 //     $section ='common';
                 // }
-                $section = $this->contrattoData['offerta']['target'];
+                $cliente = $this->contrattoData['offerta']['target'];
                 
-                include(TC_ADDONS_ROOT .  "parts/contratto/{$section}/step-{$step}.php");
+                include(TC_ADDONS_ROOT .  "parts/contratto/{$cliente}/step-{$step}.php");
 
                 echo "</div>";
 
                 return ob_get_clean(); 
-            }            
+            //}            
             
         } else {
             print ('Impossibile visualizzare il contenuto.');

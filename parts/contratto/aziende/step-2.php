@@ -5,11 +5,13 @@
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
     <input type="hidden" name="action" value="submit_contratto_aziende">
 	<input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
+    <input type="hidden" id="section" name="section" value="attivazione">
+    <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
     <fieldset id="fields-indirizzo-attivazione">
-        <legend>Indirizzo di attivazione et fornitura dei servizi</legend>
+        <legend>Indirizzo di attivazione e fornitura dei servizi</legend>
 
-        <button type="button" id="fill-from-sede" data-sourcesection="anagrafica">stesso indirizzo sede</button>
+        <button type="button" id="fill-from-stored-data" data-sourcesection="anagrafica">stesso indirizzo sede</button>
 
         <div class="form-group col-md-9">
             <label for="attivazione_indirizzo">Indirizzo (via/piazza)</label>

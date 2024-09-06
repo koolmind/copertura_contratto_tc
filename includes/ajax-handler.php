@@ -1,20 +1,4 @@
 <?php
-//add_action('init', 'debug_ajax_request');
-
-// function debug_ajax_request() {
-//     if (defined('DOING_AJAX') && DOING_AJAX) {
-//         error_log('Richiesta Ajax ricevuta');
-//         error_log('Action: ' . $_POST['action']);
-//         error_log('POST data: ' . print_r($_POST, true));
-        
-//         // Termina l'esecuzione dopo aver loggato i dati
-//         if ($_POST['action'] == 'get_transient_data') {
-//             wp_send_json(array('debug' => 'Richiesta Ajax intercettata'));
-//             exit;
-//         }
-//     }
-// }
-
 function handle_get_transient_data() {
     // Aggiungi questi header se necessario per CORS
     header("Access-Control-Allow-Origin: *");
@@ -27,12 +11,13 @@ function handle_get_transient_data() {
         exit();
     }
     
-    $x = check_ajax_referer('contratto_nonce', 'nonce');
+    check_ajax_referer('contratto_nonce', 'nonce');
         
     $transientKey = $_POST['id_transient'];
     $dataSection = $_POST['section'];
 
-    $transientData = get_transient($transientKey);
+    $allTransientData = get_transient($transientKey);
+    $sectionTransientData  = $allTransientData[$dataSection];
 
    if ($transientData === false) {
         wp_send_json_error(array(
@@ -40,7 +25,7 @@ function handle_get_transient_data() {
         ));
     } else {
         wp_send_json_success(array(
-            'transient_data' => $transientData,
+            'transient_data' => $sectionTransientData,
         ));
     }
 

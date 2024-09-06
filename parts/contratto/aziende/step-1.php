@@ -3,6 +3,8 @@
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
     <input type="hidden" name="action" value="submit_contratto_aziende">
 	<input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
+	<input type="hidden" id="section" name="section" value="anagrafica">
+	<input type="hidden" id="tipocli" name="tipocli" value="aziende">
 	
 	<fieldset id="fields-anagrafica">
 		<legend>Dati anagrafici e sede legale dell'azienda</legend>	

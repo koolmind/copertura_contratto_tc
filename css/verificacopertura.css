@@ -3,77 +3,17 @@
   display: none !important;
 }
 
-.my-1 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.my-2 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.mt-1 {
-  margin-top: 0.5rem;
-}
-
-.mt-2 {
-  margin-top: 1rem;
-}
-
-.mt-3 {
-  margin-top: 1.5rem;
-}
-
-.mt-4 {
-  margin-top: 2rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-2 {
-  margin-bottom: 1rem;
-}
-
-.mb-3 {
-  margin-bottom: 1.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 2rem;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.text-bold {
-  font-weight: bold;
-}
-
 /* BOTTONI */
 .btn-standard {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   gap: 20px;
   font-size: 1rem;
-  padding: 0.5em;
+  padding: 0.5em 1rem;
   background-color: #202b49;
   border: 2px solid #202b49;
   color: white;
-  height: 2.5rem;
-  outline: solid 3px #202b49;
-  outline-offset: 2px;
   border-radius: 16px;
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
@@ -81,7 +21,15 @@
   -o-border-radius: 16px;
 }
 .btn-standard:hover, .btn-standard:focus {
-  background-color: #794084;
+  background-color: #0081c7 !important;
+}
+.btn-standard.btn-alt {
+  background-color: #0081c7;
+  border: 1px solid #0081c7;
+  font-size: 0.85rem;
+}
+.btn-standard.btn-alt:hover, .btn-standard.btn-alt:focus {
+  background-color: #e390f3 !important;
 }
 
 body.page-template-tpl-risultato-copertura .site-content {

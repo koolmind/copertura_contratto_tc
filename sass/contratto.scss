@@ -1,0 +1,14 @@
+@import "variables";
+@import "helpers";
+
+label {
+  font-size: 13px;
+  color: $grigino;
+}
+
+legend {
+  color: $blu-medio;
+  padding: 0 !important;
+  font-size: 1.75rem;
+  font-family: "Anton", sans-serif;
+}

@@ -2,7 +2,7 @@
     $fields = @$this->contrattoData['attivazione']; 
 ?>
 
-<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5">
     <input type="hidden" name="action" value="submit_contratto_aziende">
 	<input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
     <input type="hidden" id="section" name="section" value="attivazione">
@@ -11,41 +11,47 @@
     <fieldset id="fields-indirizzo-attivazione">
         <legend>Indirizzo di attivazione e fornitura dei servizi</legend>
 
-        <button type="button" id="fill-from-stored-data" data-sourcesection="anagrafica">stesso indirizzo sede</button>
+        <div class="d-flex justify-content-end my-3">
+            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo sede</button>
+        </div>
 
-        <div class="form-group col-md-9">
-            <label for="attivazione_indirizzo">Indirizzo (via/piazza)</label>
-            <input type="text" name="dati[attivazione_indirizzo]" id="attivazione_indirizzo" class="form-control" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'attivazione_indirizzo'); ?>">
-            <small class="text-danger form-message">Campo richiesto</small>
+        <div class="row">
+            <div class="col-12 col-md-8 mb-4">
+                <label for="attivazione_indirizzo">Indirizzo (via/piazza)</label>
+                <input type="text" name="dati[attivazione_indirizzo]" id="attivazione_indirizzo" class="form-control" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'attivazione_indirizzo'); ?>">
+                <small class="text-danger form-message">Campo richiesto</small>
+            </div>
+        
+            <div class="col-12 col-md-4 mb-4">
+                <label for="attivazione_civico">Numero civico</label>
+                <input type="text" name="dati[attivazione_civico]" id="attivazione_civico" class="form-control" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'attivazione_civico'); ?>">
+                <small class="text-danger form-message">Campo richiesto</small>
+            </div>
         </div>
         
-        <div class="form-group col-md-3">
-            <label for="attivazione_civico">Numero civico</label>
-            <input type="text" name="dati[attivazione_civico]" id="attivazione_civico" class="form-control" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'attivazione_civico'); ?>">
-            <small class="text-danger form-message">Campo richiesto</small>
-        </div>
-        
-        <div class="form-group col-md-4">
-            <label for="attivazione_citta">Città</label>
-            <input type="text" name="dati[attivazione_citta]" id="attivazione_citta" class="form-control" placeholder="città" value="<?php tcGetFieldValue($fields,'attivazione_citta'); ?>">
-            <small class="text-danger form-message">Campo richiesto</small>
-        </div>
-        
-        <div class="form-group col-md-4">
-            <label for="attivazione_provincia">Provincia</label>
-            <input type="text" name="dati[attivazione_provincia]" id="attivazione_provincia" class="form-control" placeholder="provincia" value="<?php tcGetFieldValue($fields,'attivazione_provincia'); ?>">
-            <small class="text-danger form-message">Campo richiesto</small>
-        </div>
-        
-        <div class="form-group col-md-4">
-            <label for="attivazione_cap">CAP</label>
-            <input type="text" name="dati[attivazione_cap]" id="attivazione_cap" class="form-control" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'attivazione_cap'); ?>">
-            <small class="text-danger form-message">Campo richiesto</small>
+        <div class="row">
+            <div class="col-12 col-md-4 mb-4">
+                <label for="attivazione_citta">Città</label>
+                <input type="text" name="dati[attivazione_citta]" id="attivazione_citta" class="form-control" placeholder="città" value="<?php tcGetFieldValue($fields,'attivazione_citta'); ?>">
+                <small class="text-danger form-message">Campo richiesto</small>
+            </div>
+            
+            <div class="col-6 col-md-4 mb-4">
+                <label for="attivazione_provincia">Provincia</label>
+                <input type="text" name="dati[attivazione_provincia]" id="attivazione_provincia" class="form-control" placeholder="provincia" value="<?php tcGetFieldValue($fields,'attivazione_provincia'); ?>">
+                <small class="text-danger form-message">Campo richiesto</small>
+            </div>
+            
+            <div class="col-6 col-md-4 mb-4">
+                <label for="attivazione_cap">CAP</label>
+                <input type="text" name="dati[attivazione_cap]" id="attivazione_cap" class="form-control" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'attivazione_cap'); ?>">
+                <small class="text-danger form-message">Campo richiesto</small>
+            </div>
         </div>
     </fieldset>
 
-    <div class="contratto_nav_buttons">
-        <button type="submit" id="btnContrattoPrev" name="btnContrattoPrev">Indietro</button>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext">Avanti</button>
+    <div class="contratto_nav_buttons d-flex justify-content-between mt-4">
+        <button type="submit" id="btnContrattoPrev" name="btnContrattoPrev" class="btn-standard"><i class="fas fa-long-arrow-alt-left"></i> Indietro</button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

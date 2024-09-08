@@ -93,6 +93,7 @@ class PangeaTerrecablateAddons {
             wp_register_style('bootstrap5js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), '5.3.3', true);
             
             wp_register_style("verificacopertura", plugins_url('css/verificacopertura.css', __FILE__ ), array('font-awesome-cop'));
+            wp_register_style("contratto", plugins_url('css/contratto.css', __FILE__ ), array('font-awesome-cop'));
             wp_register_script("scc-coperturatcrs", plugins_url( 'js/copertura.js', __FILE__ ), array('jquery','sweetalert','leaflet','easy-autocomplete','axios'), self::VERSION, true);
             wp_register_script("scc-esitocoperturatcrs", plugins_url( 'js/esito.js', __FILE__ ), array(), self::VERSION, true);
             wp_register_script("scc-contratto", plugins_url( 'js/contratto.js', __FILE__ ), array('jquery'), rand(1,32000), true);
@@ -116,6 +117,8 @@ class PangeaTerrecablateAddons {
             }
 
             if( is_page( 'esito-copertura' ) ) {
+                wp_enqueue_style( 'bootstrap5css' );
+                wp_enqueue_script('bootstrap5js');
                 wp_enqueue_style( 'font-awesome-cop' );
                 wp_enqueue_style( 'verificacopertura' );
 
@@ -126,6 +129,7 @@ class PangeaTerrecablateAddons {
             if (is_page('contratto') ) {
                 wp_enqueue_style( 'bootstrap5css' );
                 wp_enqueue_script('bootstrap5js');
+                wp_enqueue_style( 'contratto' );
                 wp_enqueue_script('scc-contratto');
                 wp_localize_script('scc-contratto', 'contratto_utils', array(
                     'nonce' => wp_create_nonce('contratto_nonce'),

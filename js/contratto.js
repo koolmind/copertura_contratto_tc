@@ -1,6 +1,22 @@
 jQuery(document).ready(function ($) {
-  // recupero i dati dal transient
+  $("#btnContrattoNext").on("click", function (evt) {
+    evt.preventDefault();
+    var allRequiredFields = $(".tc-required");
 
+    allRequiredFields.each(function (idx) {
+      var errLabel = $(this).closest(".tc-input").find(".form-message");
+      if ($(this).val() == "") {
+        $(this).addClass("is-invalid");
+        //errLabel.removeClass("hide");
+      } else {
+        $(this).removeClass("is-invalid");
+        //errLabel.addClass("hide");
+      }
+    });
+    console.log("validando...");
+  });
+
+  // recupero i dati dal transient
   $("#fill-from-stored-data").on("click", function () {
     var transientID = $("input#cuid").val();
     var sourceSection = $(this).data("sourcesection");

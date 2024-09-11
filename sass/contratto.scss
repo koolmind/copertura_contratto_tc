@@ -12,3 +12,23 @@ legend {
   font-size: 1.75rem;
   font-family: "Anton", sans-serif;
 }
+
+label:has(~ .form-control.tc-required)::after {
+  content: "*";
+  color: firebrick;
+  margin-left: 3px;
+}
+
+.check-zone {
+  padding: 16px 48px;
+  border: 2px solid $blu-medio;
+  background-color: #f6f6f9;
+}
+
+label.title-label {
+  color: $blu-medio;
+  padding: 0 !important;
+  font-size: 1.15rem;
+  font-family: "Anton", sans-serif;
+  font-weight: 500;
+}

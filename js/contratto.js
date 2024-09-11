@@ -2,18 +2,28 @@ jQuery(document).ready(function ($) {
   $("#btnContrattoNext").on("click", function (evt) {
     evt.preventDefault();
     var allRequiredFields = $(".tc-required");
+    var hasErrors = false;
+
+    var errLabel = $("#errLabel");
+    var loadingLabel = $("#loadingLabel");
 
     allRequiredFields.each(function (idx) {
-      var errLabel = $(this).closest(".tc-input").find(".form-message");
       if ($(this).val() == "") {
         $(this).addClass("is-invalid");
-        //errLabel.removeClass("hide");
+        hasErrors = true;
       } else {
         $(this).removeClass("is-invalid");
-        //errLabel.addClass("hide");
       }
     });
-    console.log("validando...");
+
+    if (!hasErrors) {
+      errLabel.addClass("hide");
+      loadingLabel.removeClass("hide");
+      $("#contratto_form").submit();
+    } else {
+      errLabel.removeClass("hide");
+      loadingLabel.addClass("hide");
+    }
   });
 
   // recupero i dati dal transient
@@ -37,11 +47,13 @@ jQuery(document).ready(function ($) {
 
         switch (currentSection) {
           case "attivazione":
-            var prefix = tipoCli == "aziende" ? "azienda" : "cliente";
-            fillAttivazione(response.data.transient_data, prefix);
+            fillAttivazione(response.data.transient_data, tipoCli);
             break;
           case "servizi":
-            fillServizi(response.data.transient_data, "attivazione");
+            fillServizi(response.data.transient_data);
+            break;
+          case "migrazione":
+            fillIntestatario(response.data.transient_data, tipoCli);
             break;
 
           default:
@@ -55,7 +67,9 @@ jQuery(document).ready(function ($) {
     });
   });
 
-  function fillAttivazione(data, prefix) {
+  function fillAttivazione(data, cli) {
+    const prefix = cli == "aziende" ? "azienda" : "cliente";
+
     $("#attivazione_indirizzo").val(data[`${prefix}_indirizzo`]);
     $("#attivazione_civico").val(data[`${prefix}_civico`]);
     $("#attivazione_citta").val(data[`${prefix}_citta`]);
@@ -63,11 +77,55 @@ jQuery(document).ready(function ($) {
     $("#attivazione_cap").val(data[`${prefix}_cap`]);
   }
 
-  function fillServizi(data, prefix) {
+  function fillServizi(data) {
+    const prefix = "attivazione";
+
     $("#servizi_indirizzo").val(data[`${prefix}_indirizzo`]);
     $("#servizi_civico").val(data[`${prefix}_civico`]);
     $("#servizi_citta").val(data[`${prefix}_citta`]);
     $("#servizi_provincia").val(data[`${prefix}_provincia`]);
     $("#servizi_cap").val(data[`${prefix}_cap`]);
+  }
+
+  function fillIntestatario(data, cli) {
+    let prefix = "";
+    if (cli == "aziende") {
+      prefix = "azienda";
+      $("#linea_rag_sociale").val(data[`rag_sociale`]);
+      $(`#linea_${prefix}_indirizzo`).val(data[`${prefix}_indirizzo`]);
+      $(`#linea_${prefix}_civico`).val(data[`${prefix}_civico`]);
+      $(`#linea_${prefix}_citta`).val(data[`${prefix}_citta`]);
+      $(`#linea_${prefix}_provincia`).val(data[`${prefix}_provincia`]);
+      $(`#linea_${prefix}_cap`).val(data[`${prefix}_cap`]);
+      $(`#linea_${prefix}_piva_cf`).val(data[`${prefix}_piva_cf`]);
+
+      prefix = "cliente";
+      $(`#linea_${prefix}_cliente_ruolo`).val(data[`${prefix}_cliente_ruolo`]);
+      $(`#linea_${prefix}_sesso`).val(data[`${prefix}_sesso`]);
+      $(`#linea_${prefix}_data_nascita`).val(data[`${prefix}_data_nascita`]);
+      $(`#linea_${prefix}_luogo_nascita`).val(data[`${prefix}_luogo_nascita`]);
+      $(`#linea_${prefix}_provincia_nascita`).val(
+        data[`${prefix}_provincia_nascita`]
+      );
+      $(`#linea_${prefix}_nazionalita`).val(data[`${prefix}_nazionalita`]);
+      $(`#linea_${prefix}_tipo_documento`).val(
+        data[`${prefix}_tipo_documento`]
+      );
+      $(`#linea_${prefix}_doc_numero`).val(data[`${prefix}_doc_numero`]);
+      $(`#linea_${prefix}_doc_emittente`).val(data[`${prefix}_doc_emittente`]);
+      $(`#linea_${prefix}_doc_rilascio`).val(data[`${prefix}_doc_rilascio`]);
+      $(`#linea_${prefix}_doc_scadenza`).val(data[`${prefix}_doc_scadenza`]);
+    }
+
+    // campi HOME che vanno anche in OFFICE
+    prefix = "cliente";
+    $(`#linea_${prefix}_cognome`).val(data[`${prefix}_cognome`]);
+    $(`#linea_${prefix}_nome`).val(data[`${prefix}_nome`]);
+    $(`#linea_${prefix}_indirizzo`).val(data[`${prefix}_indirizzo`]);
+    $(`#linea_${prefix}_civico`).val(data[`${prefix}_civico`]);
+    $(`#linea_${prefix}_citta`).val(data[`${prefix}_citta`]);
+    $(`#linea_${prefix}_provincia`).val(data[`${prefix}_provincia`]);
+    $(`#linea_${prefix}_cap`).val(data[`${prefix}_cap`]);
+    $(`#linea_${prefix}_cod_fiscale`).val(data[`${prefix}_cod_fiscale`]);
   }
 });

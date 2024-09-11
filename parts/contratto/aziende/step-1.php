@@ -1,6 +1,6 @@
 <?php $fields = @$this->contrattoData['anagrafica']; ?>
 
-<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5">
+<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">
 	<input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
 	<input type="hidden" id="section" name="section" value="anagrafica">
@@ -11,9 +11,9 @@
 		
 		<div class="row">
 			<div class="col mb-4">
-				<label for="rag_sociale">Denominazione / Ragione sociale</label>
+				<label for="rag_sociale">Denominazione / Ragione sociale o Cognome</label>
 				<input type="text" name="dati[rag_sociale]" id="rag_sociale" class="form-control tc-required" placeholder="ragione sociale" value="<?php tcGetFieldValue($fields,'rag_sociale'); ?>">
-				<small class="text-danger form-message hide" id="bello">Campo richiesto</small>
+				<small class="text-danger form-message hide">Campo richiesto</small>
 			</div>
 		</div>
 		
@@ -40,7 +40,7 @@
 		
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="azienda_provincia">Provincia</label>
-				<input type="text" name="dati[azienda_provincia]" id="azienda_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'azienda_provincia'); ?>">
+				<input type="text" name="dati[azienda_provincia]" id="azienda_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'azienda_provincia'); ?>" maxlength="2">
 				<small class="text-danger form-message hide">Campo richiesto</small>
 			</div>
 		
@@ -102,11 +102,10 @@
 			<div class="tc-input col-12 col-md-6">
 				<label for="cliente_ruolo">Ruolo richiedente</label>
 				<select class="form-select" name="dati[cliente_ruolo]" id="cliente_ruolo">
-					<option value="">-seleziona ruolo-</option>
+					<option value="">- seleziona ruolo -</option>
 					<?php
 					$ruoli = ['titolare','legale rappresentante','delegato'];
 					$sel =  tcGetFieldValue($fields, 'cliente_ruolo',false);
-
 					foreach($ruoli as $ruolo) {
 						$isSelected = $ruolo == $sel ? " selected='selected' " : "";
 						printf('<option value="%1$s" %s>%1$s</option>', $ruolo, $isSelected);
@@ -131,21 +130,19 @@
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
-				<?php $sel =  tcGetFieldValue($fields, 'cliente_sesso',false); ?>
-	
 				<label for="cliente_sesso">Sesso</label>
-		
-				<div class="d-flex gap-4 align-items-center">
-					<div class="form-check">
-						<input class="form-check-input tc-required" type="radio" name="dati[cliente_sesso]" id="cliente_sesso_M" <?php if($sel =='M') {echo "checked='checked'";} ?>>
-						<label class="form-check-label" for="cliente_sesso_M">M</label>
-					</div>
+				<select class="form-select" name="dati[cliente_sesso]" id="cliente_sesso">
+					<option value="">- seleziona sesso -</option>
+					<?php
+					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
+					$sel =  tcGetFieldValue($fields, 'cliente_sesso',false);
 
-					<div class="form-check">
-						<input class="form-check-input tc-required" type="radio" name="dati[cliente_sesso]" id="cliente_sesso_F" <?php if($sel =='F') {echo "checked='checked'";} ?>>
-						<label class="form-check-label" for="cliente_sesso_F">F</label>
-					</div>
-				</div>
+					foreach($sesso as $sex=>$sexLabel) {
+						$isSelected = $sex == $sel ? " selected='selected' " : "";
+						printf('<option value="%s" %s>%s</option>', $sex, $isSelected, $sexLabel);
+					}
+					?>
+				</select>
 				<small class="text-danger form-message hide" style="clear:both;">Campo richiesto. Selezionare un'opzione.</small>
 			</div>
 		</div>
@@ -165,7 +162,7 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_provincia_nascita">Provincia</label>
-				<input type="text" name="dati[cliente_provincia_nascita]" id="cliente_provincia_nascita" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'cliente_provincia_nascita'); ?>">
+				<input type="text" name="dati[cliente_provincia_nascita]" id="cliente_provincia_nascita" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'cliente_provincia_nascita'); ?>" maxlength="2">
 				<small class="text-danger form-message hide">Campo richiesto</small>
 			</div>
 		</div>
@@ -191,7 +188,7 @@
 				<select name="dati[cliente_tipo_documento]" id="cliente_tipo_documento" class="form-select">
 					<option value="">-- seleziona documento -</option>
 					<?php
-					$docs = array( "carta_id"=>"Carta di identità", "patente" => "Patente di guida","passaporto"=>"Passaporto" );
+					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
 					$sel =  tcGetFieldValue($fields, 'cliente_tipo_documento',false);
 
 					foreach($docs as $value=>$label) {
@@ -253,7 +250,7 @@
 
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="cliente_provincia">Provincia</label>
-				<input type="text" name="dati[cliente_provincia]" id="cliente_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'cliente_provincia'); ?>">
+				<input type="text" name="dati[cliente_provincia]" id="cliente_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'cliente_provincia'); ?>" maxlength="2">
 				<small class="text-danger form-message hide">Campo richiesto</small>
 			</div>
 
@@ -267,6 +264,10 @@
 	</fieldset>
 
 	<div class="contratto_nav_buttons d-flex justify-content-end mt-4">
+		<div class="info_messages">
+            <span class="text-danger hide" id="errLabel">controlla i dati inseriti</span>
+            <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
+        </div>
         <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

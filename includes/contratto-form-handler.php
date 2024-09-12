@@ -32,8 +32,8 @@ function handle_contratto_aziende() {
         // integro coi nuovi dati
         $postData = $_POST['dati'];
 
-        foreach($postData as $key=>$val){
-            $data[$sezione][$key] = sanitize_text_field($val);
+        foreach($postData as $key=>$val) {
+            $data[$sezione][$key] = sanitize_text_field($val);           
         }
 
         $data['step'] = intval($data['step']) + 1;
@@ -41,6 +41,8 @@ function handle_contratto_aziende() {
 
         // potrei aver inserito uno step nel posto sbagliato, perché magari sono tornato indietro e avevo saltato uno step non necessario (es: prima 1 2 4, adesso 1 2 4 3). Riordino!
         asort($data['path'], SORT_NUMERIC);
+
+        
     }
     
     

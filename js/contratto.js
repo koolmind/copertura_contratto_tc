@@ -2,17 +2,19 @@ jQuery(document).ready(function ($) {
   // VALIDAZIONE DEGLI INPUTS
   $("#btnContrattoNext").on("click", function (evt) {
     evt.preventDefault();
-    var allRequiredFields = $(".tc-required");
-    var checkLineaFields = $(this).hasClass("jsCheckLineaFields");
-    var hasErrors = false;
+    const allRequiredFields = $(".tc-required");
+    const checkLineaFields = $(this).hasClass("jsCheckLineaFields");
+    let hasErrors = false;
 
-    var errLabel = $("#errLabel");
-    var loadingLabel = $("#loadingLabel");
+    const errLabel = $("#errLabel");
+    const loadingLabel = $("#loadingLabel");
 
     if (checkLineaFields) {
-      var mig = $("#linea_migrazione");
-      var att = $("#linea_nuova");
+      const mig = $("#linea_migrazione");
+      const att = $("#linea_nuova");
+      const por = $("#linea_portability");
 
+      // controllo che uno dei due campi migrazione/nuova linea sia stato impostato
       if (!mig.is(":checked") && !att.is(":checked")) {
         hasErrors = true;
         mig.addClass("is-invalid");
@@ -21,16 +23,31 @@ jQuery(document).ready(function ($) {
         mig.removeClass("is-invalid");
         att.removeClass("is-invalid");
       }
-      // linea_nuova
-      // linea_portability
+
+      if (!por.is(":checked")) {
+        // se non è richiesta la nun. portability, cancello il contenuto dei campi relativi, per essere sicuro di non salvarli
+        $("#fields-number-portability input").each(function () {
+          $(this).val("");
+        });
+        $("#linea_consenso_portability").prop("checked", false);
+      }
     }
 
-    allRequiredFields.each(function (idx) {
-      if ($(this).val() == "") {
-        $(this).addClass("is-invalid");
-        hasErrors = true;
+    allRequiredFields.each(function () {
+      if ($(this).prop("type") == "checkbox") {
+        if (!$(this).is(":checked")) {
+          $(this).addClass("is-invalid");
+          hasErrors = true;
+        } else {
+          $(this).removeClass("is-invalid");
+        }
       } else {
-        $(this).removeClass("is-invalid");
+        if ($(this).val() == "") {
+          $(this).addClass("is-invalid");
+          hasErrors = true;
+        } else {
+          $(this).removeClass("is-invalid");
+        }
       }
     });
 
@@ -39,7 +56,10 @@ jQuery(document).ready(function ($) {
       loadingLabel.removeClass("hide");
       $("#contratto_form").submit();
     } else {
-      errLabel.removeClass("hide");
+      errLabel.addClass("active");
+      setTimeout(() => {
+        errLabel.removeClass("active");
+      }, 2500);
       loadingLabel.addClass("hide");
     }
   });
@@ -148,20 +168,47 @@ jQuery(document).ready(function ($) {
     $(`#linea_${prefix}_cod_fiscale`).val(data[`${prefix}_cod_fiscale`]);
   }
 
+  // Gestione Checkboxes stato linea
   $cbxLinea = $("[data-check-linea]").each(function () {
     $(this).on("change", function () {
-      var cb = $(this);
+      const cb = $(this);
+      const por = $("#linea_portability");
+      const att = $("#linea_nuova");
+      const mig = $("#linea_migrazione");
 
-      // se migrazione=true, allora portability diventa true
+      // MIGRAZIONE: se True, allora anche portability diventa true
       if (cb.attr("id") == "linea_migrazione" && cb.prop("checked") == true) {
-        $("#linea_portability").prop("checked", true).trigger("change");
+        por.prop("checked", true).trigger("change");
+        att.prop("checked", false);
       }
 
+      // NUOVA ATTIVAZIONE: se True, allora Migrazione deve essere false
+      if (cb.attr("id") == "linea_nuova" && cb.prop("checked") == true) {
+        mig.prop("checked", false);
+      }
+
+      // PORTABILITY: attivo o disattivo alcuni campi collegati
       if (cb.attr("id") == "linea_portability") {
+        const cod1 = $("#linea_codice_migrazione_1");
+        const num1 = $("#linea_numero_1");
+        const consPortability = $("#linea_consenso_portability");
+        const fieldsPortability = $("#fields-number-portability");
+        const rowPortability = $("#row-consenso-portability");
+
         if (cb.prop("checked") == true) {
-          $("#fields-number-portability").removeClass("hide");
+          fieldsPortability.removeClass("hide");
+          rowPortability.removeClass("hide");
+          // imposto come obbligatori alcuni campi tra quelli della num. portability
+          cod1.addClass("tc-required");
+          num1.addClass("tc-required");
+          consPortability.addClass("tc-required");
         } else {
-          $("#fields-number-portability").addClass("hide");
+          fieldsPortability.addClass("hide");
+          rowPortability.addClass("hide");
+          cod1.removeClass("tc-required");
+          num1.removeClass("tc-required");
+          consPortability.removeClass("tc-required");
+          consPortability.removeClass("is-invalid");
         }
       }
     });

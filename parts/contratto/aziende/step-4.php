@@ -2,7 +2,6 @@
     $fields = @$this->contrattoData['migrazione']; 
 ?>
 
-
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">
     <input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
@@ -13,7 +12,7 @@
         <legend>Migrazione o attivazione nuova linea</legend>
         
         <div class="row">
-            <div class="col mb-4 d-flex gap-5">
+            <div class="col mb-4 d-flex flex-column flex-md-row gap-5">
                 <div class="form-check check-zone">
                     <input class="form-check-input" type="checkbox" value="1" id="linea_migrazione" name="dati[linea_migrazione]" data-check-linea>
                     <label class="form-check-label" for="linea_migrazione">Voglio migrare la mia linea</label>
@@ -40,13 +39,15 @@
 		</div>
     </fieldset>
     
+	<!-- NUMBER PORTABILITY -->
+
     <fieldset id="fields-number-portability" class="hide mt-3">
         <legend>Number portability</legend>
 
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_codice_migrazione_1">Codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control tc-required" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
             </div>
 
             <div class="col-12 col-md-6  mb-4">
@@ -58,7 +59,7 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_1">Numero telefonico #1</label>
-                <input type="text" name="dati[linea_numero_1]" id="linea_numero_1" class="form-control tc-required" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_numero_1'); ?>">
+                <input type="text" name="dati[linea_numero_1]" id="linea_numero_1" class="form-control" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_numero_1'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
@@ -86,12 +87,12 @@
         </div>
 		
 		<div class="row">
-			<div class="col mb-4">
+			<div class="col-13 col-md-6 mb-4">
 				<label for="linea_rag_sociale">Denominazione / Ragione sociale o Cognome</label>
 				<input type="text" name="dati[linea_rag_sociale]" id="linea_rag_sociale" class="form-control tc-required" placeholder="ragione sociale" value="<?php tcGetFieldValue($fields,'linea_rag_sociale'); ?>">
 				<small class="text-danger form-message hide">Campo richiesto</small>
 			</div>
-            <div class="col mb-4">
+            <div class="col-12 col-md-6 mb-4">
 				<label for="linea_azienda_nome">Nome</label>
 				<input type="text" name="dati[linea_azienda_nome]" id="linea_rag_sociale" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'linea_azienda_nome'); ?>">
 				<small class="text-danger form-message hide">Campo richiesto</small>
@@ -228,7 +229,7 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="linea_cliente_tipo_documento">Tipo documento</label>
-				<select name="dati[linea_cliente_tipo_documento]" id="linea_cliente_tipo_documento" class="form-select">
+				<select name="dati[linea_cliente_tipo_documento]" id="linea_cliente_tipo_documento" class="form-select tc-required">
 					<option value="">-- seleziona documento -</option>
 					<?php
 					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
@@ -311,26 +312,26 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="migrazione" name="dati[linea_consenso_migrazione]">
-                    <label class="form-check-label title-label" for="migrazione">Richiesta di migrazione dei servizi telefonici e internet</label>
+                    <input class="form-check-input tc-required" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]">
+                    <label class="form-check-label title-label" for="migralinea_consenso_migrazionezione">Richiesta di migrazione dei servizi telefonici e internet</label>
                 </div>
                 <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
-fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
-operatore l’ordine di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra
-operazione necessaria per la fornitura dei succitati servizi.</p>
+					fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
+					operatore l’ordine di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra
+					operazione necessaria per la fornitura dei succitati servizi.</p>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row hide" id="row-consenso-portability">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="migrazione" name="dati[linea_consenso_portability]">
-                    <label class="form-check-label title-label" for="migrazione">Richiesta di mantenimento del numero telefonico (Number Portability)</label>
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_consenso_portability" name="dati[linea_consenso_portability]">
+                    <label class="form-check-label title-label" for="linea_consenso_portability">Richiesta di mantenimento del numero telefonico (Number Portability)</label>
                 </div>
                 <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
-fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
-operatore l’ordine di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra
-operazione necessaria per la fornitura dei succitati servizi.</p>
+					fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
+					operatore l’ordine di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra
+					operazione necessaria per la fornitura dei succitati servizi.</p>
             </div>
         </div>
     </fieldset>
@@ -338,7 +339,7 @@ operazione necessaria per la fornitura dei succitati servizi.</p>
     <div class="contratto_nav_buttons d-flex justify-content-between mt-4">
         <button type="submit" id="btnContrattoPrev" name="btnContrattoPrev" class="btn-standard"><i class="fas fa-long-arrow-alt-left"></i> Indietro</button>
         <div class="info_messages">
-            <span class="text-danger hide" id="errLabel">controlla i dati inseriti</span>
+            <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
         <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckLineaFields">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>

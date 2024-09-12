@@ -101,7 +101,7 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-6">
 				<label for="cliente_ruolo">Ruolo richiedente</label>
-				<select class="form-select" name="dati[cliente_ruolo]" id="cliente_ruolo">
+				<select class="form-select tc-required" name="dati[cliente_ruolo]" id="cliente_ruolo">
 					<option value="">- seleziona ruolo -</option>
 					<?php
 					$ruoli = ['titolare','legale rappresentante','delegato'];
@@ -131,7 +131,7 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_sesso">Sesso</label>
-				<select class="form-select" name="dati[cliente_sesso]" id="cliente_sesso">
+				<select class="form-select  tc-required" name="dati[cliente_sesso]" id="cliente_sesso">
 					<option value="">- seleziona sesso -</option>
 					<?php
 					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
@@ -185,7 +185,7 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="cliente_tipo_documento">Tipo documento</label>
-				<select name="dati[cliente_tipo_documento]" id="cliente_tipo_documento" class="form-select">
+				<select name="dati[cliente_tipo_documento]" id="cliente_tipo_documento" class="form-select  tc-required">
 					<option value="">-- seleziona documento -</option>
 					<?php
 					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
@@ -263,9 +263,9 @@
 		
 	</fieldset>
 
-	<div class="contratto_nav_buttons d-flex justify-content-end mt-4">
+	<div class="contratto_nav_buttons d-flex justify-content-end align-items-center gap-3 mt-4">
 		<div class="info_messages">
-            <span class="text-danger hide" id="errLabel">controlla i dati inseriti</span>
+            <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
         <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>

@@ -1,6 +1,7 @@
 .hide,
 .nascondi {
   display: none !important;
+  opacity: 0;
 }
 
 /* BOTTONI */

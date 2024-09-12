@@ -6,7 +6,7 @@
 	<input type="hidden" id="section" name="section" value="anagrafica">
 	<input type="hidden" id="tipocli" name="tipocli" value="aziende">
 	
-	<fieldset id="fields-anagrafica" class="mb-5">
+	<fieldset id="fields-anagrafica" class="mb-5 mt-3">
 		<legend>Dati anagrafici e sede legale dell'azienda</legend>	
 		
 		<div class="row">
@@ -95,7 +95,7 @@
 	</fieldset>
 
 
-	<fieldset id="fields-anagrafica">
+	<fieldset id="fields-anagrafica" class="mt-3">
 		<legend>Dati personali</legend>	
 
 		<div class="row">

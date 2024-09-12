@@ -9,35 +9,38 @@
     <input type="hidden" id="section" name="section" value="migrazione">
     <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
-    <fieldset id="fields-migrazione-mantenimento">
+    <fieldset id="fields-migrazione-mantenimento" class="mt-3">
         <legend>Migrazione o attivazione nuova linea</legend>
-        <p><b>NOTA BENE</b>: 
-        in caso di passaggio da servizi Rame (ADSL-VDSL) a servizi Fibra (FTTH) o viceversa, è necessario selezionare "ATTIVAZIONE NUONA LINEA": <b>leggere con attenzione quanto segue.</b><br>
-        Si specifica che non sarà possibile effettuare la migrazione diretta nel caso in cui il servizio attualmente attivo sia basato su linea di accesso in rame (solo voce o xDSL) ed il servizio richiesto a Terrecablate sia basato su linea di accesso in fibra (FTTH), o viceversa. 
-        In questo caso verrà effettuata l'attivazione del servizio richiesto su una nuova linea e l'eventuale portabilità del numero (Number Portability) sarà effettuata in un momento successivo rispetto all'attivazione 
-        della nuova linea. In questo caso, resterà in carico al titolare della linea attualmente attiva l'eventuale comunicazione di disdetta da inviare all'attuale operatore, successivamente all'avvenuto passaggio del numero.</p>
-      
+        
         <div class="row">
-            <div class="col-12 mb-4 d-flex gap-5">
+            <div class="col mb-4 d-flex gap-5">
                 <div class="form-check check-zone">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_migrazione" name="dati[linea_migrazione]">
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_migrazione" name="dati[linea_migrazione]" data-check-linea>
                     <label class="form-check-label" for="linea_migrazione">Voglio migrare la mia linea</label>
                 </div>
                 
                 <div class="form-check check-zone">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_nuova" name="dati[linea_nuova]">
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_nuova" name="dati[linea_nuova]" data-check-linea>
                     <label class="form-check-label" for="linea_nuova">Voglio attivare una nuova linea</label>
                 </div>
 
                 <div class="form-check check-zone">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_portability" name="dati[linea_portability]">
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_portability" name="dati[linea_portability]" data-check-linea>
                     <label class="form-check-label" for="linea_portability">Voglio mantenere il mio numero telefonico</label>
                 </div>
             </div>
         </div>
+
+		<div class="row mx-0 mb-4">
+			<div class="col note_default">
+				<b>NOTA BENE</b>: in caso di passaggio da servizi Rame (ADSL-VDSL) a servizi Fibra (FTTH) o viceversa, è necessario selezionare "VOGLIO ATTIVARE UNA NUONA LINEA": <b>leggere con attenzione quanto segue.</b> Si specifica che non sarà possibile effettuare la migrazione diretta nel caso in cui il servizio attualmente attivo sia basato su linea di accesso in rame (solo voce o xDSL) ed il servizio richiesto a Terrecablate sia basato su linea di accesso in fibra (FTTH), o viceversa. 
+        In questo caso verrà effettuata l'attivazione del servizio richiesto su una nuova linea e l'eventuale portabilità del numero (Number Portability) sarà effettuata in un momento successivo rispetto all'attivazione 
+        della nuova linea. In questo caso, resterà in carico al titolare della linea attualmente attiva l'eventuale comunicazione di disdetta da inviare all'attuale operatore, successivamente all'avvenuto passaggio del numero.
+			</div>		
+		</div>
     </fieldset>
     
-    <fieldset id="fields-number-portability">
+    <fieldset id="fields-number-portability" class="hide mt-3">
         <legend>Number portability</legend>
 
         <div class="row">
@@ -75,7 +78,7 @@
         </div>        
     </fieldset>
 
-    <fieldset id="fields-intestatario-linea" class="mb-5">
+    <fieldset id="fields-intestatario-linea" class="mb-5 mt-3">
 		<legend>Intestatario e ubicazione linea telefonica</legend>	
 
         <div class="d-flex justify-content-end my-3">
@@ -141,7 +144,7 @@
         <div class="row">
 			<div class="tc-input col-12 col-md-6">
 				<label for="linea_cliente_ruolo">Ruolo intestatario</label>
-				<select class="form-select" name="dati[linea_cliente_ruolo]" id="linea_cliente_ruolo">
+				<select class="form-select tc-required" name="dati[linea_cliente_ruolo]" id="linea_cliente_ruolo">
 					<option value="">- seleziona ruolo -</option>
 					<?php
 					$ruoli = ['titolare','legale rappresentante','delegato'];
@@ -171,7 +174,7 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_sesso">Sesso</label>
-				<select class="form-select" name="dati[linea_cliente_sesso]" id="linea_cliente_sesso">
+				<select class="form-select tc-required" name="dati[linea_cliente_sesso]" id="linea_cliente_sesso">
 					<option value="">- seleziona sesso -</option>
 					<?php
 					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
@@ -302,13 +305,13 @@
 		</div>
 	</fieldset>
 
-    <fieldset>
+    <fieldset class="mt-3">
         <legend id="consensi_migrazione">Consensi</legend>
  
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="migrazione" name="dati[linea_migrazione]">
+                    <input class="form-check-input" type="checkbox" value="1" id="migrazione" name="dati[linea_consenso_migrazione]">
                     <label class="form-check-label title-label" for="migrazione">Richiesta di migrazione dei servizi telefonici e internet</label>
                 </div>
                 <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
@@ -321,7 +324,7 @@ operazione necessaria per la fornitura dei succitati servizi.</p>
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="migrazione" name="dati[linea_migrazione]">
+                    <input class="form-check-input" type="checkbox" value="1" id="migrazione" name="dati[linea_consenso_portability]">
                     <label class="form-check-label title-label" for="migrazione">Richiesta di mantenimento del numero telefonico (Number Portability)</label>
                 </div>
                 <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
@@ -338,6 +341,6 @@ operazione necessaria per la fornitura dei succitati servizi.</p>
             <span class="text-danger hide" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckLineaFields">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

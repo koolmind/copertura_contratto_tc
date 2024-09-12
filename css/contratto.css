@@ -63,3 +63,28 @@ label.title-label {
   font-family: "Anton", sans-serif;
   font-weight: 500;
 }
+
+.note_default {
+  font-size: 0.925em;
+  border: 1px solid #005985;
+  padding: 10px 10px 10px 40px;
+  position: relative;
+}
+.note_default::before {
+  content: "!";
+  font-size: 1.75em;
+  font-weight: bold;
+  display: flex;
+  position: absolute;
+  background: #005985;
+  color: #fff;
+  top: 0%;
+  left: 0px;
+  width: 30px;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.note_default p {
+  margin-bottom: 0;
+}

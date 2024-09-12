@@ -8,7 +8,7 @@
     <input type="hidden" id="section" name="section" value="attivazione">
     <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
-    <fieldset id="fields-indirizzo-attivazione">
+    <fieldset id="fields-indirizzo-attivazione" class="mt-3">
         <legend>Indirizzo di attivazione e fornitura dei servizi</legend>
 
         <div class="d-flex justify-content-end my-3">

@@ -9,7 +9,7 @@
     <input type="hidden" id="section" name="section" value="servizi">
     <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
-    <fieldset id="fields-indirizzo-dispositivo">
+    <fieldset id="fields-indirizzo-dispositivo" class="mt-3">
         <legend>Servizi richiesti</legend>
         Lorem ipsum...
         

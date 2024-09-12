@@ -1,11 +1,29 @@
 jQuery(document).ready(function ($) {
+  // VALIDAZIONE DEGLI INPUTS
   $("#btnContrattoNext").on("click", function (evt) {
     evt.preventDefault();
     var allRequiredFields = $(".tc-required");
+    var checkLineaFields = $(this).hasClass("jsCheckLineaFields");
     var hasErrors = false;
 
     var errLabel = $("#errLabel");
     var loadingLabel = $("#loadingLabel");
+
+    if (checkLineaFields) {
+      var mig = $("#linea_migrazione");
+      var att = $("#linea_nuova");
+
+      if (!mig.is(":checked") && !att.is(":checked")) {
+        hasErrors = true;
+        mig.addClass("is-invalid");
+        att.addClass("is-invalid");
+      } else {
+        mig.removeClass("is-invalid");
+        att.removeClass("is-invalid");
+      }
+      // linea_nuova
+      // linea_portability
+    }
 
     allRequiredFields.each(function (idx) {
       if ($(this).val() == "") {
@@ -27,7 +45,8 @@ jQuery(document).ready(function ($) {
   });
 
   // recupero i dati dal transient
-  $("#fill-from-stored-data").on("click", function () {
+  $("#fill-from-stored-data").on("click", function (evt) {
+    evt.preventDefault();
     var transientID = $("input#cuid").val();
     var sourceSection = $(this).data("sourcesection");
     var currentSection = $("input#section").val();
@@ -100,7 +119,7 @@ jQuery(document).ready(function ($) {
       $(`#linea_${prefix}_piva_cf`).val(data[`${prefix}_piva_cf`]);
 
       prefix = "cliente";
-      $(`#linea_${prefix}_cliente_ruolo`).val(data[`${prefix}_cliente_ruolo`]);
+      $(`#linea_${prefix}_ruolo`).val(data[`${prefix}_ruolo`]);
       $(`#linea_${prefix}_sesso`).val(data[`${prefix}_sesso`]);
       $(`#linea_${prefix}_data_nascita`).val(data[`${prefix}_data_nascita`]);
       $(`#linea_${prefix}_luogo_nascita`).val(data[`${prefix}_luogo_nascita`]);
@@ -128,4 +147,23 @@ jQuery(document).ready(function ($) {
     $(`#linea_${prefix}_cap`).val(data[`${prefix}_cap`]);
     $(`#linea_${prefix}_cod_fiscale`).val(data[`${prefix}_cod_fiscale`]);
   }
+
+  $cbxLinea = $("[data-check-linea]").each(function () {
+    $(this).on("change", function () {
+      var cb = $(this);
+
+      // se migrazione=true, allora portability diventa true
+      if (cb.attr("id") == "linea_migrazione" && cb.prop("checked") == true) {
+        $("#linea_portability").prop("checked", true).trigger("change");
+      }
+
+      if (cb.attr("id") == "linea_portability") {
+        if (cb.prop("checked") == true) {
+          $("#fields-number-portability").removeClass("hide");
+        } else {
+          $("#fields-number-portability").addClass("hide");
+        }
+      }
+    });
+  });
 });

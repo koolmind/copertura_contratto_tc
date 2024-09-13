@@ -1,5 +1,11 @@
 <?php 
     $fields = @$this->contrattoData['migrazione']; 
+
+	$cbMigrazione = (bool) tcGetFieldValue($fields,"linea_migrazione",false);
+	$cbAttivazione = (bool) tcGetFieldValue($fields,"linea_nuova",false);
+	$cbPortability = (bool) tcGetFieldValue($fields,"linea_portability",false);
+	$cbConsensoMigrazione = (bool) tcGetFieldValue($fields,"linea_consenso_migrazione",false);
+	$cbConsensoPortability = (bool) tcGetFieldValue($fields,"linea_consenso_portability",false);
 ?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
@@ -14,17 +20,17 @@
         <div class="row">
             <div class="col mb-4 d-flex flex-column flex-md-row gap-5">
                 <div class="form-check check-zone">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_migrazione" name="dati[linea_migrazione]" data-check-linea>
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_migrazione" name="dati[linea_migrazione]" data-check-linea <?php echo $cbMigrazione ? 'checked="checked" ': ''?>>
                     <label class="form-check-label" for="linea_migrazione">Voglio migrare la mia linea</label>
                 </div>
                 
                 <div class="form-check check-zone">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_nuova" name="dati[linea_nuova]" data-check-linea>
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_nuova" name="dati[linea_nuova]" data-check-linea <?php echo $cbAttivazione ? 'checked="checked" ': ''?>>
                     <label class="form-check-label" for="linea_nuova">Voglio attivare una nuova linea</label>
                 </div>
 
                 <div class="form-check check-zone">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_portability" name="dati[linea_portability]" data-check-linea>
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_portability" name="dati[linea_portability]" data-check-linea <?php echo $cbPortability ? 'checked="checked" ': ''?> >
                     <label class="form-check-label" for="linea_portability">Voglio mantenere il mio numero telefonico</label>
                 </div>
             </div>
@@ -41,7 +47,7 @@
     
 	<!-- NUMBER PORTABILITY -->
 
-    <fieldset id="fields-number-portability" class="hide mt-3">
+    <fieldset id="fields-number-portability" class="mt-3 <?php echo $cbPortability ?  '' : 'hide' ?>">
         <legend>Number portability</legend>
 
         <div class="row">
@@ -152,7 +158,7 @@
 					$sel =  tcGetFieldValue($fields, 'linea_cliente_ruolo',false);
 					foreach($ruoli as $ruolo) {
 						$isSelected = $ruolo == $sel ? " selected='selected' " : "";
-						printf('<option value="%1$s" %s>%1$s</option>', $ruolo, $isSelected);
+						printf('<option value="%s" %s>%s</option>', $ruolo, $isSelected, $ruolo);
 					}
 					?>
 				</select>
@@ -312,8 +318,8 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input tc-required" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]">
-                    <label class="form-check-label title-label" for="migralinea_consenso_migrazionezione">Richiesta di migrazione dei servizi telefonici e internet</label>
+                    <input class="form-check-input tc-required" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]" <?php echo $cbConsensoMigrazione ? ' checked="checked" ' : ''?>>
+                    <label class="form-check-label title-label" for="linea_consenso_migrazione">Richiesta di migrazione dei servizi telefonici e internet</label>
                 </div>
                 <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
 					fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
@@ -322,10 +328,10 @@
             </div>
         </div>
 
-        <div class="row hide" id="row-consenso-portability">
+        <div id="row-consenso-portability" class="row <?php echo $cbConsensoPortability ? '' : 'hide'?>">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="linea_consenso_portability" name="dati[linea_consenso_portability]">
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_consenso_portability" name="dati[linea_consenso_portability]" <?php echo $cbConsensoPortability ? ' checked="checked" ' : ''?> >
                     <label class="form-check-label title-label" for="linea_consenso_portability">Richiesta di mantenimento del numero telefonico (Number Portability)</label>
                 </div>
                 <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al

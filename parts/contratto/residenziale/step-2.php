@@ -6,13 +6,13 @@
     <input type="hidden" name="action" value="submit_contratto_aziende">
 	<input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
     <input type="hidden" id="section" name="section" value="attivazione">
-    <input type="hidden" id="tipocli" name="tipocli" value="aziende">
+    <input type="hidden" id="tipocli" name="tipocli" value="residenziale">
    
     <fieldset id="fields-indirizzo-attivazione" class="mt-3">
         <legend>Indirizzo di attivazione e fornitura dei servizi</legend>
 
         <div class="d-flex justify-content-end my-3">
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo sede</button>
+            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo</button>
         </div>
 
         <div class="row">

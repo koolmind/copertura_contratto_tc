@@ -67,6 +67,11 @@ label.title-label {
   font-weight: 500;
 }
 
+.note_info {
+  font-size: 0.9em;
+  color: #005985;
+}
+
 .note_default {
   font-size: 0.925em;
   border: 1px solid #005985;

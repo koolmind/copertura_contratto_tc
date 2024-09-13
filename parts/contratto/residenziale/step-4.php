@@ -12,7 +12,7 @@
     <input type="hidden" name="action" value="submit_contratto_aziende">
     <input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
     <input type="hidden" id="section" name="section" value="migrazione">
-    <input type="hidden" id="tipocli" name="tipocli" value="aziende">
+    <input type="hidden" id="tipocli" name="tipocli" value="residenziale">
    
     <fieldset id="fields-migrazione-mantenimento" class="mt-3">
         <legend>Migrazione o attivazione nuova linea</legend>
@@ -89,76 +89,11 @@
 		<legend>Intestatario e ubicazione linea telefonica</legend>	
 
         <div class="d-flex justify-content-end my-3">
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo sede</button>
+            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i>stesso indirizzo anagrafica</button>
         </div>
 		
-		<div class="row">
-			<div class="col-13 col-md-6 mb-4">
-				<label for="linea_rag_sociale">Denominazione / Ragione sociale o Cognome</label>
-				<input type="text" name="dati[linea_rag_sociale]" id="linea_rag_sociale" class="form-control tc-required" placeholder="ragione sociale" value="<?php tcGetFieldValue($fields,'linea_rag_sociale'); ?>">
-			</div>
-            <div class="col-12 col-md-6 mb-4">
-				<label for="linea_azienda_nome">Nome</label>
-				<input type="text" name="dati[linea_azienda_nome]" id="linea_azienda_nome" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'linea_azienda_nome'); ?>">
-			</div>
-		</div>
 		
-		<div class="row">
-			<div class="tc-input col-12 col-md-8 mb-4">
-				<label for="linea_azienda_indirizzo">Sede (via/piazza)</label>
-				<input type="text" name="dati[linea_azienda_indirizzo]" id="linea_azienda_indirizzo" class="form-control tc-required" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'linea_azienda_indirizzo'); ?>">
-			</div>
-		
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_azienda_civico">Numero civico</label>
-				<input type="text" name="dati[linea_azienda_civico]" id="linea_azienda_civico" class="form-control tc-required" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'linea_azienda_civico'); ?>">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_azienda_citta">Città</label>
-				<input type="text" name="dati[linea_azienda_citta]" id="linea_azienda_citta" class="form-control tc-required" placeholder="città" value="<?php tcGetFieldValue($fields,'linea_azienda_citta'); ?>">
-			</div>
-		
-			<div class="tc-input col-6 col-md-4 mb-4">
-				<label for="linea_azienda_provincia">Provincia</label>
-				<input type="text" name="dati[linea_azienda_provincia]" id="linea_azienda_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_azienda_provincia'); ?>" maxlength="2">
-			</div>
-		
-			<div class="tc-input col-6 col-md-4 mb-4">
-				<label for="linea_azienda_cap">CAP</label>
-				<input type="text" name="dati[linea_azienda_cap]" id="linea_azienda_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_azienda_cap'); ?>">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="tc-input col-12 col-md-6 mb-4">
-				<label for="linea_azienda_piva_cf">Partita IVA / Codice Fiscale</label>
-				<input type="text" name="dati[linea_azienda_piva_cf]" id="linea_azienda_piva_cf" class="form-control tc-required" placeholder="p.iva o cod. fiscale" value="<?php tcGetFieldValue($fields,'linea_azienda_piva_cf'); ?>">
-			</div>
-		</div>
-
-        <!-- dati titolare -->
         <div class="row">
-			<div class="tc-input col-12 col-md-6">
-				<label for="linea_cliente_ruolo">Ruolo intestatario</label>
-				<select class="form-select tc-required" name="dati[linea_cliente_ruolo]" id="linea_cliente_ruolo">
-					<option value="">- seleziona ruolo -</option>
-					<?php
-					$ruoli = ['titolare','legale rappresentante','delegato'];
-					$sel =  tcGetFieldValue($fields, 'linea_cliente_ruolo',false);
-					foreach($ruoli as $ruolo) {
-						$isSelected = $ruolo == $sel ? " selected='selected' " : "";
-						printf('<option value="%s" %s>%s</option>', $ruolo, $isSelected, $ruolo);
-					}
-					?>
-				</select>
-				<small class="text-danger form-message hide" style="clear:both;">Campo richiesto. Selezionare un'opzione.</small>
-			</div>
-		</div>
-
-		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_cognome">Cognome</label>
 				<input type="text" name="dati[linea_cliente_cognome]" id="linea_cliente_cognome" class="form-control tc-required" placeholder="cognome" value="<?php tcGetFieldValue($fields,'linea_cliente_cognome'); ?>">
@@ -167,99 +102,12 @@
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_nome">Nome</label>
 				<input type="text" name="dati[linea_cliente_nome]" id="linea_cliente_nome" class="form-control tc-required" placeholder="nome" value="<?php tcGetFieldValue($fields,'linea_cliente_nome'); ?>">
-			</div>
-
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_sesso">Sesso</label>
-				<select class="form-select tc-required" name="dati[linea_cliente_sesso]" id="linea_cliente_sesso">
-					<option value="">- seleziona sesso -</option>
-					<?php
-					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
-					$sel =  tcGetFieldValue($fields, 'linea_cliente_sesso',false);
-
-					foreach($sesso as $sex=>$sexLabel) {
-						$isSelected = $sex == $sel ? " selected='selected' " : "";
-						printf('<option value="%s" %s>%s</option>', $sex, $isSelected, $sexLabel);
-					}
-					?>
-				</select>
-				<small class="text-danger form-message hide" style="clear:both;">Campo richiesto. Selezionare un'opzione.</small>
-			</div>
+			</div>			
 		</div>
 
-		<div class="row">
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_data_nascita">Data di nascita</label>
-				<input type="text" name="dati[linea_cliente_data_nascita]" id="linea_cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'linea_cliente_data_nascita'); ?>">
-			</div>
-
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_luogo_nascita">Luogo di nascita</label>
-				<input type="text" name="dati[linea_cliente_luogo_nascita]" id="linea_cliente_luogo_nascita" class="form-control tc-required" placeholder="luogo di nascita" value="<?php tcGetFieldValue($fields,'linea_cliente_luogo_nascita'); ?>">
-			</div>
-
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_provincia_nascita">Provincia</label>
-				<input type="text" name="dati[linea_cliente_provincia_nascita]" id="linea_cliente_provincia_nascita" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_cliente_provincia_nascita'); ?>" maxlength="2">
-			</div>
-		</div>
-			
-
-		<div class="row">
-			<div class="tc-input col-12 col-md-6 mb-4">
-				<label for="linea_cliente_cod_fiscale">Codice Fiscale</label>
-				<input type="text" name="dati[linea_cliente_cod_fiscale]" id="linea_cliente_cod_fiscale" class="form-control tc-required" placeholder="codice fiscale" value="<?php tcGetFieldValue($fields,'linea_cliente_cod_fiscale'); ?>">
-			</div>
-
-			<div class="tc-input col-12 col-md-6 mb-4">
-				<label for="linea_cliente_nazionalita">Nazionalità</label>
-				<input type="text" name="dati[linea_cliente_nazionalita]" id="linea_cliente_nazionalita" class="form-control tc-required" placeholder="nazionalità" value="<?php tcGetFieldValue($fields,'linea_cliente_nazionalita'); ?>">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="tc-input col-12 col-md-6 mb-4">
-				<label for="linea_cliente_tipo_documento">Tipo documento</label>
-				<select name="dati[linea_cliente_tipo_documento]" id="linea_cliente_tipo_documento" class="form-select tc-required">
-					<option value="">-- seleziona documento -</option>
-					<?php
-					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
-					$sel =  tcGetFieldValue($fields, 'linea_cliente_tipo_documento',false);
-
-					foreach($docs as $value=>$label) {
-						$isSelected = $value == $sel ? " selected='selected' " : "";
-						printf('<option value="%s" %s>%s</option>', $value, $isSelected, $label);
-					}
-					?>
-				</select>
-			</div>
-
-			<div class="tc-input col-12 col-md-6 mb-4">
-				<label for="linea_cliente_doc_numero">Numero documento</label>
-				<input type="text" name="dati[linea_cliente_doc_numero]" id="linea_cliente_doc_numero" class="form-control tc-required" placeholder="numero del cocumento" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_numero'); ?>">
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_doc_emittente">Rilasciato da</label>
-				<input type="text" name="dati[linea_cliente_doc_emittente]" id="linea_cliente_doc_emittente" class="form-control tc-required" placeholder="rilasciato da" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_emittente'); ?>">
-			</div>
-
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_doc_rilascio">Data rilascio</label>
-				<input type="text" name="dati[linea_cliente_doc_rilascio]" id="linea_cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_rilascio'); ?>">
-			</div>
-
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="linea_cliente_doc_scadenza">Data di scadenza</label>
-				<input type="text" name="dati[linea_cliente_doc_scadenza]" id="linea_cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_scadenza'); ?>">
-			</div>
-		</div>
-
-		<div class="row">
+        <div class="row">
 			<div class="tc-input col-12 col-md-8 mb-4">
-				<label for="linea_cliente_indirizzo">Residenza (o domicilio italiano), via</label>
+				<label for="linea_cliente_indirizzo">Residente in via/piazza</label>
 				<input type="text" name="dati[linea_cliente_indirizzo]" id="linea_cliente_indirizzo" class="form-control tc-required" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'linea_cliente_indirizzo'); ?>">
 			</div>
 
@@ -285,6 +133,13 @@
 				<input type="text" name="dati[linea_cliente_cap]" id="linea_cliente_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_cliente_cap'); ?>">
 			</div>
 		</div>
+
+        <div class="row">
+			<div class="tc-input col-12 mb-4">
+				<label for="linea_cliente_cod_fiscale">Codice Fiscale</label>
+				<input type="text" name="dati[linea_cliente_cod_fiscale]" id="linea_cliente_cod_fiscale" class="form-control tc-required" placeholder="codice fiscale" value="<?php tcGetFieldValue($fields,'linea_cliente_cod_fiscale'); ?>">
+    		</div>			
+		</div>        
 	</fieldset>
 
     <fieldset class="mt-3">

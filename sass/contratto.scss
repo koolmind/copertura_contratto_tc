@@ -1,14 +1,26 @@
 @import "variables";
 @import "helpers";
 
+h4.titolo-sez {
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: $blu-medio;
+  padding: 4px;
+}
+
 h4.titoletto {
   color: $blu-medio;
-  font-size: 20px;
 }
 
 label {
   font-size: 13px;
   color: $grigino;
+}
+
+fieldset.bordered {
+  border-left: 4px dotted $blu-medio;
+  padding-left: 16px;
 }
 
 legend {
@@ -87,6 +99,77 @@ label.title-label {
   display: block;
   animation: bounceZoom 0.5s ease-in-out;
   animation-iteration-count: 5;
+}
+
+ul#all_steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  column-gap: 32px;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+
+    .num {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      color: #fff;
+      background-color: $blu-chiaro;
+      font-size: 18px;
+      font-size: bold;
+      width: 36px;
+      height: 36px;
+    }
+
+    &:not(:first-child) .num::after {
+      content: "";
+      background: $blu-chiaro;
+      display: block;
+      height: 3px;
+      width: 50px;
+      top: 50%;
+      left: -28px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+    }
+
+    .desc {
+      font-size: 13px;
+      color: $grigino;
+    }
+
+    &.active {
+      .num {
+        background-color: $viola;
+      }
+      .desc {
+        color: $viola;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  ul#all_steps {
+    display: none;
+  }
 }
 
 @keyframes bounceZoom {

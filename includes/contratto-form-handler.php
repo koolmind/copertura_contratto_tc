@@ -13,11 +13,39 @@ function tcGetFieldValue( $haystack, $needle, $output=true ) {
 	echo $out;	
 }
 
+function showSteps($curr) {
+    
+    $allSteps = array(
+        "1"=>'anagrafica',
+        "2"=>'attivazione',
+        "3"=>'consegna',
+        "4"=>'linea',
+        "5"=>'gdpr',
+        "6"=>'pagamento',
+        "7"=>'riepilogo',
+    ); ?>
+
+    <div class="steps-track mb-5">
+        <ul id="all_steps">
+    
+    <?php
+    foreach($allSteps as $idx=>$label){
+        
+        $setActive = (intval($idx) == intval($curr)) ? ' active ' : '';
+        printf('<li class="%s"><span class="num">%s</span><span class="desc">%s</span></li>', $setActive, $idx, $label);
+    } ?>        
+    
+        </ul>
+    </div>
+    <?php
+}
+
 
 function handle_contratto_aziende() {
     $contrattoUID = sanitize_text_field($_POST['cuid']);
     $sezione = sanitize_text_field($_POST['section']);
     $goBack = (bool) isset($_POST['btnContrattoPrev']);
+    
  
     // recupero i dati salvati
     $data = get_transient($contrattoUID);
@@ -31,7 +59,7 @@ function handle_contratto_aziende() {
     if( ! $goBack){
         // integro coi nuovi dati
         $postData = $_POST['dati'];
-
+        
         foreach($postData as $key=>$val) {
             $data[$sezione][$key] = sanitize_text_field($val);           
         }

@@ -1,5 +1,7 @@
 <?php 
     $fields = @$this->contrattoData['attivazione']; 
+
+    showSteps(2);
 ?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">

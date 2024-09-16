@@ -1,4 +1,9 @@
-<?php $fields = @$this->contrattoData['anagrafica']; ?>
+<?php 
+$fields = @$this->contrattoData['anagrafica']; 
+
+showSteps(1);
+
+?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">

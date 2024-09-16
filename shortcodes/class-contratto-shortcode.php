@@ -54,42 +54,29 @@ class ContrattoOnLineShortcode {
                 
                 set_transient( $this->contrattoUID, $this->contrattoData, 0);
 
-                // ob_start();
                 
-                // echo "<div class='contratto-form-wrapper'>";
-                
-                // include(TC_ADDONS_ROOT .  "parts/contratto/aziende/step-1.php");
+            }  
 
-                // echo "</div>";
+            // echo "<p>DEBUG</p>";
+            // var_dump($this->contrattoData);
+            
+            ob_start();
+            
+            echo "<div class='contratto-form-wrapper'>";
 
-                // return ob_get_clean(); 
+            $step = $this->contrattoData['step'];
+            $cliente_section = $this->contrattoData['offerta']['target'];
 
-                
-                //printf("<a href='%s' class='' id='cnt_redir'>skip.</a>", home_url('/contratto/?cuid='.$this->contrattoUID) );
-                //echo "<script> document.getElementById('cnt_redir').click(); </script>";
-                
-                //exit;
-            }  //else {
+            if($step==5 || $step==6){
+                $cliente_section ='common';
+            }
+            
+            include(TC_ADDONS_ROOT .  "parts/contratto/{$cliente_section}/step-{$step}.php");
 
-                echo "<p>DEBUG</p>";
-                var_dump($this->contrattoData);
-                
-                ob_start();
-                
-                echo "<div class='contratto-form-wrapper'>";
+            echo "</div>";
 
-                $step = $this->contrattoData['step'];
-                // if($step=='x'){
-                //     $section ='common';
-                // }
-                $cliente = $this->contrattoData['offerta']['target'];
-                
-                include(TC_ADDONS_ROOT .  "parts/contratto/{$cliente}/step-{$step}.php");
-
-                echo "</div>";
-
-                return ob_get_clean(); 
-            //}            
+            return ob_get_clean(); 
+                        
             
         } else {
             print ('Impossibile visualizzare il contenuto.');

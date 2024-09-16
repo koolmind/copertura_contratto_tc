@@ -1,0 +1,91 @@
+.tcrs-box-dettaglio-offerta {
+  border: 1px solid #181818;
+  width: 100%;
+  padding: 2rem;
+}
+.tcrs-box-dettaglio-offerta p {
+  margin: 0;
+  padding: 0;
+}
+.tcrs-box-dettaglio-offerta .nome-offerta {
+  text-transform: uppercase;
+}
+.tcrs-box-dettaglio-offerta .note {
+  margin-top: 24px;
+  color: #3f3f3f;
+  font-size: 14px;
+}
+.tcrs-box-dettaglio-offerta .caratteristiche-offerta {
+  margin: 0 0 16px 0;
+  padding: 0;
+}
+.tcrs-box-dettaglio-offerta .caratteristiche-offerta li {
+  list-style: none;
+  display: block;
+  line-height: 32px;
+}
+.tcrs-box-dettaglio-offerta .caratteristiche-offerta li::before {
+  content: url("../tick-box.svg");
+  display: inline-block;
+  zoom: 50%;
+  margin-right: 20px;
+  position: relative;
+  top: 7px;
+}
+.tcrs-box-dettaglio-offerta .dettaglio-top {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ccc;
+}
+.tcrs-box-dettaglio-offerta .dettaglio-bottom {
+  padding: 24px 0;
+}
+.tcrs-box-dettaglio-offerta .disclaimer {
+  background: #e5e5e5;
+  padding: 10px;
+  font-size: 0.9em;
+  text-align: center;
+  margin-top: 16px;
+}
+.tcrs-box-dettaglio-offerta .btn-offerta {
+  display: inline-block;
+  padding: 10px 16px;
+  width: -moz-max-content;
+  width: max-content;
+  max-width: 320px;
+  margin-top: 16px;
+  text-decoration: none !important;
+  font-weight: bold;
+}
+.tcrs-box-dettaglio-offerta.offerta-azienda .btn-offerta {
+  background-color: #bb6604;
+  color: white;
+}
+.tcrs-box-dettaglio-offerta.offerta-azienda .btn-offerta:hover {
+  background-color: #894b03;
+}
+.tcrs-box-dettaglio-offerta.offerta-residenziale .btn-offerta {
+  background-color: #019214;
+  color: white;
+}
+.tcrs-box-dettaglio-offerta.offerta-residenziale .btn-offerta:hover {
+  background-color: #015f0d;
+}
+.tcrs-box-dettaglio-offerta div#costi-opzioni {
+  margin: 12px 0;
+}
+.tcrs-box-dettaglio-offerta .riga-costo {
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #3f3f3f;
+  font-weight: bold;
+}
+.tcrs-box-dettaglio-offerta .riga-costo#totale {
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #333;
+}
+.tcrs-box-dettaglio-offerta .riga-costo img {
+  position: relative;
+  top: -2px;
+  width: 14px;
+}

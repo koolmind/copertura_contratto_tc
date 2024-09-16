@@ -14,11 +14,14 @@ jQuery(document).ready(function ($) {
     evt.preventDefault();
     const allRequiredFields = $(".tc-required");
     const checkLineaFields = $(this).hasClass("jsCheckLineaFields");
+    const checkGdprFields = $(this).hasClass("jsCheckGdprFields");
+    const checkPagamentoFields = $(this).hasClass("jsCheckPagamentoFields");
     let hasErrors = false;
 
     const errLabel = $("#errLabel");
     const loadingLabel = $("#loadingLabel");
 
+    // migrazione / nuova linea
     if (checkLineaFields) {
       const mig = $("#linea_migrazione");
       const att = $("#linea_nuova");
@@ -40,6 +43,47 @@ jQuery(document).ready(function ($) {
           $(this).val("");
         });
         $("#linea_consenso_portability").prop("checked", false);
+      }
+    }
+
+    // accettazione GDPR
+    if (checkGdprFields) {
+      const marketingOK = $("#consensoMarketingOK");
+      const marketingKO = $("#consensoMarketingKO");
+      const profilazioneOK = $("#consensoProfilazioneOK");
+      const profilazioneKO = $("#consensoProfilazioneKO");
+
+      if (!marketingOK.is(":checked") && !marketingKO.is(":checked")) {
+        hasErrors = true;
+        marketingKO.addClass("is-invalid");
+        marketingOK.addClass("is-invalid");
+      } else {
+        marketingKO.removeClass("is-invalid");
+        marketingOK.removeClass("is-invalid");
+      }
+
+      if (!profilazioneOK.is(":checked") && !profilazioneKO.is(":checked")) {
+        hasErrors = true;
+        profilazioneKO.addClass("is-invalid");
+        profilazioneOK.addClass("is-invalid");
+      } else {
+        profilazioneKO.removeClass("is-invalid");
+        profilazioneOK.removeClass("is-invalid");
+      }
+    }
+
+    // metodo di pagamento
+    if (checkPagamentoFields) {
+      const pagamentoCC = $("#pagamentoCC");
+      const pagamentoSDD = $("#pagamentoSDD");
+
+      if (!pagamentoCC.is(":checked") && !pagamentoSDD.is(":checked")) {
+        hasErrors = true;
+        pagamentoCC.addClass("is-invalid");
+        pagamentoSDD.addClass("is-invalid");
+      } else {
+        pagamentoCC.removeClass("is-invalid");
+        pagamentoSDD.removeClass("is-invalid");
       }
     }
 
@@ -222,5 +266,31 @@ jQuery(document).ready(function ($) {
         }
       }
     });
+  });
+
+  // CONTO CORRENTE SDD
+
+  $("input:radio[data-payment]").change(function () {
+    console.log("change");
+    const fieldsSDD = $("#fields-conto-corrente");
+    let fieldsToBeRequired = [
+      "sdd_intestatario_cognome_nome",
+      "sdd_intestatario_codfisc_piva",
+      "sdd_sottoscrittore_cognome_nome",
+      "sdd_sottoscrittore_codfisc",
+      "sdd_iban",
+    ];
+
+    if (this.value == "sdd") {
+      fieldsSDD.removeClass("hide");
+      $.each(fieldsToBeRequired, function (idx, val) {
+        $("#" + val).addClass("tc-required");
+      });
+    } else {
+      fieldsSDD.addClass("hide");
+      $.each(fieldsToBeRequired, function (idx, val) {
+        $("#" + val).removeClass("tc-required");
+      });
+    }
   });
 });

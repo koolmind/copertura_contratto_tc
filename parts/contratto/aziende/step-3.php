@@ -1,7 +1,7 @@
 <?php 
     $fields = @$this->contrattoData['servizi']; 
+    showSteps(3);
 ?>
-
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">
@@ -10,10 +10,7 @@
     <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
     <fieldset id="fields-indirizzo-dispositivo" class="mt-3">
-        <legend>3. Servizi richiesti</legend>
-        Lorem ipsum...
-        
-        <legend>Indirizzo di invio del dispositivo</legend>
+        <legend>3. Indirizzo di invio del dispositivo</legend>
         <div class="d-flex justify-content-end my-3">
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="attivazione" ><i class="fas fa-sync"></i> come attivazione</button>
         </div>

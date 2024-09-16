@@ -6,6 +6,8 @@
 	$cbPortability = (bool) tcGetFieldValue($fields,"linea_portability",false);
 	$cbConsensoMigrazione = (bool) tcGetFieldValue($fields,"linea_consenso_migrazione",false);
 	$cbConsensoPortability = (bool) tcGetFieldValue($fields,"linea_consenso_portability",false);
+
+	showSteps(4);
 ?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
@@ -47,7 +49,7 @@
     
 	<!-- NUMBER PORTABILITY -->
 
-    <fieldset id="fields-number-portability" class="mt-3 <?php echo $cbPortability ?  '' : 'hide' ?>">
+    <fieldset id="fields-number-portability" class="mt-3 bordered <?php echo $cbPortability ?  '' : 'hide' ?>">
         <legend>5. Tipologia linea e Mantenimento del numero (Number Portability)</legend>
 
         <div class="row">
@@ -285,6 +287,11 @@
 				<input type="text" name="dati[linea_cliente_cap]" id="linea_cliente_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_cliente_cap'); ?>">
 			</div>
 		</div>
+
+		<div class="row">
+            <p>In qualità di titolare delle linee telefoniche e/o di connessione alla rete internet indicate al punto 5 che precedono, con la presente dichiara di averne la piena e libera disponibilità e
+			   pertanto dichiara e manifesta, ad ogni effetto di legge, la propria volontà di voler usufruire su dette linee dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l.</p>
+        </div>
 	</fieldset>
 
 	<fieldset class="mt-3">

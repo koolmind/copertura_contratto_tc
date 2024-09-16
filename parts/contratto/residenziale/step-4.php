@@ -6,6 +6,8 @@
 	$cbPortability = (bool) tcGetFieldValue($fields,"linea_portability",false);
 	$cbConsensoMigrazione = (bool) tcGetFieldValue($fields,"linea_consenso_migrazione",false);
 	$cbConsensoPortability = (bool) tcGetFieldValue($fields,"linea_consenso_portability",false);
+
+    showSteps(4);
 ?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
@@ -47,7 +49,7 @@
     
 	<!-- NUMBER PORTABILITY -->
 
-    <fieldset id="fields-number-portability" class="mt-3 <?php echo $cbPortability ?  '' : 'hide' ?>">
+    <fieldset id="fields-number-portability" class="mt-3 bordered <?php echo $cbPortability ?  '' : 'hide' ?>">
         <legend>5. Tipologia linea e Mantenimento del numero (Number Portability)</legend>
 
         <div class="row">

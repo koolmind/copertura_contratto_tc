@@ -33,6 +33,11 @@
   background-color: #e390f3 !important;
 }
 
+h4.titoletto {
+  color: #005985;
+  font-size: 20px;
+}
+
 label {
   font-size: 13px;
   color: #3f3f3f;

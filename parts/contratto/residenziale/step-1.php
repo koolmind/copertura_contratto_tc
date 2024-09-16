@@ -7,7 +7,7 @@
 	<input type="hidden" id="tipocli" name="tipocli" value="residenziale">
 	
 	<fieldset id="fields-anagrafica" class="mt-3 mb-5">
-        <legend>Dati anagrafici e recapiti del Cliente</legend>			
+        <legend>1. Dati anagrafici e recapiti del Cliente</legend>			
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
@@ -97,7 +97,7 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="cliente_data_nascita">Data di nascita</label>
-				<input type="text" name="dati[cliente_data_nascita]" id="cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'cliente_data_nascita'); ?>">
+				<input type="text" name="dati[cliente_data_nascita]" id="cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'cliente_data_nascita'); ?>" data-calendario>
 			</div>
 
 			<div class="tc-input col-12 col-md-6 mb-4">
@@ -138,12 +138,12 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_doc_rilascio">Data rilascio</label>
-				<input type="text" name="dati[cliente_doc_rilascio]" id="cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'cliente_doc_rilascio'); ?>">
+				<input type="text" name="dati[cliente_doc_rilascio]" id="cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'cliente_doc_rilascio'); ?>" data-calendario> 
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_doc_scadenza">Data di scadenza</label>
-				<input type="text" name="dati[cliente_doc_scadenza]" id="cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'cliente_doc_scadenza'); ?>">
+				<input type="text" name="dati[cliente_doc_scadenza]" id="cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'cliente_doc_scadenza'); ?>" data-calendario>
 			</div>
 		</div>
 

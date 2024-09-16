@@ -10,7 +10,7 @@
     <input type="hidden" id="tipocli" name="tipocli" value="residenziale">
    
     <fieldset id="fields-indirizzo-dispositivo" class="mt-3">
-        <legend>Servizi richiesti</legend>
+        <legend>3. Servizi richiesti</legend>
         Lorem ipsum...
         
         <legend>Indirizzo di invio del dispositivo</legend>

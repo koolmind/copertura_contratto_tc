@@ -1,6 +1,11 @@
 @import "variables";
 @import "helpers";
 
+h4.titoletto {
+  color: $blu-medio;
+  font-size: 20px;
+}
+
 label {
   font-size: 13px;
   color: $grigino;

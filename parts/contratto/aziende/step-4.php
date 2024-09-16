@@ -15,7 +15,7 @@
     <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
     <fieldset id="fields-migrazione-mantenimento" class="mt-3">
-        <legend>Migrazione o attivazione nuova linea</legend>
+        <legend>4. Migrazione o attivazione nuova linea</legend>
         
         <div class="row">
             <div class="col mb-4 d-flex flex-column flex-md-row gap-5">
@@ -48,7 +48,7 @@
 	<!-- NUMBER PORTABILITY -->
 
     <fieldset id="fields-number-portability" class="mt-3 <?php echo $cbPortability ?  '' : 'hide' ?>">
-        <legend>Number portability</legend>
+        <legend>5. Tipologia linea e Mantenimento del numero (Number Portability)</legend>
 
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
@@ -86,7 +86,7 @@
     </fieldset>
 
     <fieldset id="fields-intestatario-linea" class="mb-5 mt-3">
-		<legend>Intestatario e ubicazione linea telefonica</legend>	
+		<legend>6. Servizi di migrazione e mantenimento del numero telefonico</legend>	
 
         <div class="d-flex justify-content-end my-3">
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo sede</button>
@@ -190,7 +190,7 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_data_nascita">Data di nascita</label>
-				<input type="text" name="dati[linea_cliente_data_nascita]" id="linea_cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'linea_cliente_data_nascita'); ?>">
+				<input type="text" name="dati[linea_cliente_data_nascita]" id="linea_cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'linea_cliente_data_nascita'); ?>" data-calendario>
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
@@ -248,12 +248,12 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_doc_rilascio">Data rilascio</label>
-				<input type="text" name="dati[linea_cliente_doc_rilascio]" id="linea_cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_rilascio'); ?>">
+				<input type="text" name="dati[linea_cliente_doc_rilascio]" id="linea_cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_rilascio'); ?>" data-calendario>
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_doc_scadenza">Data di scadenza</label>
-				<input type="text" name="dati[linea_cliente_doc_scadenza]" id="linea_cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_scadenza'); ?>">
+				<input type="text" name="dati[linea_cliente_doc_scadenza]" id="linea_cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_scadenza'); ?>" data-calendario>
 			</div>
 		</div>
 
@@ -287,19 +287,17 @@
 		</div>
 	</fieldset>
 
-    <fieldset class="mt-3">
-        <legend id="consensi_migrazione">Consensi</legend>
- 
+	<fieldset class="mt-3">
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="form-check">
                     <input class="form-check-input tc-required" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]" <?php echo $cbConsensoMigrazione ? ' checked="checked" ' : ''?>>
-                    <label class="form-check-label title-label" for="linea_consenso_migrazione">Richiesta di migrazione dei servizi telefonici e internet</label>
+                    <label class="form-check-label title-label" for="linea_consenso_migrazione">A - Richiesta di migrazione dei servizi telefonici e internet</label>
                 </div>
-                <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
-					fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
-					operatore l’ordine di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra
-					operazione necessaria per la fornitura dei succitati servizi.</p>
+                <p>Il cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore richiamato al punto 5 della presente proposta, con riferimento alle linee telefoniche sopra indicate al fine di usufruire 
+                    dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto operatore l’ordine 
+                    di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra operazione necessaria 
+                    per la fornitura dei succitati servizi.</p>
             </div>
         </div>
 
@@ -307,12 +305,19 @@
             <div class="col-12 mb-4">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1" id="linea_consenso_portability" name="dati[linea_consenso_portability]" <?php echo $cbConsensoPortability ? ' checked="checked" ' : ''?> >
-                    <label class="form-check-label title-label" for="linea_consenso_portability">Richiesta di mantenimento del numero telefonico (Number Portability)</label>
+                    <label class="form-check-label title-label" for="linea_consenso_portability">B - Richiesta di mantenimento del numero telefonico (Number Portability)</label>
                 </div>
-                <p>Il Cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore, con riferimento alle linee telefoniche sopra indicate al
-					fine di usufruire dei servizi di telecomunicazione offerti da Terrecablate Reti e Servizi S.r.l. A tal fine dà mandato alla società Terrecablate Reti e Servizi S.r.l di inoltrare al suddetto
-					operatore l’ordine di lavorazione e, se richiesto, la manifestazione della propria volontà di recesso oggetto della presente richiesta, secondo le forme di legge, ed a compiere ogni altra
-					operazione necessaria per la fornitura dei succitati servizi.</p>
+                <p>Il cliente dichiara di voler mantenere i numeri di cui al punto 5. nell’ambito dei servizi forniti da Terrecablate Reti e Servizi S.r.l.. Chiede pertanto che sia attivata la procedura per la
+                    prestazione del servizio di Number Portability con l’operatore indicato al precedente punto 5 relativamente ai numeri sopra specificati . A tal fine dà mandato a Terrecablate Reti e Servizi S.r.l. 
+                    affinché essa provveda ad inoltrare ai suddetti operatori l’ordine di lavorazione e la manifestazione della volontà di recesso oggetto della presente richiesta , secondo le forme di legge, 
+                    ed a compiere ogni altra operazione necessaria per la prestazione del servizio di Number Portability. Il cliente richiede che la gestione delle numerazioni sopra indicate venga delegata a Terrecablate 
+                    Reti e Servizi S.r.l.. A tale scopo, autorizza quest’ultima società ad attivare tutte le procedure necessarie con l’operatore che gestisce attualmente le numerazioni stesse. 
+                    Il Titolare manleva Terrecablate Reti e Servizi S.r.l. da eventuali inconvenienti che possano portare all’ insuccesso della Number Portability.
+                    Qualora il titolare intendesse successivamente revocare il mandato conferito a Terrecablate Reti e Servizi S.r.l., sarà sua cura darne a quest’ultima comunicazione per iscritto</p>
+
+                    <span class="note_info"><i class="fas fa-info-circle"></i> Il cliente deve dare precisa indicazione della volontà di mantenere il proprio numero di telefono sia firmando il punto B 
+                    che barrando la casella indicata nella sezione 5. Qualora venga omessa una delle due indicazioni Terrecablate NON potrà effettuare e quindi NON effettuerà la portabilità del numero telefonico 
+                    che quindi verrà sostituito con un numero nuovo.</span>
             </div>
         </div>
     </fieldset>

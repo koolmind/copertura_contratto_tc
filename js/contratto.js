@@ -1,4 +1,14 @@
 jQuery(document).ready(function ($) {
+  // DATEPICKER
+  $("input[data-calendario]").datepicker({
+    changeMonth: true,
+    changeYear: true,
+    minDate: "-80Y",
+    maxDate: "+10Y",
+    dateFormat: "dd/mm/yy",
+    yearRange: "-80:+10",
+  });
+
   // VALIDAZIONE DEGLI INPUTS
   $("#btnContrattoNext").on("click", function (evt) {
     evt.preventDefault();

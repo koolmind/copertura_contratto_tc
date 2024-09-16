@@ -7,7 +7,7 @@
 	<input type="hidden" id="tipocli" name="tipocli" value="aziende">
 	
 	<fieldset id="fields-anagrafica-azienda" class="mb-5 mt-3">
-		<legend>Dati anagrafici e sede legale dell'azienda</legend>	
+		<legend>1. Dati anagrafici e sede legale dell'azienda</legend>	
 		
 		<div class="row">
 			<div class="col mb-4">
@@ -86,7 +86,7 @@
 
 
 	<fieldset id="fields-anagrafica-cliente" class="mt-3">
-		<legend>Dati personali</legend>	
+		<legend>1.a Dati personali</legend>	
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-6">
@@ -98,7 +98,7 @@
 					$sel =  tcGetFieldValue($fields, 'cliente_ruolo',false);
 					foreach($ruoli as $ruolo) {
 						$isSelected = $ruolo == $sel ? " selected='selected' " : "";
-						printf('<option value="%1$s" %s>%1$s</option>', $ruolo, $isSelected);
+						printf('<option value="%s" %s>%s</option>', $ruolo, $isSelected,$ruolo);
 					}
 					?>
 				</select>
@@ -137,7 +137,7 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_data_nascita">Data di nascita</label>
-				<input type="text" name="dati[cliente_data_nascita]" id="cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'cliente_data_nascita'); ?>">
+				<input type="text" name="dati[cliente_data_nascita]" id="cliente_data_nascita" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'cliente_data_nascita'); ?>" data-calendario>
 				
 			</div>
 
@@ -196,12 +196,12 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_doc_rilascio">Data rilascio</label>
-				<input type="text" name="dati[cliente_doc_rilascio]" id="cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'cliente_doc_rilascio'); ?>">
+				<input type="text" name="dati[cliente_doc_rilascio]" id="cliente_doc_rilascio" class="form-control tc-required" placeholder="rilasciato il" value="<?php tcGetFieldValue($fields,'cliente_doc_rilascio'); ?>" data-calendario>
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="cliente_doc_scadenza">Data di scadenza</label>
-				<input type="text" name="dati[cliente_doc_scadenza]" id="cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'cliente_doc_scadenza'); ?>">
+				<input type="text" name="dati[cliente_doc_scadenza]" id="cliente_doc_scadenza" class="form-control tc-required" placeholder="data di scadenza" value="<?php tcGetFieldValue($fields,'cliente_doc_scadenza'); ?>" data-calendario>
 			</div>
 		</div>
 

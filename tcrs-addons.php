@@ -85,6 +85,7 @@ class PangeaTerrecablateAddons {
         $this->i18n();
 
         add_action( 'wp_enqueue_scripts', function(){
+            wp_register_style( 'jquery-ui','https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css');
             wp_enqueue_script('sweetalert', 'https://cdn.jsdelivr.net/npm/sweetalert2@10?ver=2.0.0', array(), '2.0', true);
             wp_register_style( 'font-awesome-cop', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css", array(), '5.15.4', 'all' ); 
             
@@ -127,6 +128,8 @@ class PangeaTerrecablateAddons {
             }
 
             if (is_page('contratto') ) {
+                wp_enqueue_script("jquery-ui-datepicker");
+                wp_enqueue_style( 'jquery-ui' );
                 wp_enqueue_style( 'bootstrap5css' );
                 wp_enqueue_script('bootstrap5js');
                 wp_enqueue_style( 'contratto' );

@@ -9,7 +9,7 @@
     <input type="hidden" id="tipocli" name="tipocli" value="aziende">
    
     <fieldset id="fields-indirizzo-attivazione" class="mt-3">
-        <legend>Indirizzo di attivazione e fornitura dei servizi</legend>
+        <legend>2. Indirizzo di attivazione e fornitura dei servizi</legend>
 
         <div class="d-flex justify-content-end my-3">
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo sede</button>

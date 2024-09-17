@@ -3,7 +3,7 @@
  * Plugin Name: TCRS Addons
  * Author: Simone Conti
  * Description: Shortcodes e Widgets per TerreCablate ed. 2024
- * Version: 1.1.1
+ * Version: 1.2.3
  * Text Domain: tcrsaddons
  */
 
@@ -27,7 +27,7 @@
 
 
 class PangeaTerrecablateAddons {
-    const VERSION = "1.1.1";
+    const VERSION = "1.2.3";
 
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 
@@ -43,7 +43,7 @@ class PangeaTerrecablateAddons {
 	}
 
     public function __construct() {
-        //register_activation_hook(__FILE__, [$this, 'tcrs_addons_activate'] );
+        register_activation_hook(__FILE__, [$this, 'tcrs_addons_activate'] );
         //register_deactivation_hook(__FILE__, [$this, 'tcrs_addons_deactivate'] );
 
         add_action('plugins_loaded', [$this, 'on_plugins_loaded']);
@@ -60,9 +60,56 @@ class PangeaTerrecablateAddons {
 
         $sql = "CREATE TABLE $table_name (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
-            personal_data text NOT NULL,
-            supply_data text NOT NULL,
-            payment_data text NOT NULL,
+            codice varchar(25) NOT NULL,
+            target varchar(15) NOT NULL,
+            nomeofferta varchar(50) NOT NULL,
+            canone float NOT NULL,
+            opzioni text NOT NULL,
+            attivazione float NOT NULL,
+            rag_sociale varchar(50) DEFAULT NULL,
+            azienda_indirizzo varchar(150) DEFAULT NULL,
+            azienda_civico varchar(10) DEFAULT NULL,
+            azienda_citta varchar(50) DEFAULT NULL,
+            azienda_provincia varchar(2) DEFAULT NULL,
+            azienda_cap varchar(5) DEFAULT NULL,
+            azienda_piva_cf varchar(16) DEFAULT NULL,
+            azienda_cod_destinatario varchar(10) DEFAULT NULL,
+            azienda_fax_cf varchar(30) DEFAULT NULL,
+            cliente_ruolo varchar(25) DEFAULT NULL,
+            cliente_email varchar(50) DEFAULT NULL,
+            cliente_telefono varchar(30) DEFAULT NULL,
+            cliente_cellulare varchar(30) DEFAULT NULL,
+            cliente_cognome varchar(100) DEFAULT NULL,
+            cliente_nome varchar(100) DEFAULT NULL,
+            cliente_sesso int(11) DEFAULT NULL,
+            cliente_data_nascita date '0000-00-00 00:00:00' NOT NULL,
+            cliente_luogo_nascita varchar(50) NOT NULL,
+            cliente_provincia_nascita varchar(2) NOT NULL,
+            cliente_cod_fiscale varchar(16) NOT NULL,
+            cliente_nazionalita varchar(100) NOT NULL,
+            cliente_tipo_documento int(11) NOT NULL,
+            cliente_doc_numero varchar(50) NOT NULL,
+            cliente_doc_emittente varchar(100) NOT NULL,
+            cliente_doc_rilascio date '0000-00-00 00:00:00' NOT NULL,
+            cliente_doc_scadenza date '0000-00-00 00:00:00' NOT NULL,
+            cliente_indirizzo varchar(150) DEFAULT NULL,
+            cliente_civico varchar(10) DEFAULT NULL,
+            cliente_citta varchar(50) DEFAULT NULL,
+            cliente_provincia varchar(2) DEFAULT NULL,
+            cliente_cap varchar(5) DEFAULT NULL,
+            attivazione_indirizzo varchar(150) DEFAULT NULL,
+            attivazione_civico varchar(10) DEFAULT NULL,
+            attivazione_citta varchar(50) DEFAULT NULL,
+            attivazione_provincia varchar(2) DEFAULT NULL,
+            attivazione_cap varchar(5) DEFAULT NULL,
+            servizi_indirizzo varchar(150) DEFAULT NULL,
+            servizi_civico varchar(10) DEFAULT NULL,
+            servizi_citta varchar(50) DEFAULT NULL,
+            servizi_provincia varchar(2) DEFAULT NULL,
+            servizi_cap varchar(5) DEFAULT NULL,
+            linea_migrazione TINYINT(1) NOT NULL DEFAULT 0,
+            linea_nuova TINYINT(1) NOT NULL DEFAULT 0,
+            linea_portability TINYINT(1) NOT NULL DEFAULT 0,
             date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
             PRIMARY KEY (id)
         ) $charset_collate;";

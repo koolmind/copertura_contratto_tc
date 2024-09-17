@@ -57,8 +57,8 @@ class ContrattoOnLineShortcode {
                 
             }  
 
-            // echo "<p>DEBUG</p>";
-            // var_dump($this->contrattoData);
+             echo "<p>DEBUG</p>";
+             var_dump($this->contrattoData);
             
             ob_start();
             
@@ -67,7 +67,7 @@ class ContrattoOnLineShortcode {
             $step = $this->contrattoData['step'];
             $cliente_section = $this->contrattoData['offerta']['target'];
 
-            if($step==5 || $step==6){
+            if($step==5 || $step==6 || $step==7){
                 $cliente_section ='common';
             }
             

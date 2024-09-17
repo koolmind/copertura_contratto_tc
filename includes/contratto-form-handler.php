@@ -23,6 +23,8 @@ function showSteps($curr) {
         "5"=>'gdpr',
         "6"=>'pagamento',
         "7"=>'riepilogo',
+        "8"=>'accettazione',
+
     ); ?>
 
     <div class="steps-track mb-5">

@@ -87,6 +87,13 @@ showSteps(1);
 				<input type="text" name="dati[cliente_cellulare]" id="cliente_cellulare" class="form-control tc-required" placeholder="cellulare" value="<?php tcGetFieldValue($fields,'cliente_cellulare'); ?>">
 			</div>
 		</div>		
+
+		<div class="row">
+			<div class="tc-input col-12 mb-4">
+				<label for="cliente_pec">PEC</label>
+				<input type="text" name="dati[cliente_pec]" id="cliente_pec" class="form-control tc-required" placeholder="indirizzo pec" value="<?php tcGetFieldValue($fields,'cliente_pec'); ?>">
+			</div>  
+		</div>
 	</fieldset>
 
 

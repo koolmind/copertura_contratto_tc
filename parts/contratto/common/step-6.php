@@ -55,19 +55,19 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
             <div class="row">
                 <div class="col-12 col-md-6 mb-4">
                     <label for="sdd_intestatario_cognome_nome">COGNOME e NOME / RAGIONE SOCIALE</label>
-                    <input type="text" name="dati[sdd_intestatario_cognome_nome]" id="sdd_intestatario_cognome_nome" class="form-control" value="<?php tcGetFieldValue($fields,'sdd_intestatario_cognome_nome'); ?>">
+                    <input type="text" name="dati[sdd_intestatario_cognome_nome]" id="sdd_intestatario_cognome_nome" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'sdd_intestatario_cognome_nome'); ?>">
                 </div>
 
                 <div class="col-12 col-md-6  mb-4">
                     <label for="sdd_codfisc_piva">CODICE FISCALE / P.IVA</label>
-                    <input type="text" name="dati[sdd_intestatario_codfisc_piva]" id="sdd_intestatario_codfisc_piva" class="form-control" maxlength="16" value="<?php tcGetFieldValue($fields,'sdd_intestatario_codfisc_piva'); ?>">
+                    <input type="text" name="dati[sdd_intestatario_codfisc_piva]" id="sdd_intestatario_codfisc_piva" class="form-control tc-required" maxlength="16" value="<?php tcGetFieldValue($fields,'sdd_intestatario_codfisc_piva'); ?>">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12 mb-4">
                     <h4 class="titolo-sez">CODICE IBAN DEL CONTO CORRENTE</h4>
-                    <input type="text" name="dati[sdd_iban]" id="sdd_iban" class="form-control" maxlength="27" placeholder="27 caratteri" value="<?php tcGetFieldValue($fields,'sdd_iban'); ?>">
+                    <input type="text" name="dati[sdd_iban]" id="sdd_iban" class="form-control tc-required" maxlength="27" placeholder="27 caratteri" value="<?php tcGetFieldValue($fields,'sdd_iban'); ?>">
                 </div>
                 <p>Il Sottoscritto Debitore autorizza il Creditore a disporre sul conto corrente sopra indicato addebiti in via continuativa ed il Prestatore di Servizi di Pagamento (di seguito “PSP”) ad eseguire 
                     l’addebito secondo le disposizioni impartite dal Creditore. Il rapporto con il PSP è regolato dal contratto stipulato dal Debitore con il PSP stesso.<br>
@@ -79,12 +79,12 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
             <div class="row">
                 <div class="col-12 col-md-6 mb-4">
                     <label for="sdd_sottoscrittore_cognome_nome">COGNOME e NOME</label>
-                    <input type="text" name="dati[sdd_sottoscrittore_cognome_nome]" id="sdd_sottoscrittore_cognome_nome" class="form-control" value="<?php tcGetFieldValue($fields,'sdd_sottoscrittore_cognome_nome'); ?>">
+                    <input type="text" name="dati[sdd_sottoscrittore_cognome_nome]" id="sdd_sottoscrittore_cognome_nome" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'sdd_sottoscrittore_cognome_nome'); ?>">
                 </div>
 
                 <div class="col-12 col-md-6  mb-4">
                     <label for="sdd_sottoscrittore_codfisc">CODICE FISCALE</label>
-                    <input type="text" name="dati[sdd_sottoscrittore_codfisc]" id="sdd_sottoscrittore_codfisc" class="form-control" maxlength="16" value="<?php tcGetFieldValue($fields,'sdd_codfiscsdd_sottoscrittore_codfisc_piva'); ?>">
+                    <input type="text" name="dati[sdd_sottoscrittore_codfisc]" id="sdd_sottoscrittore_codfisc" class="form-control tc-required" maxlength="16" value="<?php tcGetFieldValue($fields,'sdd_codfiscsdd_sottoscrittore_codfisc_piva'); ?>">
                 </div>
             </div>
 

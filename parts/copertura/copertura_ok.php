@@ -56,6 +56,7 @@ switch ($tecnologia) {
         <img src="<?php echo TC_ADDONS_ROOT_URL;?>/img/tick-round-out.svg" alt="copertura OK" class="ico-esito" />
         <h2>Il tuo indirizzo "<?php echo $indirizzo; ?>" <br/>
         è coperto con tecnologia <?php echo $tecToShow; ?> fino a <?php echo $speed; ?> Mbps.</h2>
+        <!-- <p>La linea Terrecablate sarà attivata con tecnologia <?php //echo $tecnologia;?> </p> -->
     </div>
 
     <div class="copertura-result">
@@ -211,6 +212,7 @@ switch ($tecnologia) {
                     <div id="btn-conferma-offerta" class="js_offer_selected_only hide my-2 text-right">
                         <input type="hidden" name="target" value="<?php echo $tipoCli; ?>" />
                         <input type="hidden" name="contratto_unique_id" value="C-<?php echo uniqid(); ?>" />
+                        <input type="hidden" name="tipo_accesso" value="<?php echo $tecnologia; ?>" />
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>

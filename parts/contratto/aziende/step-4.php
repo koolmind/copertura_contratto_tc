@@ -185,7 +185,6 @@
 					}
 					?>
 				</select>
-				<small class="text-danger form-message hide" style="clear:both;">Campo richiesto. Selezionare un'opzione.</small>
 			</div>
 		</div>
 

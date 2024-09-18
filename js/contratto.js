@@ -201,7 +201,6 @@ jQuery(document).ready(function ($) {
 
       prefix = "cliente";
       $(`#linea_${prefix}_ruolo`).val(data[`${prefix}_ruolo`]);
-      $(`#linea_${prefix}_sesso`).val(data[`${prefix}_sesso`]);
       $(`#linea_${prefix}_data_nascita`).val(data[`${prefix}_data_nascita`]);
       $(`#linea_${prefix}_luogo_nascita`).val(data[`${prefix}_luogo_nascita`]);
       $(`#linea_${prefix}_provincia_nascita`).val(
@@ -221,6 +220,7 @@ jQuery(document).ready(function ($) {
     prefix = "cliente";
     $(`#linea_${prefix}_cognome`).val(data[`${prefix}_cognome`]);
     $(`#linea_${prefix}_nome`).val(data[`${prefix}_nome`]);
+    $(`#linea_${prefix}_sesso`).val(data[`${prefix}_sesso`]);
     $(`#linea_${prefix}_indirizzo`).val(data[`${prefix}_indirizzo`]);
     $(`#linea_${prefix}_civico`).val(data[`${prefix}_civico`]);
     $(`#linea_${prefix}_citta`).val(data[`${prefix}_citta`]);

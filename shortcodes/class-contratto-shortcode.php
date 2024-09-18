@@ -25,7 +25,6 @@ class ContrattoOnLineShortcode {
         
         $this->contrattoUID = $this->getContrattoID();
         
-
         // eseguo lo shortcode solo su frontend, su admin crasha per mancanza di parametri
         if ( ! is_admin() && ! \Elementor\Plugin::$instance->editor->is_edit_mode() && $this->contrattoUID!==null) {        
             
@@ -40,11 +39,12 @@ class ContrattoOnLineShortcode {
                 // salvo i dati base dell'offerta
                 $composizione_offerta = array(
                     'target'        => sanitize_text_field($_POST["target"]),
+                    'tipoaccesso'   => sanitize_text_field($_POST['tipo_accesso']),
                     'nomeofferta'   => sanitize_text_field($_POST["cnt-nomeofferta"]),
                     'canone'        => sanitize_text_field($_POST["cnt-canone"]),
                     'opzioni'       => $_POST['cnt-options'],
                     'costo'         => sanitize_text_field($_POST['cnt-costo']),
-                    'attivazione'   => sanitize_text_field($_POST['cnt-attivazione'])
+                    'attivazione'   => sanitize_text_field($_POST['cnt-attivazione']),
                 );
         
                 // update data

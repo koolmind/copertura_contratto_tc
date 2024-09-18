@@ -3,7 +3,7 @@
  * Plugin Name: TCRS Addons
  * Author: Simone Conti
  * Description: Shortcodes e Widgets per TerreCablate ed. 2024
- * Version: 1.2.18
+ * Version: 1.2.22
  * Text Domain: tcrsaddons
  */
 
@@ -27,7 +27,7 @@
 
 
 class PangeaTerrecablateAddons {
-    const VERSION = "1.2.18";
+    const VERSION = "1.2.22";
 
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 
@@ -62,6 +62,7 @@ class PangeaTerrecablateAddons {
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             codice varchar(25) NOT NULL,
             target varchar(15) NOT NULL,
+            tipo_accesso varchar(30) NOT NULL,
             nomeofferta varchar(50) NOT NULL,
             canone float NOT NULL,
             opzioni text NOT NULL,
@@ -82,7 +83,7 @@ class PangeaTerrecablateAddons {
             cliente_cognome varchar(100) DEFAULT NULL,
             cliente_nome varchar(100) DEFAULT NULL,
             cliente_sesso int(11) DEFAULT NULL,
-            cliente_data_nascita date DEFAULT '0000-00-00' NOT NULL,
+            cliente_data_nascita date DEFAULT NULL,
             cliente_luogo_nascita varchar(50) NOT NULL,
             cliente_provincia_nascita varchar(2) NOT NULL,
             cliente_cod_fiscale varchar(16) NOT NULL,
@@ -90,8 +91,8 @@ class PangeaTerrecablateAddons {
             cliente_tipo_documento int(11) NOT NULL,
             cliente_doc_numero varchar(50) NOT NULL,
             cliente_doc_emittente varchar(100) NOT NULL,
-            cliente_doc_rilascio date DEFAULT '0000-00-00' NOT NULL,
-            cliente_doc_scadenza date DEFAULT '0000-00-00' NOT NULL,
+            cliente_doc_rilascio date DEFAULT NULL,
+            cliente_doc_scadenza date DEFAULT NULL,
             cliente_indirizzo varchar(150) DEFAULT NULL,
             cliente_civico varchar(10) DEFAULT NULL,
             cliente_citta varchar(50) DEFAULT NULL,
@@ -128,16 +129,16 @@ class PangeaTerrecablateAddons {
             linea_cliente_nome varchar(50) DEFAULT NULL,
             linea_cliente_cognome varchar(50) DEFAULT NULL,
             linea_cliente_sesso int(11) DEFAULT NULL,
-            linea_cliente_data_nascita date DEFAULT '0000-00-00' NOT NULL,
-            linea_cliente_luogo_nascita varchar(50) NOT NULL,
-            linea_cliente_provincia_nascita varchar(2) NOT NULL,
+            linea_cliente_data_nascita date DEFAULT NULL,
+            linea_cliente_luogo_nascita varchar(50) DEFAULT NULL,
+            linea_cliente_provincia_nascita varchar(2) DEFAULT NULL,
             linea_cliente_cod_fiscale varchar(16) NOT NULL,
-            linea_cliente_nazionalita varchar(100) NOT NULL,
-            linea_cliente_tipo_documento int(11) NOT NULL,
-            linea_cliente_doc_numero varchar(50) NOT NULL,
-            linea_cliente_doc_emittente varchar(100) NOT NULL,
-            linea_cliente_doc_rilascio date DEFAULT '0000-00-00' NOT NULL,
-            linea_cliente_doc_scadenza date DEFAULT '0000-00-00' NOT NULL,
+            linea_cliente_nazionalita varchar(100) DEFAULT NULL,
+            linea_cliente_tipo_documento int(11) DEFAULT NULL,
+            linea_cliente_doc_numero varchar(50) DEFAULT NULL,
+            linea_cliente_doc_emittente varchar(100) DEFAULT NULL,
+            linea_cliente_doc_rilascio date DEFAULT NULL,
+            linea_cliente_doc_scadenza date DEFAULT NULL,
             linea_cliente_indirizzo varchar(150) DEFAULT NULL,
             linea_cliente_civico varchar(10) DEFAULT NULL,
             linea_cliente_citta varchar(50) DEFAULT NULL,

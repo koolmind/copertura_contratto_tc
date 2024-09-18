@@ -12,6 +12,8 @@ jQuery(document).ready(function ($) {
   // VALIDAZIONE DEGLI INPUTS
   $("#btnContrattoNext").on("click", function (evt) {
     evt.preventDefault();
+
+    const allTextInputs = $("input[type='text']");
     const allRequiredFields = $(".tc-required");
     const checkLineaFields = $(this).hasClass("jsCheckLineaFields");
     const checkGdprFields = $(this).hasClass("jsCheckGdprFields");
@@ -20,6 +22,11 @@ jQuery(document).ready(function ($) {
 
     const errLabel = $("#errLabel");
     const loadingLabel = $("#loadingLabel");
+
+    // elimino eventuali spazi dal contenuto dei text inputs, altrimenti risultano riempiti
+    allTextInputs.each(function () {
+      $(this).val($(this).val().trim());
+    });
 
     // migrazione / nuova linea
     if (checkLineaFields) {

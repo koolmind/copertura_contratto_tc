@@ -87,15 +87,32 @@
 		
 		
         <div class="row">
-			<div class="tc-input col-12 col-md-6 mb-4">
+			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_cognome">Cognome</label>
 				<input type="text" name="dati[linea_cliente_cognome]" id="linea_cliente_cognome" class="form-control tc-required" placeholder="cognome" value="<?php tcGetFieldValue($fields,'linea_cliente_cognome'); ?>">
 			</div>
 
-			<div class="tc-input col-12 col-md-6 mb-4">
+			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_nome">Nome</label>
 				<input type="text" name="dati[linea_cliente_nome]" id="linea_cliente_nome" class="form-control tc-required" placeholder="nome" value="<?php tcGetFieldValue($fields,'linea_cliente_nome'); ?>">
 			</div>			
+
+            <div class="tc-input col-12 col-md-4 mb-4">
+				<label for="linea_cliente_sesso">Sesso</label>
+				<select class="form-select tc-required" name="dati[linea_cliente_sesso]" id="linea_cliente_sesso">
+					<option value="">- seleziona sesso -</option>
+					<?php
+					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
+					$sel =  tcGetFieldValue($fields, 'linea_cliente_sesso',false);
+
+					foreach($sesso as $sex=>$sexLabel) {
+						$isSelected = $sex == $sel ? " selected='selected' " : "";
+						printf('<option value="%s" %s>%s</option>', $sex, $isSelected, $sexLabel);
+					}
+					?>
+				</select>
+				<small class="text-danger form-message hide" style="clear:both;">Campo richiesto. Selezionare un'opzione.</small>
+			</div>
 		</div>
 
         <div class="row">

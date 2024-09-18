@@ -181,8 +181,8 @@
                         <div class="col-12">
                             Il cliente ha richiesto <b>
                             <?php 
-                            if($migrazione['linea_migrazione'] == '1') echo " la MIGRAZIONE della sua linea ";
-                            if($migrazione['linea_nuova'] == '1') echo " l'ATTIVAZIONE di una nuova linea ";
+                            if(isset($migrazione['linea_migrazione']) && $migrazione['linea_migrazione'] == '1') echo " la MIGRAZIONE della sua linea ";
+                            if(isset($migrazione['linea_nuova']) && $migrazione['linea_nuova'] == '1') echo " l'ATTIVAZIONE di una nuova linea ";
 
                             if($migrazione['linea_portability'] == '1')
                                 echo " CON PORTABILITÀ del suo numero.";
@@ -193,13 +193,13 @@
 
                         <?php if($migrazione['linea_portability'] == '1') { ?>
                         
-                            <?php echo $migrazione['linea_codice_migrazione_1']  ? '<div class="col-12 col-md-6">COD.MIGRAZIONE #1: <b>'. $migrazione['linea_codice_migrazione_1'] .'</b></div>' : ''; ?>
-                            <?php echo $migrazione['linea_codice_migrazione_2']  ? '<div class="col-12 col-md-6">COD.MIGRAZIONE #2: <b> '. $migrazione['linea_codice_migrazione_2'] .'</b></div>' : ''; ?>
+                            <?php echo isset($migrazione['linea_codice_migrazione_1']) && $migrazione['linea_codice_migrazione_1']  ? '<div class="col-12 col-md-6">COD.MIGRAZIONE #1: <b>'. $migrazione['linea_codice_migrazione_1'] .'</b></div>' : ''; ?>
+                            <?php echo isset($migrazione['linea_codice_migrazione_2']) && $migrazione['linea_codice_migrazione_2']  ? '<div class="col-12 col-md-6">COD.MIGRAZIONE #2: <b> '. $migrazione['linea_codice_migrazione_2'] .'</b></div>' : ''; ?>
                                                 
-                            <?php echo $migrazione['linea_numero_1']  ? '<div class="col-12 col-md-6">Numero #1:<b> '. $migrazione['linea_numero_1'] .'</b></div>' : ''; ?>
-                            <?php echo $migrazione['linea_numero_2']  ? '<div class="col-12 col-md-6">Numero #2:<b> '. $migrazione['linea_numero_2'] .'</b></div>' : ''; ?>
-                            <?php echo $migrazione['linea_numero_3']  ? '<div class="col-12 col-md-6">Numero #3:<b> '. $migrazione['linea_numero_3'] .'</b></div>' : ''; ?>
-                            <?php echo $migrazione['linea_numero_4']  ? '<div class="col-12 col-md-6">Numero #4:<b> '. $migrazione['linea_numero_4'] .'</b></div>' : ''; ?>
+                            <?php echo isset($migrazione['linea_numero_1']) && $migrazione['linea_numero_1']  ? '<div class="col-12 col-md-6">Numero #1:<b> '. $migrazione['linea_numero_1'] .'</b></div>' : ''; ?>
+                            <?php echo isset($migrazione['linea_numero_2']) && $migrazione['linea_numero_2'] ? '<div class="col-12 col-md-6">Numero #2:<b> '. $migrazione['linea_numero_2'] .'</b></div>' : ''; ?>
+                            <?php echo isset($migrazione['linea_numero_3']) && $migrazione['linea_numero_3'] ? '<div class="col-12 col-md-6">Numero #3:<b> '. $migrazione['linea_numero_3'] .'</b></div>' : ''; ?>
+                            <?php echo isset($migrazione['linea_numero_4']) && $migrazione['linea_numero_4'] ? '<div class="col-12 col-md-6">Numero #4:<b> '. $migrazione['linea_numero_4'] .'</b></div>' : ''; ?>
                         <?php } ?>
                     </div>            
                 </div>
@@ -246,6 +246,7 @@
                     </div>
                     
                     <div class="row px-2">
+                        <?php if($isAzienda): ?>
                         <div class="col-12 col-md-6">
                            Nato/a il: <b><?php echo $migrazione['linea_cliente_data_nascita'] ?></b>
                         </div>
@@ -255,6 +256,7 @@
                         <div class="col-12 col-md-6">
                             Nazionalità: <b><?php echo $migrazione['linea_cliente_nazionalita'] ?></b>
                         </div>
+                        <?php endif; ?>
                         <div class="col-12 col-md-6">
                             C.F.: <b><?php echo $migrazione['linea_cliente_cod_fiscale'] ?></b>
                         </div>
@@ -272,6 +274,7 @@
                         </div>
                     </div>
 
+                    <?php if($isAzienda): ?>
                     <div class="row px-2">                        
                         <div class="col-12 col-md-6">
                             Tipo documento: <b><?php echo $migrazione['linea_cliente_tipo_documento'] ?></b>
@@ -289,6 +292,7 @@
                             Scade il: <b><?php echo $migrazione['linea_cliente_doc_scadenza'] ?></b>
                         </div>
                     </div>                
+                    <?php endif; ?>
                 </div>
 
                 <div class="gdpr riepilogo-box">
@@ -331,7 +335,7 @@
                             <b>SOTTOSCRITTORE: </b> <?php echo $pagamento['sdd_sottoscrittore_cognome_nome'];?>
                         </div>
                         <div class="col-12">
-                            <b>P.IVA/C.F. : </b> <?php echo $pagamento['sdd_sottoscrittore_codfisc_piva'];?>
+                            <b>P.IVA/C.F. : </b> <?php echo $pagamento['sdd_sottoscrittore_codfisc'];?>
                         </div>
 
                         <?php if($pagamento['sdd_titolare_linea']): ?>
@@ -402,9 +406,9 @@
     <div class="contratto_nav_buttons d-flex justify-content-between mt-4">
         <button type="submit" id="btnContrattoPrev" name="btnContrattoPrev" class="btn-standard"><i class="fas fa-long-arrow-alt-left"></i> Indietro</button>
         <div class="info_messages">
-            <span class="text-danger" id="errLabel">controlla i tuoi consensi</span>
+            <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckPagamentoFields">ACCETTA E CONCLUDI<i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">I DATI SONO CORRETTI<i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

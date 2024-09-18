@@ -84,7 +84,7 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
 
                 <div class="col-12 col-md-6  mb-4">
                     <label for="sdd_sottoscrittore_codfisc">CODICE FISCALE</label>
-                    <input type="text" name="dati[sdd_sottoscrittore_codfisc]" id="sdd_sottoscrittore_codfisc" class="form-control tc-required" maxlength="16" value="<?php tcGetFieldValue($fields,'sdd_codfiscsdd_sottoscrittore_codfisc_piva'); ?>">
+                    <input type="text" name="dati[sdd_sottoscrittore_codfisc]" id="sdd_sottoscrittore_codfisc" class="form-control tc-required" maxlength="16" value="<?php tcGetFieldValue($fields,'sdd_sottoscrittore_codfisc'); ?>">
                 </div>
             </div>
 

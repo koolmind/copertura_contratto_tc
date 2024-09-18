@@ -1,11 +1,14 @@
 <?php 
-    $fields = @$this->contrattoData['firma']; 
+    $fields = @$this->contrattoData['firme']; 
+    $cbAccettazioneContratto = (bool) tcGetFieldValue($fields,"accettazione_contratto",false);
+    $cbFirmaContratto = (bool) tcGetFieldValue($fields,"firma_contratto",false);
+    $cbApprovazioneArticoliContratto = (bool) tcGetFieldValue($fields,"approvazione_articoli_contratto",false);
     showSteps(8);
 ?>
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">
     <input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
-    <input type="hidden" id="section" name="section" value="firma">
+    <input type="hidden" id="section" name="section" value="firme">
     <!-- <input type="hidden" id="tipocli" name="tipocli" value="aziende"> -->
    
     <fieldset id="fields-firma" class="mt-3">
@@ -25,7 +28,7 @@
         <div class="row">
         <div class="col-12 mb-4">
             <div class="form-check">
-                <input class="form-check-input tc-required" type="checkbox" value="1" id="firma_contratto" name="dati[firma_contratto]" <?php echo $cbAccettazioneContratto ? ' checked="checked" ' : ''?>>
+                <input class="form-check-input tc-required" type="checkbox" value="1" id="firma_contratto" name="dati[firma_contratto]" <?php echo $cbFirmaContratto ? ' checked="checked" ' : ''?>>
                 <label class="form-check-label title-label" for="firma_contratto">FIRMA DELLA PROPOSTA DI CONTRATTO</label>
             </div>
             <p>La firma conferma le obbligazioni del Cliente previste nella presente Proposta di Contratto per la prestazione di Servizi di comunicazione elettronica (telefonie fissa ed internet) anche
@@ -36,7 +39,7 @@ Condizioni Generali di Contratto.</p>
         <div class="row">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input tc-required" type="checkbox" value="1" id="approvazione_articoli_contratto" name="dati[approvazione_articoli_contratto]" <?php echo $cbAccettazioneContratto ? ' checked="checked" ' : ''?>>
+                    <input class="form-check-input tc-required" type="checkbox" value="1" id="approvazione_articoli_contratto" name="dati[approvazione_articoli_contratto]" <?php echo $cbApprovazioneArticoliContratto ? ' checked="checked" ' : ''?>>
                     <label class="form-check-label title-label" for="approvazione_articoli_contratto">APPROVAZIONE ESPLICITA DELLE CONDIZIONI DI CONTRATTO</label>
                 </div>
                 <p>Il Cliente, previa attenta e specifica lettura, dichiara di aver preso visione e conoscenza ed espressamente approva, ai sensi degli articoli 1341 e 1342, C.C., i seguenti articoli delle
@@ -56,6 +59,6 @@ LIMITAZIONE E SOSPENSIONE DEI SERVIZI; 27 RECESSO DI TERRECABLATE; 28. APPARATI 
             <span class="text-danger" id="errLabel">controlla i tuoi consensi</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckPagamentoFields">ACCETTA E CONCLUDI<i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">ACCETTA E CONCLUDI<i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

@@ -109,7 +109,18 @@
 				<input type="text" name="dati[cliente_luogo_nascita]" id="cliente_luogo_nascita" class="form-control tc-required" placeholder="luogo di nascita" value="<?php tcGetFieldValue($fields,'cliente_luogo_nascita'); ?>">
 			</div>
         </div>
+		
+		<div class="row">
+		<div class="tc-input col-12 col-md-6 mb-4">
+				<label for="cliente_provincia_nascita">Provincia</label>
+				<input type="text" name="dati[cliente_provincia_nascita]" id="cliente_provincia_nascita" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'cliente_provincia_nascita'); ?>" maxlength="2">
+			</div>
 
+			<div class="tc-input col-12 col-md-6 mb-4">
+				<label for="cliente_nazionalita">Nazionalità</label>
+				<input type="text" name="dati[cliente_nazionalita]" id="cliente_nazionalita" class="form-control tc-required" placeholder="nazionalità" value="<?php tcGetFieldValue($fields,'cliente_nazionalita'); ?>">
+			</div>
+		</div>
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
@@ -161,7 +172,7 @@
         <div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="cliente_pec">PEC</label>
-				<input type="text" name="dati[cliente_pec]" id="cliente_pec" class="form-control" placeholder="rilasciato da" value="<?php tcGetFieldValue($fields,'cliente_pec'); ?>">
+				<input type="text" name="dati[cliente_pec]" id="cliente_pec" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'cliente_pec'); ?>">
 			</div>            
 
             <div class="tc-input col-12 col-md-6 mb-4 align-self-end">

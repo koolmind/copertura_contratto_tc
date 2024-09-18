@@ -67,7 +67,7 @@ class ContrattoOnLineShortcode {
             $step = $this->contrattoData['step'];
             $cliente_section = $this->contrattoData['offerta']['target'];
 
-            if($step==5 || $step==6 || $step==7){
+            if( in_array( $step, [5,6,7,8,9] ) ){
                 $cliente_section ='common';
             }
             

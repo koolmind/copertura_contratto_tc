@@ -1,4 +1,10 @@
 jQuery(document).ready(function ($) {
+  // ATTIVAZIONE BOTTONI SOLO A CARICAMENTO COMPLETATO
+  $(window).on("load", function () {
+    // Seleziona tutti i bottoni e rimuovi l'attributo disabled
+    $("button").prop("disabled", false);
+  });
+
   // DATEPICKER
   $("input[data-calendario]").datepicker({
     changeMonth: true,

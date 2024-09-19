@@ -59,6 +59,6 @@ LIMITAZIONE E SOSPENSIONE DEI SERVIZI; 27 RECESSO DI TERRECABLATE; 28. APPARATI 
             <span class="text-danger" id="errLabel">controlla i tuoi consensi</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">ACCETTA E CONCLUDI<i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard" disabled>ACCETTA E CONCLUDI<i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

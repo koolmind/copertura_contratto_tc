@@ -189,6 +189,6 @@
             <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard" disabled>Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

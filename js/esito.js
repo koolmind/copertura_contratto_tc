@@ -77,9 +77,11 @@ updateOfferData = () => {
     .join("");
 
   cartNome.textContent = offerName;
-  cartCanone.textContent = offerPrice + " €";
+  cartCanone.textContent = getAmount(offerPrice).toFixed(2) + " €";
   cartAttivazione.innerText =
-    offerAttivazione == 0 ? "GRATUITA" : offerAttivazione + " €";
+    offerAttivazione == 0
+      ? "GRATUITA"
+      : getAmount(offerAttivazione).toFixed(2) + " €";
   cartNote.textContent = offerNote;
   cartFeatures.innerHTML = formattedFeaturesList;
 
@@ -102,7 +104,7 @@ offerte.forEach((offerta) => {
   });
 });
 
-/** GESTIONE AGGIUNTA RIMOZIONE OPZIONI */
+/** GESTIONE AGGIUNTA e RIMOZIONE OPZIONI */
 if (btnOptionsAdd) {
   btnOptionsAdd.forEach((btn) => {
     btn.addEventListener("click", (evt) => handleOptionClicked(evt));
@@ -133,7 +135,9 @@ const handleOptionClicked = (evt) => {
   const optName = btnData.name;
   const optAction = btnData.action;
   const optMulti = btnData.multi == "1";
+  const optExcl = btnData.excl == "1";
   const optQMax = btnData.qmax || null;
+  const allExclusives = document.querySelectorAll(`[data-excl='1']`);
 
   if (optAction == "add") {
     let objInCart = null;
@@ -153,15 +157,34 @@ const handleOptionClicked = (evt) => {
     }
 
     if (!objInCart || !optMulti)
-      addedOptions.push({ id: optId, name: optName, cost: optCost, qty: 1 });
+      addedOptions.push({
+        id: optId,
+        name: optName,
+        cost: optCost,
+        qty: 1,
+        excl: +optExcl,
+      });
 
     if (!optMulti) btn.classList.add("hide");
+    if (optExcl) {
+      // disabilito le altre opzioni esclusive
+      allExclusives.forEach((item) => {
+        if (item.id != optId) item.setAttribute("disabled", "disabled");
+      });
+    }
   } else {
     filteredOptions = addedOptions.filter((opt) => opt.id != optId);
     addedOptions = [...filteredOptions];
-
     // riattivo il bottone corrispondente tra le opzioni
     document.querySelector(`#btn-opt-${optId}`).classList.remove("hide");
+
+    if (optExcl) {
+      console.log("riattivo");
+      // riabilito le altre opzioni esclusive
+      allExclusives.forEach((item) => {
+        item.removeAttribute("disabled");
+      });
+    }
   }
 
   renderOptionsContent();
@@ -176,7 +199,7 @@ const updateCartTotal = () => {
     initial
   );
 
-  totaleContainer.innerHTML = total.toFixed(2) + "&euro;";
+  totaleContainer.innerHTML = total.toFixed(2) + " &euro;";
   cntCosto.value = total.toFixed(2);
 };
 
@@ -184,10 +207,11 @@ const renderOptionsContent = () => {
   console.log(`rendering opt`);
   const renderedOutput = addedOptions
     .map((option, idx) => {
-      return `<p class="riga-costo" id="row-opt-${option.id}">
+      return `<p class="riga-costo row-opt" id="row-opt-${option.id}">
                 <span><button role="button" class="js-btn-cart-del btn-option-small" 
                     data-id="${option.id}" 
-                    data-action="del">
+                    data-action="del"
+                    data-excl="${option.excl}">
                     <i class="far fa-minus-square"></i>
                     </button>                    
                     <span>(${option.qty}x) ${option.name} </span></span>
@@ -211,5 +235,5 @@ const renderOptionsContent = () => {
 
 resetOptionContent = () => {
   addedOptions = [];
-  optionalCostsContainer.innerHTML = "no option";
+  optionalCostsContainer.innerHTML = "nessuna opzione selezionata";
 };

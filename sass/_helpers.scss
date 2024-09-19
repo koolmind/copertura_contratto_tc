@@ -15,9 +15,6 @@
   background-color: $blu-scuro;
   border: 2px solid $blu-scuro;
   color: white;
-  // height: 2.5rem;
-  // outline: solid 3px $blu-scuro;
-  // outline-offset: 2px;
   border-radius: $b-radius;
   -webkit-border-radius: $b-radius;
   -moz-border-radius: $b-radius;
@@ -29,6 +26,13 @@
     background-color: $blu-chiaro !important;
   }
 
+  &:disabled,
+  &:disabled:hover {
+    background-color: lightgray !important;
+    color: #999;
+    border: 1px solid darkgray;
+  }
+
   &.btn-alt {
     background-color: $blu-chiaro;
     border: 1px solid $blu-chiaro;
@@ -37,6 +41,12 @@
     &:hover,
     &:focus {
       background-color: $viola-chiaro !important;
+    }
+
+    &:disabled {
+      background-color: lightgray !important;
+      color: #999;
+      border: 1px solid darkgray;
     }
   }
 }

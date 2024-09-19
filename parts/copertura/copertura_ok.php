@@ -97,7 +97,7 @@ switch ($tecnologia) {
 
             
             <div id="offer-options" class="hide">
-                <h3 class="esito-section-title">SERVIZI OPZIONALI</h3>
+                <h3 class="esito-section-title">- SERVIZI OPZIONALI - </h3>
                 <?php // recupero le opzioni disponibili per il prodotto in base al target residenziale / azienda. Poi nascondo quelle che non servono col JS (non ho altro modo)    
                 
                 $optArgs = array(
@@ -127,6 +127,7 @@ switch ($tecnologia) {
                         $desc = get_the_content();
                         $prezzo = get_post_meta($postID,'opzione_prezzo', true);
                         $isMultipla = get_post_meta($postID, 'opzione_multipla', true);
+                        $isEsclusiva =  get_post_meta($postID, 'opzione_esclusiva', true);
                         $quantitaMax = get_post_meta($postID, 'quantita_max', true);
                         $prodotti_collegati = get_post_meta($postID, 'prodotti_collegati', false);
                         
@@ -145,7 +146,8 @@ switch ($tecnologia) {
                         data-cost="<?php echo $prezzo; ?>" 
                         data-id="<?php echo $slug;?>" 
                         data-name="<?php echo $title;?>" 
-                        data-multi="<?php echo $isMultipla; ?>" 
+                        data-multi="<?php echo intval($isMultipla); ?>" 
+                        data-excl="<?php echo intval($isEsclusiva); ?>" 
                         <?php if($quantitaMax) echo 'data-qmax="'. $quantitaMax . '"'; ?>
                         data-action="add">
                         <i class="fas fa-plus"></i> <span>aggiungi</span>
@@ -176,7 +178,7 @@ switch ($tecnologia) {
 
                 <div id="dettaglio-mensili">
                     <div class="riga-costo js_offer_selected_only hide">
-                        <span>CANONE MENSILE BASE: </span>
+                        <span><strong>CANONE MENSILE BASE:</strong> </span>
                         <span id="cart-canone" class="text-bold">-</span>
                         <input type="hidden" name="cnt-canone" id="cnt-canone" value="" />  
                     </div>
@@ -184,7 +186,7 @@ switch ($tecnologia) {
                     
 
                     <div class="mt-3 js_offer_selected_only hide">
-                        <span>OPZIONI AGGIUNTIVE: </span>
+                        <span><strong>OPZIONI AGGIUNTIVE: </strong></span>
                         <div id="costi-opzioni">nessuna opzione selezionata</div>
                     </div>
 
@@ -195,12 +197,12 @@ switch ($tecnologia) {
 
                 <div class="dettaglio-bottom js_offer_selected_only hide">
                     <div class="flex-space-between riga-costo" id="cart-totale">
-                        <span>Canone mensile:</span>
+                        <span><strong>Canone mensile:</strong></span>
                         <span class="costo text-bold">-</span>
                         <input type="hidden" name="cnt-costo" id="cnt-costo" value="" />  
                     </div>
                     <div class="riga-costo">
-                        <span class="costo-label">Costo attivazione: </span>
+                        <span class="costo-label"><strong>Costo attivazione: </strong></span>
                         <span id="cart-attivazione" class="text-bold">-</span>
                         <input type="hidden" name="cnt-attivazione" id="cnt-attivazione" value="" />  
                     </div>

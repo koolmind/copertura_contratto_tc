@@ -91,7 +91,7 @@
 		<legend>6. Servizi di migrazione e mantenimento del numero telefonico</legend>	
 
         <div class="d-flex justify-content-end my-3">
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i> stesso indirizzo sede</button>
+            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i> stesso indirizzo sede</button>
         </div>
 		
 		<div class="row">
@@ -334,6 +334,6 @@
             <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckLineaFields">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckLineaFields" disabled>Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

@@ -24,6 +24,11 @@
 .btn-standard:hover, .btn-standard:focus {
   background-color: #0081c7 !important;
 }
+.btn-standard:disabled, .btn-standard:disabled:hover {
+  background-color: lightgray !important;
+  color: #999;
+  border: 1px solid darkgray;
+}
 .btn-standard.btn-alt {
   background-color: #0081c7;
   border: 1px solid #0081c7;
@@ -31,6 +36,11 @@
 }
 .btn-standard.btn-alt:hover, .btn-standard.btn-alt:focus {
   background-color: #e390f3 !important;
+}
+.btn-standard.btn-alt:disabled {
+  background-color: lightgray !important;
+  color: #999;
+  border: 1px solid darkgray;
 }
 
 body.page-template-tpl-risultato-copertura .site-content {
@@ -107,7 +117,6 @@ body.page-template-tpl-risultato-copertura .site-content {
 }
 
 .result-text {
-  color: #f4f4f4;
   font-size: 1.25rem;
   font-weight: 500;
 }
@@ -156,11 +165,10 @@ body.page-template-tpl-risultato-copertura .site-content {
 .esito-section-title {
   color: #f4f4f4;
   font-weight: bold;
-  background-color: #202b49;
-  border: 2px solid #f4f4f4;
   width: -moz-fit-content;
   width: fit-content;
   padding: 0.5rem 1rem;
+  font-size: 30px !important;
 }
 
 .offer-option {
@@ -187,10 +195,17 @@ body.page-template-tpl-risultato-copertura .site-content {
 .offer-option .offer-option-add {
   grid-area: bottone;
   text-align: center;
+  max-height: 40px;
+}
+.offer-option .offer-option-add:disabled, .offer-option .offer-option-add:disabled:hover {
+  background-color: lightgray !important;
+  color: #999;
+  border: 1px solid darkgray;
 }
 
 #btn-conferma-offerta .btn-standard {
   padding: 0.5em 2.5em;
+  margin-top: 2rem;
 }
 
 .btn-option-small {
@@ -215,13 +230,25 @@ ul#cart-caratteristiche-offerta i.fa {
 
 .riga-costo {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #3f3f3f;
 }
+.riga-costo.row-opt {
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.riga-costo.row-opt .costo {
+  text-align: right;
+  width: 100%;
+}
 
 .js-btn-cart-del {
   background-color: transparent;
+  color: firebrick !important;
+  padding: 0.75rem;
 }
 .js-btn-cart-del svg path {
   stroke: firebrick;
@@ -232,6 +259,12 @@ ul#cart-caratteristiche-offerta i.fa {
   color: white;
   font-size: 1.25em;
   margin: 2em 1em;
+}
+
+#cart-note {
+  font-size: 0.95rem;
+  background: #e3e3e3;
+  padding: 0.5rem;
 }
 
 /* --------------- VERIFICA COPERTURA ----------------- */

@@ -24,6 +24,11 @@
 .btn-standard:hover, .btn-standard:focus {
   background-color: #0081c7 !important;
 }
+.btn-standard:disabled, .btn-standard:disabled:hover {
+  background-color: lightgray !important;
+  color: #999;
+  border: 1px solid darkgray;
+}
 .btn-standard.btn-alt {
   background-color: #0081c7;
   border: 1px solid #0081c7;
@@ -31,6 +36,11 @@
 }
 .btn-standard.btn-alt:hover, .btn-standard.btn-alt:focus {
   background-color: #e390f3 !important;
+}
+.btn-standard.btn-alt:disabled {
+  background-color: lightgray !important;
+  color: #999;
+  border: 1px solid darkgray;
 }
 
 h4.titolo-sez {

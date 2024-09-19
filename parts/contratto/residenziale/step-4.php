@@ -82,7 +82,7 @@
 
         <div class="d-flex justify-content-between my-3">
             <h4 class="titoletto">IL SOTTOSCRITTO</h4>
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica"><i class="fas fa-sync"></i>stesso indirizzo anagrafica</button>
+            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i>stesso indirizzo anagrafica</button>
         </div>
 		
 		
@@ -199,6 +199,6 @@
             <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckLineaFields">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard jsCheckLineaFields" disabled>Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

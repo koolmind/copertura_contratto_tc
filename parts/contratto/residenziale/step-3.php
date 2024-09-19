@@ -15,7 +15,7 @@
         
         <legend>3.Indirizzo di invio del dispositivo</legend>
         <div class="d-flex justify-content-end my-3">
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="attivazione" ><i class="fas fa-sync"></i>stesso indirizzo attivazione</button>
+            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="attivazione" disabled><i class="fas fa-sync"></i>stesso indirizzo attivazione</button>
         </div>
 
         <div class="row">
@@ -54,6 +54,6 @@
             <span class="text-danger" id="errLabel">controlla i dati inseriti</span>
             <span class="saving hide" id="loadingLabel">salvataggio in corso...</span>
         </div>
-        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard">Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
+        <button type="submit" id="btnContrattoNext" name="btnContrattoNext" class="btn-standard" disabled>Avanti <i class="fas fa-long-arrow-alt-right"></i></button>
     </div>
 </form>

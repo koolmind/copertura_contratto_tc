@@ -21,6 +21,7 @@ jQuery(document).ready(function ($) {
 
     const allTextInputs = $("input[type='text']");
     const allRequiredFields = $(".tc-required");
+    const allMigrations = $(".tc-migration");
     const checkLineaFields = $(this).hasClass("jsCheckLineaFields");
     const checkGdprFields = $(this).hasClass("jsCheckGdprFields");
     const checkPagamentoFields = $(this).hasClass("jsCheckPagamentoFields");
@@ -28,6 +29,10 @@ jQuery(document).ready(function ($) {
 
     const errLabel = $("#errLabel");
     const loadingLabel = $("#loadingLabel");
+
+    // allRequiredFields.each(function () {
+    //   $(this).removeClass("is-invalid");
+    // });
 
     // elimino eventuali spazi dal contenuto dei text inputs, altrimenti risultano riempiti
     allTextInputs.each(function () {
@@ -100,6 +105,7 @@ jQuery(document).ready(function ($) {
       }
     }
 
+    // validazione campi obbligatori
     allRequiredFields.each(function () {
       if ($(this).prop("type") == "checkbox") {
         if (!$(this).is(":checked")) {
@@ -117,6 +123,39 @@ jQuery(document).ready(function ($) {
         }
       }
     });
+
+    // validazione codici di migrazione
+    /* IN SOSPESO FINO A CHIARIMENTI SUI CODICI SENZA COS
+    allMigrations.each(function () {
+      let field = $(this);
+      if (field.val() != "") {
+        $.ajax({
+          url: "/wp-admin/admin-ajax.php", // Variabile globale di WordPress per l'URL dell'admin-ajax.php
+          type: "POST",
+          data: {
+            action: "validate_migration_code",
+            migcode: field.val(), // codice di migrazione inserito
+          },
+          success: function (response) {
+            if (response.data.esito == "ok") {
+              console.log("valido!");
+              field.removeClass("is-invalid");
+              field.closest("div").find(".form-message").addClass("hide");
+            }
+
+            if (response.data.esito == "ko") {
+              field.addClass("is-invalid");
+              hasErrors = true;
+              field.closest("div").find(".form-message").removeClass("hide");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Errore Ajax:", status, error);
+            console.log("Risposta XHR:", xhr.responseText);
+          },
+        });
+      }
+    });*/
 
     if (!hasErrors) {
       errLabel.addClass("hide");
@@ -149,7 +188,7 @@ jQuery(document).ready(function ($) {
         section: sourceSection, // sezione dei dati da recuperare
       },
       success: function (response) {
-        console.log("Risposta completa:", response);
+        //        console.log("Risposta completa:", response);
 
         switch (currentSection) {
           case "attivazione":

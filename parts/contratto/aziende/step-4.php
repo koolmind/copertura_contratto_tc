@@ -1,4 +1,5 @@
 <?php 
+	global $sesso, $docs, $ruoli;
     $fields = @$this->contrattoData['migrazione']; 
 
 	$cbMigrazione = (bool) tcGetFieldValue($fields,"linea_migrazione",false);
@@ -55,34 +56,36 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_codice_migrazione_1">Codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control tc-migration" maxlength="18" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
+				<small class="text-danger form-message hide">Codice migrazione errato</small>
             </div>
 
             <div class="col-12 col-md-6  mb-4">
                 <label for="linea_codice_migrazione_2">Secondo codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_2]" id="linea_codice_migrazione_2" class="form-control" placeholder="opzionale" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_2'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_2]" id="linea_codice_migrazione_2" class="form-control tc-migration" placeholder="opzionale" maxlength="18" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_2'); ?>">
+				<small class="text-danger form-message hide">Codice migrazione errato</small>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_1">Numero telefonico #1</label>
-                <input type="text" name="dati[linea_numero_1]" id="linea_numero_1" class="form-control" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_numero_1'); ?>">
+                <input type="text" name="dati[linea_numero_1]" id="linea_numero_1" class="form-control" value="<?php tcGetFieldValue($fields,'linea_numero_1'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_2">Numero telefonico #2</label>
-                <input type="text" name="dati[linea_numero_2]" id="linea_numero_2" class="form-control" placeholder="opzionale" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_numero_2'); ?>">
+                <input type="text" name="dati[linea_numero_2]" id="linea_numero_2" class="form-control" placeholder="opzionale" value="<?php tcGetFieldValue($fields,'linea_numero_2'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_3">Numero telefonico #3</label>
-                <input type="text" name="dati[linea_numero_3]" id="linea_numero_3" class="form-control" placeholder="opzionale" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_numero_3'); ?>">
+                <input type="text" name="dati[linea_numero_3]" id="linea_numero_3" class="form-control" placeholder="opzionale" value="<?php tcGetFieldValue($fields,'linea_numero_3'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_4">Numero telefonico #4</label>
-                <input type="text" name="dati[linea_numero_4]" id="linea_numero_4" class="form-control" placeholder="opzionale" maxlength="19" value="<?php tcGetFieldValue($fields,'linea_numero_4'); ?>">
+                <input type="text" name="dati[linea_numero_4]" id="linea_numero_4" class="form-control" placeholder="opzionale" value="<?php tcGetFieldValue($fields,'linea_numero_4'); ?>">
             </div>
         </div>        
     </fieldset>
@@ -148,7 +151,6 @@
 				<select class="form-select tc-required" name="dati[linea_cliente_ruolo]" id="linea_cliente_ruolo">
 					<option value="">- seleziona ruolo -</option>
 					<?php
-					$ruoli = ['titolare','legale rappresentante','delegato'];
 					$sel =  tcGetFieldValue($fields, 'linea_cliente_ruolo',false);
 					foreach($ruoli as $ruolo) {
 						$isSelected = $ruolo == $sel ? " selected='selected' " : "";
@@ -176,7 +178,6 @@
 				<select class="form-select tc-required" name="dati[linea_cliente_sesso]" id="linea_cliente_sesso">
 					<option value="">- seleziona sesso -</option>
 					<?php
-					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
 					$sel =  tcGetFieldValue($fields, 'linea_cliente_sesso',false);
 
 					foreach($sesso as $sex=>$sexLabel) {
@@ -224,7 +225,6 @@
 				<select name="dati[linea_cliente_tipo_documento]" id="linea_cliente_tipo_documento" class="form-select tc-required">
 					<option value="">-- seleziona documento -</option>
 					<?php
-					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
 					$sel =  tcGetFieldValue($fields, 'linea_cliente_tipo_documento',false);
 
 					foreach($docs as $value=>$label) {

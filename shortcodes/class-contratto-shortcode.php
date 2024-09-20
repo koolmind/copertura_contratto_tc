@@ -31,9 +31,6 @@ class ContrattoOnLineShortcode {
             // CARICO I DATI DAL TRANSIENT
             $this->contrattoData = $this->loadContrattoData($this->contrattoUID);
 
-            
-            
-
             // recupero e aggiorno i dati della copertura da POST
             if( isset($_POST['btn_acquista_offerta'])) {        
                 // salvo i dati base dell'offerta
@@ -57,8 +54,8 @@ class ContrattoOnLineShortcode {
                 
             }  
 
-             echo "<p>DEBUG</p>";
-             var_dump($this->contrattoData);
+            //  echo "<p>DEBUG</p>";
+            //  var_dump($this->contrattoData);
             
             ob_start();
             

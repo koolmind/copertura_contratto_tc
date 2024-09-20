@@ -1,4 +1,5 @@
 <?php 
+	global $sesso, $docs, $ruoli;
 	$fields = @$this->contrattoData['anagrafica']; 
 
 	showSteps(1);
@@ -29,7 +30,6 @@
 				<select class="form-select  tc-required" name="dati[cliente_sesso]" id="cliente_sesso">
 					<option value="">- seleziona sesso -</option>
 					<?php
-					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
 					$sel =  tcGetFieldValue($fields, 'cliente_sesso',false);
 
 					foreach($sesso as $sex=>$sexLabel) {
@@ -128,7 +128,6 @@
 				<select name="dati[cliente_tipo_documento]" id="cliente_tipo_documento" class="form-select  tc-required">
 					<option value="">-- seleziona documento -</option>
 					<?php
-					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
 					$sel =  tcGetFieldValue($fields, 'cliente_tipo_documento',false);
 
 					foreach($docs as $value=>$label) {

@@ -1,4 +1,5 @@
 <?php 
+global $sesso, $docs, $ruoli;
 $fields = @$this->contrattoData['anagrafica']; 
 
 showSteps(1);
@@ -106,7 +107,6 @@ showSteps(1);
 				<select class="form-select tc-required" name="dati[cliente_ruolo]" id="cliente_ruolo">
 					<option value="">- seleziona ruolo -</option>
 					<?php
-					$ruoli = ['titolare','legale rappresentante','delegato'];
 					$sel =  tcGetFieldValue($fields, 'cliente_ruolo',false);
 					foreach($ruoli as $ruolo) {
 						$isSelected = $ruolo == $sel ? " selected='selected' " : "";
@@ -134,7 +134,6 @@ showSteps(1);
 				<select class="form-select  tc-required" name="dati[cliente_sesso]" id="cliente_sesso">
 					<option value="">- seleziona sesso -</option>
 					<?php
-					$sesso = ["1"=>"Femmina","2"=>"Maschio"];
 					$sel =  tcGetFieldValue($fields, 'cliente_sesso',false);
 
 					foreach($sesso as $sex=>$sexLabel) {
@@ -183,7 +182,6 @@ showSteps(1);
 				<select name="dati[cliente_tipo_documento]" id="cliente_tipo_documento" class="form-select  tc-required">
 					<option value="">-- seleziona documento -</option>
 					<?php
-					$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
 					$sel =  tcGetFieldValue($fields, 'cliente_tipo_documento',false);
 
 					foreach($docs as $value=>$label) {

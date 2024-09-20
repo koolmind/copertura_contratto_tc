@@ -1,4 +1,6 @@
 <?php 
+    global $sesso, $docs, $ruoli;
+
     $offerta = $this->contrattoData['offerta'];
     $anagrafica = $this->contrattoData['anagrafica'];
     $attivazione = $this->contrattoData['attivazione'];
@@ -23,7 +25,7 @@
         
 
         <div class="row">
-            <div class="col-12 col-md-7 order-1 order-md-0">
+            <div class="col-12 col-md-8 order-1 order-md-0">
                 
                 <?php if($isAzienda): ?>
                 <div class="anagrafica riepilogo-box">
@@ -62,7 +64,7 @@
 
                     <?php 
                     if($isAzienda):
-                        printf('<div class="row px-2"><div class="col-12">Ruolo: %s</div></div>',$anagrafica['cliente_ruolo']);
+                        printf('<div class="row px-2"><div class="col-12">Ruolo: <b>%s</b></div></div>',$anagrafica['cliente_ruolo']);
                     endif;
                     ?>
                     <div class="row px-2">
@@ -73,7 +75,7 @@
                             Nome: <b><?php echo $anagrafica['cliente_nome'] ?></b>
                         </div>
                         <div class="col-12 col-md-4">
-                            Sesso: <b><?php echo $anagrafica['cliente_sesso'] ?></b>
+                            Sesso: <b><?php echo $sesso[$anagrafica['cliente_sesso']] ?></b>
                         </div>
                     </div>
                     
@@ -128,7 +130,7 @@
 
                     <div class="row px-2">                        
                         <div class="col-12 col-md-6">
-                            Tipo documento: <b><?php echo $anagrafica['cliente_tipo_documento'] ?></b>
+                            Tipo documento: <b><?php echo $docs[$anagrafica['cliente_tipo_documento']] ?></b>
                         </div>
                         <div class="col-12 col-md-6">
                             Num. documento: <b><?php echo $anagrafica['cliente_doc_numero'] ?></b>
@@ -228,7 +230,7 @@
                     </div>
 
                     <div class="row px-2">
-                        <div class="col-12">Ruolo: <?php echo $migrazione['linea_cliente_ruolo']; ?></div>
+                        <div class="col-12">Ruolo: <b><?php echo $migrazione['linea_cliente_ruolo']; ?></b></div>
                     </div>
                     <?php endif; ?>
 
@@ -241,7 +243,7 @@
                             Nome: <b><?php echo $migrazione['linea_cliente_nome'] ?></b>
                         </div>
                         <div class="col-12 col-md-4">
-                            Sesso: <b><?php echo $migrazione['linea_cliente_sesso'] ?></b>
+                            Sesso: <b><?php echo $sesso[$migrazione['linea_cliente_sesso']] ?></b>
                         </div>
                     </div>
                     
@@ -277,7 +279,7 @@
                     <?php if($isAzienda): ?>
                     <div class="row px-2">                        
                         <div class="col-12 col-md-6">
-                            Tipo documento: <b><?php echo $migrazione['linea_cliente_tipo_documento'] ?></b>
+                            Tipo documento: <b><?php echo $docs[$migrazione['linea_cliente_tipo_documento']] ?></b>
                         </div>
                         <div class="col-12 col-md-6">
                             Num. documento: <b><?php echo $migrazione['linea_cliente_doc_numero'] ?></b>
@@ -315,7 +317,7 @@
                             }
                             
                             if($pagamento['metodo_pagamento'] == 'sdd') {
-                                echo "Il cliente chiede che le sue fatture vengano addebitate direttamente sul suo <b>CONTO CORRENTE tramite SDD </b></p>";
+                                echo "Il cliente chiede che le sue fatture vengano addebitate direttamente sul <b>CONTO CORRENTE tramite SDD </b></p>";
                             }
                             ?>
                         </div>
@@ -366,9 +368,9 @@
             
             
 
-            <div class="col-12 col-md-5 order-0 order-md-1 riepilogo-box b-offerta">
-                <h4 class="titolo"><?php echo $offerta['nomeofferta'];?></h4>
-                <div class="row px-3">
+            <div class="col-12 col-md-4 order-0 order-md-1 riepilogo-box b-offerta">
+                <h4 class="titolo"><small>Hai scelto di acquistare</small><br/><?php echo $offerta['nomeofferta'];?></h4>
+                <div class="row px-3 py-4">
                     <div class="col-9">Canone mensile</div>
                     <div class="col-3 text-end"><?php echo $offerta['canone'];?> €</div>
                 </div>

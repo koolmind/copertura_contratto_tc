@@ -156,32 +156,34 @@ ul#all_steps li {
   justify-content: center;
   align-items: center;
   width: 60px;
+  row-gap: 6px;
 }
 ul#all_steps li .num {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid #202b49;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   color: #fff;
-  background-color: #0081c7;
+  background: linear-gradient(45deg, #202b49, #0081c7);
   font-size: 18px;
-  font-size: bold;
+  font-weight: bold;
   width: 36px;
   height: 36px;
 }
 ul#all_steps li:not(:first-child) .num::after {
   content: "";
-  background: #0081c7;
+  background: #abc4d1;
   display: block;
   height: 3px;
   width: 50px;
   top: 50%;
-  left: -28px;
+  left: -30px;
   position: absolute;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -194,37 +196,35 @@ ul#all_steps li .desc {
   color: #3f3f3f;
 }
 ul#all_steps li.active .num {
-  background-color: #794084;
+  background: linear-gradient(45deg, #44244b, #e390f3);
+  border: 2px solid #44244b;
 }
 ul#all_steps li.active .desc {
   color: #794084;
 }
 
 div.riepilogo-box {
-  border: 2px solid #005985;
-  border-radius: 24px;
-  -webkit-border-radius: 24px;
-  -moz-border-radius: 24px;
-  -ms-border-radius: 24px;
-  -o-border-radius: 24px;
+  border: 2px solid lightgray;
   overflow: hidden;
   margin-bottom: 24px;
   padding: 0 0 1rem 0;
 }
 div.riepilogo-box .titolo {
-  background-color: #0081c7;
-  color: white;
+  background-color: #abc4d1;
+  color: #3f3f3f;
   padding: 0.5rem 1rem;
   text-align: right;
   font-size: 15px;
+  font-weight: bold;
 }
 div.riepilogo-box.b-offerta {
   padding: 0 0 2rem 0;
 }
 div.riepilogo-box.b-offerta .titolo {
   background-color: #005985;
-  font-size: 18px;
+  font-size: 19px;
   text-align: center;
+  color: #fff;
 }
 
 @media (max-width: 767px) {

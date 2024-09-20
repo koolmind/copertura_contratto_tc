@@ -3,6 +3,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// picklists
+global $sesso;
+global $docs;
+global $ruoli;
+$sesso = array("1"=>"Femmina","2"=>"Maschio");
+$docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
+$ruoli = array('titolare','legale rappresentante','delegato');
+
 function tcGetFieldValue( $haystack, $needle, $output=true ) {
 	$out = null;
 	
@@ -42,58 +50,6 @@ function showSteps($curr) {
     </div>
     <?php
 }
-
-
-function handle_contratto_aziende() {
-    $contrattoUID = sanitize_text_field($_POST['cuid']);
-    $sezione = sanitize_text_field($_POST['section']);
-    $goBack = (bool) isset($_POST['btnContrattoPrev']);
-    
- 
-    // recupero i dati salvati
-    $data = get_transient($contrattoUID);
-
-    if($goBack){
-        // devo solo tornare allo step precedentemente compilato
-        array_pop($data['path']);
-        $data['step'] = intval($data['path'][ count($data['path']) - 1]);        
-    }
-    
-    if( ! $goBack){
-        // integro coi nuovi dati
-        $postData = $_POST['dati'];
-        
-        foreach($postData as $key=>$val) {
-            $data[$sezione][$key] = sanitize_text_field($val);           
-        }
-
-        $data['step'] = intval($data['step']) + 1;
-        
-        //if($data['step'] > 9) $data['step'] = 9;
-
-        //else 
-        $data['path'][] = $data['step'];
-
-        // potrei aver inserito uno step nel posto sbagliato, perché magari sono tornato indietro e avevo saltato uno step non necessario (es: prima 1 2 4, adesso 1 2 4 3). Riordino!
-        asort($data['path'], SORT_NUMERIC);        
-    }
-    
-    
-    // IN OGNI CASO RICARICO LA PAGINA AL GIUSTO STEP e AGGIORNO IL TRANSIENT
-    set_transient( $contrattoUID, $data, 0);
-
-    // Se sono allo step 9, devo salvare i dati sul DB! 
-    if( $data['step'] == 9 ){
-        saveDataToDb($data, $contrattoUID);
-    } 
-    // ... poi redirect
-    wp_redirect(home_url('/contratto/?cuid='.$contrattoUID) );
-    
-    exit;
-}
-add_action('admin_post_nopriv_submit_contratto_aziende', 'handle_contratto_aziende');
-add_action('admin_post_submit_contratto_aziende', 'handle_contratto_aziende');
-
 
 /**
  * Ritorna il corretto valore formattato, in base al tipo di dato e al suo valore
@@ -260,3 +216,54 @@ function saveDataToDb($data, $cID) {
 
     return;
 }
+
+
+function handle_contratto_aziende() {
+    $contrattoUID = sanitize_text_field($_POST['cuid']);
+    $sezione = sanitize_text_field($_POST['section']);
+    $goBack = (bool) isset($_POST['btnContrattoPrev']);
+    
+ 
+    // recupero i dati salvati
+    $data = get_transient($contrattoUID);
+
+    if($goBack){
+        // devo solo tornare allo step precedentemente compilato
+        array_pop($data['path']);
+        $data['step'] = intval($data['path'][ count($data['path']) - 1]);        
+    }
+    
+    if( ! $goBack){
+        // integro coi nuovi dati
+        $postData = $_POST['dati'];
+        
+        foreach($postData as $key=>$val) {
+            $data[$sezione][$key] = sanitize_text_field($val);           
+        }
+
+        $data['step'] = intval($data['step']) + 1;
+        
+        //if($data['step'] > 9) $data['step'] = 9;
+
+        //else 
+        $data['path'][] = $data['step'];
+
+        // potrei aver inserito uno step nel posto sbagliato, perché magari sono tornato indietro e avevo saltato uno step non necessario (es: prima 1 2 4, adesso 1 2 4 3). Riordino!
+        asort($data['path'], SORT_NUMERIC);        
+    }
+    
+    
+    // IN OGNI CASO RICARICO LA PAGINA AL GIUSTO STEP e AGGIORNO IL TRANSIENT
+    set_transient( $contrattoUID, $data, 0);
+
+    // Se sono allo step 9, devo salvare i dati sul DB! 
+    if( $data['step'] == 9 ){
+        saveDataToDb($data, $contrattoUID);
+    } 
+    // ... poi redirect
+    wp_redirect(home_url('/contratto/?cuid='.$contrattoUID) );
+    
+    exit;
+}
+add_action('admin_post_nopriv_submit_contratto_aziende', 'handle_contratto_aziende');
+add_action('admin_post_submit_contratto_aziende', 'handle_contratto_aziende');

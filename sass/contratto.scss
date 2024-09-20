@@ -115,33 +115,35 @@ ul#all_steps {
     justify-content: center;
     align-items: center;
     width: 60px;
+    row-gap: 6px;
 
     .num {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 2px solid $blu-scuro;
       border-radius: 50%;
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       -ms-border-radius: 50%;
       -o-border-radius: 50%;
       color: #fff;
-      background-color: $blu-chiaro;
+      background: linear-gradient(45deg, $blu-scuro, $blu-chiaro);
       font-size: 18px;
-      font-size: bold;
+      font-weight: bold;
       width: 36px;
       height: 36px;
     }
 
     &:not(:first-child) .num::after {
       content: "";
-      background: $blu-chiaro;
+      background: $ceruleo;
       display: block;
       height: 3px;
       width: 50px;
       top: 50%;
-      left: -28px;
+      left: -30px;
       position: absolute;
       transform: translate(-50%, -50%);
       -webkit-transform: translate(-50%, -50%);
@@ -157,7 +159,8 @@ ul#all_steps {
 
     &.active {
       .num {
-        background-color: $viola;
+        background: linear-gradient(45deg, $viola-scuro, $viola-chiaro);
+        border: 2px solid $viola-scuro;
       }
       .desc {
         color: $viola;
@@ -167,22 +170,18 @@ ul#all_steps {
 }
 
 div.riepilogo-box {
-  border: 2px solid $blu-medio;
-  border-radius: 24px;
-  -webkit-border-radius: 24px;
-  -moz-border-radius: 24px;
-  -ms-border-radius: 24px;
-  -o-border-radius: 24px;
+  border: 2px solid lightgray;
   overflow: hidden;
   margin-bottom: 24px;
   padding: 0 0 1rem 0;
 
   .titolo {
-    background-color: $blu-chiaro;
-    color: white;
+    background-color: $ceruleo;
+    color: $grigino;
     padding: 0.5rem 1rem;
     text-align: right;
     font-size: 15px;
+    font-weight: bold;
   }
 
   &.b-offerta {
@@ -190,8 +189,9 @@ div.riepilogo-box {
 
     .titolo {
       background-color: $blu-medio;
-      font-size: 18px;
+      font-size: 19px;
       text-align: center;
+      color: #fff;
     }
   }
 }

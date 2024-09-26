@@ -15,7 +15,9 @@ jQuery(document).ready(function ($) {
         .on("select", function (e) {
           var uploaded_image = image.state().get("selection").first();
           var image_url = uploaded_image.toJSON().url;
-          $("#contratto_" + contrattoImgButton + "_image").val(image_url);
+          var image_id = uploaded_image.toJSON().id;
+
+          $("#contratto_" + contrattoImgButton + "_image").val(image_id);
           $("#contratto_" + contrattoImgButton + "_preview").attr(
             "src",
             image_url

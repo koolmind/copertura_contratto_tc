@@ -1,129 +1,132 @@
 <?php
 require_once(TC_ADDONS_ROOT . 'vendor/tcpdf/tcpdf.php');
 
-
 class MYPDF extends TCPDF {
+
+    protected $headerContent;
+    protected $footerContent;
+
+    public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $headerContent='', $footerContent) {
+        parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache);
+        $this->headerContent = $headerContent;
+        $this->footerContent = $footerContent;
+    }
+
 
     //Page header
     public function Header() {
-        // Logo
-        $header_path = TC_ADDONS_ROOT ."img/logotcrs.png";
+        $this->Image($this->headerContent, 10, 10, 190, 25 , '', '', 'T', false, 300, '', false, false, 0,false, false, false);
+    }
 
-        $this->Image($header_path, 10, 10, 190, 25 , 'PNG', '', 'T', true, 300, '', false, false, 0,false, false, false);
+    public function Footer() {
+        $this->Image($this->footerContent, 10, 270, 190, 25 , '', '', 'T', true, 300, '', false, false, 0,false, false, false);
     }
 }
 
 
 function generate_contratto_pdf($cuid) { 
+    $blu = '#004F6F';
+    $chiaro = "#dae9ef";
+
     // get contract data
     global $wpdb;
     $table_name = $wpdb->prefix . 'contratti';
     $cnt = $wpdb->get_row($wpdb->prepare( "SELECT * FROM {$table_name} WHERE codice = %s", $cuid ), OBJECT );
-    
-    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    $pdf->SetCreator(PDF_CREATOR);
-    $pdf->SetAuthor('Terrecablate Reti e Servizi');
-    $pdf->SetTitle('Proposta di contratto');
 
-    // Header e footer
-    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
-    
-    $pdf->SetMargins(10, 40, 10);
-
-    $pdf->setPrintFooter(false);
-
-    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-
-    $pdf->AddPage();
-    $pdf->SetFont('helvetica', '', 9);
-
-
-/*-------------------
-
-<div class="col-12 col-md-4 order-0 order-md-1 riepilogo-box b-offerta">
-                <h4 class="titolo"><small>Hai scelto di acquistare</small><br/><?php echo $offerta['nomeofferta'];?></h4>
-                <div class="row px-3 py-4">
-                    <div class="col-9">Canone mensile</div>
-                    <div class="col-3 text-end"><?php echo $offerta['canone'];?> €</div>
-                </div>
-                
-                <?php if (count($offerta['opzioni'])): ?>
-                    <div class="my-3 px-3" id="riepilogo-opzioni">
-                        <strong>OPZIONI</strong>                    
-                    <?php 
-                        foreach ($offerta['opzioni'] as $opzione): 
-                            $strName = $opzione['name'];
-                            $strQty = intval($opzione['qty']) > 1 ? ' (x'.$opzione['qty'].')' : '' ;
-                            $optCost = $opzione['cost'] * $opzione['qty'];
-                            $strCost = number_format($optCost, 2,",",".");
-                    ?>
-                            <div class="row pl-1">
-                                <div class="col-9"><?php echo $strName;?> <?php echo $strQty;?> </div>
-                                <div class="col-3 text-end"><?php echo $strCost;?> €</div>
-                            </div>
-                <?php   endforeach; ?>
-                        </div>
-                <?php endif; ?>
-
-                <div class="row px-3">
-                    <div class="col-9">Attivazione</div>
-                    <div class="col-3 text-end">
-                        <?php echo floatval($offerta['attivazione']) == 0 ? 'GRATIS' : $offerta['attivazione'] ." €";?>
-                    </div>
-                </div>
-            </div>
-
---------------------*/
-
-    
 
     function money($val){
         if(floatval($val)==0) return "GRATIS";
 
-        return number_format( floatval($val), 2, ",", ".") . "€";
+        return number_format( floatval($val), 2, ",", ".") . " €";
     }
     
+    // carico header e footer in base al target
+    $fileHeaderId = get_option("contratto_header_".$cnt->target."_image", TC_ADDONS_PLACEHOLDER_ID);
+    $fileHeaderPath = get_attached_file( $fileHeaderId );
+    
+    $fileFooterId = get_option("contratto_footer_".$cnt->target."_image", TC_ADDONS_PLACEHOLDER_ID);
+    $fileFooterPath = get_attached_file( $fileFooterId );
+        
+    $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false, $fileHeaderPath, $fileFooterPath);
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('Terrecablate Reti e Servizi');
+    $pdf->SetTitle('Proposta di contratto n.'.$cnt->id);
+
+    // Header e footer
+    //$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+    
+    $pdf->SetMargins(10, 40, 10);
+
+    $pdf->setPrintFooter(false);
+    
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+
+    $pdf->AddPage();
+    // Calcola le larghezze delle colonne
+    $colGap = 6;    
+    $pageWidth = $pdf->getPageWidth() - PDF_MARGIN_LEFT - PDF_MARGIN_RIGHT;
+    $leftColumnWidth = ($pageWidth - $colGap) * 0.6;
+    $rightColumnWidth = ($pageWidth - $colGap) * 0.4;
+
+
+    $pdf->SetFont('helvetica', '', 9);
+
     $canone = money($cnt->canone);
     $attivazione = money($cnt->attivazione);
 
     $arrOpzioni = maybe_unserialize($cnt->opzioni);
-    $strOpzioni ="<tr><td colspan='2'>Opzioni</td></tr>";
+    $strOpzioni = "";
+    if(count($arrOpzioni) > 0){
+        $strOpzioni .= '<tr><td colspan="2" style="line-height:18mm;font-weight:bold; vertical-align:middle;">OPZIONI</td></tr>';
 
-    foreach($arrOpzioni as $opt) {
-        $strOpzioni .= "<tr><td>{$opt['name']}</td><td>{$opt['cost']}</td></tr>";
+        foreach($arrOpzioni as $idx => $opt) {
+            $qty = intval($opt['qty'] > 1) ? '(x' . $opt['qty'] . ')' : '';
+            $strOpzioni .= '<tr><td style="background-color:'. ($idx % 2 == 0 ? $chiaro : '#ffffff') .'">' . $opt['name'];
+            
+            if(intval($opt['qty'] > 1) ){
+                $strOpzioni .= sprintf('(x%s)',$opt['qty']);
+            } 
+            
+            $strOpzioni .= '</td><td align="right" style="background-color:'. ($idx % 2 == 0 ? $chiaro : '#ffffff') .'">' . money($opt['cost']) .'</td></tr>';
+        }
     }
-    
 
-    $tbl = <<<EOD
-        <table border="1" cellpadding="1" cellspacing="1">
+    $boxRight = '
+        <table border="0" cellpadding="5">
         <tr>
-            <td width="466">Dati utente</td>
-            <td width="200">
-                <table border="0" cellpadding="1" cellspacing="1">
-                <tr>
-                    <td colspan"2">DETTAGLIO COSTI</td>
-                </tr>
-                <tr>
-                    <td width="70%">Canone mensile</td>
-                    <td width="30%" align="right">{$canone}</td>
-                </tr>
-                <tr>
-                    <td width="70%">Attivazione</td>
-                    <td width="30%" align="right">{$attivazione}</td>
-                </tr>
+            <td colspan="2" style="background-color:'.$blu.';color:white;">LA TUA OFFERTA</td>
+        </tr>
+        <tr>
+            <td width="70%">Canone mensile base</td>
+            <td align="right" width="30%">'.$canone.'</td>
+        </tr>
+        <tr>
+            <td style="background-color:'.$chiaro.'">Attivazione</td>
+            <td align="right" style="background-color:'.$chiaro.'">'.$attivazione."</td>
+        </tr>";
 
-                {$strOpzioni}
-                </table>
-            </td>
-        </tr>    
-        </table>
-        EOD;
+        if($strOpzioni){
+            $boxRight .= $strOpzioni;
+        }
+
+    $boxRight .= "</table>";
+
     
+
+    $boxLeft = "Vari dati utente";
+
+    
+    // Scrivi il contenuto della colonna sinistra
+    $pdf->writeHTMLCell($leftColumnWidth, '', PDF_MARGIN_LEFT, '', $boxLeft, 1, 0, false, true, 'L', false);    
+
+    // Scrivi il contenuto della colonna destra
+    $rightColumnX = PDF_MARGIN_LEFT + $leftColumnWidth + $colGap;
+    $pdf->writeHTMLCell($rightColumnWidth, '', $rightColumnX , '', $boxRight, 0, 1, false, true, 'L', false);
         
 
 
-    $pdf->writeHTML($tbl, true, false, false, false, '');
+    // $pdf->writeHTML($tbl, true, false, false, false, '');
 
 
     // set file name

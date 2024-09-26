@@ -9,10 +9,10 @@
 
  namespace PangeaTcrs;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-ini_set('log_errors', 1);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('log_errors', 1);
 
 
 
@@ -26,7 +26,8 @@ ini_set('log_errors', 1);
  define ('TC_ADDONS_ROOT_URL', plugin_dir_url(__FILE__));
  define ('TC_ADDONS_CONTRATTI_DIR', $contratti_dir); 
  define ('TC_ADDONS_CONTRATTI_URL', $contratti_url); 
- 
+ define ('TC_ADDONS_PLACEHOLDER_ID', 4034);
+
  
  include_once __DIR__ .'/shortcodes/class-offers-shortcode.php';
  include_once __DIR__ .'/shortcodes/class-copertura-shortcode.php';

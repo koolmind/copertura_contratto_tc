@@ -9,10 +9,24 @@
 
  namespace PangeaTcrs;
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+ini_set('log_errors', 1);
+
+
+
  if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+ $upload_dir = wp_upload_dir();
+ $contratti_dir = $upload_dir['basedir'] . '/tcrs-contratti';
+ $contratti_url = $upload_dir['baseurl'] . '/tcrs-contratti';
 
  define ('TC_ADDONS_ROOT', trailingslashit( __DIR__) );
  define ('TC_ADDONS_ROOT_URL', plugin_dir_url(__FILE__));
+ define ('TC_ADDONS_CONTRATTI_DIR', $contratti_dir); 
+ define ('TC_ADDONS_CONTRATTI_URL', $contratti_url); 
+ 
  
  include_once __DIR__ .'/shortcodes/class-offers-shortcode.php';
  include_once __DIR__ .'/shortcodes/class-copertura-shortcode.php';
@@ -23,7 +37,9 @@
  //include_once __DIR__ . '/includes/settings-contratto.php';
  include_once __DIR__ . '/includes/contratto-form-handler.php';
  include_once __DIR__ . '/includes/ajax-handler.php';
- include_once __DIR__ . '/settings/options-tcrs.php';
+ include_once __DIR__ . '/includes/generatepdf.php';
+  
+include_once __DIR__ . '/settings/options-tcrs.php';
 
 
 class PangeaTerrecablateAddons {
@@ -167,8 +183,14 @@ class PangeaTerrecablateAddons {
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         $res = dbDelta($sql);        
-        error_log('Processo Delta');
-        error_log(print_r($res, true));
+        // error_log('Processo Delta');
+        // error_log(print_r($res, true));
+
+        // creo la cartella per i contratti
+        
+        if (!file_exists(TC_ADDONS_CONTRATTI_DIR)) {
+            wp_mkdir_p(TC_ADDONS_CONTRATTI_DIR);
+        }
     }
 
     // Funzione di disattivazione del plugin

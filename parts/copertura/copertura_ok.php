@@ -30,7 +30,7 @@ $prodArgs = array(
         array(
             'taxonomy' => 'tecnologia',
             'field' => 'name',
-            'terms' => $tecnologia,
+            'terms' => urldecode($tecnologia),
         ),
     ),
 );

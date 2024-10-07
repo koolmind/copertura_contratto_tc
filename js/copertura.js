@@ -554,6 +554,7 @@
   }
 
   function renderEsito() {
+    console.log(esito);
     let out = "";
     let tpl = undefined;
 
@@ -564,12 +565,21 @@
     };
 
     if (esito.connessione) {
-      urlParams = {
-        ...urlParams,
-        copertura: "ok",
-      };
+      invendibili = ["Rame su AI", "ULL", "Bitstream Ethernet", "Bitstream"];
 
       let [tec, vel] = esito.prodotto.split(/-/i);
+
+      if (invendibili.includes(tec)) {
+        urlParams = {
+          ...urlParams,
+          copertura: "ko",
+        };
+      } else {
+        urlParams = {
+          ...urlParams,
+          copertura: "ok",
+        };
+      }
 
       if (vel.slice(-1) == "E") urlParams = { ...urlParams, esclusivita: 1 };
       vel = vel.slice(0, -1);

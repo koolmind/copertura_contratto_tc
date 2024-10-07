@@ -311,11 +311,11 @@ ul#cart-caratteristiche-offerta i.fa {
 }
 
 .switch-field input:checked + label#label-azienda {
-  background-color: #bb6604;
+  background-color: #794084;
 }
 
 .switch-field input:checked + label#label-residenziale {
-  background-color: #019214;
+  background-color: #0081c7;
 }
 
 .switch-field label:first-of-type {

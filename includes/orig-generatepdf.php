@@ -24,49 +24,22 @@ class MYPDF extends TCPDF {
 }
 
 
-function getSesso($sex){
-    return $sex==1 ? "F" : "M";
-} 
-
-function showDate($date) {
-    return implode("/", array_reverse(explode("-",$date)));
-}
-
-function money($val){
-    if(floatval($val)==0) return "GRATIS";
-
-    return number_format( floatval($val), 2, ",", ".") . " €";
-}
-
-function testo($doc, $col) {
-    list($R,$G,$B) = explode(',', $col);
-    $doc->SetTextColor( intval($R),intval($G),intval($B) );
-}
-
-function sfondo($doc, $col) {
-    list($R,$G,$B) = explode(',', $col);
-    $doc->SetFillColor( intval($R),intval($G),intval($B) );
-}
-
-function linea($doc, $col) {
-    list($R,$G,$B) = explode(',', $col);
-    $doc->SetDrawColor( intval($R),intval($G),intval($B) );
-}
-
 function generate_contratto_pdf($cuid) { 
-    $blu = "0,79,111";
-    $chiaro = "218,233,239";
-    $nero = "0,0,0";
-    $bianco = "255,255,255";
-    $grigio = "128,128,128";
-
+    $blu = '#004F6F';
+    $chiaro = "#dae9ef";
 
     // get contract data
     global $wpdb;
     $table_name = $wpdb->prefix . 'contratti';
     $cnt = $wpdb->get_row($wpdb->prepare( "SELECT * FROM {$table_name} WHERE codice = %s", $cuid ), OBJECT );
 
-   
+
+    function money($val){
+        if(floatval($val)==0) return "GRATIS";
+
+        return number_format( floatval($val), 2, ",", ".") . " €";
+    }
+    
     // carico header e footer in base al target
     $fileHeaderId = get_option("contratto_header_".$cnt->target."_image", TC_ADDONS_PLACEHOLDER_ID);
     $fileHeaderPath = get_attached_file( $fileHeaderId );
@@ -90,21 +63,19 @@ function generate_contratto_pdf($cuid) {
 
     // set cell padding
     $pdf->setCellPaddings(1, 1, 1, 1);
-
     // set cell margins
-    $pdf->setCellMargins(1,1,1,1);
-
-    $pdf->SetFont('helvetica', '', 9);
+    $pdf->setCellMargins(1, 1, 1, 1);
 
 
     $pdf->AddPage();
     // Calcola le larghezze delle colonne
-    $colGap = 4;    
+    $colGap = 6;    
     $pageWidth = $pdf->getPageWidth() - PDF_MARGIN_LEFT - PDF_MARGIN_RIGHT;
     $leftColumnWidth = ($pageWidth - $colGap) * 0.6;
     $rightColumnWidth = ($pageWidth - $colGap) * 0.4;
-    $rightColumnX = PDF_MARGIN_LEFT + $leftColumnWidth + $colGap;
 
+
+    $pdf->SetFont('helvetica', '', 9);
 
     $canone = money($cnt->canone);
     $attivazione = money($cnt->attivazione);
@@ -146,63 +117,36 @@ function generate_contratto_pdf($cuid) {
 
     $boxRight .= "</table>";
 
-
-    // MultiCell( $w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false)
     
-    testo($pdf, $blu);
-    sfondo($pdf, $chiaro);
-    linea($pdf, $blu);
 
-    $pdf->MultiCell($rightColumnWidth, 5, $boxRight, 0, 'L', 0, 0, $rightColumnX, '', true,0,true);
+    $boxLeft = "
+    <div>
+    Proposta di contratto del " . $cnt->data_proposta_contratto . "<br>
+    Cliente: " . $cnt->rag_sociale . "<br>
+    Offerta: " . $cnt->nomeofferta . "
+    </div>";
+
+    $boxLeft .= "
+    <div style='padding:10px;'>
+    DATI ANAGRAFICI AZIENDA <br>Ragione Sociale: <strong>" . $cnt->rag_sociale . "</strong><br>
+    Sede: <strong>" . $cnt->azienda_indirizzo . "," . $cnt->azienda_civico . " - " . $cnt->azienda_cap . " " . $cnt->azienda_citta . " (". $cnt->azienda_provincia .")</strong><br>
+    P.IVA / C.F.: <strong>" . $cnt->azienda_piva_cf ."</strong><br>
+    Cod. Destinatario: <strong>" . $cnt->azienda_cod_destinatario ."</strong>
+    </div>";
 
 
-    $txt = "Proposta di contratto del {$cnt->data_proposta_contratto}<br>Cliente: {$cnt->rag_sociale}<br>Offerta: {$cnt->nomeofferta}";
-    $pdf->MultiCell($leftColumnWidth, 5, $txt, 1, 'L', 1, 1, 8, '', true,0,true);
+    
+    // Scrivi il contenuto della colonna sinistra
+    $pdf->writeHTMLCell($leftColumnWidth, '', PDF_MARGIN_LEFT, '', $boxLeft, 1, 0, false, true, 'L', false);    
 
-    testo($pdf, $blu);
-    sfondo($pdf, $bianco);
-    linea($pdf, $blu);
+    // Scrivi il contenuto della colonna destra
+    $rightColumnX = PDF_MARGIN_LEFT + $leftColumnWidth + $colGap;
+    $pdf->writeHTMLCell($rightColumnWidth, '', $rightColumnX , '', $boxRight, 0, 1, false, true, 'L', false);
+        
 
-    $txt = "<strong>DATI ANAGRAFICI AZIENDA</strong>";
-    $pdf->MultiCell($leftColumnWidth, '3', $txt, 'B', 'L', 0, 2, 8, '', true,0,true);
 
-    testo($pdf, $nero);
-    linea($pdf, $grigio);
+    // $pdf->writeHTML($tbl, true, false, false, false, '');
 
-    $txt= "Ragione Sociale: <strong>{$cnt->rag_sociale}</strong><br>Sede: <strong>{$cnt->azienda_indirizzo }, {$cnt->azienda_civico}<br>{$cnt->azienda_cap} {$cnt->azienda_citta} ( {$cnt->azienda_provincia} )</strong><br>";
-    $txt.= "P.IVA / C.F.: <strong>{$cnt->azienda_piva_cf}</strong>  -  Cod. Dest.: <strong>{$cnt->azienda_cod_destinatario}</strong>";
-    $pdf->MultiCell($leftColumnWidth, 5, $txt, 0, 'L', 1, 2, 8, '', true,0,true);
-
-    testo($pdf, $blu);
-    linea($pdf, $blu);
-
-    $txt = "<strong>DATI DI CONTATTO</strong>";
-    $pdf->MultiCell($leftColumnWidth, '3', $txt, 'B', 'L', 0, 2, 8, '', true,0,true);
-
-    testo($pdf, $nero);
-    linea($pdf, $grigio);
-
-    $txt = "Email: <strong>{$cnt->cliente_email}</strong><br>Pec: <strong>{$cnt->cliente_pec}</strong> <br>";
-    $txt.= "Telefono: <strong>{$cnt->cliente_telefono}</strong>  -  Mobile: <strong>{$cnt->cliente_cellulare}</strong>";
-    if($cnt->azienda_fax) { $txt.= "<br>Fax: <strong>{$cnt->azienda_fax}</strong>"; }
-    $pdf->MultiCell($leftColumnWidth, 5, $txt, 0, 'L', 1, 2, 8, '', true, 0, true);
-
-    testo($pdf, $blu);
-    linea($pdf, $blu);
-
-    $ruolo = strtoupper($cnt->cliente_ruolo);
-    $txt = "<strong>DATI DEL {$ruolo}</strong>";
-    $pdf->MultiCell($leftColumnWidth, '3', $txt, 'B', 'L', 0, 2, 8, '', true,0,true);
-
-    testo($pdf, $nero);
-    linea($pdf, $grigio);
-
-    $sesso = getSesso($cnt->cliente_sesso);
-    $ddn = showDate($cnt->cliente_data_nascita);
-
-    $txt = "Cognome: <strong>{$cnt->cliente_cognome}</strong>  Nome: <strong>{$cnt->cliente_nome}</strong>  Sesso: <strong>{$sesso}</strong> <br>";
-    $txt.= "Nato/a a <strong>{$cnt->cliente_luogo_nascita} ({$cnt->cliente_provincia_nascita})</strong>  il <strong>{$ddn}</strong>";
-    $pdf->MultiCell($leftColumnWidth, 5, $txt, 0, 'L', 1, 2, 8, '', true, 0, true);
 
     // set file name
     $pdfName = "/" . $cuid . "_" . time() . ".pdf";

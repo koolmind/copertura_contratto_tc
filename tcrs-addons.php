@@ -97,6 +97,7 @@ class PangeaTerrecablateAddons {
             cliente_email varchar(50) DEFAULT NULL,
             cliente_telefono varchar(30) DEFAULT NULL,
             cliente_cellulare varchar(30) DEFAULT NULL,
+            cliente_pec varchar(50) DEFAULT NULL,
             cliente_cognome varchar(100) DEFAULT NULL,
             cliente_nome varchar(100) DEFAULT NULL,
             cliente_sesso int(11) DEFAULT NULL,

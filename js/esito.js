@@ -192,7 +192,6 @@ const handleOptionClicked = (evt) => {
 };
 
 const updateCartTotal = () => {
-  console.log(`update total`);
   const initial = parseFloat(selectedOffer.dataset.price.replace(",", "."));
   const total = addedOptions.reduce(
     (acc, cur) => acc + parseFloat(cur.cost) * cur.qty,
@@ -204,11 +203,10 @@ const updateCartTotal = () => {
 };
 
 const renderOptionsContent = () => {
-  console.log(`rendering opt`);
   const renderedOutput = addedOptions
     .map((option, idx) => {
       return `<p class="riga-costo row-opt" id="row-opt-${option.id}">
-                <span><button role="button" class="js-btn-cart-del btn-option-small" 
+                <span><button type="button" role="button" class="js-btn-cart-del btn-option-small" 
                     data-id="${option.id}" 
                     data-action="del"
                     data-excl="${option.excl}">

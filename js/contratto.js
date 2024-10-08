@@ -119,10 +119,47 @@ jQuery(document).ready(function ($) {
           $(this).addClass("is-invalid");
           hasErrors = true;
         } else {
-          $(this).removeClass("is-invalid");
+          // potrebbe essere pieno, ma non formalmente valido. Controllo se c'è una funzione di validazione
+          if ($(this).data("checkfcn")) {
+            const fcn = $(this).data("checkfcn");
+
+            switch (fcn) {
+              case "cf_piva":
+                hasErrors = !checkCfPiva($(this).val()); // la fuzione ritorna la validità, a noi interssa la non invalidità
+                break;
+              case "iban":
+                hasErrors = !checkIban($(this).val());
+                break;
+              default:
+                break;
+            }
+            console.log(`funx`, fcn, hasErrors);
+            if (!hasErrors) $(this).removeClass("is-invalid");
+            else $(this).addClass("is-invalid");
+          }
         }
       }
     });
+
+    function checkCfPiva(str) {
+      // è una P.IVA valida ?
+      if (/^([A-Z]{2})?[0-9]{11}$/i.test(str)) {
+        return true;
+      }
+
+      // è un CF valido?
+      if (/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/.test(str)) {
+        return true;
+      }
+
+      return false;
+    }
+
+    function checkIBAN(str) {
+      if (/^[A-Za-z]{2}[0-9]{2}[A-Za-z]{1}[0-9]{22}$/i.test(str)) return true;
+
+      return false;
+    }
 
     // validazione codici di migrazione
     /* IN SOSPESO FINO A CHIARIMENTI SUI CODICI SENZA COS

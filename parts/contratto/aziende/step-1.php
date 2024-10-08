@@ -54,8 +54,8 @@ showSteps(1);
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
-				<label for="azienda_piva_cf">Partita IVA/ Codice Fiscale</label>
-				<input type="text" name="dati[azienda_piva_cf]" id="azienda_piva_cf" class="form-control tc-required" placeholder="p.iva o cod. fiscale" value="<?php tcGetFieldValue($fields,'azienda_piva_cf'); ?>">
+				<label for="azienda_piva_cf">Partita IVA / Codice Fiscale</label>
+				<input type="text" name="dati[azienda_piva_cf]" id="azienda_piva_cf" class="form-control tc-required" placeholder="p.iva o cod. fiscale" value="<?php tcGetFieldValue($fields,'azienda_piva_cf'); ?>" data-checkfcn='cf_piva'>
 			</div>
 
 			<div class="tc-input col-12 col-md-6 mb-4">
@@ -167,7 +167,7 @@ showSteps(1);
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="cliente_cod_fiscale">Codice Fiscale</label>
-				<input type="text" name="dati[cliente_cod_fiscale]" id="cliente_cod_fiscale" class="form-control tc-required" placeholder="codice fiscale" value="<?php tcGetFieldValue($fields,'cliente_cod_fiscale'); ?>">
+				<input type="text" name="dati[cliente_cod_fiscale]" id="cliente_cod_fiscale" class="form-control tc-required" placeholder="codice fiscale" value="<?php tcGetFieldValue($fields,'cliente_cod_fiscale'); ?>" data-checkfcn='cf_piva'>
 			</div>
 
 			<div class="tc-input col-12 col-md-6 mb-4">

@@ -69,8 +69,6 @@ get_header(); ?>
 
         <div class="contratto-form-wrapper">
 
-            <?php //var_dump($_POST); ?>
-
             <?php
                 $step = $contrattoData['step'];
                 // if($step=='x'){

@@ -215,6 +215,11 @@ switch ($tecnologia) {
                         <input type="hidden" name="target" value="<?php echo $tipoCli; ?>" />
                         <input type="hidden" name="contratto_unique_id" value="C-<?php echo uniqid(); ?>" />
                         <input type="hidden" name="tipo_accesso" value="<?php echo $tecnologia; ?>" />
+                        <input type="hidden" name="cop_indirizzo" id="cop-indirizzo" value="<?php echo $via; ?>" />  
+                        <input type="hidden" name="cop_civico" id="cop-civico" value="<?php echo $nc; ?>" />  
+                        <input type="hidden" name="cop_citta" id="cop-citta" value="<?php echo $co; ?>" />  
+                        <input type="hidden" name="cop_cap" id="cop-cap" value="<?php echo $cap; ?>" />  
+                        <input type="hidden" name="cop_provincia" id="cop-provincia" value="<?php echo $prv; ?>" />  
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>

@@ -19,7 +19,7 @@ function handle_get_transient_data() {
     $allTransientData = get_transient($transientKey);
     $sectionTransientData  = $allTransientData[$dataSection];
 
-   if ($transientData === false) {
+   if ($sectionTransientData === false) {
         wp_send_json_error(array(
             'message' => 'Dati non trovati o scaduti.',
         ));

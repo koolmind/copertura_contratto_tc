@@ -1,14 +1,18 @@
 <?php 
+	showSteps(4);
+
 	global $sesso, $docs, $ruoli;
     $fields = @$this->contrattoData['migrazione']; 
+
+	if(!$fields) 
+        $fields = loadDataFromTransient($this->contrattoUID, 'anagrafica', 'linea', true);
 
 	$cbMigrazione = (bool) tcGetFieldValue($fields,"linea_migrazione",false);
 	$cbAttivazione = (bool) tcGetFieldValue($fields,"linea_nuova",false);
 	$cbPortability = (bool) tcGetFieldValue($fields,"linea_portability",false);
 	$cbConsensoMigrazione = (bool) tcGetFieldValue($fields,"linea_consenso_migrazione",false);
 	$cbConsensoPortability = (bool) tcGetFieldValue($fields,"linea_consenso_portability",false);
-
-	showSteps(4);
+	
 ?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
@@ -93,9 +97,9 @@
     <fieldset id="fields-intestatario-linea" class="mb-5 mt-3">
 		<legend>6. Servizi di migrazione e mantenimento del numero telefonico</legend>	
 
-        <div class="d-flex justify-content-end my-3">
+        <!-- <div class="d-flex justify-content-end my-3">
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i> stesso indirizzo sede</button>
-        </div>
+        </div> -->
 		
 		<div class="row">
 			<div class="col-13 col-md-6 mb-4">

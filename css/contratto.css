@@ -54,6 +54,9 @@ h4.titolo-sez {
 h4.titoletto {
   color: #005985;
 }
+h4.titoletto.smaller {
+  font-size: 1em;
+}
 
 label {
   font-size: 13px;

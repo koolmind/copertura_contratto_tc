@@ -43,9 +43,19 @@ class ContrattoOnLineShortcode {
                     'costo'         => sanitize_text_field($_POST['cnt-costo']),
                     'attivazione'   => sanitize_text_field($_POST['cnt-attivazione']),
                 );
+
+                // salvo i dati dall'indirizzo inserito in copertura per inserirlo nella voce "attivazione" del contratto (indirizzo di attivazione e fornitura)
+                $dati_attivazione = array(
+                    'attivazione_indirizzo' => sanitize_text_field($_POST["cop_indirizzo"]),
+                    'attivazione_civico'    => sanitize_text_field($_POST["cop_civico"]),
+                    'attivazione_citta'     => sanitize_text_field($_POST["cop_citta"]),
+                    'attivazione_cap'       => sanitize_text_field($_POST["cop_cap"]),
+                    'attivazione_provincia' => sanitize_text_field($_POST["cop_provincia"]),
+                );
         
                 // update data
                 $this->contrattoData['offerta'] = $composizione_offerta;
+                $this->contrattoData['attivazione'] = $dati_attivazione;
                 $this->contrattoData['step'] = 1;
                 $this->contrattoData['path'][] = 1; // array contenente tutti gli step che mano mano vengono completati, per tenere traccia di eventuali salti
                 
@@ -54,9 +64,6 @@ class ContrattoOnLineShortcode {
                 
             }  
 
-            //  echo "<p>DEBUG</p>";
-            //  var_dump($this->contrattoData);
-            
             ob_start();
             
             echo "<div class='contratto-form-wrapper'>";
@@ -64,7 +71,7 @@ class ContrattoOnLineShortcode {
             $step = $this->contrattoData['step'];
             $cliente_section = $this->contrattoData['offerta']['target'];
 
-            if( in_array( $step, [5,6,7,8,9] ) ){
+            if( in_array( $step, [5,6,7,8,9,10] ) ){
                 $cliente_section ='common';
             }
             

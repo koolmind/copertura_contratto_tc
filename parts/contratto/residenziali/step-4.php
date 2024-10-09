@@ -1,6 +1,9 @@
 <?php 
     global $sesso, $docs, $ruoli;
     $fields = @$this->contrattoData['migrazione']; 
+    
+    if(!$fields) 
+        $fields = loadDataFromTransient($this->contrattoUID, 'anagrafica', 'linea', true);
 
 	$cbMigrazione = (bool) tcGetFieldValue($fields,"linea_migrazione",false);
 	$cbAttivazione = (bool) tcGetFieldValue($fields,"linea_nuova",false);
@@ -85,7 +88,7 @@
 
         <div class="d-flex justify-content-between my-3">
             <h4 class="titoletto">IL SOTTOSCRITTO</h4>
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i>stesso indirizzo anagrafica</button>
+            <!-- <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i>stesso indirizzo anagrafica</button> -->
         </div>
 		
 		

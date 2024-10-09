@@ -21,6 +21,7 @@ jQuery(document).ready(function ($) {
 
     const allTextInputs = $("input[type='text']");
     const allRequiredFields = $(".tc-required");
+    const patternCheckFields = $("input[data-checkfcn]");
     const allMigrations = $(".tc-migration");
     const checkLineaFields = $(this).hasClass("jsCheckLineaFields");
     const checkGdprFields = $(this).hasClass("jsCheckGdprFields");
@@ -119,36 +120,48 @@ jQuery(document).ready(function ($) {
           $(this).addClass("is-invalid");
           hasErrors = true;
         } else {
-          // potrebbe essere pieno, ma non formalmente valido. Controllo se c'è una funzione di validazione
-          if ($(this).data("checkfcn")) {
-            const fcn = $(this).data("checkfcn");
-
-            switch (fcn) {
-              case "cf_piva":
-                hasErrors = !checkCfPiva($(this).val()); // la fuzione ritorna la validità, a noi interssa la non invalidità
-                break;
-              case "iban":
-                hasErrors = !checkIban($(this).val());
-                break;
-              default:
-                break;
-            }
-            console.log(`funx`, fcn, hasErrors);
-            if (!hasErrors) $(this).removeClass("is-invalid");
-            else $(this).addClass("is-invalid");
-          }
+          $(this).removeClass("is-invalid");
         }
       }
     });
 
+    // controllo tutti i campi che hanno bisogno di un controllo formale sull'input,
+    // siano essi obbligatori o meno (se non sono vuoti, li controllo)
+    patternCheckFields.each(function () {
+      if ($(this).val() != "") {
+        doCheckFunction($(this));
+      }
+    });
+
+    function doCheckFunction(field) {
+      const fcn = field.data("checkfcn");
+      let validField = true;
+      switch (fcn) {
+        case "cf_piva":
+          validField = checkCfPiva(field.val());
+          break;
+        case "iban":
+          validField = checkIBAN(field.val());
+          break;
+        default:
+          break;
+      }
+      if (validField) {
+        field.removeClass("is-invalid");
+      } else {
+        field.addClass("is-invalid");
+        hasErrors = true;
+      }
+    }
+
     function checkCfPiva(str) {
       // è una P.IVA valida ?
-      if (/^([A-Z]{2})?[0-9]{11}$/i.test(str)) {
+      if (/^([A-Za-z]{2})?[0-9]{11}$/i.test(str)) {
         return true;
       }
 
       // è un CF valido?
-      if (/^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$/.test(str)) {
+      if (/^[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]$/.test(str)) {
         return true;
       }
 
@@ -207,6 +220,7 @@ jQuery(document).ready(function ($) {
     }
   });
 
+  /*
   // recupero i dati dal transient
   $("#fill-from-stored-data").on("click", function (evt) {
     evt.preventDefault();
@@ -285,13 +299,9 @@ jQuery(document).ready(function ($) {
       $(`#linea_${prefix}_ruolo`).val(data[`${prefix}_ruolo`]);
       $(`#linea_${prefix}_data_nascita`).val(data[`${prefix}_data_nascita`]);
       $(`#linea_${prefix}_luogo_nascita`).val(data[`${prefix}_luogo_nascita`]);
-      $(`#linea_${prefix}_provincia_nascita`).val(
-        data[`${prefix}_provincia_nascita`]
-      );
+      $(`#linea_${prefix}_provincia_nascita`).val(data[`${prefix}_provincia_nascita`]);
       $(`#linea_${prefix}_nazionalita`).val(data[`${prefix}_nazionalita`]);
-      $(`#linea_${prefix}_tipo_documento`).val(
-        data[`${prefix}_tipo_documento`]
-      );
+      $(`#linea_${prefix}_tipo_documento`).val(data[`${prefix}_tipo_documento`]);
       $(`#linea_${prefix}_doc_numero`).val(data[`${prefix}_doc_numero`]);
       $(`#linea_${prefix}_doc_emittente`).val(data[`${prefix}_doc_emittente`]);
       $(`#linea_${prefix}_doc_rilascio`).val(data[`${prefix}_doc_rilascio`]);
@@ -310,6 +320,7 @@ jQuery(document).ready(function ($) {
     $(`#linea_${prefix}_cap`).val(data[`${prefix}_cap`]);
     $(`#linea_${prefix}_cod_fiscale`).val(data[`${prefix}_cod_fiscale`]);
   }
+ */
 
   // Gestione Checkboxes stato linea
   $cbxLinea = $("[data-check-linea]").each(function () {

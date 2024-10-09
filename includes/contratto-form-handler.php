@@ -11,6 +11,35 @@ $sesso = array("1"=>"Femmina","2"=>"Maschio");
 $docs = array( "1"=>"Carta di identità", "2" => "Patente di guida","4"=>"Passaporto", "5"=>"Permesso di soggiorno" );
 $ruoli = array('titolare','legale rappresentante','delegato');
 
+
+/**
+ * transientKey: nome del transient
+ * dataSection : nome sezione del transient, e anche prefisso dei suoi campi (nei casi in oggetto, sì)
+ * newPrefix   : prefisso dei campi da esportare
+ * prepend     : indica se il newPrefix debba essere appeso all'inizio o sostituito
+ */
+function loadDataFromTransient($transientKey, $dataSection, $newPrefix, $prepend=false) {
+    $allTransientData = get_transient($transientKey);
+    
+    if(!isset($allTransientData[$dataSection])) return null;
+
+    $sectionTransientData  = $allTransientData[$dataSection];
+
+    $out = array();
+    foreach($sectionTransientData as $key=>$val) {
+        if($prepend){
+            $newKey = $newPrefix."_".$key;
+        } else {
+            $regex = '/'.$dataSection.'/i';
+            $newKey = preg_replace($regex, $newPrefix, $key);          
+        }            
+
+        $out[$newKey] = $val;     
+    }
+
+    return $out;
+}
+
 function tcGetFieldValue( $haystack, $needle, $output=true ) {
 	$out = null;
 	
@@ -30,9 +59,10 @@ function showSteps($curr) {
         "4"=>'linea',
         "5"=>'gdpr',
         "6"=>'pagamento',
-        "7"=>'riepilogo',
-        "8"=>'accettazione',
-        "9"=>'download',
+        "7"=>'elenchi',
+        "8"=>'riepilogo',
+        "9"=>'accettazione',        
+        "10"=>'download',
 
     ); ?>
 
@@ -84,7 +114,8 @@ function valOrNull($section, $item, $type) {
 
 function saveDataToDb($data, $cID) {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'contratti';
+    $table_contratti = $wpdb->prefix . 'contratti';
+    $table_elenchi = $wpdb->prefix . 'elenchi';
 
     // variabili di comodo
     $offerta = $data['offerta'];
@@ -95,6 +126,7 @@ function saveDataToDb($data, $cID) {
     $gdpr = $data['gdpr'];
     $pagamento = $data['pagamento'];
     $firme = $data['firme'];
+    $elenchi = $data['elenchi'];
     $opzioni = maybe_serialize($offerta['opzioni']);
 
     $toSave = array(
@@ -202,7 +234,31 @@ function saveDataToDb($data, $cID) {
         'data_proposta_contratto' => date("Y-m-d H:i:s")
     );
 
-    $wpdb->insert($table_name, $toSave);
+    $wpdb->insert($table_contratti, $toSave);
+    
+    // SALVO I DATI PER GLI ELENCHI
+    $toSaveElenchi = array(
+        'codice' => $cID,
+        'elenchi_consenso' => valOrNull($elenchi, 'elenchi_consenso', 'bool'),
+        'elenchi_servabbonati' => valOrNull($elenchi, 'elenchi_servabbonati', 'bool'),        
+        'elenchi_nome' => valOrNull($elenchi, 'elenchi_nome', 'str'),
+        'elenchi_cognome' => valOrNull($elenchi, 'elenchi_cognome', 'str'),
+        'elenchi_soloiniziale' => valOrNull($elenchi, 'elenchi_soloiniziale', 'bool'),
+        'elenchi_indirizzo' => valOrNull($elenchi, 'elenchi_indirizzo', 'str'),
+        'elenchi_civico' => valOrNull($elenchi, 'elenchi_civico', 'str'),
+        'elenchi_citta' => valOrNull($elenchi, 'elenchi_citta', 'str'),
+        'elenchi_provincia' => valOrNull($elenchi, 'elenchi_provincia', 'str'),
+        'elenchi_cap' => valOrNull($elenchi, 'elenchi_cap', 'str'),
+        'elenchi_titolo' => valOrNull($elenchi, 'elenchi_titolo', 'str'),
+        'elenchi_professione' => valOrNull($elenchi, 'elenchi_professione', 'str'),
+        'elenchi_nomedanumero' => valOrNull($elenchi, 'elenchi_nomedanumero', 'bool'),
+        'elenchi_posta' => valOrNull($elenchi, 'elenchi_posta', 'bool'),
+        'data_compilazione' => date("Y-m-d H:i:s")
+    );
+
+    $wpdb->insert($table_elenchi, $toSaveElenchi);
+
+
 
     // if ($wpdb->last_error) {
     //     error_log("Errore MySQL durante l'inserimento: " . $wpdb->last_error);

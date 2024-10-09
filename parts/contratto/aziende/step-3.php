@@ -1,6 +1,10 @@
 <?php 
-    $fields = @$this->contrattoData['servizi']; 
     showSteps(3);
+
+    $fields = @$this->contrattoData['servizi']; 
+    
+    if(!$fields) 
+        $fields = loadDataFromTransient($this->contrattoUID, 'attivazione', 'servizi'); 
 ?>
 
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
@@ -11,9 +15,9 @@
    
     <fieldset id="fields-indirizzo-dispositivo" class="mt-3">
         <legend>3. Indirizzo di invio del dispositivo</legend>
-        <div class="d-flex justify-content-end my-3">
+        <!-- <div class="d-flex justify-content-end my-3">
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="attivazione" disabled><i class="fas fa-sync"></i> come attivazione</button>
-        </div>
+        </div> -->
 
         <div class="row">
             <div class="col-12 col-md-8 mb-4">

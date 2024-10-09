@@ -562,6 +562,10 @@
       ...urlParams,
       tipoCliente: tipoCli,
       indirizzo: `${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})`,
+      via: `${sParticella} ${sIndirizzo}`,
+      ncivico: sCivico,
+      comune: sComune,
+      provincia: sProvincia,
     };
 
     if (esito.connessione) {
@@ -600,7 +604,7 @@
     // compongo l'url per la pagina del risultato
     //let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
     let finalUrl = `${copertura_params.TCRS_SITE_URL}esito-copertura/?`;
-    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&ind=${urlParams.indirizzo}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
+    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&ind=${urlParams.indirizzo}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
 
     window.location.href = encodeURI(finalUrl);
     return;

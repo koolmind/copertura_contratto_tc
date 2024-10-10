@@ -3,7 +3,7 @@
  * Plugin Name: TCRS Addons
  * Author: Simone Conti
  * Description: Shortcodes e Widgets per TerreCablate ed. 2024
- * Version: 1.3.8
+ * Version: 1.3.9
  * Text Domain: tcrsaddons
  */
 
@@ -44,7 +44,7 @@ include_once __DIR__ . '/settings/options-tcrs.php';
 
 
 class PangeaTerrecablateAddons {
-    const VERSION = "1.3.8";
+    const VERSION = "1.3.9";
 
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 
@@ -76,128 +76,7 @@ class PangeaTerrecablateAddons {
         $table_elenchi = $wpdb->prefix . 'elenchi';
         $charset_collate = $wpdb->get_charset_collate();
 
-        /*
-        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
-            codice varchar(25) NOT NULL,
-            target varchar(15) NOT NULL,
-            tipo_accesso varchar(30) NOT NULL,
-            nomeofferta varchar(50) NOT NULL,
-            canone float NOT NULL,
-            opzioni text NOT NULL,
-            attivazione float NOT NULL,
-            rag_sociale varchar(50) DEFAULT NULL,
-            azienda_indirizzo varchar(150) DEFAULT NULL,
-            azienda_civico varchar(10) DEFAULT NULL,
-            azienda_citta varchar(50) DEFAULT NULL,
-            azienda_provincia varchar(2) DEFAULT NULL,
-            azienda_cap varchar(5) DEFAULT NULL,
-            azienda_piva_cf varchar(16) DEFAULT NULL,
-            azienda_cod_destinatario varchar(10) DEFAULT NULL,
-            azienda_fax varchar(30) DEFAULT NULL,
-            cliente_ruolo varchar(25) DEFAULT NULL,
-            cliente_email varchar(50) DEFAULT NULL,
-            cliente_telefono varchar(30) DEFAULT NULL,
-            cliente_cellulare varchar(30) DEFAULT NULL,
-            cliente_pec varchar(50) DEFAULT NULL,
-            cliente_cognome varchar(100) DEFAULT NULL,
-            cliente_nome varchar(100) DEFAULT NULL,
-            cliente_sesso int(11) DEFAULT NULL,
-            cliente_data_nascita date DEFAULT NULL,
-            cliente_luogo_nascita varchar(50) NOT NULL,
-            cliente_provincia_nascita varchar(2) NOT NULL,
-            cliente_cod_fiscale varchar(16) NOT NULL,
-            cliente_nazionalita varchar(100) NOT NULL,
-            cliente_tipo_documento int(11) NOT NULL,
-            cliente_doc_numero varchar(50) NOT NULL,
-            cliente_doc_emittente varchar(100) NOT NULL,
-            cliente_doc_rilascio date DEFAULT NULL,
-            cliente_doc_scadenza date DEFAULT NULL,
-            cliente_indirizzo varchar(150) DEFAULT NULL,
-            cliente_civico varchar(10) DEFAULT NULL,
-            cliente_citta varchar(50) DEFAULT NULL,
-            cliente_provincia varchar(2) DEFAULT NULL,
-            cliente_cap varchar(5) DEFAULT NULL,
-            attivazione_indirizzo varchar(150) DEFAULT NULL,
-            attivazione_civico varchar(10) DEFAULT NULL,
-            attivazione_citta varchar(50) DEFAULT NULL,
-            attivazione_provincia varchar(2) DEFAULT NULL,
-            attivazione_cap varchar(5) DEFAULT NULL,
-            servizi_indirizzo varchar(150) DEFAULT NULL,
-            servizi_civico varchar(10) DEFAULT NULL,
-            servizi_citta varchar(50) DEFAULT NULL,
-            servizi_provincia varchar(2) DEFAULT NULL,
-            servizi_cap varchar(5) DEFAULT NULL,
-            linea_migrazione TINYINT(1) NOT NULL DEFAULT 0,
-            linea_nuova TINYINT(1) NOT NULL DEFAULT 0,
-            linea_portability TINYINT(1) NOT NULL DEFAULT 0,
-            linea_codice_migrazione_1 varchar(50) DEFAULT NULL,
-            linea_codice_migrazione_2 varchar(50) DEFAULT NULL,
-            linea_numero_1 varchar(50) DEFAULT NULL,
-            linea_numero_2 varchar(50) DEFAULT NULL,
-            linea_numero_3 varchar(50) DEFAULT NULL,
-            linea_numero_4 varchar(50) DEFAULT NULL,
-            linea_rag_sociale varchar(50) DEFAULT NULL,
-            linea_azienda_nome varchar(50) DEFAULT NULL,
-            linea_azienda_indirizzo varchar(150) DEFAULT NULL,
-            linea_azienda_civico varchar(10) DEFAULT NULL,
-            linea_azienda_citta varchar(50) DEFAULT NULL,
-            linea_azienda_provincia varchar(2) DEFAULT NULL,
-            linea_azienda_cap varchar(5) DEFAULT NULL,
-            linea_azienda_piva_cf varchar(16) DEFAULT NULL,
-            linea_cliente_ruolo varchar(25) DEFAULT NULL,
-            linea_cliente_nome varchar(50) DEFAULT NULL,
-            linea_cliente_cognome varchar(50) DEFAULT NULL,
-            linea_cliente_sesso int(11) DEFAULT NULL,
-            linea_cliente_data_nascita date DEFAULT NULL,
-            linea_cliente_luogo_nascita varchar(50) DEFAULT NULL,
-            linea_cliente_provincia_nascita varchar(2) DEFAULT NULL,
-            linea_cliente_cod_fiscale varchar(16) NOT NULL,
-            linea_cliente_nazionalita varchar(100) DEFAULT NULL,
-            linea_cliente_tipo_documento int(11) DEFAULT NULL,
-            linea_cliente_doc_numero varchar(50) DEFAULT NULL,
-            linea_cliente_doc_emittente varchar(100) DEFAULT NULL,
-            linea_cliente_doc_rilascio date DEFAULT NULL,
-            linea_cliente_doc_scadenza date DEFAULT NULL,
-            linea_cliente_indirizzo varchar(150) DEFAULT NULL,
-            linea_cliente_civico varchar(10) DEFAULT NULL,
-            linea_cliente_citta varchar(50) DEFAULT NULL,
-            linea_cliente_provincia varchar(2) DEFAULT NULL,
-            linea_cliente_cap varchar(5) DEFAULT NULL,
-            linea_consenso_migrazione TINYINT(1) NOT NULL DEFAULT 0,
-            linea_consenso_portability TINYINT(1) NOT NULL DEFAULT 0,
-            consenso_marketing TINYINT(1) NOT NULL DEFAULT 0,
-            consenso_profilazione TINYINT(1) NOT NULL DEFAULT 0,
-            metodo_pagamento varchar(3) DEFAULT NULL,
-            sdd_intestatario_cognome_nome varchar(100) DEFAULT NULL,
-            sdd_intestatario_codfisc_piva varchar(16) DEFAULT NULL,
-            sdd_iban varchar(27) DEFAULT NULL,
-            sdd_sottoscrittore_cognome_nome varchar(100) DEFAULT NULL,
-            sdd_sottoscrittore_codfisc varchar(16) DEFAULT NULL,
-            sdd_titolare_linea varchar(50) DEFAULT NULL,
-            sdd_titolare_cognome_nome varchar(100) DEFAULT NULL,
-            sdd_titolare_codfisc_piva varchar(16) DEFAULT NULL,
-            sdd_titolare_recapito varchar(50) DEFAULT NULL,
-            accettazione_contratto TINYINT(1) NOT NULL DEFAULT 0,
-            firma_contratto TINYINT(1) NOT NULL DEFAULT 0,
-            approvazione_articoli_contratto TINYINT(1) NOT NULL DEFAULT 0,
-            elenchi_consenso TINYINT(1) NOT NULL DEFAULT 0,
-            elenchi_servabbonati TINYINT(1) NOT NULL DEFAULT 0,
-            elenchi_nome varchar(50) DEFAULT NULL,
-            elenchi_cognome varchar(50) DEFAULT NULL,
-            elenchi_soloiniziale TINYINT(1) NOT NULL DEFAULT 0,
-            elenchi_indirizzo varchar(150) DEFAULT NULL,
-            elenchi_civico varchar(10) DEFAULT NULL,
-            elenchi_citta varchar(50) DEFAULT NULL,
-            elenchi_provincia varchar(2) DEFAULT NULL,
-            elenchi_cap varchar(5) DEFAULT NULL,
-            elenchi_titolo varchar(50) DEFAULT NULL,
-            elenchi_professione varchar(100) DEFAULT NULL,
-            elenchi_nomedanumero TINYINT(1) NOT NULL DEFAULT 0,
-            elenchi_posta TINYINT(1) NOT NULL DEFAULT 0,
-            data_proposta_contratto datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-            PRIMARY KEY (id)
-        ) $charset_collate;";*/
+        
 
         $sqlContratti = "CREATE TABLE IF NOT EXISTS $table_contratti (
             id mediumint(9) NOT NULL AUTO_INCREMENT,

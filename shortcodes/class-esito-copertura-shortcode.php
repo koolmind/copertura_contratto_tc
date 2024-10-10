@@ -27,14 +27,11 @@ class EsitoCoperturaShortcode {
         $tipoCli = isset($_GET['cli']) ? $_GET['cli'] : null;
         $esclusivo = isset($_GET['e']) ? intval($_GET['e']) : 0;
         $tecnologia = isset($_GET['t']) ? $_GET['t'] : null;
-        // $indirizzo = isset($_GET['ind']) ? $_GET['ind'] : null;
         
         $via = isset($_GET['via']) ? $_GET['via'] : null;
         $nc = isset($_GET['nc']) ? $_GET['nc'] : null;
         $co = isset($_GET['co']) ? $_GET['co'] : null;
         $prv = isset($_GET['prv']) ? $_GET['prv'] : null;
-        // e il cap?
-        $cap = '00000';
         $indirizzo = $via . ", " . $co . " (" . $prv . ")";
         
         $speed = isset($_GET['sp']) ? $_GET['sp'] : null;

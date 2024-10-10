@@ -45,11 +45,17 @@ class ContrattoOnLineShortcode {
                 );
 
                 // salvo i dati dall'indirizzo inserito in copertura per inserirlo nella voce "attivazione" del contratto (indirizzo di attivazione e fornitura)
+                
+                $com = fixAccents(strtolower(sanitize_text_field($_POST["cop_citta"])));
+                $prv = fixAccents(strtolower(sanitize_text_field($_POST["cop_provincia"])));
+
+                $Cap = getCapFromDB($prv,$com);
+                
                 $dati_attivazione = array(
                     'attivazione_indirizzo' => sanitize_text_field($_POST["cop_indirizzo"]),
                     'attivazione_civico'    => sanitize_text_field($_POST["cop_civico"]),
                     'attivazione_citta'     => sanitize_text_field($_POST["cop_citta"]),
-                    'attivazione_cap'       => sanitize_text_field($_POST["cop_cap"]),
+                    'attivazione_cap'       => $Cap ? $Cap  : '00000',
                     'attivazione_provincia' => sanitize_text_field($_POST["cop_provincia"]),
                 );
         

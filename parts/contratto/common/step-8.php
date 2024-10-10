@@ -20,25 +20,25 @@
     $strElenchi .= sprintf("<div class='col-12'>Il cliente <b>%s</b> che i suoi dati vengano comunicati, su richiesta, da parte di un Servizio Abbonati.</div>", $servAbb);
     
     $datiElenco = "";
-    $datiElenco .= $elenchi['elenchi_cognome'] ? "<div class='col-12 col-md-4'>Cognome/Rag.Sociale: <b>{$elenchi['elenchi_cognome']}</b></div>" : "";
-    $datiElenco .= $elenchi['elenchi_nome'] ? "<div class='col-12 col-md-4'>Nome: <b>{$elenchi['elenchi_nome']}</b></div>" : "";
-    $datiElenco .= $elenchi['elenchi_soloiniziale'] ? "<div class='col-12 col-md-4'>Solo Iniziale: <b>SI</b></div>": "";
-    $datiElenco .= $elenchi['elenchi_numero'] ? "<div class='col-12'>Numero tel.: <b>{$elenchi['elenchi_numero']}</b></div>" : "";
+    $datiElenco .= $elenchi['elenchi_cognome'] ? "<div class='col-12 col-md-4'><b>Cognome/Rag.Sociale:</b> {$elenchi['elenchi_cognome']}</div>" : "";
+    $datiElenco .= $elenchi['elenchi_nome'] ? "<div class='col-12 col-md-4'><b>Nome:</b> {$elenchi['elenchi_nome']}</div>" : "";
+    $datiElenco .= $elenchi['elenchi_soloiniziale'] ? "<div class='col-12 col-md-4'><b>Solo Iniziale:</b> SI</b></div>": "";
+    $datiElenco .= $elenchi['elenchi_numero'] ? "<div class='col-12'><b>Numero tel.:</b> {$elenchi['elenchi_numero']}</div>" : "";
 
     $addr = "";
-    $addr .= $elenchi['elenchi_indirizzo'] ? "Indirizzo: <b>{$elenchi['elenchi_indirizzo']}</b>" : "";
-    $addr .= $elenchi['elenchi_civico'] ? " n. <b>{$elenchi['elenchi_civico']}</b>" : "";
-    $addr .= $elenchi['elenchi_cap'] ? ", <b>{$elenchi['elenchi_cap']}</b>" : "";
-    $addr .= $elenchi['elenchi_citta'] ? " - <b>{$elenchi['elenchi_citta']}</b>  " : "";    
-    $addr .= $elenchi['elenchi_provincia'] ? "<b>({$elenchi['elenchi_provincia']})</b>" : "";
+    $addr .= $elenchi['elenchi_indirizzo'] ? "<b>Indirizzo:</b> {$elenchi['elenchi_indirizzo']}" : "";
+    $addr .= $elenchi['elenchi_civico'] ? " n. {$elenchi['elenchi_civico']}" : "";
+    $addr .= $elenchi['elenchi_cap'] ? ", {$elenchi['elenchi_cap']}" : "";
+    $addr .= $elenchi['elenchi_citta'] ? " - {$elenchi['elenchi_citta']}  " : "";    
+    $addr .= $elenchi['elenchi_provincia'] ? "({$elenchi['elenchi_provincia']})" : "";
     
     $altriDatiElenco = "";
-    $altriDatiElenco .= $elenchi['elenchi_titolo'] ? "<div class='col-12'>Titolo di studio/Specializzazione: <b>{$elenchi['elenchi_titolo']}</b></div>" : "";
-    $altriDatiElenco .= $elenchi['elenchi_titolo'] ? "<div class='col-12'>Professione/Attività: <b>{$elenchi['elenchi_professione']}</b></div>" : "";
+    $altriDatiElenco .= $elenchi['elenchi_titolo'] ? "<div class='col-12'><b>Titolo di studio/Specializzazione:</b> {$elenchi['elenchi_titolo']}</div>" : "";
+    $altriDatiElenco .= $elenchi['elenchi_titolo'] ? "<div class='col-12'><b>Professione/Attività:</b> {$elenchi['elenchi_professione']}</div>" : "";
     
-    $strElenchi .= $datiElenco !="" ? "<hr class='my-2' /><div class='col-12'><em>Dati da pubblicare:</em></div>{$datiElenco}": "";
+    $strElenchi .= $datiElenco !="" ? "<hr class='my-2' /><div class='col-12'><small><b>Dati da pubblicare:</b></small></div>{$datiElenco}": "";
     $strElenchi .= $addr !="" ? "<div class='col-12'>{$addr}</div>": "";
-    $strElenchi .= $altriDatiElenco !="" ? "<hr class='my-2' /><div class='col-12'><em>Dati aggiuntivi:</em></div> {$altriDatiElenco}<br>": "";
+    $strElenchi .= $altriDatiElenco !="" ? "<hr class='my-2' /><div class='col-12'><small><b>Dati aggiuntivi:</b></small></div> {$altriDatiElenco}<br>": "";
 
     $isAzienda = (bool) ($offerta['target']=='aziende');
 

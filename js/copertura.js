@@ -71,6 +71,30 @@
       });
   }
 
+  function fixAccents(text) {
+    // Oggetto delle sostituzioni
+    const replacements = {
+      "a'": "à",
+      "e'": "è",
+      "i'": "ì",
+      "o'": "ò",
+      "u'": "ù",
+      "A'": "À",
+      "E'": "È",
+      "I'": "Ì",
+      "O'": "Ò",
+      "U'": "Ù",
+    };
+
+    // Effettua le sostituzioni
+    let result = text;
+    for (const [pattern, replacement] of Object.entries(replacements)) {
+      result = result.replaceAll(pattern, replacement);
+    }
+
+    return result;
+  }
+
   function abilita(item) {
     item.removeAttr("disabled");
   }
@@ -184,17 +208,10 @@
         // devo far comparire SIENA come prima provincia
         let provinceOut = [{ provincia: "SIENA" }, ...provinceTemp];
 
-        selProvincia.append(
-          `<option value=''>- seleziona provincia -</option>`
-        );
+        selProvincia.append(`<option value=''>- seleziona provincia -</option>`);
 
         selProvincia.append(
-          provinceOut
-            .map(
-              (prov) =>
-                `<option value='${prov.provincia}'>${prov.provincia}</option>`
-            )
-            .join("")
+          provinceOut.map((prov) => `<option value='${prov.provincia}'>${prov.provincia}</option>`).join("")
         );
       })
       .catch(function (error) {
@@ -230,11 +247,7 @@
           return 0;
         });
 
-        selComune.append(
-          comuni.map(
-            (com) => `<option value="${com.comune}">${com.comune}</option>`
-          )
-        );
+        selComune.append(comuni.map((com) => `<option value="${com.comune}">${com.comune}</option>`));
         preloader.addClass("nascondi");
         abilita(selComune);
       })
@@ -251,9 +264,7 @@
 
     var options = {
       url: function (phrase) {
-        return `${
-          copertura_params.TCRS_WS_ROOT
-        }wsautocomplete.php?provincia=${encodeURI(
+        return `${copertura_params.TCRS_WS_ROOT}wsautocomplete.php?provincia=${encodeURI(
           sProvincia
         )}&comune=${encodeURI(sComune)}&indirizzolike=${encodeURI(phrase)}`;
       },
@@ -274,9 +285,7 @@
         },
         onShowListEvent: function () {
           preloader.addClass("nascondi");
-          let risultatiContainer = document.querySelector(
-            "#eac-container-indirizzo > ul"
-          );
+          let risultatiContainer = document.querySelector("#eac-container-indirizzo > ul");
           indirizziTrovati = risultatiContainer.querySelectorAll("li").length;
         },
         onSelectItemEvent: function () {},
@@ -307,12 +316,7 @@
         pulisci(selCivico, "select");
         var civici = response.data;
 
-        selCivico.append(
-          civici.map(
-            (num) =>
-              `<option value='${num.civico_cliente}'>${num.civico_cliente}</option>`
-          )
-        );
+        selCivico.append(civici.map((num) => `<option value='${num.civico_cliente}'>${num.civico_cliente}</option>`));
         abilita(selCivico);
       })
       .catch(function (error) {
@@ -399,9 +403,7 @@
     if (voucher) {
       var gradient = alternativaFtth ? "bonus-ftth" : bonusGradient;
       var ivaMsg =
-        voucher.prezzo != 0
-          ? `+ iva pari a ${voucher.iva} €/mese`
-          : `paghi solo l'iva pari a ${voucher.iva} €/mese`;
+        voucher.prezzo != 0 ? `+ iva pari a ${voucher.iva} €/mese` : `paghi solo l'iva pari a ${voucher.iva} €/mese`;
       return `
         <div class="reduced_price_wrapper">
           <div class="voucher_name ${gradient}">${voucher.tipoVoucher}</div>
@@ -455,12 +457,7 @@
     const consigliata = dati.TIPOLOGIA_ACCESSO_CONSIGLIATA[tipocliente];
     let puntoGeo = null;
 
-    const tipologieNonOfferte = [
-      "Bitstream",
-      "Bitstream Ethernet",
-      "ULL",
-      "Rame su AI",
-    ];
+    const tipologieNonOfferte = ["Bitstream", "Bitstream Ethernet", "ULL", "Rame su AI"];
 
     if (tipologieNonOfferte.contains(consigliata.tipo)) {
       return {
@@ -486,18 +483,14 @@
     //var esito_voce_fax = dati.TIM.ull == "SI" || dati.TIM.wlr == "SI";
 
     const showAlert =
-      dati.OF &&
-      dati.OF.copertura === "FTTH" &&
-      dati.OF.area === "BIANCA" &&
-      consigliata.tipo === "OF_FTTH"
+      dati.OF && dati.OF.copertura === "FTTH" && dati.OF.area === "BIANCA" && consigliata.tipo === "OF_FTTH"
         ? true
         : false;
 
     const riferimento_prodotto = consigliata.tipo + "-" + consigliata.maxspeed;
 
     // zona non coperta
-    if (riferimento_prodotto == "-" || consigliata.tipo == "OF_FWA")
-      return { connessione: false, ftth: false };
+    if (riferimento_prodotto == "-" || consigliata.tipo == "OF_FWA") return { connessione: false, ftth: false };
 
     // zona coperta in esclusiva da TC
     var isFtth = riferimento_prodotto == "TCRS_GPON-1000/300E";
@@ -510,11 +503,7 @@
     return {
       tipoCli: tipocliente,
       prodotto: riferimento_prodotto,
-      connessione: getConnessioneParams(
-        tipocliente,
-        consigliata.tipo,
-        consigliata.maxspeed
-      ),
+      connessione: getConnessioneParams(tipocliente, consigliata.tipo, consigliata.maxspeed),
       ftth: isFtth,
       mostraAvviso: showAlert,
       effSpeed: consigliata.effspeed,
@@ -561,10 +550,10 @@
     urlParams = {
       ...urlParams,
       tipoCliente: tipoCli,
-      indirizzo: `${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})`,
-      via: `${sParticella} ${sIndirizzo}`,
+      //indirizzo: `${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})`,
+      via: `${fixAccents(sParticella)} ${fixAccents(sIndirizzo)}`,
       ncivico: sCivico,
-      comune: sComune,
+      comune: fixAccents(sComune),
       provincia: sProvincia,
     };
 
@@ -590,8 +579,7 @@
 
       urlParams = { ...urlParams, tecnologia: tec, speed: vel };
 
-      if (esito.effSpeed)
-        urlParams = { ...urlParams, effSpeed: esito.effSpeed };
+      if (esito.effSpeed) urlParams = { ...urlParams, effSpeed: esito.effSpeed };
 
       if (esito.mostraAvviso) urlParams = { ...urlParams, alert: 1 };
     } else {
@@ -604,7 +592,7 @@
     // compongo l'url per la pagina del risultato
     //let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
     let finalUrl = `${copertura_params.TCRS_SITE_URL}esito-copertura/?`;
-    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&ind=${urlParams.indirizzo}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
+    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
 
     window.location.href = encodeURI(finalUrl);
     return;
@@ -618,10 +606,10 @@
     style="border: 0"
     loading="lazy"
     allowfullscreen
-    src="https://www.google.com/maps?q=${geoocoords.replace(
+    src="https://www.google.com/maps?q=${geoocoords.replace(" ", "")}&ll=${geoocoords.replace(
       " ",
       ""
-    )}&ll=${geoocoords.replace(" ", "")}&z=18&output=embed"
+    )}&z=18&output=embed"
     >
     </iframe>
     `;

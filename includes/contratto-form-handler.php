@@ -244,7 +244,7 @@ function saveDataToDb($data, $cID) {
         'elenchi_nome' => valOrNull($elenchi, 'elenchi_nome', 'str'),
         'elenchi_cognome' => valOrNull($elenchi, 'elenchi_cognome', 'str'),
         'elenchi_soloiniziale' => valOrNull($elenchi, 'elenchi_soloiniziale', 'bool'),
-        'elenchi_numero' => valOrNull($elenchi, 'elenchi_numero', 'bool'),
+        'elenchi_numero' => valOrNull($elenchi, 'elenchi_numero', 'str'),
         'elenchi_indirizzo' => valOrNull($elenchi, 'elenchi_indirizzo', 'str'),
         'elenchi_civico' => valOrNull($elenchi, 'elenchi_civico', 'str'),
         'elenchi_citta' => valOrNull($elenchi, 'elenchi_citta', 'str'),
@@ -324,3 +324,38 @@ function handle_contratto_aziende() {
 }
 add_action('admin_post_nopriv_submit_contratto_aziende', 'handle_contratto_aziende');
 add_action('admin_post_submit_contratto_aziende', 'handle_contratto_aziende');
+
+
+function getCapFromDB($provincia, $comune) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'comuni_cap';
+
+    $sql = $wpdb->prepare("SELECT cap FROM {$table_name} WHERE denominazione_provincia=%s AND denominazione_ita LIKE %s LIMIT 0,1", array($provincia, $comune));
+
+    $cap = $wpdb->get_var($sql); // prendo il primo CAP, nel caso ce ne fossero più di uno
+
+    return $cap;
+}
+
+function fixAccents($text) {
+    // Array delle sostituzioni
+    $replacements = [
+        "a'" => "à",
+        "e'" => "è",
+        "i'" => "ì",
+        "o'" => "ò",
+        "u'" => "ù",
+        "A'" => "À",
+        "E'" => "È",
+        "I'" => "Ì",
+        "O'" => "Ò",
+        "U'" => "Ù"
+    ];
+    
+    // Effettua le sostituzioni
+    return str_replace(
+        array_keys($replacements), 
+        array_values($replacements), 
+        $text
+    );
+}

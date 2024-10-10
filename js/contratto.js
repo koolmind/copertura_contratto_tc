@@ -26,14 +26,11 @@ jQuery(document).ready(function ($) {
     const checkLineaFields = $(this).hasClass("jsCheckLineaFields");
     const checkGdprFields = $(this).hasClass("jsCheckGdprFields");
     const checkPagamentoFields = $(this).hasClass("jsCheckPagamentoFields");
+    const checkElenchiFields = $(this).hasClass("jsCheckElenchiFields");
     let hasErrors = false;
 
     const errLabel = $("#errLabel");
     const loadingLabel = $("#loadingLabel");
-
-    // allRequiredFields.each(function () {
-    //   $(this).removeClass("is-invalid");
-    // });
 
     // elimino eventuali spazi dal contenuto dei text inputs, altrimenti risultano riempiti
     allTextInputs.each(function () {
@@ -103,6 +100,21 @@ jQuery(document).ready(function ($) {
       } else {
         pagamentoCC.removeClass("is-invalid");
         pagamentoSDD.removeClass("is-invalid");
+      }
+    }
+
+    // metodo di pagamento
+    if (checkElenchiFields) {
+      const consensoElenchiOK = $("#consensoElenchiOK");
+      const consensoElenchiKO = $("#consensoElenchiKO");
+
+      if (!consensoElenchiOK.is(":checked") && !consensoElenchiKO.is(":checked")) {
+        hasErrors = true;
+        consensoElenchiOK.addClass("is-invalid");
+        consensoElenchiKO.addClass("is-invalid");
+      } else {
+        consensoElenchiOK.removeClass("is-invalid");
+        consensoElenchiKO.removeClass("is-invalid");
       }
     }
 

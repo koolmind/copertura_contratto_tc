@@ -1,7 +1,9 @@
 <?php 
     $fields = @$this->contrattoData['elenchi']; 
-    // $rbMarketing = tcGetFieldValue($fields,"consenso_marketing",false);
-    // $rbProfilazione =  tcGetFieldValue($fields,"consenso_profilazione",false);
+    $rbElenchi =  tcGetFieldValue($fields,"elenchi_consenso",false);
+    $cbIniziale =  tcGetFieldValue($fields,"elenchi_soloiniziale",false);
+    $rbNomeDaNumero =  tcGetFieldValue($fields,"elenchi_nomedanumero",false);
+    $rbPosta =  tcGetFieldValue($fields,"elenchi_posta",false);
 
     showSteps(7);
 ?>
@@ -53,21 +55,21 @@
             <div class="col-12 mb-4">
                 <h4 class="titolo-sez text-center">1. Vuole che il suo nome sia presente nei nuovi elenchi telefonici?</h4>
                 <div class="d-flex gap-5 justify-content-center mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="dati[elenchi_consenso]" id="consensoElenchiOK" value="1" <?php //echo $rbElenchi === "1" ? ' checked ' : ''; ?> >
+                    <div class="form-check">                    
+                        <input class="form-check-input" type="radio" name="dati[elenchi_consenso]" id="consensoElenchiOK" value="1" <?php echo $rbElenchi === "1" ? ' checked ' : ''; ?> >
                         <label class="form-check-label" for="consensoElenchiOK">SI</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="dati[elenchi_consenso]" id="consensoMarketingKO" value="0" <?php //echo $rbElenchi === "0"  ? ' checked ' : ''; ?> >
-                        <label class="form-check-label" for="consensoMarketingKO">NO</label>
+                        <input class="form-check-input" type="radio" name="dati[elenchi_consenso]" id="consensoElenchiKO" value="0" <?php echo $rbElenchi === "0"  ? ' checked ' : ''; ?> >
+                        <label class="form-check-label" for="consensoElenchiKO">NO</label>
                     </div>
                 </div>
                 <h4 class="titoletto smaller"><b>SE HA RISPOSTO NO</b>: può fermarsi qui e non rispondere alle altre domande oppure, pur avendo deciso di non figurare nei nuovi elenchi, può chiedere che i dati che indicherà più avanti 
                 possano essere forniti a chi ne faccia richiesta ad un Servizio di informazione abbonati. Se è interessato, barri la casella seguente e indichi ai punti 2, 3 del questionario i dati 
                 che non vuole siano pubblicati negli elenchi, ma vuole che siano forniti a chi li richiede.</h4>
-                <div class="form-check mb-2">
+                <div class="form-check check-zone mb-2">
                     <input class="form-check-input" type="checkbox" name="dati[elenchi_servabbonati]" id="consensoAbbonati" value="1">
-                    <label class="form-check-label" for="consensoAbbonati">Desidero che i miei dati vengano forniti se richiesti ad un Servizio Abbonati</label>
+                    <label class="form-check-label" for="consensoAbbonati">Desidero che i miei dati vengano forniti, se richiesti, ad un Servizio Abbonati</label>
                 </div>
                 <h4 class="titoletto smaller"><b>SE HA RISPOSTO SI, PROSEGUA CON LE DOMANDE SUCCESSIVE</b></h4>
             </div>
@@ -87,11 +89,23 @@
             </div>
             <div class="col-12 col-md-4 mb-4">
                 <div class="form-check d-flex align-items-center gap-2">
-                    <input class="form-check-input" type="checkbox" name="dati[elenchi_soloiniziale]" id="elenchi_soloiniziale" value="1">
+                    <input class="form-check-input" type="checkbox" name="dati[elenchi_soloiniziale]" id="elenchi_soloiniziale" value="1" <?php echo $cbIniziale === "1" ? ' checked ' : ''; ?>>
                     <label class="form-check-label" for="elenchi_soloiniziale"> Barri la casella per comparire solo con l’iniziale del nome (es.: per Lorenzo, L.). Se non barra la casella il nome verrà pubblicato per esteso</label>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+			<div class="tc-input col-12 mb-4">
+				<label for="elenchi_numero">Numero telefonico</label>
+				<input type="text" name="dati[elenchi_numero]" id="elenchi_numero" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'elenchi_numero'); ?>">
+			</div>
+		
+			<div class="tc-input col-12 col-md-4 mb-4">
+				<label for="elenchi_civico">Numero civico</label>
+				<input type="text" name="dati[elenchi_civico]" id="elenchi_civico" class="form-control" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'elenchi_civico'); ?>">
+			</div>
+		</div>
 
         <div class="row">
 			<div class="tc-input col-12 col-md-8 mb-4">
@@ -143,11 +157,11 @@
                 <h4 class="titoletto smaller">Una persona che non conosce o che non ricorda il suo nome, potrebbe risalire ad esso sulla base del suo numero telefonico o di un altro suo dato. È d’accordo?</h4>
                 <div class="d-flex gap-5 justify-content-center mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="dati[elenchi_nomedanumero]" id="consensoNomeDaNumeroOK" value="1" <?php // echo $rbElenchi === "1" ? ' checked ' : ''; ?> >
+                        <input class="form-check-input" type="radio" name="dati[elenchi_nomedanumero]" id="consensoNomeDaNumeroOK" value="1" <?php echo $rbNomeDaNumero === "1" ? ' checked ' : ''; ?> >
                         <label class="form-check-label" for="consensoNomeDaNumeroOK">SI</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="dati[elenchi_nomedanumero]" id="consensoNomeDaNumeroKO" value="0" <?php // echo $rbElenchi === "0"  ? ' checked ' : ''; ?> >
+                        <input class="form-check-input" type="radio" name="dati[elenchi_nomedanumero]" id="consensoNomeDaNumeroKO" value="0" <?php echo $rbNomeDaNumero === "0"  ? ' checked ' : ''; ?> >
                         <label class="form-check-label" for="consensoNomeDaNumeroKO">NO</label>
                     </div>
                 </div>
@@ -162,11 +176,11 @@
                     Se SI, iI simbolo della bustina indicherà questa Sua scelta.</h4>
                 <div class="d-flex gap-5 justify-content-center mb-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="dati[elenchi_posta]" id="consensoPostaOK" value="1" <?php // echo $rbElenchi === "1" ? ' checked ' : ''; ?> >
+                        <input class="form-check-input" type="radio" name="dati[elenchi_posta]" id="consensoPostaOK" value="1" <?php  echo $rbPosta === "1" ? ' checked ' : ''; ?> >
                         <label class="form-check-label" for="consensoPostaOK">SI</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="dati[elenchi_posta]" id="consensoPostaKO" value="0" <?php //echo $rbElenchi === "0"  ? ' checked ' : ''; ?> >
+                        <input class="form-check-input" type="radio" name="dati[elenchi_posta]" id="consensoPostaKO" value="0" <?php echo $rbPosta === "0"  ? ' checked ' : ''; ?> >
                         <label class="form-check-label" for="consensoPostaKO">NO</label>
                     </div>
                 </div>

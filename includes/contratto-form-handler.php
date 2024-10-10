@@ -244,6 +244,7 @@ function saveDataToDb($data, $cID) {
         'elenchi_nome' => valOrNull($elenchi, 'elenchi_nome', 'str'),
         'elenchi_cognome' => valOrNull($elenchi, 'elenchi_cognome', 'str'),
         'elenchi_soloiniziale' => valOrNull($elenchi, 'elenchi_soloiniziale', 'bool'),
+        'elenchi_numero' => valOrNull($elenchi, 'elenchi_numero', 'bool'),
         'elenchi_indirizzo' => valOrNull($elenchi, 'elenchi_indirizzo', 'str'),
         'elenchi_civico' => valOrNull($elenchi, 'elenchi_civico', 'str'),
         'elenchi_citta' => valOrNull($elenchi, 'elenchi_citta', 'str'),

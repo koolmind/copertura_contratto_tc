@@ -315,6 +315,7 @@ class PangeaTerrecablateAddons {
             elenchi_nome varchar(50) DEFAULT '',
             elenchi_cognome varchar(50) DEFAULT '',
             elenchi_soloiniziale tinyint(1) NOT NULL DEFAULT 0,
+            elenchi_numero varchar(20) DEFAULT '',
             elenchi_indirizzo varchar(100) DEFAULT '',
             elenchi_civico varchar(10) DEFAULT '',
             elenchi_citta varchar(50) DEFAULT '',

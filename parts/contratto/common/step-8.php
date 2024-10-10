@@ -1,6 +1,8 @@
 <?php 
     global $sesso, $docs, $ruoli;
 
+    showSteps(8);
+
     $offerta = $this->contrattoData['offerta'];
     $anagrafica = $this->contrattoData['anagrafica'];
     $attivazione = $this->contrattoData['attivazione'];
@@ -9,16 +11,43 @@
     $gdpr = $this->contrattoData['gdpr'];
     $pagamento = $this->contrattoData['pagamento'];
 
+    // Output per la parte degli elenchi
+    $elenchi = $this->contrattoData['elenchi'];
+    $strElenchi = "<div class='col-12'>Il cliente ";
+    $strElenchi .= $elenchi['elenchi_consenso'] ? "<b>DESIDERA</b>" : "<b>NON DESIDERA</b>" ;
+    $strElenchi .= " che il suo nome sia presente nei nuovi elenchi telefonci.</div>";
+    $servAbb = $elenchi['elenchi_servabbonati'] ? "DESIDERA" : "NON DESIDERA";
+    $strElenchi .= sprintf("<div class='col-12'>Il cliente <b>%s</b> che i suoi dati vengano comunicati, su richiesta, da parte di un Servizio Abbonati.</div>", $servAbb);
+    
+    $datiElenco = "";
+    $datiElenco .= $elenchi['elenchi_cognome'] ? "<div class='col-12 col-md-4'>Cognome/Rag.Sociale: <b>{$elenchi['elenchi_cognome']}</b></div>" : "";
+    $datiElenco .= $elenchi['elenchi_nome'] ? "<div class='col-12 col-md-4'>Nome: <b>{$elenchi['elenchi_nome']}</b></div>" : "";
+    $datiElenco .= $elenchi['elenchi_soloiniziale'] ? "<div class='col-12 col-md-4'>Solo Iniziale: <b>SI</b></div>": "";
+    $datiElenco .= $elenchi['elenchi_numero'] ? "<div class='col-12'>Numero tel.: <b>{$elenchi['elenchi_numero']}</b></div>" : "";
+
+    $addr = "";
+    $addr .= $elenchi['elenchi_indirizzo'] ? "Indirizzo: <b>{$elenchi['elenchi_indirizzo']}</b>" : "";
+    $addr .= $elenchi['elenchi_civico'] ? " n. <b>{$elenchi['elenchi_civico']}</b>" : "";
+    $addr .= $elenchi['elenchi_cap'] ? ", <b>{$elenchi['elenchi_cap']}</b>" : "";
+    $addr .= $elenchi['elenchi_citta'] ? " - <b>{$elenchi['elenchi_citta']}</b>  " : "";    
+    $addr .= $elenchi['elenchi_provincia'] ? "<b>({$elenchi['elenchi_provincia']})</b>" : "";
+    
+    $altriDatiElenco = "";
+    $altriDatiElenco .= $elenchi['elenchi_titolo'] ? "<div class='col-12'>Titolo di studio/Specializzazione: <b>{$elenchi['elenchi_titolo']}</b></div>" : "";
+    $altriDatiElenco .= $elenchi['elenchi_titolo'] ? "<div class='col-12'>Professione/Attività: <b>{$elenchi['elenchi_professione']}</b></div>" : "";
+    
+    $strElenchi .= $datiElenco !="" ? "<hr class='my-2' /><div class='col-12'><em>Dati da pubblicare:</em></div>{$datiElenco}": "";
+    $strElenchi .= $addr !="" ? "<div class='col-12'>{$addr}</div>": "";
+    $strElenchi .= $altriDatiElenco !="" ? "<hr class='my-2' /><div class='col-12'><em>Dati aggiuntivi:</em></div> {$altriDatiElenco}<br>": "";
+
     $isAzienda = (bool) ($offerta['target']=='aziende');
 
-    showSteps(8);
+    
 
 ?>
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">
     <input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
-    <!-- <input type="hidden" id="section" name="section" value="riepilogo"> -->
-    <!-- <input type="hidden" id="tipocli" name="tipocli" value="aziende"> -->
    
     <fieldset id="fields-riepilogo" class="mt-3">
         <legend>Controlla i dati inseriti</legend>
@@ -307,7 +336,7 @@
                     </div>                    
                 </div>
 
-                <div class="gdpr riepilogo-box">
+                <div class="pagamento riepilogo-box">
                     <h4 class="titolo">MODALITÀ DI PAGAMENTO</h4>    
                     <div class="row px-2">
                         <div class="col-12">
@@ -357,9 +386,22 @@
                             <b>Recapito telefonico alternativo: </b> <?php echo $pagamento['sdd_titolare_recapito'];?>
                         </div>
                         <?php endif; ?>
+                    </div>                    
+                </div>
 
-
-
+                <div class="elenchi riepilogo-box">
+                    <h4 class="titolo">INSERIMENTO NEL DB UNICO ELENCHI TELEFONICI</h4>    
+                    
+                    <div class="row px-2">
+                        <?php echo $strElenchi; ?>
+                        
+                        <hr class="my-2" />
+                        <div class="col-12">
+                            Il cliente: <b><?php echo $elenchi['elenchi_nomedanumero'] == '1' ? "DESIDERA ": "NON DESIDERA" ?></b> che si possa risalire al suoi nome a partire da altri dati.
+                        </div>
+                        <div class="col-12">
+                            Il cliente: <b><?php echo $elenchi['elenchi_posta'] == '1' ? "DESIDERA ": "NON DESIDERA" ?></b> ricevere pubblicità cartacea per posta.
+                        </div>
                     </div>                    
                 </div>
 

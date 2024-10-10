@@ -3,6 +3,7 @@
     $cbAccettazioneContratto = (bool) tcGetFieldValue($fields,"accettazione_contratto",false);
     $cbFirmaContratto = (bool) tcGetFieldValue($fields,"firma_contratto",false);
     $cbApprovazioneArticoliContratto = (bool) tcGetFieldValue($fields,"approvazione_articoli_contratto",false);
+    
     showSteps(9);
 ?>
 <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">

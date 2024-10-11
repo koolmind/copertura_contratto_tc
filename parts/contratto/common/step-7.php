@@ -99,12 +99,7 @@
 			<div class="tc-input col-12 mb-4">
 				<label for="elenchi_numero">Numero telefonico</label>
 				<input type="text" name="dati[elenchi_numero]" id="elenchi_numero" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'elenchi_numero'); ?>">
-			</div>
-		
-			<div class="tc-input col-12 col-md-4 mb-4">
-				<label for="elenchi_civico">Numero civico</label>
-				<input type="text" name="dati[elenchi_civico]" id="elenchi_civico" class="form-control" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'elenchi_civico'); ?>">
-			</div>
+			</div>		
 		</div>
 
         <div class="row">

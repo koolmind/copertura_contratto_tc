@@ -111,7 +111,7 @@ function generate_contratto_pdf($cuid) {
 
     $arrOpzioni = maybe_unserialize($cnt->opzioni);
     $strOpzioni = "";
-    if(count($arrOpzioni) > 0){
+    if(is_array($arrOpzioni) && count($arrOpzioni) > 0){
         $strOpzioni .= '<tr><td colspan="2" style="margin-top:5mm;font-weight:bold; vertical-align:middle;">OPZIONI</td></tr>';
 
         foreach($arrOpzioni as $idx => $opt) {

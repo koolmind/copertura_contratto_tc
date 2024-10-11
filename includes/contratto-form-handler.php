@@ -129,6 +129,8 @@ function saveDataToDb($data, $cID) {
     $elenchi = $data['elenchi'];
     $opzioni = maybe_serialize($offerta['opzioni']);
 
+    error_log("Inizio salvataggio Contratto");
+
     $toSave = array(
         'codice' => $cID,
         'target' => valOrNull($offerta, 'target', 'str'),
@@ -234,8 +236,17 @@ function saveDataToDb($data, $cID) {
         'data_proposta_contratto' => date("Y-m-d H:i:s")
     );
 
-    $wpdb->insert($table_contratti, $toSave);
+    $R1 = $wpdb->insert($table_contratti, $toSave);
+
+    if ($wpdb->last_error) {
+         error_log("Errore MySQL durante l'inserimento: " . $wpdb->last_error);
+     } else {
+         error_log("Nessun errore MySQL riportato, ma nessuna riga inserita");
+     }
+
+     error_log('Query SQL generata: ' . $wpdb->last_query);
     
+    error_log("Inizio salvataggio Dati Elenco");
     // SALVO I DATI PER GLI ELENCHI
     $toSaveElenchi = array(
         'codice' => $cID,
@@ -257,7 +268,7 @@ function saveDataToDb($data, $cID) {
         'data_compilazione' => date("Y-m-d H:i:s")
     );
 
-    $wpdb->insert($table_elenchi, $toSaveElenchi);
+    $R2 = $wpdb->insert($table_elenchi, $toSaveElenchi);
 
 
 
@@ -300,8 +311,6 @@ function handle_contratto_aziende() {
 
         $data['step'] = intval($data['step']) + 1;
         
-        //if($data['step'] > 9) $data['step'] = 9;
-
         //else 
         $data['path'][] = $data['step'];
 
@@ -313,8 +322,9 @@ function handle_contratto_aziende() {
     // IN OGNI CASO RICARICO LA PAGINA AL GIUSTO STEP e AGGIORNO IL TRANSIENT
     set_transient( $contrattoUID, $data, 0);
 
-    // Se sono allo step 9, devo salvare i dati sul DB! 
-    if( $data['step'] == 9 ){
+    // Se sono allo step 10, devo salvare i dati sul DB! 
+    if( $data['step'] == 10 ){
+        error_log('Siamo allo step 10');
         saveDataToDb($data, $contrattoUID);
     } 
     // ... poi redirect
@@ -336,6 +346,18 @@ function getCapFromDB($provincia, $comune) {
 
     return $cap;
 }
+
+function getProvFromDB($provincia) {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'comuni_cap';
+
+    $sql = $wpdb->prepare("SELECT sigla_provincia FROM {$table_name} WHERE denominazione_provincia=%s LIMIT 0,1", array($provincia));
+
+    $prv = $wpdb->get_var($sql); // prendo il la prima Provincia, nel caso ce ne fossero più di una
+
+    return $prv;
+}
+
 
 function fixAccents($text) {
     // Array delle sostituzioni

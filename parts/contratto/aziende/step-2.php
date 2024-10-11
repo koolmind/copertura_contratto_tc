@@ -13,9 +13,9 @@
         <legend>2. Indirizzo di attivazione e fornitura dei servizi</legend>
         <h4 class="titoletto">Conferma i tuoi dati, verificando con attenzione il CAP.</h4>
 
-        <div class="d-flex justify-content-end my-3">
+        <!-- <div class="d-flex justify-content-end my-3">
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i> stesso indirizzo sede</button>
-        </div>
+        </div> -->
 
         <div class="row">
             <div class="col-12 col-md-8 mb-4">

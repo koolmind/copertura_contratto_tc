@@ -50,13 +50,14 @@ class ContrattoOnLineShortcode {
                 $prv = fixAccents(strtolower(sanitize_text_field($_POST["cop_provincia"])));
 
                 $Cap = getCapFromDB($prv,$com);
+                $siglaProv = getProvFromDB($prv);
                 
                 $dati_attivazione = array(
                     'attivazione_indirizzo' => sanitize_text_field($_POST["cop_indirizzo"]),
                     'attivazione_civico'    => sanitize_text_field($_POST["cop_civico"]),
                     'attivazione_citta'     => sanitize_text_field($_POST["cop_citta"]),
                     'attivazione_cap'       => $Cap ? $Cap  : '00000',
-                    'attivazione_provincia' => sanitize_text_field($_POST["cop_provincia"]),
+                    'attivazione_provincia' => $siglaProv ? $siglaProv : '',
                 );
         
                 // update data

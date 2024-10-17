@@ -19,14 +19,16 @@
  if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
  $upload_dir = wp_upload_dir();
- $contratti_dir = $upload_dir['basedir'] . '/tcrs-contratti';
- $contratti_url = $upload_dir['baseurl'] . '/tcrs-contratti';
+ $contratti_dir = $upload_dir['basedir'] . '/tcrs-contratti/';
+ $contratti_url = $upload_dir['baseurl'] . '/tcrs-contratti/';
 
  define ('TC_ADDONS_ROOT', trailingslashit( __DIR__) );
  define ('TC_ADDONS_ROOT_URL', plugin_dir_url(__FILE__));
  define ('TC_ADDONS_CONTRATTI_DIR', $contratti_dir); 
  define ('TC_ADDONS_CONTRATTI_URL', $contratti_url); 
  define ('TC_ADDONS_PLACEHOLDER_ID', 4034);
+ define ('FPDF_FONTPATH', TC_ADDONS_ROOT . 'vendor/fpdf/font/');
+ 
 
  
  include_once __DIR__ .'/shortcodes/class-offers-shortcode.php';

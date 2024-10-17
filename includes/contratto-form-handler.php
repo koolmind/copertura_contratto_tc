@@ -95,7 +95,7 @@ function valOrNull($section, $item, $type) {
     }
 
     if($type === 'date') {
-        return implode("-", explode("/", $section[$item]) );
+        return implode("-", array_reverse(explode("/", $section[$item]) ) );
     }
 
     if($type === 'price') {
@@ -152,6 +152,7 @@ function saveDataToDb($data, $cID) {
         'cliente_email' => valOrNull($anagr, 'cliente_email', 'str'),
         'cliente_telefono' => valOrNull($anagr, 'cliente_telefono', 'str'),
         'cliente_cellulare' => valOrNull($anagr, 'cliente_cellulare', 'str'),
+        'cliente_pec' => valOrNull($anagr, 'cliente_pec', 'str'),
         'cliente_cognome' => valOrNull($anagr, 'cliente_cognome', 'str'),
         'cliente_nome' => valOrNull($anagr, 'cliente_nome', 'str'),
         'cliente_sesso' => valOrNull($anagr, 'cliente_sesso', 'int'),

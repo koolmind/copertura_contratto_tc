@@ -69,10 +69,6 @@ $col = array();
 $col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['rag_sociale']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
-// $col = array();
-// $col[] = array('text' => decodeUTF8('Nome: '. strtoupper($cnt['nome_azienda']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-// $columns[] = $col;
-
 $col = array();
 $col[] = array('text' => decodeUTF8('Sede Via/Piazza: '. strtoupper($cnt['azienda_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['azienda_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
@@ -159,8 +155,6 @@ $columns[] = $col;
 $pdf->WriteTable($columns);
 $columns = null;
 
-/*
-
 $pdf->Ln(1);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',6);
@@ -173,33 +167,50 @@ $pdf->MultiCell(0,$lineHeight, '2. Indirizzi');
 $pdf->Ln(2);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',10);
-$pdf->MultiCell(0,$lineHeight, 'INDIRIZZO DI ATTIVAZIONE E FORNITURA DEI SERVIZI (da compialare se diverso da quello della sede):');
+$pdf->MultiCell(0,$lineHeight, 'INDIRIZZO DI ATTIVAZIONE E FORNITURA DEI SERVIZI');
 
 $pdf->SetFont('FFDin','',10);
 $pdf->SetTextColor(0,0,0);
 
 $col = array();
-$col[] = array('text' => decodeUTF8('Indirizzo Via/Piazza: '. strtoupper($cnt['indirizzo_attivazione']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['numero_civico_attivazione']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Indirizzo Via/Piazza: '. strtoupper($cnt['attivazione_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['attivazione_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['citta_attivazione']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['provincia_attivazione']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['cap_attivazione']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['attivazione_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['attivazione_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['attivazione_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
 $pdf->WriteTable($columns);
 $columns = null;
 
 
+// ----	PAGINA 2 ----
 
+// Offerta e accesso
+switch ($cnt['tipo_accesso']) {
+    case 'TCRS_GPON':
+    case 'OF_FTTH':
+    case 'VULA FTTH':
+    case 'Bitstream NGA FTTH':
+        $specLabel = " FTTH";
+            break;    
+    case 'Bitstream Ethernet':
+        $specLabel = " ADSL";
+            break;    
+    default:
+        $specLabel = " FTTC";
+        break;
+}
 
-// 	PAGINA 2
+$nomeCompletoOfferta = $cnt['nomeofferta'] . $specLabel;
+$opzioni = $cnt['opzioni'] !== null ? maybe_unserialize($cnt['opzioni']) : null;
 
 $pdf->AddPage();
-$pdf->Image($header_image, 0, 5, 210,25.7);
-$pdf->Image($footer_image, 0, 278, 210,16);
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(33);
 
@@ -210,39 +221,61 @@ $pdf->MultiCell(0,$lineHeight, '3. Prodotti e Servizi richiesti');
 $pdf->Ln(3);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','B',11);
-$pdf->MultiCell(0,$lineHeight, 'SERVIZI INTERNET* E TELEFONO TERRECABLATE');
+$pdf->MultiCell(0,$lineHeight, 'SERVIZI INTERNET E TELEFONO TERRECABLATE');
 $pdf->SetTextColor(0,0,0);
-$pdf->MultiCell(0,$lineHeight, decodeUTF8( $contratti_strings[$cnt['offerta_selezionata']] ) );
-
-if ($cnt['offerta_selezionata'] == 'myofficeisdn'):
-
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Tipo di borchia: '. strtoupper($cnt['borchia']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Q.ta numeri aggiuntivi per servizio: '. strtoupper($cnt['numeri_isdn']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
-	
-	$pdf->WriteTable($columns);
-	$columns = null;
-
-elseif ($cnt['offerta_selezionata'] == 'myofficefax'):
-
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Email sul quale ricevere il fax: '. strtoupper($cnt['fax_email']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Nome con cui comparire nel fax: '. strtoupper($cnt['fax_nome']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
-
-	$pdf->WriteTable($columns);
-	$columns = null;
-
-else:
-	$pdf->Ln(2);
-	$pdf->SetTextColor(0, 86, 122);
-	$pdf->SetFont('FFDin','',6);
-	$pdf->MultiCell(0,$lineHeight, decodeUTF8("* Per coloro che scelgono uno dei prodotti MyOffce Fibra il servizio verrà attivato con il proflo 100 Mega (download 100 Mbps, upload 20 Mbps, BMG 256 Kbps), qualora l'opzione Fibra non fosse disponibile il servizio verrà attivato in tecnologia ADSL con una velocità di navigazione fno a 20 Mega (download 20 Mbps, upload 1 Mbps, BMG 128 Kbps) o fno alla massima velocità disponibile sulla tua centrale. La velocità non è garantita poiché è dipendente da molti fattori quali, tra gli altri, la distanza dalla centrale, la qualità del doppino ed il livello di congestione della rete") );
-endif;
+$pdf->MultiCell(0,$lineHeight, "Sarà attivata l'offerta {$nomeCompletoOfferta}"); 
 
 $pdf->Ln(4);
 
+if($opzioni):
+    $pdf->SetTextColor(0, 86, 122);
+    $pdf->SetFont('FFDin','',10);
+    $pdf->MultiCell(0,$lineHeight, 'OPZIONI AGGIUNTIVE');
+
+    $pdf->SetFont('FFDin','',10);
+    $pdf->SetTextColor(0,0,0);
+    
+    $columns = null;
+    foreach($opzioni as $opt):
+        $q = intval($opt['qty']);
+        $p = number_format(floatval($q * $opt['cost']), 2,',','.');
+        $txt  = "- " . strtoupper($opt['name']);
+        $txt .= $q > 1 ? " ( x{$q} )": "";
+        $txt .= ": +{$p} euro";
+        $col = array();
+        $col[] = array('text' => decodeUTF8( $txt ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+        $columns[] = $col;
+    endforeach;
+
+    $pdf->WriteTable($columns);
+    $columns = null;
+endif;
+
+$pdf->Ln(4);
+$pdf->SetTextColor(0, 86, 122);
+$pdf->SetFont('FFDin','',10);
+$pdf->MultiCell(0,$lineHeight, 'INDIRIZZO DI INVIO NUOVO DISPOSITIVO');
+
+$pdf->SetFont('FFDin','',10);
+$pdf->SetTextColor(0,0,0);
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Indirizzo Via/Piazza: '. strtoupper($cnt['servizi_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['servizi_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['servizi_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['servizi_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['servizi_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$pdf->WriteTable($columns);
+$columns = null;
+
+
+$pdf->Ln(4);
+/*
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','B',11);
 $pdf->MultiCell(0,$lineHeight, 'INDIRIZZO INVIO MODEM');
@@ -424,6 +457,7 @@ if($servizi>0):
 else:
 	$pdf->MultiCell(0,$lineHeight, 'nessun servizio aggiuntivo.');
 endif;
+*/
 
 $pdf->Ln(10);
 $pdf->SetTextColor(235, 110, 43);
@@ -431,18 +465,37 @@ $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, '4. Stato attuale linee telefoniche');
 
 $pdf->SetTextColor(0,0,0);
+
+$linea_port = $cnt['linea_portability'];
+$linea_new = $cnt['linea_nuova'];
+$linea_mig = $cnt['linea_migrazione'];
+
+if($linea_new) {
+    $txt = "Il cliente richiede l'ATTIVAZIONE di un a NUOVA LINEA.";
+    if($linea_port) 
+        $txt .= "Richiede inoltre la PORTABILITY del/i numero/i telefonico/i.";
+}
+
+if($linea_mig) {
+    $txt = "Il cliente richiede la MIGRAZIONE della PROPRIA LINEA, con PORTABILITY del/i numero/i telefonico/i.";
+}
+
+$pdf->Ln(4);
+$pdf->SetFont('FFDin','B',10);
+$pdf->MultiCell(0,$lineHeight, decodeUTF8($txt),0,'L' );
+
+$pdf->Ln(4);
+
 $pdf->SetFont('FFDin','',10);
-$pdf->MultiCell(0,$lineHeight, decodeUTF8("Per poter effettuare l'attivazione delle linee telefoniche di Terrecablate è necessario indicare se la linea è una linea telefonica attiva, una linea telefonica che è stata attiva ma che non lo è adesso o se è necessario portare una nuova linea") );
-$pdf->SetFont('FFDin','IB',10);
-$pdf->MultiCell(0,$lineHeight, decodeUTF8($contratti_strings[$cnt['stato_attuale_linee']]),0,'C' );
+$pdf->MultiCell(0,$lineHeight, decodeUTF8("Si specifica che non sarà possibile effettuare la migrazione diretta nel caso in cui il servizio attualmente attivo sia basato su linea di accesso in rame (solo voce o xDSL) ed il servizio richiesto a Terrecablate sia basato su linea di accesso in fibra (FTTH), o viceversa. In questo caso verrà effettuata l'attivazione del servizio richiesto su una nuova linea e l'eventuale portabilità del numero (Number Portability) sarà effettuata in un momento successivo rispetto all'attivazione della nuova linea. In questo caso, resterà in carico al titolare della linea attualmente attiva l'eventuale comunicazione di disdetta da inviare all'attuale operatore, successivamente all'avvenuto passaggio del numero.") );
 
 
-
+/*
  // 	PAGINA 3
 
 $pdf->AddPage();
-$pdf->Image($header_image, 0, 5, 210,25.7);
-$pdf->Image($footer_image, 0, 278, 210,16);
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(33);
 
@@ -454,16 +507,24 @@ $pdf->SetTextColor(0,0,0);
 $pdf->SetFont('FFDin','',10);
 $temp = ($cnt['stato_attuale_linee'] == 'stato_attuale_nuovalinea') ? strtoupper(decodeUTF8($cnt['indirizzo_nuova_linea'])) : "-";
 $pdf->MultiCell(0,$lineHeight, 'Indirizzo nuova linea: '. $temp );
+*/
 
 $pdf->Ln(10);
 
 $pdf->SetTextColor(235, 110, 43);
 $pdf->SetFont('FFDin','',14);
-$pdf->MultiCell(0,$lineHeight, '6. Tipologia linea e Mantenimento del numero (Number Portability)');
-$pdf->Ln(4);
-$pdf->SetFont('FFDin','',10);
-$pdf->SetTextColor(0, 86, 122);
-$pdf->MultiCell(0,$lineHeight, decodeUTF8("Da compilare solo da parte dei titolari di linee telefoniche attualmente attive") );
+$pdf->MultiCell(0,$lineHeight, '5. Tipologia linea e Mantenimento del numero (Number Portability)');
+// $pdf->Ln(4);
+// $pdf->SetFont('FFDin','',10);
+// $pdf->SetTextColor(0, 86, 122);
+// $pdf->MultiCell(0,$lineHeight, decodeUTF8("Da compilare solo da parte dei titolari di linee telefoniche attualmente attive") );
+
+$col = array();
+
+if($cnt['linea_numero_1']) {
+    $col[] = array('text' => decodeUTF8('NUMERO #1'), 'width' => '30', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+}
+---------TABELLA MIGRAZIONE ------
 
 $pdf->Ln(1);
 $col = array();
@@ -613,8 +674,8 @@ $columns = null;
 
 // PAG 4
 $pdf->AddPage();
-$pdf->Image($header_image, 0, 5, 210,25.7);
-$pdf->Image($footer_image, 0, 278, 210,16);
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(35);
 
@@ -792,8 +853,8 @@ $pdf->MultiCell(0,$lineHeight, "NOTE: ");
 
 // PAGINA 5 
 $pdf->AddPage();
-$pdf->Image($header_image, 0, 5, 210,25.7);
-$pdf->Image($footer_image, 0, 278, 210,16);
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(35);
 
@@ -932,8 +993,8 @@ if($cnt['modalita_pagamento'] == 'pagamento_sdd'):
 //	PAGINA 6 - SOLO PER BONIFICO
  
 $pdf->AddPage();
-$pdf->Image($header_image, 0, 5, 210,25.7);
-$pdf->Image($footer_image, 0, 278, 210,16);
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(35);
 

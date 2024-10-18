@@ -1,5 +1,8 @@
 <?php 
-class CUSTOMPDF extends FPDF { 
+
+use setasign\Fpdi\Fpdi;
+
+class CUSTOMPDF extends Fpdi { 
 
     function WriteTable($tcolums) {
       // go through all colums

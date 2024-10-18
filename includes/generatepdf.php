@@ -1,32 +1,7 @@
 <?php
-//require_once(TC_ADDONS_ROOT . 'vendor/tcpdf/tcpdf.php');
-
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/fpdf.php');
-// require_once(TC_ADDONS_ROOT . 'vendor/FPDF/fpdi.php');
-// require_once(TC_ADDONS_ROOT . 'vendor/FPDF/exfpdf.php');
+require_once(TC_ADDONS_ROOT . 'vendor/fpdi/src/autoload.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/custompdf.php');
-
-// class MYPDF extends TCPDF {
-
-//     protected $headerContent;
-//     protected $footerContent;
-
-//     public function __construct($orientation='P', $unit='mm', $format='A4', $unicode=true, $encoding='UTF-8', $diskcache=false, $headerContent='', $footerContent) {
-//         parent::__construct($orientation, $unit, $format, $unicode, $encoding, $diskcache);
-//         $this->headerContent = $headerContent;
-//         $this->footerContent = $footerContent;
-//     }
-
-
-//     //Page header
-//     public function Header() {
-//         $this->Image($this->headerContent, 10, 10, 190, 25 , '', '', 'T', false, 300, '', false, false, 0,false, false, false);
-//     }
-
-//     public function Footer() {
-//         $this->Image($this->footerContent, 10, 270, 190, 25 , '', '', 'T', true, 300, '', false, false, 0,false, false, false);
-//     }
-// }
 
 function decodeUTF8($text)
     {
@@ -58,6 +33,11 @@ function showDocumento ($doc) {
 
 function showRuolo ($role) {
     return $ruoli[$role];
+}
+
+function showMetodoPagamento ($pag) {
+    $modi = array( "cc"=>"Carta di credito", "sdd" => "Addebito automatico in conto corrente (SDD)" );
+    return strtoupper($modi[$pag]);
 }
 
 function money($val){
@@ -101,6 +81,8 @@ function generate_contratto_pdf($cuid) {
     
     $fileFooterId = get_option("contratto_footer_".$cnt['target']."_image", TC_ADDONS_PLACEHOLDER_ID);
     $fileFooterPath = get_attached_file( $fileFooterId );
+
+    $fileContratto = get_option("contratto_".$cnt['target']."_pdf_file");
     
     include(TC_ADDONS_ROOT .  "parts/pdf/pdf-{$cnt['target']}.php");
 

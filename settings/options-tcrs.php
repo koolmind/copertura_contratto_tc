@@ -24,8 +24,12 @@ function tcrs_option_page() {
             $imgHeaderAzienda = wp_get_attachment_url( $imgHeaderAziendaId );
             $imgFooterAzienda = wp_get_attachment_url( $imgFooterAziendaId );
 
-            $pdfContrattoHome = get_option('contratto_residenziali_pdf_file', '');
-            $pdfContrattoAzienda = get_option('contratto_aziende_pdf_file', '');
+
+            $pdfContrattoHomeId = get_option('contratto_residenziali_pdf_file', '');
+            $pdfContrattoAziendaId = get_option('contratto_aziende_pdf_file', '');
+
+            $pdfContrattoHome = wp_get_attachment_url($pdfContrattoHomeId);
+            $pdfContrattoAzienda = wp_get_attachment_url($pdfContrattoAziendaId);
             //$pdfContrattoAziendaFtth = get_option('contratto_aziendeftth_pdf_file', '');
 
             ?>
@@ -36,7 +40,7 @@ function tcrs_option_page() {
                     <th scope="row"><label for="contratto_header_residenziali_image">Testata HOME:</label></th>
                     <td>
                         <img src="<?php echo esc_url( $imgHeaderHome ) ?>" alt="Immagine di testata Contratto HOME" height="130" id="contratto_header_residenziali_preview" /><br />
-                        <input type="text" name="contratto_header_residenziali_image" id="contratto_header_residenziali_image" value="<?php echo esc_attr( $imgHeaderHomeId ); ?>" />
+                        <input type="hidden" name="contratto_header_residenziali_image" id="contratto_header_residenziali_image" value="<?php echo esc_attr( $imgHeaderHomeId ); ?>" />
                         <input type="button" class="button button-secondary" value="Carica Immagine" id="header_residenziali_image_btn" data-contratto-image="header_residenziali">
                     </td>
                 </tr>
@@ -45,7 +49,7 @@ function tcrs_option_page() {
                     <th scope="row"><label for="contratto_footer_residenziali_image">Footer HOME:</label></th>
                     <td>
                         <img src="<?php echo esc_url( $imgFooterHome ) ?>" alt="Immagine di Footer Contratto HOME" height="130" id="contratto_footer_residenziali_preview" /><br />
-                        <input type="text" name="contratto_footer_residenziali_image" id="contratto_footer_residenziali_image" value="<?php echo esc_attr( $imgFooterHomeId  ); ?>" />
+                        <input type="hidden" name="contratto_footer_residenziali_image" id="contratto_footer_residenziali_image" value="<?php echo esc_attr( $imgFooterHomeId  ); ?>" />
                         <input type="button" class="button button-secondary" value="Carica Immagine" id="footer_residenziali_image_btn" data-contratto-image="footer_residenziali">
                     </td>
                 </tr>
@@ -54,7 +58,7 @@ function tcrs_option_page() {
                     <th scope="row"><label for="contratto_header_aziende_image">Testata OFFICE:</label></th>
                     <td>
                         <img src="<?php echo esc_url( $imgHeaderAzienda ) ?>" alt="Immagine di Testata Contratto OFFICE" height="130" id="contratto_header_aziende_preview" /><br />
-                        <input type="text" name="contratto_header_aziende_image" id="contratto_header_aziende_image" value="<?php echo esc_attr( $imgHeaderAziendaId); ?>" />
+                        <input type="hidden" name="contratto_header_aziende_image" id="contratto_header_aziende_image" value="<?php echo esc_attr( $imgHeaderAziendaId); ?>" />
                         <input type="button" class="button button-secondary" value="Carica Immagine" id="header_aziende_image_btn" data-contratto-image="header_aziende">
                     </td>
                 </tr>
@@ -63,7 +67,7 @@ function tcrs_option_page() {
                     <th scope="row"><label for="contratto_footer_aziende_image">Footer OFFICE:</label></th>
                     <td>
                         <img src="<?php echo esc_url( $imgFooterAzienda ) ?>" alt="Immagine di Footer Contratto OFFICE" height="130" id="contratto_footer_aziende_preview" /><br />
-                        <input type="text" name="contratto_footer_aziende_image" id="contratto_footer_aziende_image" value="<?php echo esc_attr( $imgFooterAziendaId ); ?>" />
+                        <input type="hidden" name="contratto_footer_aziende_image" id="contratto_footer_aziende_image" value="<?php echo esc_attr( $imgFooterAziendaId ); ?>" />
                         <input type="button" class="button button-secondary" value="Carica Immagine" id="footer_aziende_image_btn" data-contratto-image="footer_aziende">
                     </td>
                 </tr>       
@@ -78,8 +82,8 @@ function tcrs_option_page() {
                         <a href="<?php echo esc_attr($pdfContrattoHome); ?>" target="_blank" id="contratto_residenzali_pdf_preview" style="margin-bottom:16px;">
                             <img src="<?php echo ($pdfContrattoHome) ? $filePdf_placeholder : $fileMissing_placeholder; ?>" alt="file" width="42"/>
                         </a>
-                        <input type="hidden" name="contratto_residenzali_pdf_file" id="contratto_residenzali_pdf_file" value="<?php echo esc_attr($pdfContrattoHome); ?>" class="regular-text"><br>
-                        <input type="button" id="home_pdf_file_btn" class="button" value="Seleziona pdf" data-contratto-file="home_pdf">
+                        <input type="hidden" name="contratto_residenziali_pdf_file" id="contratto_residenziali_pdf_file" value="<?php echo esc_attr($pdfContrattoHomeId); ?>" class="regular-text"><br>
+                        <input type="button" id="residenziali_pdf_file_btn" class="button" value="Seleziona pdf" data-contratto-file="residenziali_pdf">
                     </td>
                 </tr>
 
@@ -89,8 +93,8 @@ function tcrs_option_page() {
                         <a href="<?php echo esc_attr($pdfContrattoAzienda); ?>" target="_blank" id="contratto_aziende_pdf_preview" style="margin-bottom:16px;">
                             <img src="<?php echo ($pdfContrattoAzienda) ? $filePdf_placeholder : $fileMissing_placeholder; ?>" alt="file"  width="42"/>
                         </a>
-                        <input type="hidden" name="contratto_aziende_pdf_file" id="contratto_aziende_pdf_file" value="<?php echo esc_attr($pdfContrattoHome); ?>" class="regular-text"><br>
-                        <input type="button" id="azienda_pdf_file_btn" class="button" value="Seleziona pdf" data-contratto-file="aziende_pdf">
+                        <input type="hidden" name="contratto_aziende_pdf_file" id="contratto_aziende_pdf_file" value="<?php echo esc_attr($pdfContrattoAziendaId); ?>" class="regular-text"><br>
+                        <input type="button" id="aziende_pdf_file_btn" class="button" value="Seleziona pdf" data-contratto-file="aziende_pdf">
                     </td>
                 </tr>
    

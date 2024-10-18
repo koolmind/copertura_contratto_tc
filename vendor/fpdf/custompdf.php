@@ -1,10 +1,27 @@
 <?php 
 
-use setasign\Fpdi\Fpdi;
+class CUSTOMPDF extends FPDF { 
 
-class CUSTOMPDF extends Fpdi { 
+   protected $B = 0;
+   protected $I = 0;
+   protected $U = 0;
+   protected $HREF = '';
 
-    function WriteTable($tcolums) {
+   function decode_utf8($text) {
+      // Usa mb_convert_encoding se disponibile
+      if (function_exists('mb_convert_encoding')) {
+          return mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
+      }
+      // Altrimenti, usa iconv come fallback
+      else if (function_exists('iconv')) {
+          return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $text);
+      }
+      // Se nessuna delle due è disponibile, restituisci il testo originale
+      // (potrebbe causare problemi con caratteri non-ASCII)
+      return $text;
+  }
+
+   function WriteTable($tcolums) {
       // go through all colums
       for ($i = 0; $i < sizeof($tcolums); $i++)
       {
@@ -109,8 +126,7 @@ class CUSTOMPDF extends Fpdi {
    }
 
    // Computes the number of lines a MultiCell of width w will take
-   function NbLines($w, $txt)
-   {
+   function NbLines($w, $txt) {
       $cw=&$this->CurrentFont['cw'];
       if($w==0)
          $w=$this->w-$this->rMargin-$this->x; 
@@ -158,6 +174,95 @@ class CUSTOMPDF extends Fpdi {
       }
       return $nl;
    }
-        
+   
+   // -- Gestione dell'output HTML
+   function WriteHTML($html) {
+      // Parser HTML
+      $html = $this->decode_utf8($html);
+      $html = str_replace("\n",' ',$html);
+      $a = preg_split('/<(.*)>/U',$html,-1,PREG_SPLIT_DELIM_CAPTURE);
+      foreach($a as $i=>$e)
+      {
+         if($i%2==0) 
+         {
+               // Text
+               if($this->HREF)
+                  $this->PutLink($this->HREF,$e);
+               else
+                  $this->Write(5,$e);
+         }
+         else
+         {
+               // Tag
+               if($e[0]=='/')
+                  $this->CloseTag(strtoupper(substr($e,1)));
+               else
+               {
+                  // Extract attributes
+                  $a2 = explode(' ',$e);
+                  $tag = strtoupper(array_shift($a2));
+                  $attr = array();
+                  foreach($a2 as $v)
+                  {
+                     if(preg_match('/([^=]*)=["\']?([^"\']*)/',$v,$a3))
+                           $attr[strtoupper($a3[1])] = $a3[2];
+                  }
+                  $this->OpenTag($tag,$attr);
+               }
+         }
+      }
+   }
+
+   function OpenTag($tag, $attr)
+    {
+        // Opening tag
+        if($tag=='B' || $tag=='I' || $tag=='U')
+            $this->SetStyle($tag,true);
+        if($tag=='A')
+            $this->HREF = $attr['HREF'];
+        if($tag=='BR')
+            $this->Ln(5);
+    }
+
+    function CloseTag($tag)
+    {
+        // Closing tag
+        if($tag=='B' || $tag=='I' || $tag=='U')
+            $this->SetStyle($tag,false);
+        if($tag=='A')
+            $this->HREF = '';
+    }
+
+   function SetStyle($tag, $enable) {
+      // Modify style and select corresponding font
+      $this->$tag += ($enable ? 1 : -1);
+      $style = '';
+      foreach(array('B', 'I', 'U') as $s)
+      {
+         if($this->$s > 0)
+               $style .= $s;
+      }
+      $this->SetFont('',$style);
+   }
+
+   function PutLink($URL, $txt) {
+      // Put a hyperlink
+      $this->SetTextColor(0,0,255);
+      $this->SetStyle('U',true);
+      $this->Write(5,$txt,$URL);
+      $this->SetStyle('U',false);
+      $this->SetTextColor(0);
+   }
+
+   function MultiCellHTML($w, $h, $html, $border=0, $align='J', $fill=false) {
+      $this->Ln($h); // Add extra line height
+      $x = $this->GetX();
+      $y = $this->GetY();
+      $this->SetXY($x, $y - $h); // Reset position
+      $this->WriteHTML($html);
+      $this->SetXY($x, $this->GetY() + $h); // Reset position
+   }
+
+
 }
 

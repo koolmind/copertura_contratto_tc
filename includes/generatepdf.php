@@ -1,22 +1,21 @@
 <?php
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/fpdf.php');
-require_once(TC_ADDONS_ROOT . 'vendor/fpdi/src/autoload.php');
+//require_once(TC_ADDONS_ROOT . 'vendor/fpdi/src/autoload.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/custompdf.php');
 
-function decodeUTF8($text)
-    {
-        // Usa mb_convert_encoding se disponibile
-        if (function_exists('mb_convert_encoding')) {
-            return mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
-        }
-        // Altrimenti, usa iconv come fallback
-        else if (function_exists('iconv')) {
-            return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $text);
-        }
-        // Se nessuna delle due è disponibile, restituisci il testo originale
-        // (potrebbe causare problemi con caratteri non-ASCII)
-        return $text;
+function decodeUTF8($text) {
+    // Usa mb_convert_encoding se disponibile
+    if (function_exists('mb_convert_encoding')) {
+        return mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
     }
+    // Altrimenti, usa iconv come fallback
+    else if (function_exists('iconv')) {
+        return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $text);
+    }
+    // Se nessuna delle due è disponibile, restituisci il testo originale
+    // (potrebbe causare problemi con caratteri non-ASCII)
+    return $text;
+}
 
 function getSesso($sex){
     return $sex==1 ? "F" : "M";
@@ -82,7 +81,8 @@ function generate_contratto_pdf($cuid) {
     $fileFooterId = get_option("contratto_footer_".$cnt['target']."_image", TC_ADDONS_PLACEHOLDER_ID);
     $fileFooterPath = get_attached_file( $fileFooterId );
 
-    $fileContratto = get_option("contratto_".$cnt['target']."_pdf_file");
+    $fileContrattoId = get_option("contratto_".$cnt['target']."_pdf_file");
+    $fileContratto = get_attached_file( $fileContrattoId );
     
     include(TC_ADDONS_ROOT .  "parts/pdf/pdf-{$cnt['target']}.php");
 

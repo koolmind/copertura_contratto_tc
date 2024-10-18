@@ -18,10 +18,7 @@ jQuery(document).ready(function ($) {
           var image_id = uploaded_image.toJSON().id;
 
           $("#contratto_" + contrattoImgButton + "_image").val(image_id);
-          $("#contratto_" + contrattoImgButton + "_preview").attr(
-            "src",
-            image_url
-          );
+          $("#contratto_" + contrattoImgButton + "_preview").attr("src", image_url);
         });
     });
   });
@@ -32,6 +29,7 @@ jQuery(document).ready(function ($) {
       e.preventDefault();
 
       var contrattoFileButton = jQuery(this).data("contratto-file");
+      console.log(contrattoFileButton);
 
       var filePdf = wp
         .media({
@@ -41,14 +39,13 @@ jQuery(document).ready(function ($) {
         .open()
         .on("select", function (e) {
           var uploaded_file = filePdf.state().get("selection").first();
+          console.log(uploaded_file.toJSON().id);
           var file_url = uploaded_file.toJSON().url;
           var file_title = uploaded_file.toJSON().title;
+          var file_id = uploaded_file.toJSON().id;
 
-          $("#contratto_" + contrattoFileButton + "_file").val(file_url);
-          $("#contratto_" + contrattoFileButton + "_preview").attr(
-            "href",
-            file_url
-          );
+          $("#contratto_" + contrattoFileButton + "_file").val(file_id);
+          $("#contratto_" + contrattoFileButton + "_preview").attr("href", file_url);
           $("#contratto_" + contrattoFileButton + "_preview").text(file_title);
         });
     });

@@ -60,60 +60,45 @@ $pdf->MultiCell(0,$lineHeight, decodeUTF8("Il/La sottoscritto/a, di seguito e ne
 $pdf->Ln(8);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
-$pdf->MultiCell(0,$lineHeight, '1. Dati Anagrafici e sede legale dell\'azienda');
+$pdf->MultiCell(0,$lineHeight, '1. Dati Anagrafici e recapti del cliente');
 $pdf->Ln(2);
 $pdf->SetFont('FFDin','',10);
 $pdf->SetTextColor(0,0,0);
 
 
-$col = array();
-$col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['rag_sociale']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
+// $col = array();
+// $col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['rag_sociale']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $columns[] = $col;
 
-$col = array();
-$col[] = array('text' => decodeUTF8('Sede Via/Piazza: '. strtoupper($cnt['azienda_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['azienda_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
+// $col = array();
+// $col[] = array('text' => decodeUTF8('Sede Via/Piazza: '. strtoupper($cnt['azienda_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['azienda_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $columns[] = $col;
 
-$col = array();
-$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['azienda_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['azienda_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['azienda_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
+// $col = array();
+// $col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['azienda_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['azienda_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['azienda_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $columns[] = $col;
 
-$col = array();
-$col[] = array('text' => decodeUTF8('Partita IVA / Codice Fiscale: '. strtoupper($cnt['azienda_piva_cf']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
-
-
-
-$col = array();
-$col[] = array('text' => decodeUTF8('Email: '. strtoupper($cnt['cliente_email']) ), 'width' => '64', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$temp = @$cnt['cliente_telefono'] ? strtoupper($cnt['cliente_telefono']) : "";
-$col[] = array('text' => decodeUTF8('Tel: '.  $temp), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$temp = @$cnt['cliente_fax'] ? strtoupper($cnt['cliente_fax']) : "";
-$col[] = array('text' => decodeUTF8('Fax: '.  $temp), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
-
-$col = array();
-$col[] = array('text' => decodeUTF8('Cellulare: '. $cnt['cliente_cellulare']), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
-
-$col = array();
-$col[] = array('text' => decodeUTF8('PEC: '. $cnt['cliente_pec']), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
-
-$col = array();
-$col[] = array('text' => decodeUTF8('Codice Destinatario: '. strtoupper($cnt['azienda_cod_destinatario']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
-
-$pdf->WriteTable($columns);
-$columns = null;
+// $col = array();
+// $col[] = array('text' => decodeUTF8('Partita IVA / Codice Fiscale: '. strtoupper($cnt['azienda_piva_cf']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $columns[] = $col;
 
 
-$col = array();
-$col[] = array('text' => decodeUTF8('Ruolo: '. strtoupper($cnt['cliente_ruolo']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$columns[] = $col;
+
+// $col = array();
+// $col[] = array('text' => decodeUTF8('Email: '. strtoupper($cnt['cliente_email']) ), 'width' => '64', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $temp = @$cnt['cliente_telefono'] ? strtoupper($cnt['cliente_telefono']) : "";
+// $col[] = array('text' => decodeUTF8('Tel: '.  $temp), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+
+// $columns[] = $col;
+
+
+// $col = array();
+// $col[] = array('text' => decodeUTF8('PEC: '. $cnt['cliente_pec']), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+// $columns[] = $col;
+
 
 $col = array();
 $col[] = array('text' => decodeUTF8('Cognome: '. strtoupper($cnt['cliente_cognome']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
@@ -122,14 +107,33 @@ $col[] = array('text' => decodeUTF8('Sesso: '. getSesso($cnt['cliente_sesso']) )
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' => decodeUTF8('Data di nascita: '. showDate($cnt['cliente_data_nascita']) ), 'width' => '58', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('Luogo di nascita: '. strtoupper($cnt['cliente_luogo_nascita']) ), 'width' => '96', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['cliente_provincia_nascita']) ), 'width' => '46', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Indirizzo Via/Piazza: '. strtoupper($cnt['cliente_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['cliente_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['cliente_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['cliente_provincia']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['cliente_cap']) ), 'width' => '64', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
 $col = array();
 $col[] = array('text' => decodeUTF8('Codice Fiscale: '. strtoupper($cnt['cliente_cod_fiscale']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Cellulare: '. $cnt['cliente_cellulare']), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$temp = @$cnt['cliente_telefono'] ? strtoupper($cnt['cliente_telefono']) : "";
+$col[] = array('text' => decodeUTF8('Tel: '.  $temp), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Data di nascita: '. showDate($cnt['cliente_data_nascita']) ), 'width' => '58', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Luogo di nascita: '. strtoupper($cnt['cliente_luogo_nascita']) ), 'width' => '96', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['cliente_provincia_nascita']) ), 'width' => '46', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
 
 $col = array();
 $col[] = array('text' => decodeUTF8('Documento *: '. showDocumento($cnt['cliente_tipo_documento']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
@@ -143,14 +147,12 @@ $col[] = array('text' => decodeUTF8('Scadenza: '. showDate($cnt['cliente_doc_sca
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' => decodeUTF8('Residenza (o domicilio italiano): '. strtoupper($cnt['cliente_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['cliente_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Email: '. strtoupper($cnt['cliente_email']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['cliente_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['cliente_provincia']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['cliente_cap']) ), 'width' => '64', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('PEC**: '. strtoupper($cnt['cliente_pec'])), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('**In mancanza di una propria PEC, Terrecablate te ne fornirà una gratuitamente, compilando il modulo in calce.'), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '9', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
 $pdf->WriteTable($columns);
@@ -334,8 +336,8 @@ if($cnt["linea_portability"]):
 	if($cnt['linea_numero_1'] && $cnt['linea_codice_migrazione_1']) {
 		$txtNum = $cnt['linea_numero_1'];
 		$txtNum .= $cnt['linea_numero_2'] ? "\n{$cnt['linea_numero_2']}" : "";
-		$txtNum .= $cnt['linea_numero_3'] ? "\n{$cnt['linea_numero_3']}" : "";
-		$txtNum .= $cnt['linea_numero_4'] ? "\n{$cnt['linea_numero_4']}" : "";
+		// $txtNum .= $cnt['linea_numero_3'] ? "\n{$cnt['linea_numero_3']}" : "";
+		// $txtNum .= $cnt['linea_numero_4'] ? "\n{$cnt['linea_numero_4']}" : "";
 
 		$txtMig = $cnt['linea_codice_migrazione_1'];
 		$txtMig .= $cnt['linea_codice_migrazione_2'] ? "\n{$cnt['linea_codice_migrazione_2']}" : "";
@@ -356,35 +358,38 @@ if($cnt["linea_portability"]):
 	$pdf->SetTextColor(0, 86, 122);
 	$pdf->SetFont('FFDin','',14);
 	$pdf->MultiCell(0,$lineHeight+3, '6. Servizi di migrazione e mantenimento del numero telefonico');
+	
+	$pdf->Ln(6);
+	$pdf->MultiCell(0,$lineHeight+3, 'IL SOTTOSCRITTO');
 
 	$pdf->SetFont('FFDin','',10);
 	$pdf->SetTextColor(0, 0, 0);
 
 
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['linea_rag_sociale']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['linea_azienda_nome']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['linea_rag_sociale']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['linea_azienda_nome']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Sede Via/Piazza: '. strtoupper($cnt['linea_azienda_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['linea_azienda_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Sede Via/Piazza: '. strtoupper($cnt['linea_azienda_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['linea_azienda_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['linea_azienda_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_azienda_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['linea_azienda_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['linea_azienda_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_azienda_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['linea_azienda_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Partita IVA / Codice Fiscale: '. strtoupper($cnt['linea_azienda_piva_cf']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Partita IVA / Codice Fiscale: '. strtoupper($cnt['linea_azienda_piva_cf']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
 
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Ruolo: '. strtoupper($cnt['linea_cliente_ruolo']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Ruolo: '. strtoupper($cnt['linea_cliente_ruolo']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
 	$col = array();
 	$col[] = array('text' => decodeUTF8('Cognome: '. strtoupper($cnt['linea_cliente_cognome']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
@@ -392,31 +397,14 @@ if($cnt["linea_portability"]):
 	$col[] = array('text' => decodeUTF8('Sesso: '. getSesso($cnt['linea_cliente_sesso']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$columns[] = $col;
 
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Data di nascita: '. showDate($cnt['linea_cliente_data_nascita']) ), 'width' => '58', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Luogo di nascita: '. strtoupper($cnt['linea_cliente_luogo_nascita']) ), 'width' => '96', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_cliente_provincia_nascita']) ), 'width' => '46', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Data di nascita: '. showDate($cnt['linea_cliente_data_nascita']) ), 'width' => '58', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('Luogo di nascita: '. strtoupper($cnt['linea_cliente_luogo_nascita']) ), 'width' => '96', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_cliente_provincia_nascita']) ), 'width' => '46', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
 	$col = array();
-	$col[] = array('text' => decodeUTF8('Codice Fiscale: '. strtoupper($cnt['linea_cliente_cod_fiscale']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Nazionalità: '. strtoupper($cnt['linea_cliente_nazionalita']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
-
-
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Documento *: '. showDocumento($cnt['linea_cliente_tipo_documento']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['linea_cliente_doc_numero']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
-
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Rilasciato da: '. strtoupper($cnt['linea_cliente_doc_emittente']) ), 'width' => '110', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('il: '. showDate($cnt['linea_cliente_doc_rilascio']) ), 'width' => '45', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$col[] = array('text' => decodeUTF8('Scadenza: '. showDate($cnt['linea_cliente_doc_scadenza']) ), 'width' => '45', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
-
-	$col = array();
-	$col[] = array('text' => decodeUTF8('Residenza (o domicilio italiano): '. strtoupper($cnt['linea_cliente_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	$col[] = array('text' => decodeUTF8('Residente in Via/Piazza: '. strtoupper($cnt['linea_cliente_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['linea_cliente_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$columns[] = $col;
 
@@ -425,6 +413,22 @@ if($cnt["linea_portability"]):
 	$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_cliente_provincia']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['linea_cliente_cap']) ), 'width' => '64', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$columns[] = $col;
+
+	$col = array();
+	$col[] = array('text' => decodeUTF8('Codice Fiscale: '. strtoupper($cnt['linea_cliente_cod_fiscale']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	$col[] = array('text' => decodeUTF8('Nazionalità: '. strtoupper($cnt['linea_cliente_nazionalita']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	$columns[] = $col;
+
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Documento *: '. showDocumento($cnt['linea_cliente_tipo_documento']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['linea_cliente_doc_numero']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
+
+	// $col = array();
+	// $col[] = array('text' => decodeUTF8('Rilasciato da: '. strtoupper($cnt['linea_cliente_doc_emittente']) ), 'width' => '110', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('il: '. showDate($cnt['linea_cliente_doc_rilascio']) ), 'width' => '45', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $col[] = array('text' => decodeUTF8('Scadenza: '. showDate($cnt['linea_cliente_doc_scadenza']) ), 'width' => '45', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	// $columns[] = $col;
 
 	$pdf->WriteTable($columns);
 	$columns = null;
@@ -458,7 +462,7 @@ if($cnt["linea_portability"]):
 	$col = array();
 	$col[] = array('text' =>decodeUTF8('Data '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 	$col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
-	$col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+	$col[] = array('text' =>decodeUTF8('Firma Titolare'), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 	$columns[] = $col;
 
 	$col = array();
@@ -486,7 +490,7 @@ if($cnt["linea_portability"]):
 	$col = array();
 	$col[] = array('text' =>decodeUTF8('Data '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 	$col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
-	$col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+	$col[] = array('text' =>decodeUTF8('Firma Titolare '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 	$columns[] = $col;
 
 	$col = array();
@@ -512,7 +516,6 @@ if($cnt["linea_portability"]):
 	$pdf->MultiCell(0,$lineHeight, "NOTE: ");
 
 endif;
-
 
 // ***********	PAGINA 4 ***************
 $pdf->AddPage();
@@ -630,7 +633,7 @@ $pdf->WriteTable($columns);
 $columns = null;
 
 $pdf->Ln(6);
-$pdf->MultiCell(0,4, decodeUTF8("Il Cliente, previa attenta e specifica lettura, dichiara di aver preso visione e conoscenza ed espressamente approva, ai sensi degli articoli 1341 e 1342, C.C., i seguenti articoli delle Condizioni Generali di Contratto: 3.DATI PERSONALI DEL CLIENTE; 5. ACCETTAZIONE DELLA PROPOSTA; 6. NON ACCETTAZIONE DELLA PROPOSTA – MANCATA CONCLUSIONE DEL CONTRATTO; 8. DURATA DEL CONTRATTO; 9. MODIFICHE DEL CONTRATTO DA PARTE DI TERRECABLATE; 11. CESSIONE DEL CONTRATTO; 12 CARATTERISTICHE DEI SERVIZI; 14. OPZIONE; 19. USO PERSONALE – ABUSO DEL CONTRATTO E DEI SERVIZI – TRAFFICO ANOMALO; 21. LIMITAZIONE E FUNZIONAMENTO DEI SERVIZI; 25. OMESSO PAGAMENTO – LIMITAZIONE E SOSPENSIONE DEI SERVIZI; 27 RECESSO DI TERRECABLATE; 28. APPARATI FORNITI DA TERRECABLATE - CONDIZIONI DI NOLEGGIO 29. CESSAZIONE DEL CONTRATTO – OBBLIGHI RESTITUTORI DEL CLIENTE; 38. LIMITAZIONE DI RESPONSABILITÀ - MANLEVA") );
+$pdf->MultiCell(0,4, decodeUTF8("Il Cliente, previa attenta e specifica lettura, dichiara di aver preso visione e conoscenza ed espressamente approva, ai sensi degli articoli 1341 e 1342, C.C., i seguenti articoli delle Condizioni Generali di Contratto: 3.DATI PERSONALI DEL CLIENTE; 5. ACCETTAZIONE DELLA PROPOSTA; 6. NON ACCETTAZIONE DELLA PROPOSTA - MANCATA CONCLUSIONE DEL CONTRATTO; 8. DURATA DEL CONTRATTO; 9. MODIFICHE DEL CONTRATTO DA PARTE DI TERRECABLATE; 11. CESSIONE DEL CONTRATTO; 12 CARATTERISTICHE DEI SERVIZI; 14. OPZIONE; 19. USO PERSONALE - ABUSO DEL CONTRATTO E DEI SERVIZI - TRAFFICO ANOMALO; 21. LIMITAZIONE E FUNZIONAMENTO DEI SERVIZI; 25. OMESSO PAGAMENTO - LIMITAZIONE E SOSPENSIONE DEI SERVIZI; 27 RECESSO DI TERRECABLATE; 28. APPARATI FORNITI DA TERRECABLATE - CONDIZIONI DI NOLEGGIO 29. CESSAZIONE DEL CONTRATTO - OBBLIGHI RESTITUTORI DEL CLIENTE; 38. LIMITAZIONE DI RESPONSABILITÀ - MANLEVA") );
 
 $pdf->Ln(2);
 $col = array();

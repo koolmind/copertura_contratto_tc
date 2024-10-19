@@ -70,10 +70,12 @@ function generate_contratto_pdf($cuid) {
 
     // get contract data
     global $wpdb;
-    $table_name = $wpdb->prefix . 'contratti';
-    $cnt = $wpdb->get_row($wpdb->prepare( "SELECT * FROM {$table_name} WHERE codice = %s", $cuid ), ARRAY_A );
+    $contratti_tbl = $wpdb->prefix . 'contratti';
+    $cnt = $wpdb->get_row($wpdb->prepare( "SELECT * FROM {$contratti_tbl} WHERE codice = %s ORDER BY data_proposta_contratto DESC LIMIT 0,1", $cuid ), ARRAY_A );
 
-   
+    $elenchi_tbl = $wpdb->prefix . 'elenchi';
+    $ele = $wpdb->get_row($wpdb->prepare( "SELECT * FROM {$elenchi_tbl} WHERE codice = %s AND contratto_id=%d", array($cuid,$cnt['id']) ), ARRAY_A );
+       
     // carico header e footer in base al target
     $fileHeaderId = get_option("contratto_header_".$cnt['target']."_image", TC_ADDONS_PLACEHOLDER_ID);
     $fileHeaderPath = get_attached_file( $fileHeaderId );

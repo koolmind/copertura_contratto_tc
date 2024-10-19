@@ -58,7 +58,7 @@ $pdf->SetFillColor(244,244,244);
 $pdf->MultiCell(0,$lineHeight, decodeUTF8("Il/La sottoscritto/a, di seguito e nel prosieguo altresì \"Cliente\" così come sotto identificata/o, dichiara di aver ricevuto da Terrecablate Reti e Servizi S.r.l. completa informativa pre-contrattuale secondo il modello allegato alla presente Proposta, nonché completa informativa in ordine all'esercizio del diritto di recesso ai sensi dell'art. 49, comma 1, lett. h) del Codice del Consumo (Ripensamento), come da modello allegato, anteriormente alla presentazione della presente Proposta ed a mezzo delle presente Proposta, pertanto, propone a Terrecablate Reti e Servizi S.r.l. di concludere un contratto per la fornitura del Servizio di telefonia fissa e/o accesso internet secondo l'Offerta Commerciale in appresso indicata, alle condizioni e con le modalità risultanti dalla Proposta, e nei documenti che compongono il Contratto quali le Condizioni Generali di Contratto, la Carta dei Servizi, l'Offerta Commerciale e l'Informativa sul trattamento dei dati personali (D.Lgs 196 del 30 giungo 2003), che dichiara di ben conoscere ed accettare, in ogni loro parte."),0,'L', true);
 
 $pdf->Ln(8);
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, '1. Dati Anagrafici e sede legale dell\'azienda');
 $pdf->Ln(2);
@@ -162,7 +162,7 @@ $pdf->SetFont('FFDin','',6);
 $pdf->MultiCell(0,$lineHeight, '* Allegare fotocopia del documento indicato');
 
 $pdf->Ln(10);
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, '2. Indirizzi');
 $pdf->Ln(2);
@@ -215,7 +215,7 @@ $pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(33);
 
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, '3. Prodotti e Servizi richiesti');
 
@@ -276,7 +276,7 @@ $columns = null;
 
 
 $pdf->Ln(10);
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, '4. Stato attuale linee telefoniche');
 
@@ -309,7 +309,7 @@ $pdf->MultiCell(0,$lineHeight, decodeUTF8("Si specifica che non sarà possibile 
 if($cnt["linea_portability"]):
 	$pdf->Ln(10);
 
-	$pdf->SetTextColor(235, 110, 43);
+	$pdf->SetTextColor(0, 86, 122);
 	$pdf->SetFont('FFDin','',14);
 	$pdf->MultiCell(0,$lineHeight, '5. Tipologia linea e Mantenimento del numero (Number Portability)');
 	// $pdf->Ln(4);
@@ -353,7 +353,7 @@ if($cnt["linea_portability"]):
 	$pdf->Ln(10);
 
 	// ------------ PUNTO 6 ----------------------------
-	$pdf->SetTextColor(235, 110, 43);
+	$pdf->SetTextColor(0, 86, 122);
 	$pdf->SetFont('FFDin','',14);
 	$pdf->MultiCell(0,$lineHeight+3, '6. Servizi di migrazione e mantenimento del numero telefonico');
 
@@ -521,7 +521,7 @@ $pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(35);
 
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight+3, '7. Manifestazione di consenso al trattamento dei dati personali ( REG. EU 679/206)');
 
@@ -559,7 +559,7 @@ $columns = null;
 
 
 $pdf->Ln(10);
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight+3, decodeUTF8('8. Scelta Modalità di pagamento') );
 
@@ -576,7 +576,7 @@ endif;
 
 
 $pdf->Ln(6);
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight+3, decodeUTF8('9. Firma proposta di contratto')) ;
 
@@ -657,7 +657,7 @@ if($cnt['metodo_pagamento'] == 'sdd'):
 
 	$pdf->SetY(35);
 
-	$pdf->SetTextColor(235, 110, 43);
+	$pdf->SetTextColor(0, 86, 122);
 	$pdf->SetFont('FFDin','',14);
 	$pdf->MultiCell(0,$lineHeight, 'MOD. A - AUTORIZZAZIONE PERMANENTE DI ADDEBITO IN CONTO');
 	$pdf->Ln(1);
@@ -755,38 +755,41 @@ if($cnt['metodo_pagamento'] == 'sdd'):
 	$pdf->WriteTable($columns);
 	$columns = null;
 
-	$pdf->Ln(2);
+	// visibilità condizionale
+	if($cnt['sdd_titolare_linea']):
+		$pdf->Ln(2);
 
-	$col = array();
-	$col[] = array('text' =>'TITOLARE DEL CONTRATTO/LINEA TELEFONICA (da compilare solo se il sottoscrittore non coincide con il titolare del contratto)', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+		$col = array();
+		$col[] = array('text' =>'TITOLARE DEL CONTRATTO/LINEA TELEFONICA (da compilare solo se il sottoscrittore non coincide con il titolare del contratto)', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+		$columns[] = $col;
 
-	$col = array();
-	$temp = @$cnt['sdd_titolare_linea'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_linea']) ) : "";
-	$col[] = array('text' =>'Linea Telefonica / Contratto:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$columns[] = $col;
+		$col = array();
+		$temp = @$cnt['sdd_titolare_linea'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_linea']) ) : "";
+		$col[] = array('text' =>'Linea Telefonica / Contratto:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$columns[] = $col;
 
-	$col = array();
-	$temp = @$cnt['sdd_titolare_cognome_nome'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_cognome_nome']) ) : "";
-	$col[] = array('text' =>'Cognome e Nome/Ragione Sociale:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$columns[] = $col;
+		$col = array();
+		$temp = @$cnt['sdd_titolare_cognome_nome'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_cognome_nome']) ) : "";
+		$col[] = array('text' =>'Cognome e Nome/Ragione Sociale:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$columns[] = $col;
 
-	$col = array();
-	$temp = @$cnt['sdd_titolare_codfisc_piva'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_codfisc_piva']) ) : "";
-	$col[] = array('text' =>'Codice Fiscale /P.IVA:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$columns[] = $col;
+		$col = array();
+		$temp = @$cnt['sdd_titolare_codfisc_piva'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_codfisc_piva']) ) : "";
+		$col[] = array('text' =>'Codice Fiscale /P.IVA:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$columns[] = $col;
 
-	$col = array();
-	$temp = @$cnt['sdd_titolare_recapito'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_recapito']) ) : "";
-	$col[] = array('text' =>'Recapito Telefonico:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$columns[] = $col;
+		$col = array();
+		$temp = @$cnt['sdd_titolare_recapito'] ? strtoupper( decodeUTF8($cnt['sdd_titolare_recapito']) ) : "";
+		$col[] = array('text' =>'Recapito Telefonico:', 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$col[] = array('text' =>$temp, 'width' => '134', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+		$columns[] = $col;
 
-	$pdf->WriteTable($columns);
-	$columns = null;
+		$pdf->WriteTable($columns);
+		$columns = null;
+	endif;
 
 	$pdf->Ln(2);
 	$pdf->SetFont('FFDin','',6);
@@ -821,7 +824,7 @@ $pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(35);
 
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, 'Richiesta pubblicazione dati nei nuovi elenchi telefonici');
 $pdf->Ln(1);
@@ -865,7 +868,7 @@ $pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(35);
 
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 
 // -- intestazione complessa 
@@ -918,14 +921,138 @@ $columns[] = $col;
 $pdf->WriteTable($columns);
 $columns = null;
 
-
 $pdf->SetX(0);
+$pdf->SetY(60);
 
 $col = array();
-	$col[] = array('text' =>'DATI IDENTIFICATIVI DEL SOTTOSCRITTORE', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	$columns[] = $col;
+$col[] = array('text' =>'1. Vuole che il suo nome sia presente nei nuovi elenchi telefonici?', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
 
-	QUIIIIIII
+$pdf->WriteTable($columns);
+$columns = null;
+
+$pdf->SetTextColor(0,0,0);
+$temp = $ele['elenchi_consenso'] ? "\n[X] SI     [ ] NO" : "[ ] SI     [X] NO";
+$temp .= $ele['elenchi_servabbonati'] ? "\nDESIDERO " : "\nNON DESIDERO ";
+$temp .= "che i dati da me indicati possano essere foniti a chi ne faccia richiesta ad un Servizio di informazione abbonati)\n";
+$pdf->MultiCell(0,$lineHeight, $temp, 1,'C');
+
+$pdf->Ln(1);
+$col = array();
+$col[] = array('text' =>'2. Con quali dati vuol essere inserito negli elenchi?', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>"Di seguito indichi i dati con i quali vuole essere inserito all'interno dei nuovi elenchi. Può decidere di comparire senza la Via e il Numero Civico, o solamente senza quest'ultimo, non compilando i relativi campi. Devono essere indicati i dati dell'intestatario.", 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Cognome/Ragione sociale: '. strtoupper($ele['elenchi_cognome']) ), 'width' => '80', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Nome: '. strtoupper($ele['elenchi_nome']) ), 'width' => '80', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$iniz = $ele['elenchi_soloiniziale'] ? "[X] solo inziale" : "[ ] solo iniziale";
+$col[] = array('text' => $iniz, 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Numero telefonico: '. strtoupper($ele['elenchi_numero']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Indirizzo: Via/Piazza '. strtoupper($ele['elenchi_indirizzo']) ), 'width' => '140', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('N.Civico: '. strtoupper($ele['elenchi_civico']) ), 'width' => '60', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Comune '. strtoupper($ele['elenchi_citta']) ), 'width' => '120', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('CAP: '. strtoupper($ele['elenchi_cap']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($ele['elenchi_provincia']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+	
+$pdf->WriteTable($columns);
+$columns = null;
+
+$pdf->Ln(1);
+$col = array();
+$col[] = array('text' =>'3. Vuole che negli elenchi figurino altri suoi dat?', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>decodeUTF8("Può chiedere che negli elenchi siano inseriti anche altri suoi dati. Li indichi qui sotto."), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Titolo di studio o di specializzazione '. strtoupper($ele['elenchi_titolo']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' => decodeUTF8('Professione o Attività: '. strtoupper($ele['elenchi_professione']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$pdf->WriteTable($columns);
+$columns = null;
+
+
+$pdf->Ln(1);
+$col = array();
+$col[] = array('text' =>'4. Desidera che una persona che conosce il suo numero di telefono possa risalire al suo nome?', 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>decodeUTF8("Una persona che non conosce o che non ricorda il suo nome, potrebbe risalire ad esso sulla base del suo numero telefonico o di un altro suo dato. È d'accordo?"), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$columns[] = $col;
+
+$col = array();
+$temp = $ele['elenchi_nomedanumero'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO";
+$col[] = array('text' => $temp, 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$pdf->WriteTable($columns);
+$columns = null;
+
+$pdf->Ln(1);
+$col = array();
+$col[] = array('text' => decodeUTF8('5. Vuole ricevere pubblicità per posta?'), 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>decodeUTF8("Lei ha il diritto di dire SI o NO all'invio di pubblicità, promozioni, offerte commerciali, ecc. tramite posta cartacea al Suo indirizzo indicato negli elenchi.\nSONO D'ACCORDO CON L'USO DEL MIO INDIRIZZO PER L'INVIO DI POSTA CARTACEA PUBBLICITARIA:"), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$columns[] = $col;
+
+$col = array();
+$temp = decodeUTF8("Se SI, iI simbolo della bustina indicherà questa Sua scelta.      ");
+$temp .= $ele['elenchi_posta'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO";
+$col[] = array('text' => $temp, 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$pdf->WriteTable($columns);
+$columns = null;
+
+
+$pdf->Ln(1);
+
+$col = array();
+$col[] = array('text' => decodeUTF8('DATA E FIRMA'), 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>decodeUTF8("Le ricordiamo che per esprimere il suo consenso relativamente all'inserimento dei suoi dati nei nuovi elenchi è necessario firmare il presente modulo ed inviare, inoltre, copia di un suo documento di identità. Nel caso in cui sia presente la Ragione Sociale, è necessario che la firma e la fotocopia del documento siano quelli del Rappresentante Legale. La documentazione completa dovrà essere inviata per posta al seguente indirizzo: Terrecablate Reti e Servizi S.r.l. Viale Toselli, 9/A 53100 Siena, oppure tramite fax al n° 0577047497."), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>decodeUTF8('Data '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$columns[] = $col;
+
+$col = array();
+$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$pdf->WriteTable($columns);
+$columns = null;
+
 
 // *************** GDPR **************************************
 $pdf->AddPage();
@@ -934,7 +1061,7 @@ $pdf->Image($fileFooterPath, 0, 278, 210,16);
 
 $pdf->SetY(33);
 
-$pdf->SetTextColor(235, 110, 43);
+$pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
 $pdf->MultiCell(0,$lineHeight, 'INFORMATIVA AI SENSI DELL\'ART. 13 DEL REGOLAMENTO UE 679/2016 RELATIVA AL TRATTAMENTO DEI DATI PERSONALI');
 
@@ -987,7 +1114,7 @@ $pdf->MultiCellHTML(0, $lineHeight-1,"<b>Trasferimento dei dati extra UE</b><br>
 
 $pdf->Ln(3);
 
-$pdf->MultiCellHTML(0, $lineHeight-1,"<b>Destinatari e trasferimento dei dati personali</b>\<br>- soggetti che agiscono tipicamente in qualità di responsabili del trattamento ai sensi dell'art. 28 del Regolamento;<br>- personale incaricato del trattamento ai sensi dell'articolo 29 del Regolamento;<br>- soggetti, enti o autorità, autonomi titolari del trattamento, a cui sia obbligatorio comunicare i suoi dati personali in forza di disposizioni di legge o di ordini delle autorità;<br>- soggetti che svolgono attività di trasmissione, imbustamento, trasporto e smistamento delle comunicazioni dell'interessato;<br>L'elenco aggiornato e completo dei responsabili è disponibile presso Terrecablate e comunque può essere richiesto al Titolare ai recapiti sopra indicati.");
+$pdf->MultiCellHTML(0, $lineHeight-1,"<b>Destinatari e trasferimento dei dati personali</b><br>- soggetti che agiscono tipicamente in qualità di responsabili del trattamento ai sensi dell'art. 28 del Regolamento;<br>- personale incaricato del trattamento ai sensi dell'articolo 29 del Regolamento;<br>- soggetti, enti o autorità, autonomi titolari del trattamento, a cui sia obbligatorio comunicare i suoi dati personali in forza di disposizioni di legge o di ordini delle autorità;<br>- soggetti che svolgono attività di trasmissione, imbustamento, trasporto e smistamento delle comunicazioni dell'interessato;<br>L'elenco aggiornato e completo dei responsabili è disponibile presso Terrecablate e comunque può essere richiesto al Titolare ai recapiti sopra indicati.");
 
 
 $pdf->Ln(3);
@@ -996,8 +1123,7 @@ $pdf->MultiCellHTML(0, $lineHeight-1,"<b>Conservazione dei dati personali</b><br
 
 $pdf->Ln(3);
 
-$pdf->MultiCellHTML(0, $lineHeight-1,"In riferimento alla conservazione dei dati di traffico, questa è soggetta alla seguenti prescrizioni normative:<br>- Art. 123 del DLgs 196/2003 (come modificato dal D.Lgs. 101/2018): i dati relativi al traffico telefonico e/o telematico saranno conservati per un periodo massimo di sei mesi per finalità di fatturazione ovvero di pagamenti in caso di interconnessione, salva l'ulteriore specifica conservazione necessaria per effetto di una contestazione anche in sede giudiziale;");
-$pdf->MultiCellHTML(0, $lineHeight-1,"- Art.132 del DLgs 196/2003 (come modificato dal D.Lgs. 101/2018) i dati relativi al traffico telefonico e telematico in entrata ( e/o in uscita) esclusi comunque i contenuti delle comunicazioni, saranno conservati per finalità di accertamento e repressione dei reati per un periodo massimo di 24 mesi per il traffico telefonico; di 12 mesi per il traffico telematico; di 30 giorni per le chiamate senza risposta - termini derogati dall’art 24 delle Legge Europea n.167/2017 per finalità di accertamento e repressione dei soli reati di cui agli artt. 51, comma 3 quater e 407, comma 2, lett.a) c.p.p. Nei soli casi di reato, in cui è consentita la deroga del termine di conservazione, il dato di traffico telefonico (compreso le chiamate senza risposta) e telematico è conservato per 72 mesi.");
+$pdf->MultiCellHTML(0, $lineHeight-1,"In riferimento alla conservazione dei dati di traffico, questa è soggetta alla seguenti prescrizioni normative:<br>- Art. 123 del DLgs 196/2003 (come modificato dal D.Lgs. 101/2018): i dati relativi al traffico telefonico e/o telematico saranno conservati per un periodo massimo di sei mesi per finalità di fatturazione ovvero di pagamenti in caso di interconnessione, salva l'ulteriore specifica conservazione necessaria per effetto di una contestazione anche in sede giudiziale;\n- Art.132 del DLgs 196/2003 (come modificato dal D.Lgs. 101/2018) i dati relativi al traffico telefonico e telematico in entrata ( e/o in uscita) esclusi comunque i contenuti delle comunicazioni, saranno conservati per finalità di accertamento e repressione dei reati per un periodo massimo di 24 mesi per il traffico telefonico; di 12 mesi per il traffico telematico; di 30 giorni per le chiamate senza risposta - termini derogati dall’art 24 delle Legge Europea n.167/2017 per finalità di accertamento e repressione dei soli reati di cui agli artt. 51, comma 3 quater e 407, comma 2, lett.a) c.p.p. Nei soli casi di reato, in cui è consentita la deroga del termine di conservazione, il dato di traffico telefonico (compreso le chiamate senza risposta) e telematico è conservato per 72 mesi.");
 
 
 

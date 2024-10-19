@@ -238,12 +238,14 @@ function saveDataToDb($data, $cID) {
     );
 
     $R1 = $wpdb->insert($table_contratti, $toSave);
-
+    
     if ($wpdb->last_error) {
          error_log("Errore MySQL durante l'inserimento: " . $wpdb->last_error);
      } else {
          error_log("Nessun errore MySQL riportato, ma nessuna riga inserita");
      }
+
+     $contrattoID = $wpdb->insert_id;
 
      error_log('Query SQL generata: ' . $wpdb->last_query);
     
@@ -251,6 +253,7 @@ function saveDataToDb($data, $cID) {
     // SALVO I DATI PER GLI ELENCHI
     $toSaveElenchi = array(
         'codice' => $cID,
+        'contratto_id' => $contrattoID,
         'elenchi_consenso' => valOrNull($elenchi, 'elenchi_consenso', 'bool'),
         'elenchi_servabbonati' => valOrNull($elenchi, 'elenchi_servabbonati', 'bool'),        
         'elenchi_nome' => valOrNull($elenchi, 'elenchi_nome', 'str'),

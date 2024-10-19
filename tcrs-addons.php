@@ -190,6 +190,7 @@ class PangeaTerrecablateAddons {
 
         $sqlElenchi = "CREATE TABLE IF NOT EXISTS $table_elenchi (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
+            contratto_id mediumint(9) NOT NULL,
             codice varchar(25) NOT NULL,
             elenchi_consenso tinyint(1) NOT NULL DEFAULT 0,
             elenchi_servabbonati tinyint(1) NOT NULL DEFAULT 0,

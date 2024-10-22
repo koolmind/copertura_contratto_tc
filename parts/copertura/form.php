@@ -1,5 +1,5 @@
 <?php
-$tipoCli = isset($_GET['tc'])  ? $_GET['tc'] : "aziende";
+$tipoCli = isset($_GET['tc'])  ? $_GET['tc'] : null;
 ?>
 
  <form action="" class="copertura" id="frm-verifica-cop">					

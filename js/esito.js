@@ -31,6 +31,7 @@ const btnOptionsAdd = document.querySelectorAll(`.js-btn-cart-add`);
 
 let selectedOffer = null;
 let addedOptions = [];
+let offerFritz = 0;
 
 const selezionaOfferta = (evt) => {
   selectedOffer = evt.target.closest(".offer-single");
@@ -47,24 +48,38 @@ const deselezionaOfferta = (tgt) => {
 };
 
 const updateOfferOptions = () => {
+  console.log(`Aggiorno dati Opzioni`);
   const offerID = selectedOffer.dataset.offer;
   opzioni.forEach((opz) => {
     const prodCollegati = opz.dataset.prodotti.split(/;/);
+    const optFritz = +opz.dataset.needFritz;
 
     if (!prodCollegati.includes(offerID)) opz.classList.add("hide");
-    else opz.classList.remove("hide");
+    else {
+      // l'opzione è collegata all'offerta, ma devo controllare che sia vendibile, in base alla presenza di un modem Fritz
+      if ((optFritz === 1 && offerFritz === 1) || optFritz === 0) {
+        console.log("VEDO OPZIONE-", opz.id, "offer ", offerFritz, "option", optFritz);
+        opz.classList.remove("hide");
+      } else {
+        console.log("NASCONDO OPZIONE-", opz.id, "offer ", offerFritz, "option", optFritz);
+        opz.classList.add("hide");
+      }
+    }
   });
 
   optionsContainer.classList.remove("hide");
 };
 
 updateOfferData = () => {
+  console.log(`Aggiorno dati Offerta`);
   const offerID = selectedOffer.dataset.offer;
   const offerName = selectedOffer.dataset.name;
   const offerPrice = selectedOffer.dataset.price;
   const offerNote = selectedOffer.dataset.note;
   const offerFeatures = selectedOffer.dataset.features;
   let offerAttivazione = selectedOffer.dataset.attivazione;
+
+  offerFritz = +selectedOffer.dataset.hasFritz;
 
   const features = offerFeatures.split(/;/);
   const formattedFeaturesList = features
@@ -78,10 +93,7 @@ updateOfferData = () => {
 
   cartNome.textContent = offerName;
   cartCanone.textContent = getAmount(offerPrice).toFixed(2) + " €";
-  cartAttivazione.innerText =
-    offerAttivazione == 0
-      ? "GRATUITA"
-      : getAmount(offerAttivazione).toFixed(2) + " €";
+  cartAttivazione.innerText = offerAttivazione == 0 ? "GRATUITA" : getAmount(offerAttivazione).toFixed(2) + " €";
   cartNote.textContent = offerNote;
   cartFeatures.innerHTML = formattedFeaturesList;
 
@@ -90,17 +102,15 @@ updateOfferData = () => {
   cntAttivazione.value = offerAttivazione;
   cntCosto.value = offerPrice;
 
-  document
-    .querySelectorAll(".js_offer_selected_only")
-    .forEach((item) => item.classList.remove("hide"));
+  document.querySelectorAll(".js_offer_selected_only").forEach((item) => item.classList.remove("hide"));
 };
 
 offerte.forEach((offerta) => {
   offerta.addEventListener("click", (evt) => {
     deselezionaOfferta(selectedOffer);
     selezionaOfferta(evt);
-    updateOfferOptions();
     updateOfferData();
+    updateOfferOptions();
   });
 });
 
@@ -193,10 +203,7 @@ const handleOptionClicked = (evt) => {
 
 const updateCartTotal = () => {
   const initial = parseFloat(selectedOffer.dataset.price.replace(",", "."));
-  const total = addedOptions.reduce(
-    (acc, cur) => acc + parseFloat(cur.cost) * cur.qty,
-    initial
-  );
+  const total = addedOptions.reduce((acc, cur) => acc + parseFloat(cur.cost) * cur.qty, initial);
 
   totaleContainer.innerHTML = total.toFixed(2) + " &euro;";
   cntCosto.value = total.toFixed(2);
@@ -215,15 +222,9 @@ const renderOptionsContent = () => {
                     <span>(${option.qty}x) ${option.name} </span></span>
       <span class="costo">
       ${(option.cost * option.qty).toFixed(2)} &euro;</span>
-      <input type="hidden" name="cnt-options[${idx}][name]" value="${
-        option.name
-      }" />
-      <input type="hidden" name="cnt-options[${idx}][cost]" value="${
-        option.cost
-      }" />
-      <input type="hidden" name="cnt-options[${idx}][qty]" value="${
-        option.qty
-      }" />
+      <input type="hidden" name="cnt-options[${idx}][name]" value="${option.name}" />
+      <input type="hidden" name="cnt-options[${idx}][cost]" value="${option.cost}" />
+      <input type="hidden" name="cnt-options[${idx}][qty]" value="${option.qty}" />
       </p>`;
     })
     .join("");

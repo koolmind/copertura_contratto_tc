@@ -409,16 +409,17 @@
             </div><!-- colonna sinistra -->
             
             
-
             <div class="col-12 col-md-4 order-0 order-md-1 riepilogo-box b-offerta">
                 <h4 class="titolo"><small>Hai scelto di acquistare</small><br/><?php echo $offerta['nomeofferta'];?></h4>
-                <div class="row px-3 py-4">
+                <div class="row px-3 mt-4 mb-2">
                     <div class="col-9">Canone mensile</div>
                     <div class="col-3 text-end"><?php echo $offerta['canone'];?> €</div>
+                    <?php $subTotale = floatval(preg_replace('/,/i', '.', $offerta['canone']));?>
+                    
                 </div>
                 
                 <?php if (count($offerta['opzioni'])): ?>
-                    <div class="my-3 px-3" id="riepilogo-opzioni">
+                    <div class="px-3 mt-1 mb-3" id="riepilogo-opzioni">
                         <strong>OPZIONI</strong>                    
                     <?php 
                         foreach ($offerta['opzioni'] as $opzione): 
@@ -426,6 +427,9 @@
                             $strQty = intval($opzione['qty']) > 1 ? ' (x'.$opzione['qty'].')' : '' ;
                             $optCost = $opzione['cost'] * $opzione['qty'];
                             $strCost = number_format($optCost, 2,",",".");
+
+                            $subTotale += $optCost ;
+                            $strSubTotale = number_format($subTotale, 2,",",".");
                     ?>
                             <div class="row pl-1">
                                 <div class="col-9"><?php echo $strName;?> <?php echo $strQty;?> </div>
@@ -435,8 +439,13 @@
                         </div>
                 <?php endif; ?>
 
+                <div class="row px-3 mt-4 mb-2 pt-1" style="border-top:1px solid #c9c9c9";>
+                    <div class="col-9"><b>Totale mensile</b></div>
+                    <div class="col-3 text-end"><?php echo $strSubTotale;?> €</div>
+                </div>
+
                 <div class="row px-3">
-                    <div class="col-9">Attivazione</div>
+                    <div class="col-9"><b>Attivazione</b></div>
                     <div class="col-3 text-end">
                         <?php echo floatval($offerta['attivazione']) == 0 ? 'GRATIS' : $offerta['attivazione'] ." €";?>
                     </div>

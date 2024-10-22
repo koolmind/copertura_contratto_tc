@@ -1,6 +1,6 @@
 <?php
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/fpdf.php');
-//require_once(TC_ADDONS_ROOT . 'vendor/fpdi/src/autoload.php');
+require_once(TC_ADDONS_ROOT . 'vendor/fpdi2/src/autoload.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/custompdf.php');
 
 function decodeUTF8($text) {

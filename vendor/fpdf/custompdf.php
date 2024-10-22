@@ -1,6 +1,8 @@
 <?php 
 
-class CUSTOMPDF extends FPDF { 
+use setasign\Fpdi\Fpdi;
+
+class CUSTOMPDF extends Fpdi { 
 
    protected $B = 0;
    protected $I = 0;

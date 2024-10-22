@@ -1,4 +1,5 @@
 <?php
+$oggi = date('d/m/Y');
 
 $pdf = new CUSTOMPDF('P','mm','A4');
 $pdf->AddFont('FFDin','','FFDINPro-Regular.php');
@@ -466,7 +467,7 @@ if($cnt["linea_portability"]):
 	$columns[] = $col;
 
 	$col = array();
-	$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	$col[] = array('text' => $oggi, 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 	$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$columns[] = $col;
@@ -494,7 +495,7 @@ if($cnt["linea_portability"]):
 	$columns[] = $col;
 
 	$col = array();
-	$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+	$col[] = array('text' => $oggi, 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 	$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$columns[] = $col;
@@ -552,7 +553,7 @@ $col[] = array('text' =>decodeUTF8('Titolare '), 'width' => '80', 'height' => $c
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => $oggi, 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
@@ -593,13 +594,13 @@ $pdf->MultiCell(0,4, decodeUTF8("Il Cliente dichiara di voler ricevere la confer
 
 $pdf->Ln(2);
 $col = array();
-$col[] = array('text' =>decodeUTF8('Data '), 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$col[] = array('text' =>decodeUTF8('Data'), 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>'', 'width' => '40', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' =>' ', 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => $oggi, 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' =>'', 'width' => '40', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>' ', 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
@@ -618,13 +619,13 @@ $pdf->SetTextColor(0,0,0);
 $pdf->MultiCell(0,4, decodeUTF8("La firma conferma le obbligazioni del Cliente previste nella presente Proposta di Contratto per la prestazione di Servizi di comunicazione elettronica (telefonie fissa ed internet) anche con riferimento alla modalità di pagamento prescelta. Il Contratto tra il Cliente e Terrecablate Reti e Servizi S.r.l. si perfeziona in base alla procedura contenuta negli Articoli 4 e 5 delle Condizioni Generali di Contratto.") );
 $pdf->Ln(2);
 $col = array();
-$col[] = array('text' =>decodeUTF8('Data '), 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$col[] = array('text' =>decodeUTF8('Data'), 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>'', 'width' => '40', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' =>' ', 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => $oggi, 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' =>'', 'width' => '40', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>' ', 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
@@ -643,7 +644,7 @@ $col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => '4', 
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' =>' ', 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => $oggi, 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' =>'', 'width' => '40', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>' ', 'width' => '80', 'height' => '4', 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
@@ -751,7 +752,7 @@ if($cnt['metodo_pagamento'] == 'sdd'):
 
 	$col = array();
 	$col[] = array('text' =>'Luogo:', 'width' => '66', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
-	$col[] = array('text' =>'Data:', 'width' => '66', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
+	$col[] = array('text' =>'Data: '. $oggi, 'width' => '66', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
 	$col[] = array('text' =>'Firma:', 'width' => '68', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
 	$columns[] = $col;
 
@@ -800,7 +801,7 @@ if($cnt['metodo_pagamento'] == 'sdd'):
 
 	$col = array();
 	$col[] = array('text' =>' ', 'width' => '66', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => '');
-	$col[] = array('text' =>' ', 'width' => '66', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => '');
+	$col[] = array('text' => $oggi, 'width' => '66', 'height' => 15, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => '');
 	$col[] = array('text' =>' ', 'width' => '66', 'height' => 15, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => '');
 	$columns[] = $col;
 
@@ -1042,13 +1043,13 @@ $col[] = array('text' =>decodeUTF8("Le ricordiamo che per esprimere il suo conse
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' =>decodeUTF8('Data '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
+$col[] = array('text' =>decodeUTF8('Data'), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>decodeUTF8('Firma '), 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $columns[] = $col;
 
 $col = array();
-$col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => $oggi, 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' =>'', 'width' => '40', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => '');
 $col[] = array('text' =>' ', 'width' => '80', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
@@ -1057,100 +1058,34 @@ $pdf->WriteTable($columns);
 $columns = null;
 
 
-// *************** GDPR **************************************
+
+// GDPR
+$pathToPdf = TC_ADDONS_ROOT . "stuff/documento-gdpr-residenzali.pdf";
+
+$pageCount = $pdf->setSourceFile($pathToPdf);
+
+$pageId = $pdf->importPage(1);
 $pdf->AddPage();
-$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
-$pdf->Image($fileFooterPath, 0, 278, 210,16);
+$pdf->useImportedPage($pageId);
 
-$pdf->SetY(33);
-
-$pdf->SetTextColor(0, 86, 122);
-$pdf->SetFont('FFDin','',14);
-$pdf->MultiCell(0,$lineHeight, 'INFORMATIVA AI SENSI DELL\'ART. 13 DEL REGOLAMENTO UE 679/2016 RELATIVA AL TRATTAMENTO DEI DATI PERSONALI');
-
-$pdf->Ln(2);
-$pdf->SetTextColor(0, 0, 0);
-$pdf->SetFont('FFDin','',9);
-
-
-$pdf->MultiCellHTML(0, $lineHeight, "Ai sensi dell'art. 13 del Regolamento UE 679/2016 (di seguito \"GDPR\" o \"Regolamento\"), con la presente informativa Terrecablate Reti e Servizi S.r.l. (di seguito, \"<b>Terrecablate</b>\"), con sede legale Viale Toselli, 9/A - 53100 Siena, e-mail privacy@terrecablate.it in qualità di Titolare del trattamento dei Suoi dati personali (di seguito anche \"Titolare\"), intende informarLa sulla tipologia di dati raccolti e sulle modalità di trattamento adottate nel corso del rapporto contrattuale con il Titolare.<br>Il Responsabile per la protezione dei dati personali (di seguito, \"<b>DPO</b>\") ex art. 37 e ss. del Regolamento raggiungibile all'indirizzo e-mail dpo@terrecablate.it e tramite posta ordinaria all'indirizzo Terrecablate Reti e Servizi S.r.l., in Viale Toselli, 9/A, CAP 53100, Siena, c.a. del <b>Data Protection Officer.</b>") ;
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight,"<b>Categorie di dati oggetto del trattamento</b><br>Il Titolare tratterà i Suoi dati personali rientranti nella definizione di cui all'art. 4(1) del GDPR, raccolti nell'ambito del contratto e/o della conclusione dello stesso, tra cui rientrano, a titolo esemplificativo e non esaustivo nome, cognome, numero di telefono mobile, indirizzo e-mail ed in generale i suoi dati di contatto (in qualità di titolare del contratto ovvero quale referente/rappresentante legale della società titolare del contratto). Al fine di usufruire delle agevolazioni previste dalla DELIBERA n. 46/17/CONS AGCOM, l'Autorità stabilisce le modalità di attuazione delle disposizioni relative alle misure destinate agli utenti disabili di cui agli artt. 57 e 73 bis del decreto legislativo 1 agosto 2003, n. 259 “Codice delle comunicazioni elettroniche”; potranno essere trattati dati appartenenti a particolari categorie ai sensi dell'art. 9 del GDPR, ed in particolare dati relativi al tuo stato di salute, qualora necessari per l'attivazione di particolari servizi.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight,"<b>Finalità, base giuridica e facoltatività del trattamento</b><br>Il trattamento dei Suoi dati è effettuato per le seguenti finalità:<br>a. erogazione del Servizio ed esecuzione di ogni eventuale relativo obbligo contrattuale assunto da Terrecablate nei Suoi confronti (a titolo esemplificativo l'installazione o la consegna di apparati necessari per la fruizione del Servizio, invio di informazioni o comunicazioni di servizio, la gestione di reclami e contenziosi, chiamate al nostro servizio clienti (compreso eventuale recupero del credito direttamente o attraverso soggetti terzi quali Società di recupero del credito; cessione del credito a Società autorizzate);<br>b. adempimenti di legge, regolamenti o normative nazionali e comunitarie, adempimenti a disposizioni delle Autorità di vigilanza del settore o ad ordini emanati da Autorità giudiziarie e/o amministrative in tra cui, gli obblighi derivanti dalla DELIBERA n. 46/17/CONS AGCOM; nonché quelli connessi alle finalità di accertamento e repressione dei reati, di ordine pubblico e di protezione civile; <br>c. I Suoi dati personali, ivi inclusi quelli relativi al traffico telematico, potranno essere anche trattati da Terrecablate per far valere o difendere un proprio diritto in sede giudiziaria (compreso eventuale recupero del credito);");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight,"La base giuridica del trattamento per la finalità a) è l'art. 6.1.b) del GDPR, per la finalità b) sono gli artt. 6.1.c) e 9.2.b) del GDPR e per la finalità c) sono gli artt. 9.2.f) e il 6.1.f) del GDPR.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight,"Il conferimento dei Suoi dati personali per le finalità a) e b) e c) sopra indicate è facoltativo, ma in difetto non sarà possibile per Terrecablate erogare il Servizio ed adempiere agli ulteriori obblighi assunti nei Suoi confronti");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight,"I Suoi dati personali saranno trattati, inoltre, solo previo Suo specifico consenso ex art. 6.1.a) del Regolamento, per le seguenti finalità:<br>d. inviarLe comunicazioni promozionali e di marketing, incluso l'invio di newsletter e ricerche di mercato, attraverso strumenti automatizzati (email, sms, mms, notifiche push, fax, whatsapp) e non (posta cartacea e telefono con operatore); si precisa che il Titolare raccoglie un unico consenso per le finalità di marketing qui descritte, ai sensi del Provvedimento Generale del Garante per la Protezione dei Dati Personali \"Linee guida in materia di attività promozionale e contrasto allo spam\" del 4 luglio 2013; qualora, in ogni caso, Lei desiderasse opporsi al trattamento dei Suoi dati per le finalità di marketing eseguito con i mezzi qui indicati, nonché revocare il consenso prestato, potrà in qualunque momento farlo contattando il Titolare o il DPO ai recapiti indicati in questa informativa, senza pregiudicare la liceità del trattamento basata sul consenso prestato prima della revoca;");
-$pdf->MultiCellHTML(0, $lineHeight,"e. per l'analisi delle sue scelte d'acquisto e delle sue preferenze comportamentali nei nostri Punti Amici e sui nostri siti web, al fine di meglio strutturare comunicazioni e proposte commerciali personalizzate, per effettuare analisi generali per fini di orientamento strategico e di intelligence commerciale e, in genere, per attività di profilazione;<br>f. per essere inseriti negli elenchi telefonici (cartacei ed altri tipi di elenchi, via Internet, riprodotti su supporti elettronici, su carta), eventualmente distinti per categorie o per zone geografiche o per tipo di telefonia fissa e/o mobile, con il Suo consenso, salvo possibili aggiustamenti di eventuali errori formali e miglioramenti redazionali già tenuti presenti per gli elenchi in distribuzione.");
-
-
-
+$pageId = $pdf->importPage(2);
 $pdf->AddPage();
-$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
-$pdf->Image($fileFooterPath, 0, 278, 210,16);
+$pdf->useImportedPage($pageId);
 
-$pdf->SetY(33);
+if(!$cnt['cliente_pec']):
+	// MODULO PEC
+	$pathToPdf = TC_ADDONS_ROOT . "stuff/richiesta_pec.pdf";
 
-$pdf->MultiCellHTML(0, $lineHeight-1,"La base giuridica del trattamento per le finalità d), e) e f) è l'art. 6.1.a) del Regolamento.<br>Il conferimento dei Suoi Dati Personali per le finalità di cui alla lettera d), e), f) e g) sopra indicate è facoltativo; non è prevista alcuna conseguenza in caso di un Suo rifiuto.");
+	$pageCount = $pdf->setSourceFile($pathToPdf);
 
-$pdf->Ln(3);
+	$pageId = $pdf->importPage(1);
+	$pdf->AddPage();
+	$pdf->useImportedPage($pageId);
 
-$pdf->MultiCellHTML(0, $lineHeight-1,"<b>Modalità di trattamento dei dati</b><br>Il trattamento dei Dati Personali avverrà tramite supporti e/o strumenti informatici, manuali e/o telematici, con logiche strettamente correlate alle finalità del trattamento e comunque garantendo la riservatezza e sicurezza dei dati stessi e nel rispetto del Regolamento e dei Provvedimenti del Garante per la protezione dei Dati Personali applicabili. Al fine di fornirLe un servizio di assistenza telefonica più efficiente, i Suoi dati potranno essere trattati con procedure informatizzate idonee a permettere all'operatore di identificare, all'atto della chiamata, la tipologia di contratto in essere.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"<b>Trasferimento dei dati extra UE</b><br>I Suoi Dati Personali potranno essere trasferiti al di fuori dello Spazio Economico Europeo. La Società rende noto che il trattamento avverrà secondo una delle modalità consentite dalla legge vigente, quali ad esempio il consenso dell'interessato, l'adozione di Clausole Standard approvate dalla Commissione Europea, la selezione di soggetti aderenti a programmi internazionali per la libera circolazione dei dati od operanti in Paesi considerati sicuri dalla Commissione Europea.<br>
-È possibile avere maggiori informazioni, su richiesta, presso il Titolare o il DPO ai contatti sopraindicati.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"<b>Destinatari e trasferimento dei dati personali</b><br>- soggetti che agiscono tipicamente in qualità di responsabili del trattamento ai sensi dell'art. 28 del Regolamento;<br>- personale incaricato del trattamento ai sensi dell'articolo 29 del Regolamento;<br>- soggetti, enti o autorità, autonomi titolari del trattamento, a cui sia obbligatorio comunicare i suoi dati personali in forza di disposizioni di legge o di ordini delle autorità;<br>- soggetti che svolgono attività di trasmissione, imbustamento, trasporto e smistamento delle comunicazioni dell'interessato;<br>L'elenco aggiornato e completo dei responsabili è disponibile presso Terrecablate e comunque può essere richiesto al Titolare ai recapiti sopra indicati.");
-
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"<b>Conservazione dei dati personali</b><br>I tuoi dati saranno trattati solo per il tempo necessario per le finalità sopra menzionate e saranno conservati per i periodi di seguito indicati:<br>a. i dati trattati per l'esecuzione del contratto saranno conservati per tutta la durata del contratto e per un periodo di 10 anni successivo alla conclusione del contratto, salvo sorga l'esigenza di una ulteriore conservazione, per consentire a Terrecablate la difesa dei propri diritti;<br>b. i dati trattati per l'adempimento di obblighi di legge saranno conservati da Terrecablate nei limiti previsti dalla legge e finché persista la necessità del trattamento per adempiere a detti obblighi di legge;<br>c. i dati saranno trattati per finalità di marketing per un periodo di 24 mesi e fino alla eventuale revoca del consenso da te prestato;<br>d. i dati saranno trattati per finalità di profilazione per un periodo di 12 mesi e fino alla eventuale revoca del consenso da te prestato all'utilizzo degli stessi per tale scopo;");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"In riferimento alla conservazione dei dati di traffico, questa è soggetta alla seguenti prescrizioni normative:<br>- Art. 123 del DLgs 196/2003 (come modificato dal D.Lgs. 101/2018): i dati relativi al traffico telefonico e/o telematico saranno conservati per un periodo massimo di sei mesi per finalità di fatturazione ovvero di pagamenti in caso di interconnessione, salva l'ulteriore specifica conservazione necessaria per effetto di una contestazione anche in sede giudiziale;\n- Art.132 del DLgs 196/2003 (come modificato dal D.Lgs. 101/2018) i dati relativi al traffico telefonico e telematico in entrata ( e/o in uscita) esclusi comunque i contenuti delle comunicazioni, saranno conservati per finalità di accertamento e repressione dei reati per un periodo massimo di 24 mesi per il traffico telefonico; di 12 mesi per il traffico telematico; di 30 giorni per le chiamate senza risposta - termini derogati dall’art 24 delle Legge Europea n.167/2017 per finalità di accertamento e repressione dei soli reati di cui agli artt. 51, comma 3 quater e 407, comma 2, lett.a) c.p.p. Nei soli casi di reato, in cui è consentita la deroga del termine di conservazione, il dato di traffico telefonico (compreso le chiamate senza risposta) e telematico è conservato per 72 mesi.");
-
-
-
-
-$pdf->AddPage();
-$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
-$pdf->Image($fileFooterPath, 0, 278, 210,16);
-
-$pdf->SetY(33);
-
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"<b>I Suoi diritti privacy ex artt. 15 e ss. del Regolamento</b><br>Lei ha diritto di chiedere al Titolare, in qualunque momento, l'accesso ai Suoi Dati, la rettifica o la cancellazione degli stessi o di richiedere la limitazione del trattamento, o di ottenere in un formato strutturato, di uso comune e leggibile da dispositivo automatico i dati che La riguardano nei casi previsti dall'art. 20 del Regolamento. In qualsiasi momento potrà revocare ex art. 7 del Regolamento, il consenso già prestato, senza che ciò pregiudichi la liceità del trattamento effettuato anteriormente alla revoca del consenso.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"La informiamo, inoltre, che ha diritto di opporsi ex art. 21 del Regolamento, per motivi legittimi, al trattamento dei dati, per esempio potrà opporsi in ogni momento all'invio di marketing diretto con strumenti automatizzati (sms, mms, email, notifiche push, fax) e non (posta cartacea, telefono con operatore); inoltre, resta salva la possibilità di esercitare tale diritto in parte, ossia, in tal caso, opponendosi, ad esempio, al solo invio di comunicazioni promozionali effettuato tramite strumenti automatizzati.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight-1,"Le richieste vanno rivolte per iscritto al Titolare ovvero al DPO ai recapiti sopra indicati.");
-
-$pdf->Ln(3);
-
-$pdf->MultiCellHTML(0, $lineHeight,"In ogni caso Lei ha sempre diritto di proporre reclamo all'autorità di controllo competente (Garante per la Protezione dei Dati Personali), ai sensi dell'art. 77 del Regolamento, qualora ritenga che il trattamento dei Suoi dati sia contrario alla normativa in vigore.");
+	$pageId = $pdf->importPage(2);
+	$pdf->AddPage();
+	$pdf->useImportedPage($pageId);
+endif;
 
 
 // ---- OUTPUT ----

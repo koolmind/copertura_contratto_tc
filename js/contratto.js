@@ -54,7 +54,7 @@ jQuery(document).ready(function ($) {
       }
 
       if (!por.is(":checked")) {
-        // se non è richiesta la nun. portability, cancello il contenuto dei campi relativi, per essere sicuro di non salvarli
+        // se non è richiesta la num. portability, cancello il contenuto dei campi relativi, per essere sicuro di non salvarli
         $("#fields-number-portability input").each(function () {
           $(this).val("");
         });
@@ -343,9 +343,22 @@ jQuery(document).ready(function ($) {
       const mig = $("#linea_migrazione");
 
       // MIGRAZIONE: se True, allora anche portability diventa true
-      if (cb.attr("id") == "linea_migrazione" && cb.prop("checked") == true) {
-        por.prop("checked", true).trigger("change");
-        att.prop("checked", false);
+      if (cb.attr("id") == "linea_migrazione") {
+        const consMigrazione = $("#linea_consenso_migrazione");
+        const rowMigrazione = $("#row-consenso-migrazione");
+        console.log("mig:", cb.prop("checked"));
+        if (cb.prop("checked") == true) {
+          console.log(`migra!`);
+          por.prop("checked", true).trigger("change");
+          att.prop("checked", false);
+
+          consMigrazione.addClass("tc-required");
+          rowMigrazione.removeClass("hide");
+        } else {
+          console.log(`non migra!`);
+          consMigrazione.removeClass("tc-required");
+          rowMigrazione.addClass("hide");
+        }
       }
 
       // NUOVA ATTIVAZIONE: se True, allora Migrazione deve essere false

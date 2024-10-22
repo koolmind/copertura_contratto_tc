@@ -79,7 +79,7 @@ body.page-template-tpl-risultato-copertura .site-content {
   border: 6px solid green;
 }
 .copertura-result-header.copertura-ko {
-  border: 6px solid red;
+  border: 6px solid #b91414;
 }
 .copertura-result-header.copertura-wrong {
   border: 6px solid #e390f3;
@@ -256,7 +256,6 @@ ul#cart-caratteristiche-offerta i.fa {
 
 .messaggio-info {
   text-align: center;
-  color: white;
   font-size: 1.25em;
   margin: 2em 1em;
 }

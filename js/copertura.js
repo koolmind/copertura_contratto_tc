@@ -63,9 +63,7 @@
     params.append("provincia", sProvincia);
     axios
       .post(`${copertura_params.TCRS_WS_ROOT}logToDB.php`, params)
-      .then(function (response) {
-        //console.log(response);
-      })
+      .then(function (response) {})
       .catch(function (error) {
         console.error(error);
       });
@@ -115,7 +113,7 @@
 
   function resetAll(e) {
     e.preventDefault();
-    tipoCli = "aziende";
+    tipoCli = undefined;
     sProvincia = undefined;
     sComune = undefined;
     sIndirizzo = undefined;
@@ -134,7 +132,6 @@
     esitoCopertura.addClass("nascondi");
     mappaApparato.addClass("nascondi");
     theMap.html("");
-    console.log("reset e vedo form");
     frmVerificaCop.slideDown();
 
     loadProvince();
@@ -359,7 +356,7 @@
   // INIT
   function init() {
     var params = new URLSearchParams(window.location.search);
-    tipoCli = params.get("tipoCli") ?? "aziende";
+    tipoCli = params.get("tipoCli") ?? undefined;
     loadProvince();
   }
 
@@ -457,9 +454,10 @@
     const consigliata = dati.TIPOLOGIA_ACCESSO_CONSIGLIATA[tipocliente];
     let puntoGeo = null;
 
-    const tipologieNonOfferte = ["Bitstream", "Bitstream Ethernet", "ULL", "Rame su AI"];
+    let tipologieNonOfferte = ["Bitstream", "ULL", "Rame su AI"]; //"Bitstream Ethernet" riattivato
 
     if (tipologieNonOfferte.contains(consigliata.tipo)) {
+      console.log("non offerta");
       return {
         tipoCli: tipocliente,
         prodotto: null,
@@ -524,9 +522,6 @@
       .then(function (response) {
         esito = analizza_dati(response.data.dati, tipoCli);
 
-        console.log("Ho un esito");
-        console.log(esito);
-
         // output della mappa (se disponinibile)
         if (esito.mappa) {
           renderMap(esito.mappa);
@@ -543,7 +538,6 @@
   }
 
   function renderEsito() {
-    console.log(esito);
     let out = "";
     let tpl = undefined;
 
@@ -558,7 +552,7 @@
     };
 
     if (esito.connessione) {
-      invendibili = ["Rame su AI", "ULL", "Bitstream Ethernet", "Bitstream"];
+      invendibili = ["Rame su AI", "ULL", "Bitstream"]; // "Bitstream Ethernet" riattivato per adesso
 
       let [tec, vel] = esito.prodotto.split(/-/i);
 
@@ -574,8 +568,10 @@
         };
       }
 
-      if (vel.slice(-1) == "E") urlParams = { ...urlParams, esclusivita: 1 };
-      vel = vel.slice(0, -1);
+      if (vel.charAt(vel.length - 1) == "E") {
+        urlParams = { ...urlParams, esclusivita: 1 };
+        vel = vel.slice(0, -1);
+      }
 
       urlParams = { ...urlParams, tecnologia: tec, speed: vel };
 

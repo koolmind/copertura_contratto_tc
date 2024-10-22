@@ -13,12 +13,18 @@ $prodArgs = array(
         array(
             'key' => 'target',
             'value' => $tipoCli,
-            'compare' => '='
+            'compare' => '=',
         ),
+        // array(
+        //     'key' => 'banda_down',
+        //     'value' => $down,
+        //     'compare' => 'LIKE'
+        // ),
         array(
-            'key' => 'banda_down',
-            'value' => $down,
-            'compare' => 'LIKE'
+            'key' => 'banda_minima_attivabilita',
+            'value' => intval($down),
+            'compare' => '<=',
+            'type' => 'numeric'
         ),
         array(
             'key' => 'esclusivita',
@@ -46,6 +52,9 @@ switch ($tecnologia) {
     case 'Bitstream NGA FTTH':
         $tecToShow = "FTTH";
         break;    
+    case 'Bitstream Ethernet':
+        $tecToShow = "ADSL";
+            break;    
     default:
         $tecToShow = "FTTC";
         break;
@@ -76,6 +85,7 @@ switch ($tecnologia) {
                         $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
                         $note = trim(get_post_meta( $offerID, "note", true ));
                         $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
+                        $includeFritz = get_post_meta( $offerID, "include_fritz", true );
                         // $disclaimer = get_post_meta( $offerID, "disclaimer", true );
                         ?>
 
@@ -86,7 +96,8 @@ switch ($tecnologia) {
                             data-price="<?php echo $prezzo; ?>"
                             data-attivazione="<?php echo $attivazione; ?>"
                             data-note="<?php echo $note; ?>"
-                            data-features="<?php echo $caratteristiche; ?>"                            
+                            data-features="<?php echo $caratteristiche; ?>"      
+                            data-has-fritz="<?php echo $includeFritz; ?>"                      
                             >
                         <h2><?php echo get_the_title(); ?></h2>
                         </div>
@@ -130,11 +141,11 @@ switch ($tecnologia) {
                         $isEsclusiva =  get_post_meta($postID, 'opzione_esclusiva', true);
                         $quantitaMax = get_post_meta($postID, 'quantita_max', true);
                         $prodotti_collegati = get_post_meta($postID, 'prodotti_collegati', false);
-                        
-                        
+                        $abbinamentoFritz = get_post_meta($postID, 'abbinamento_fritz', true);
+                        $aggiungiFritz = get_post_meta($postID, 'aggiungi_fritz', true);
                 ?>
                 
-                <div class="offer-option offer-box" id="opt-<?php echo $slug;?>" data-prodotti="<?php echo implode(";", $prodotti_collegati[0]); ?>">
+                <div class="offer-option offer-box" id="opt-<?php echo $slug;?>" data-prodotti="<?php echo implode(";", $prodotti_collegati[0]); ?>" data-need-fritz="<?php echo intval($abbinamentoFritz); ?>">
                     
                     <h3 class="option-title"><?php echo $title; ?></h3>
                     
@@ -147,7 +158,9 @@ switch ($tecnologia) {
                         data-id="<?php echo $slug;?>" 
                         data-name="<?php echo $title;?>" 
                         data-multi="<?php echo intval($isMultipla); ?>" 
-                        data-excl="<?php echo intval($isEsclusiva); ?>" 
+                        data-excl="<?php echo intval($isEsclusiva); ?>"
+                        data-need-fritz =  "<?php echo intval($abbinamentoFritz); ?>"
+                        data-is-fritz =  "<?php echo intval($aggiungiFritz); ?>"
                         <?php if($quantitaMax) echo 'data-qmax="'. $quantitaMax . '"'; ?>
                         data-action="add">
                         <i class="fas fa-plus"></i> <span>aggiungi</span>

@@ -56,6 +56,7 @@
 
     <fieldset id="fields-number-portability" class="mt-3 bordered <?php echo $cbPortability ?  '' : 'hide' ?>">
         <legend>5. Tipologia linea e Mantenimento del numero (Number Portability)</legend>
+		<span class="note_info d-block mb-2"><i class="fas fa-info-circle"></i> Il <b>Codice di Migrazione</b> può essere reperito nella fattura di cortesia inviata mensilmente dal tuo attuale operatore telefonico.</span>
 
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
@@ -298,7 +299,7 @@
 	</fieldset>
 
 	<fieldset class="mt-3">
-        <div class="row">
+		<div id="row-consenso-migrazione" class="row <?php echo $cbConsensoMigrazione ? '' : 'hide'?>">
             <div class="col-12 mb-4">
                 <div class="form-check">
                     <input class="form-check-input tc-required" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]" <?php echo $cbConsensoMigrazione ? ' checked="checked" ' : ''?>>

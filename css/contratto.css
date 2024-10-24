@@ -43,6 +43,27 @@
   border: 1px solid darkgray;
 }
 
+a.btn-download {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: "Helvetica", Sans-serif;
+  color: #ffffff !important;
+  background-color: #005985;
+  padding: 12px 24px;
+  border: 2px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+}
+a.btn-download:hover, a.btn-download:focus {
+  background-color: #0081c7 !important;
+}
+
 h4.titolo-sez {
   font-size: 18px;
   font-weight: bold;

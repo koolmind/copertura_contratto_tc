@@ -50,3 +50,25 @@
     }
   }
 }
+
+a.btn-download {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: "Helvetica", Sans-serif;
+  color: #ffffff !important;
+  background-color: $blu-medio;
+  padding: 12px 24px;
+  border: 2px;
+  max-width: fit-content;
+  border-radius: $b-radius;
+  -webkit-border-radius: $b-radius;
+  -moz-border-radius: $b-radius;
+  -ms-border-radius: $b-radius;
+  -o-border-radius: $b-radius;
+
+  &:hover,
+  &:focus {
+    background-color: $blu-chiaro !important;
+  }
+}

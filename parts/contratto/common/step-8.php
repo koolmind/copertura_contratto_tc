@@ -450,6 +450,13 @@
                         <?php echo floatval($offerta['attivazione']) == 0 ? 'GRATIS' : $offerta['attivazione'] ." €";?>
                     </div>
                 </div>
+
+                <?php if(isset($migrazione['linea_nuova']) && $migrazione['linea_nuova'] == '1'): ?>
+                <div class="row px-3">
+                    <div class="col-9"><b>Maggiorazione attivazione nuova linea</b></div>
+                    <div class="col-3 text-end">25,00 €</div>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
         

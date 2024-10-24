@@ -13,9 +13,10 @@
     <fieldset id="fields-indirizzo-attivazione" class="mt-3">
         <legend>2. Indirizzo di attivazione e fornitura dei servizi</legend>
 
-        <!-- <div class="d-flex justify-content-end my-3">
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="anagrafica" disabled><i class="fas fa-sync"></i> stesso indirizzo</button>
-        </div> -->
+        <div class="my-3">
+            <h4>Conferma i tuoi dati</h4>
+            <p>Controlla con attenzione se il CAP è corretto prima di proseguire.</p>
+        </div>
 
         <div class="row">
             <div class="col-12 col-md-8 mb-4">

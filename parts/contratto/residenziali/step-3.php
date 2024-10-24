@@ -21,6 +21,11 @@
             <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="attivazione" disabled><i class="fas fa-sync"></i>stesso indirizzo attivazione</button>
         </div> -->
 
+        <div class="my-3">
+            <h4>Vuoi che il dispositivo sia inviato ad un indirizzo diverso?</h4>
+            <p>Controlla i dati inseriti, e modificali se necessario, prima di proseguire.</p>
+        </div>
+        
         <div class="row">
             <div class="col-12 col-md-8 mb-4">
                 <label for="servizi_indirizzo">Indirizzo (via/piazza)</label>

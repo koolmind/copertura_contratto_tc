@@ -1,8 +1,13 @@
 <?php 
     $fields = @$this->contrattoData['firme']; 
-    $cbAccettazioneContratto = (bool) tcGetFieldValue($fields,"accettazione_contratto",false);
-    $cbFirmaContratto = (bool) tcGetFieldValue($fields,"firma_contratto",false);
-    $cbApprovazioneArticoliContratto = (bool) tcGetFieldValue($fields,"approvazione_articoli_contratto",false);
+    // $cbAccettazioneContratto = (bool) tcGetFieldValue($fields,"accettazione_contratto",false);
+    // $cbFirmaContratto = (bool) tcGetFieldValue($fields,"firma_contratto",false);
+    // $cbApprovazioneArticoliContratto = (bool) tcGetFieldValue($fields,"approvazione_articoli_contratto",false);
+
+    // momentaneamente sono tutte attive, poi cambieranno (readonly?)
+    $cbAccettazioneContratto = true;
+    $cbFirmaContratto = true;
+    $cbApprovazioneArticoliContratto = true;
     
     showSteps(9);
 ?>

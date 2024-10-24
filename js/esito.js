@@ -53,17 +53,16 @@ const updateOfferOptions = () => {
   opzioni.forEach((opz) => {
     const prodCollegati = opz.dataset.prodotti.split(/;/);
     const optFritz = +opz.dataset.needFritz;
+    const optButton = opz.querySelector("button");
 
     if (!prodCollegati.includes(offerID)) opz.classList.add("hide");
-    else {
-      // l'opzione è collegata all'offerta, ma devo controllare che sia vendibile, in base alla presenza di un modem Fritz
-      if ((optFritz === 1 && offerFritz === 1) || optFritz === 0) {
-        console.log("VEDO OPZIONE-", opz.id, "offer ", offerFritz, "option", optFritz);
-        opz.classList.remove("hide");
-      } else {
-        console.log("NASCONDO OPZIONE-", opz.id, "offer ", offerFritz, "option", optFritz);
-        opz.classList.add("hide");
-      }
+    else opz.classList.remove("hide");
+
+    // disabilito il bottone delle opzioni che necessitano di un modem Fritz!Box se non è già compreso nell'offerta
+    if (+optButton.dataset.needFritz === 1 && offerFritz === 0) {
+      optButton.setAttribute("disabled", "disabled");
+    } else {
+      optButton.removeAttribute("disabled");
     }
   });
 
@@ -147,6 +146,9 @@ const handleOptionClicked = (evt) => {
   const optMulti = btnData.multi == "1";
   const optExcl = btnData.excl == "1";
   const optQMax = btnData.qmax || null;
+  const optIsFritz = btnData.isFritz == "1";
+  const optNeedFritz = btnData.needFritz == "1";
+  const allFritzBtns = document.querySelectorAll(`.offer-option button[data-need-fritz='1']`);
   const allExclusives = document.querySelectorAll(`[data-excl='1']`);
 
   if (optAction == "add") {
@@ -173,26 +175,52 @@ const handleOptionClicked = (evt) => {
         cost: optCost,
         qty: 1,
         excl: +optExcl,
+        isFritz: +optIsFritz,
+        needFritz: +optNeedFritz,
       });
 
     if (!optMulti) btn.classList.add("hide");
+
     if (optExcl) {
       // disabilito le altre opzioni esclusive
       allExclusives.forEach((item) => {
         if (item.id != optId) item.setAttribute("disabled", "disabled");
       });
     }
+
+    // sto aggiugendo un'opzione che include un apparato Fritz!Box, quindi abilito le opzioni che necessitano di Fritz!
+    if (optIsFritz && allFritzBtns != null) {
+      console.log("Bottone di fritz", optIsFritz);
+      allFritzBtns.forEach((item) => {
+        console.log("analizzando ", item);
+        item.removeAttribute("disabled");
+      });
+    }
   } else {
-    filteredOptions = addedOptions.filter((opt) => opt.id != optId);
+    let filteredOptions = addedOptions.filter((opt) => opt.id != optId);
     addedOptions = [...filteredOptions];
     // riattivo il bottone corrispondente tra le opzioni
     document.querySelector(`#btn-opt-${optId}`).classList.remove("hide");
 
     if (optExcl) {
-      console.log("riattivo");
       // riabilito le altre opzioni esclusive
       allExclusives.forEach((item) => {
         item.removeAttribute("disabled");
+      });
+    }
+
+    // se rimuovo un'opzione che contiene un Fritz!Box devo eliminare anche tutte le opzioni che necessitano di Fritz!
+    if (optIsFritz) {
+      // rimuovo le opzioni Fritz dal carrello
+      let fritzToRemove = document.querySelectorAll(`.js-btn-cart-del[data-need-fritz="1"]`);
+      fritzToRemove.forEach((item) => {
+        filteredOptions = addedOptions.filter((opt) => opt.id != item.dataset.id);
+        addedOptions = [...filteredOptions];
+      });
+
+      // disabilito i relativi pulsanti
+      allFritzBtns.forEach((item) => {
+        item.setAttribute("disabled", "disabled");
       });
     }
   }
@@ -216,6 +244,8 @@ const renderOptionsContent = () => {
                 <span><button type="button" role="button" class="js-btn-cart-del btn-option-small" 
                     data-id="${option.id}" 
                     data-action="del"
+                    data-is-fritz="${option.isFritz}"
+                    data-need-fritz="${option.needFritz}"
                     data-excl="${option.excl}">
                     <i class="far fa-minus-square"></i>
                     </button>                    

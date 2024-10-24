@@ -228,6 +228,22 @@ $pdf->MultiCell(0,$lineHeight, 'SERVIZI INTERNET E TELEFONO TERRECABLATE');
 $pdf->SetTextColor(0,0,0);
 $pdf->MultiCell(0,$lineHeight, decodeUTF8("Sarà attivata l'offerta {$nomeCompletoOfferta}")); 
 
+$pdf->Ln(2);
+$canone = number_format(floatval($cnt['canone']), 2, ',', '.') . " euro/mese";
+$attivazione = floatval($cnt['attivazione']) == 0 ? 'GRATIS' : number_format(floatval($cnt['canone']), 2, ',', '.') . " euro" ;
+
+$columns = null;
+$col = array();
+$col[] = array('text' => decodeUTF8( "CANONE: {$canone}" ), 'width' => '60', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$col[] = array('text' => decodeUTF8( "ATTIVAZIONE: {$attivazione}" ), 'width' => '60', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+
+if($cnt['linea_nuova'])
+	$col[] = array('text' => decodeUTF8( "MAGG. ATT. NUOVA LINEA: 25,00 euro" ), 'width' => '80', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+
+$columns[] = $col;
+$pdf->WriteTable($columns);
+$columns = null;
+
 $pdf->Ln(4);
 
 if($opzioni):

@@ -47,7 +47,7 @@ if( isset($_POST['btn_acquista_offerta']) ) {
     $contrattoData['offerta'] = $composizione_offerta;
     $contrattoData['step'] = 1;
 
-    set_transient( $contrattoUID, $contrattoData, 0);
+    set_transient( $contrattoUID, $contrattoData, TC_TRANSIENT_EXP);
 
     wp_redirect(home_url('/contratto/?cuid='.$contrattoUID));
     exit;

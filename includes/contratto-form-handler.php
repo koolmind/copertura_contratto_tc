@@ -324,7 +324,7 @@ function handle_contratto_aziende() {
     
     
     // IN OGNI CASO RICARICO LA PAGINA AL GIUSTO STEP e AGGIORNO IL TRANSIENT
-    set_transient( $contrattoUID, $data, 0);
+    set_transient( $contrattoUID, $data, TC_TRANSIENT_EXP);
 
     // Se sono allo step 10, devo salvare i dati sul DB! 
     if( $data['step'] == 10 ){

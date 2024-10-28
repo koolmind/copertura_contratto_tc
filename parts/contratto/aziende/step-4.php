@@ -163,7 +163,6 @@
 					}
 					?>
 				</select>
-				<small class="text-danger form-message hide" style="clear:both;">Campo richiesto. Selezionare un'opzione.</small>
 			</div>
 		</div>
 
@@ -302,7 +301,7 @@
 		<div id="row-consenso-migrazione" class="row <?php echo $cbConsensoMigrazione ? '' : 'hide'?>">
             <div class="col-12 mb-4">
                 <div class="form-check">
-                    <input class="form-check-input tc-required" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]" <?php echo $cbConsensoMigrazione ? ' checked="checked" ' : ''?>>
+                    <input class="form-check-input" type="checkbox" value="1" id="linea_consenso_migrazione" name="dati[linea_consenso_migrazione]" <?php echo $cbConsensoMigrazione ? ' checked="checked" ' : ''?>>
                     <label class="form-check-label title-label" for="linea_consenso_migrazione">A - Richiesta di migrazione dei servizi telefonici e internet</label>
                 </div>
                 <p>Il cliente dichiara di voler recedere dal rapporto contrattuale con l’operatore richiamato al punto 5 della presente proposta, con riferimento alle linee telefoniche sopra indicate al fine di usufruire 

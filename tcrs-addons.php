@@ -22,6 +22,7 @@
  $contratti_dir = $upload_dir['basedir'] . '/tcrs-contratti/';
  $contratti_url = $upload_dir['baseurl'] . '/tcrs-contratti/';
 
+ define ("TC_TRANSIENT_EXP", 0); // 7200 sec = 2 ore ; 0 = no expiration
  define ('TC_ADDONS_ROOT', trailingslashit( __DIR__) );
  define ('TC_ADDONS_ROOT_URL', plugin_dir_url(__FILE__));
  define ('TC_ADDONS_CONTRATTI_DIR', $contratti_dir); 

@@ -66,7 +66,7 @@ class ContrattoOnLineShortcode {
                 $this->contrattoData['step'] = 1;
                 $this->contrattoData['path'][] = 1; // array contenente tutti gli step che mano mano vengono completati, per tenere traccia di eventuali salti
                 
-                set_transient( $this->contrattoUID, $this->contrattoData, 0);
+                set_transient( $this->contrattoUID, $this->contrattoData, TC_TRANSIENT_EXP);
 
                 
             }  

@@ -135,7 +135,7 @@ switch ($tecnologia) {
                         $postID = get_the_ID();
                         $slug = get_post_field('post_name', $postID);
                         $title = get_the_title();
-                        $desc = get_the_content();
+                        $desc = get_the_content(); 
                         $prezzo = get_post_meta($postID,'opzione_prezzo', true);
                         $isMultipla = get_post_meta($postID, 'opzione_multipla', true);
                         $isEsclusiva =  get_post_meta($postID, 'opzione_esclusiva', true);
@@ -143,13 +143,15 @@ switch ($tecnologia) {
                         $prodotti_collegati = get_post_meta($postID, 'prodotti_collegati', false);
                         $abbinamentoFritz = get_post_meta($postID, 'abbinamento_fritz', true);
                         $aggiungiFritz = get_post_meta($postID, 'aggiungi_fritz', true);
+                        // questo messaggio va visualizzato zolo se l'opzione necessita di avere un router Fritz! ma l'offerta di base non lo comprende.
+                        $fritzMessage = (intval($abbinamentoFritz) != 0) ? "<p data-fritzonly class='hide my-2' style='font-size:0.9em'><b><span style='color:#794084;'>ATTENZIONE:</span> L'opzione è selezionabile solo in presenza di un modem/router Fritz!Box.</b></p>" : "";
                 ?>
                 
                 <div class="offer-option offer-box" id="opt-<?php echo $slug;?>" data-prodotti="<?php echo implode(";", $prodotti_collegati[0]); ?>" data-need-fritz="<?php echo intval($abbinamentoFritz); ?>">
                     
                     <h3 class="option-title"><?php echo $title; ?></h3>
                     
-                    <div class="option-desc"><?php echo $desc; ?></div>
+                    <div class="option-desc"><?php echo $desc . $fritzMessage ?></div>
                     
                     <h4 class="option-price"><?php echo $prezzo; ?> <small>€/mese</small></h4>
 

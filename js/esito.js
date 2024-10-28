@@ -48,8 +48,8 @@ const deselezionaOfferta = (tgt) => {
 };
 
 const updateOfferOptions = () => {
-  console.log(`Aggiorno dati Opzioni`);
   const offerID = selectedOffer.dataset.offer;
+  const offerHasFritz = +selectedOffer.dataset.hasFritz;
   opzioni.forEach((opz) => {
     const prodCollegati = opz.dataset.prodotti.split(/;/);
     const optFritz = +opz.dataset.needFritz;
@@ -57,6 +57,14 @@ const updateOfferOptions = () => {
 
     if (!prodCollegati.includes(offerID)) opz.classList.add("hide");
     else opz.classList.remove("hide");
+
+    // mostro/nascondo il messaggio relativo alla necessità di un apparato Fritz! per certe opzioni
+    const msgsFritzOnly = document.querySelectorAll(`[data-fritzonly]`);
+    if (optFritz && !offerHasFritz) {
+      msgsFritzOnly.forEach((el) => el.classList.remove("hide"));
+    } else {
+      msgsFritzOnly.forEach((el) => el.classList.add("hide"));
+    }
 
     // disabilito il bottone delle opzioni che necessitano di un modem Fritz!Box se non è già compreso nell'offerta
     if (+optButton.dataset.needFritz === 1 && offerFritz === 0) {

@@ -46,6 +46,7 @@ jQuery(document).ready(function ($) {
       // controllo che uno dei due campi migrazione/nuova linea sia stato impostato
       if (!mig.is(":checked") && !att.is(":checked")) {
         hasErrors = true;
+        console.log(`errore migra/attiv`);
         mig.addClass("is-invalid");
         att.addClass("is-invalid");
       } else {
@@ -71,6 +72,7 @@ jQuery(document).ready(function ($) {
 
       if (!marketingOK.is(":checked") && !marketingKO.is(":checked")) {
         hasErrors = true;
+        console.log(`errore marketing`);
         marketingKO.addClass("is-invalid");
         marketingOK.addClass("is-invalid");
       } else {
@@ -80,6 +82,7 @@ jQuery(document).ready(function ($) {
 
       if (!profilazioneOK.is(":checked") && !profilazioneKO.is(":checked")) {
         hasErrors = true;
+        console.log(`errore prof`);
         profilazioneKO.addClass("is-invalid");
         profilazioneOK.addClass("is-invalid");
       } else {
@@ -95,6 +98,7 @@ jQuery(document).ready(function ($) {
 
       if (!pagamentoCC.is(":checked") && !pagamentoSDD.is(":checked")) {
         hasErrors = true;
+        console.log(`errore pagam`);
         pagamentoCC.addClass("is-invalid");
         pagamentoSDD.addClass("is-invalid");
       } else {
@@ -110,6 +114,7 @@ jQuery(document).ready(function ($) {
 
       if (!consensoElenchiOK.is(":checked") && !consensoElenchiKO.is(":checked")) {
         hasErrors = true;
+        console.log(`errore elenchi`);
         consensoElenchiOK.addClass("is-invalid");
         consensoElenchiKO.addClass("is-invalid");
       } else {
@@ -124,6 +129,7 @@ jQuery(document).ready(function ($) {
         if (!$(this).is(":checked")) {
           $(this).addClass("is-invalid");
           hasErrors = true;
+          console.log(`errore check`);
         } else {
           $(this).removeClass("is-invalid");
         }
@@ -131,6 +137,7 @@ jQuery(document).ready(function ($) {
         if ($(this).val() == "") {
           $(this).addClass("is-invalid");
           hasErrors = true;
+          console.log(`errore campo`, $(this).prop("type"));
         } else {
           $(this).removeClass("is-invalid");
         }
@@ -163,6 +170,7 @@ jQuery(document).ready(function ($) {
       } else {
         field.addClass("is-invalid");
         hasErrors = true;
+        console.log(`error piva o iban`);
       }
     }
 
@@ -346,16 +354,13 @@ jQuery(document).ready(function ($) {
       if (cb.attr("id") == "linea_migrazione") {
         const consMigrazione = $("#linea_consenso_migrazione");
         const rowMigrazione = $("#row-consenso-migrazione");
-        console.log("mig:", cb.prop("checked"));
         if (cb.prop("checked") == true) {
-          console.log(`migra!`);
           por.prop("checked", true).trigger("change");
           att.prop("checked", false);
 
           consMigrazione.addClass("tc-required");
           rowMigrazione.removeClass("hide");
         } else {
-          console.log(`non migra!`);
           consMigrazione.removeClass("tc-required");
           rowMigrazione.addClass("hide");
         }
@@ -375,6 +380,7 @@ jQuery(document).ready(function ($) {
         const rowPortability = $("#row-consenso-portability");
 
         if (cb.prop("checked") == true) {
+          console.log(`SI portability`);
           fieldsPortability.removeClass("hide");
           rowPortability.removeClass("hide");
           // imposto come obbligatori alcuni campi tra quelli della num. portability
@@ -382,6 +388,7 @@ jQuery(document).ready(function ($) {
           num1.addClass("tc-required");
           consPortability.addClass("tc-required");
         } else {
+          console.log(`NO portability`);
           fieldsPortability.addClass("hide");
           rowPortability.addClass("hide");
           cod1.removeClass("tc-required");

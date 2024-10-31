@@ -42,6 +42,7 @@ class ContrattoOnLineShortcode {
                     'opzioni'       => $_POST['cnt-options'],
                     'costo'         => sanitize_text_field($_POST['cnt-costo']),
                     'attivazione'   => sanitize_text_field($_POST['cnt-attivazione']),
+                    'velocita'      => sanitize_text_field($_POST['cop_velocita']),
                 );
 
                 // salvo i dati dall'indirizzo inserito in copertura per inserirlo nella voce "attivazione" del contratto (indirizzo di attivazione e fornitura)

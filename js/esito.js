@@ -78,13 +78,26 @@ const updateOfferOptions = () => {
 };
 
 updateOfferData = () => {
-  console.log(`Aggiorno dati Offerta`);
   const offerID = selectedOffer.dataset.offer;
   const offerName = selectedOffer.dataset.name;
   const offerPrice = selectedOffer.dataset.price;
   const offerNote = selectedOffer.dataset.note;
   const offerFeatures = selectedOffer.dataset.features;
+  const offerMaxSpeed = +selectedOffer.dataset.maxspeed;
   let offerAttivazione = selectedOffer.dataset.attivazione;
+  const copVelocita = document.querySelector(`#cop-velocita`); // la velocità della linea dedotta dal verifica copertura
+
+  const queryString = window.location.search;
+  const urlParameters = new URLSearchParams(queryString);
+  const [downSpeed, upSpeed] = urlParameters.get("sp").split("/");
+
+  console.log(`Speed: ${upSpeed}, ${downSpeed}`);
+
+  if (offerMaxSpeed < downSpeed) {
+    copVelocita.value = offerMaxSpeed;
+  } else {
+    copVelocita.value = downSpeed;
+  }
 
   offerFritz = +selectedOffer.dataset.hasFritz;
 

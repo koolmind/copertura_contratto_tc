@@ -418,7 +418,7 @@
                     
                 </div>
                 
-                <?php if (count($offerta['opzioni'])): ?>
+                <?php if (isset($offerta['opzioni']) && count($offerta['opzioni'])): ?>
                     <div class="px-3 mt-1 mb-3" id="riepilogo-opzioni">
                         <strong>OPZIONI</strong>                    
                     <?php 
@@ -429,7 +429,6 @@
                             $strCost = number_format($optCost, 2,",",".");
 
                             $subTotale += $optCost ;
-                            $strSubTotale = number_format($subTotale, 2,",",".");
                     ?>
                             <div class="row pl-1">
                                 <div class="col-9"><?php echo $strName;?> <?php echo $strQty;?> </div>
@@ -437,7 +436,9 @@
                             </div>
                 <?php   endforeach; ?>
                         </div>
-                <?php endif; ?>
+                <?php endif; 
+                    $strSubTotale = number_format($subTotale, 2,",",".");
+                ?>
 
                 <div class="row px-3 mt-4 mb-2 pt-1" style="border-top:1px solid #c9c9c9";>
                     <div class="col-9"><b>Totale mensile</b></div>

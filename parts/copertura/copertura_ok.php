@@ -15,11 +15,6 @@ $prodArgs = array(
             'value' => $tipoCli,
             'compare' => '=',
         ),
-        // array(
-        //     'key' => 'banda_down',
-        //     'value' => $down,
-        //     'compare' => 'LIKE'
-        // ),
         array(
             'key' => 'banda_minima_attivabilita',
             'value' => intval($down),
@@ -83,6 +78,7 @@ switch ($tecnologia) {
                         $titolo = get_the_title();
                         $prezzo = get_post_meta( $offerID, "prezzo", true );
                         $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
+                        $maxSpeedDown = get_post_meta( $offerID, "max_speed_down", true );
                         $note = trim(get_post_meta( $offerID, "note", true ));
                         $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
                         $includeFritz = get_post_meta( $offerID, "include_fritz", true );
@@ -94,6 +90,7 @@ switch ($tecnologia) {
                             data-offer="<?php echo $offerID; ?>"
                             data-name="<?php echo $titolo; ?>"
                             data-price="<?php echo $prezzo; ?>"
+                            data-maxspeed="<?php echo $maxSpeedDown; ?>"
                             data-attivazione="<?php echo $attivazione; ?>"
                             data-note="<?php echo $note; ?>"
                             data-features="<?php echo $caratteristiche; ?>"      
@@ -235,6 +232,7 @@ switch ($tecnologia) {
                         <input type="hidden" name="cop_citta" id="cop-citta" value="<?php echo $co; ?>" />  
                         <input type="hidden" name="cop_cap" id="cop-cap" value="<?php echo $cap; ?>" />  
                         <input type="hidden" name="cop_provincia" id="cop-provincia" value="<?php echo $prv; ?>" />  
+                        <input type="hidden" name="cop_velocita" id="cop-velocita" value="<?php echo $down; ?>" />  
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>

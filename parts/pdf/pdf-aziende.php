@@ -593,6 +593,12 @@ if($cnt['metodo_pagamento'] == 'cc'):
 endif;
 
 
+$pdf->AddPage();
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
+
+$pdf->SetY(35);
+
 $pdf->Ln(6);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);

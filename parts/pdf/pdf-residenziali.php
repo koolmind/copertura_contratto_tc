@@ -594,6 +594,12 @@ if($cnt['metodo_pagamento'] == 'cc'):
 	$pdf->MultiCell(0,4, decodeUTF8("La informiamo che il metodo di pagamento con Carta di Credito verrà gestito ricorrendo all'apposito servizio messo a disposizione da CartaSi che rende disponibili unicamente i circuiti Visa e Mastercad e non potranno essere utilizzate Carte di Credito in modalità prepagata/ricaricabile. Terrecablate Reti e Servizi S.r.l. La informa che scegliendo la modalità di pagamento con Carta di Credito, Le verrà inviato tramite e-mail, il Codice Cliente ed il Codice Contratto mediante i quali dovrà registrarsi al portale clienti di Terrecablate (MyTerrecablate, rinvenibile all'indirizzo internet http://portale.terrecablate.it ) al fine di completare la procedura di addebito permanente sulla propria Carta di Credito e Le rammenta che la procedura di attivazione dei Servizi richiesti non potrà perfezionarsi senza che Lei vi abbia provveduto. A tale proposito Terrecablate Reti e Servizi S.r.l., inoltre, le rammenta che il termine per perfezionare la procedura di registrazione al Portale Cliente MyTerrecablate e di autorizzazione all'addebito permanente su Carta di Credito è di 10 giorni dalla data di accettazione del Contratto da parte di Terrecablate. Ove Lei abbia scelto la modalità di pagamento mediante addebito su Carta di Credito, Terrecablate Reti e Servizi S.r.l. la informa che i Suoi dati, occorrenti per tale attività, non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e Servizi S.r.l. ma saranno trattati in autonomia da Carta SI tramite i propri sistemi"));
 endif;
 
+// ***********	PAGINA 5 ***************
+$pdf->AddPage();
+$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
+$pdf->Image($fileFooterPath, 0, 278, 210,16);
+
+$pdf->SetY(35);
 
 $pdf->Ln(6);
 $pdf->SetTextColor(0, 86, 122);
@@ -669,7 +675,7 @@ $pdf->WriteTable($columns);
 $columns = null;
 
 
-// ***********	PAGINA 5 Bonfico ***************
+// ***********	PAGINA Bonfico ***************
 if($cnt['metodo_pagamento'] == 'sdd'):
 	$pdf->AddPage();
 	$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
@@ -1102,6 +1108,32 @@ if(!$cnt['cliente_pec']):
 	$pdf->AddPage();
 	$pdf->useImportedPage($pageId);
 endif;
+
+// SCHEDA AGCOM
+// $specLabel contiene ADSL / FTTC / FTTH
+// $cnt['tipo_accesso'] mi serve per sapere se sono in rete o fuori rete (solo FTTH)
+// $cnt['nomeofferta'] contiene il nome 
+$velocitaDown = $cnt['velocita'];
+
+// recupero il pdf dall'array contenuto in generatepdf.php
+// es. $pdfAgcom['Smart HOME'][FTTH"_"100_<IR(FR)>];
+
+$pdfSpec = trim($specLabel)."_".$velocitaDown;
+
+if( trim($specLabel) === "FTTH" ){
+	$pdfSpec .= ($cnt['tipo_accesso'] == 'TCRS_GPON') ? '_IR' : '_FR';
+} 
+
+$schedaAgcomName = $pdfAgcom[$cnt['nomeofferta']][$pdfSpec];
+
+
+$pathToPdf = TC_ADDONS_ROOT . "stuff/agcom/".$schedaAgcomName;
+
+$pageCount = $pdf->setSourceFile($pathToPdf);
+
+$pageId = $pdf->importPage(1);
+$pdf->AddPage();
+$pdf->useImportedPage($pageId);
 
 
 // ---- OUTPUT ----

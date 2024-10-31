@@ -3,6 +3,8 @@ require_once(TC_ADDONS_ROOT . 'vendor/fpdf/fpdf.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdi2/src/autoload.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/custompdf.php');
 
+
+
 function decodeUTF8($text) {
     // Usa mb_convert_encoding se disponibile
     if (function_exists('mb_convert_encoding')) {
@@ -66,7 +68,29 @@ function generate_contratto_pdf($cuid) {
     $nero = "0,0,0";
     $bianco = "255,255,255";
     $grigio = "128,128,128";
-
+    
+    // pdf AgCom
+    $pdfAgcom = array(
+        'Smart HOME'=> array(
+            'ADSL_20'       => 'prospetto-allegato1-156-23-cons-ADSL-20_SmartHome_ADSL.pdf', 
+            'FTTC_100'      => 'prospetto-allegato1-156-23-cons-VDSL2-100_SmartHome_FTTC.pdf', 
+            'FTTC_200'      => 'prospetto-allegato1-156-23-cons-VDSL2-200_SmartHome_FTTC.pdf', 
+            'FTTH_1000_IR'  => 'prospetto-allegato1-156-23-cons-FTTH-1000_SmartHome-IR.pdf',
+            'FTTH_1000_FR'  => 'prospetto-allegato1-156-23-cons-FTTH-1000_SmartHome-FR.pdf'
+        ),
+        'Smart HOME Plus'=> array(
+            'FTTH_2500_IR'  => 'prospetto-allegato1-156-23-cons-FTTH-2500_SmartHome_PLUS-IR.pdf',
+            'FTTH_2500_FR'  => 'prospetto-allegato1-156-23-cons-FTTH-2500_SmartHome_PLUS-FR.pdf',
+        ),
+        'Smart OFFICE' => array(
+            'FTTH_2500_IR'=> null,
+            'FTTH_2500_FR'=> null,
+        ),
+        'Smart OFFICE TCRS'=> array(
+            'FTTH_2500_IR'=> null,
+            'FTTH_2500_FR'=> null,
+        ),
+    );
 
     // get contract data
     global $wpdb;

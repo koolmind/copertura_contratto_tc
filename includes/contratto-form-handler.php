@@ -129,13 +129,16 @@ function saveDataToDb($data, $cID) {
     $elenchi = $data['elenchi'];
     $opzioni = maybe_serialize($offerta['opzioni']);
 
-    error_log("Inizio salvataggio Contratto");
+
+    // eccezione SmartHome, che arriva max a 1000mbps
+    if($offerta['nomeofferta'] == 'Smart HOME') $offerta['velocita'] = 1000;
 
     $toSave = array(
         'codice' => $cID,
         'target' => valOrNull($offerta, 'target', 'str'),
         'tipo_accesso' => valOrNull($offerta, 'tipoaccesso', 'str'),
         'nomeofferta' => valOrNull($offerta, 'nomeofferta', 'str'),
+        'velocita' => valOrNull($offerta, 'velocita', 'int'),
         'canone' => valOrNull($offerta, 'canone', 'price'),
         'opzioni' => $opzioni,
         'attivazione' => valOrNull($offerta, 'attivazione', 'price'),

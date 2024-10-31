@@ -40,6 +40,7 @@ if( isset($_POST['btn_acquista_offerta']) ) {
         'opzioni'       => sanitize_text_field($_POST['options']),
         'costo'         => sanitize_text_field($_POST['cnt-costo']),
         'attivazione'   => sanitize_text_field($_POST['cnt-attivazione'])
+        'velocita'   => sanitize_text_field($_POST['cnt-velocita'])
     );
 
     

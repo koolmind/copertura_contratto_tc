@@ -78,6 +78,7 @@ switch ($tecnologia) {
                         $titolo = get_the_title();
                         $prezzo = get_post_meta( $offerID, "prezzo", true );
                         $attivazione = get_post_meta( $offerID, "costo_attivazione", true );
+                        $gestione = get_post_meta( $offerID, "costo_gestione", true );
                         $maxSpeedDown = get_post_meta( $offerID, "max_speed_down", true );
                         $note = trim(get_post_meta( $offerID, "note", true ));
                         $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
@@ -92,6 +93,7 @@ switch ($tecnologia) {
                             data-price="<?php echo $prezzo; ?>"
                             data-maxspeed="<?php echo $maxSpeedDown; ?>"
                             data-attivazione="<?php echo $attivazione; ?>"
+                            data-gestione="<?php echo $gestione; ?>"
                             data-note="<?php echo $note; ?>"
                             data-features="<?php echo $caratteristiche; ?>"      
                             data-has-fritz="<?php echo $includeFritz; ?>"                      
@@ -201,27 +203,27 @@ switch ($tecnologia) {
                         <span><strong>OPZIONI AGGIUNTIVE: </strong></span>
                         <div id="costi-opzioni">nessuna opzione selezionata</div>
                     </div>
-
-                    
-
-                    <div id="cart-note" class="my-2 js_offer_selected_only hide"></div>		            
                 </div>
 
                 <div class="dettaglio-bottom js_offer_selected_only hide">
-                    <div class="flex-space-between riga-costo" id="cart-totale">
+                    <div class="flex-space-between riga-costo mt-3" id="cart-totale">
                         <span><strong>Canone mensile:</strong></span>
                         <span class="costo text-bold">-</span>
                         <input type="hidden" name="cnt-costo" id="cnt-costo" value="" />  
                     </div>
                     <div class="riga-costo">
                         <span class="costo-label"><strong>Costo attivazione: </strong></span>
-                        <span id="cart-attivazione" class="text-bold">-</span>
+                        <span id="cart-attivazione" class="text-bold" style="text-align:right;">-</span>
                         <input type="hidden" name="cnt-attivazione" id="cnt-attivazione" value="" />  
                     </div>
 
-                    <!-- <div class="disclaimer">
-                        <p>Hai 14 giorni dall'attivazione per cambiare idea e richiedere la disattivazione della linea.<br>Pensaci!</p>
-                    </div> -->
+                    <div class="riga-costo">
+                        <span class="costo-label"><strong>Contributo gestione pratica: </strong></span>
+                        <span id="cart-gestione" class="text-bold">-</span>
+                        <input type="hidden" name="cnt-gestione" id="cnt-gestione" value="" />  
+                    </div>
+
+                    <div id="cart-note" class="my-2 js_offer_selected_only hide"></div>		            
 
                     <div id="btn-conferma-offerta" class="js_offer_selected_only hide my-2 text-right">
                         <input type="hidden" name="target" value="<?php echo $tipoCli; ?>" />
@@ -230,7 +232,7 @@ switch ($tecnologia) {
                         <input type="hidden" name="cop_indirizzo" id="cop-indirizzo" value="<?php echo $via; ?>" />  
                         <input type="hidden" name="cop_civico" id="cop-civico" value="<?php echo $nc; ?>" />  
                         <input type="hidden" name="cop_citta" id="cop-citta" value="<?php echo $co; ?>" />  
-                        <input type="hidden" name="cop_cap" id="cop-cap" value="<?php echo $cap; ?>" />  
+                        <!-- <input type="hidden" name="cop_cap" id="cop-cap" value="<?php echo $cap; ?>" />   -->
                         <input type="hidden" name="cop_provincia" id="cop-provincia" value="<?php echo $prv; ?>" />  
                         <input type="hidden" name="cop_velocita" id="cop-velocita" value="<?php echo $down; ?>" />  
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>

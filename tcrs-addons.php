@@ -9,20 +9,13 @@
 
  namespace PangeaTcrs;
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-// ini_set('log_errors', 1);
-
-
-
  if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
  $upload_dir = wp_upload_dir();
  $contratti_dir = $upload_dir['basedir'] . '/tcrs-contratti/';
  $contratti_url = $upload_dir['baseurl'] . '/tcrs-contratti/';
 
- define ("TC_TRANSIENT_EXP", 0); // 7200 sec = 2 ore ; 0 = no expiration
+ define ("TC_TRANSIENT_EXP", 7200); // 7200 sec = 2 ore ; 0 = no expiration
  define ('TC_ADDONS_ROOT', trailingslashit( __DIR__) );
  define ('TC_ADDONS_ROOT_URL', plugin_dir_url(__FILE__));
  define ('TC_ADDONS_CONTRATTI_DIR', $contratti_dir); 
@@ -90,7 +83,8 @@ class PangeaTerrecablateAddons {
             velocita smallint UNSIGNED NOT NULL,
             canone decimal(10,2) NOT NULL,
             opzioni text DEFAULT '',
-            attivazione decimal(10,2) NOT NULL,
+            attivazione decimal(10,2) NOT NULL DEFAULT 0,
+            gestione decimal(10,2) NOT NULL DEFAULT 0,
             rag_sociale varchar(50) DEFAULT '',
             azienda_indirizzo varchar(100) DEFAULT '',
             azienda_civico varchar(10) DEFAULT '',

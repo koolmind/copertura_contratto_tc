@@ -1,9 +1,17 @@
 jQuery(document).ready(function ($) {
-  // ATTIVAZIONE BOTTONI SOLO A CARICAMENTO COMPLETATO
-  $(window).on("load", function () {
-    // Seleziona tutti i bottoni e rimuovi l'attributo disabled
+  // // ATTIVAZIONE BOTTONI SOLO A CARICAMENTO COMPLETATO
+  // $(window).on("load", function () {
+  //   // Seleziona tutti i bottoni e rimuovi l'attributo disabled
+  //   $("button").prop("disabled", false);
+  // });
+
+  if (document.readyState === "complete") {
     $("button").prop("disabled", false);
-  });
+  } else {
+    $(window).on("load", function () {
+      $("button").prop("disabled", false);
+    });
+  }
 
   // DATEPICKER
   $("input[data-calendario]").datepicker({

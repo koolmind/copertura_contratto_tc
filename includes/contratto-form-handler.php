@@ -129,10 +129,11 @@ function saveDataToDb($data, $cID) {
     $elenchi = $data['elenchi'];
     $opzioni = maybe_serialize($offerta['opzioni']);
 
+    // Cancello eventuali righe già presenti nel db con lo stesso codice contratto (succede solo col debug, ma non si sa mai)
+    $wpdb->delete( $table_contratti, ['codice' => $cID], ['%s'] );
+    $wpdb->delete( $table_elenchi, ['codice' => $cID], ['%s'] );
 
-    // eccezione SmartHome, che arriva max a 1000mbps
-    if($offerta['nomeofferta'] == 'Smart HOME') $offerta['velocita'] = 1000;
-
+    // Preparo i dati
     $toSave = array(
         'codice' => $cID,
         'target' => valOrNull($offerta, 'target', 'str'),
@@ -142,6 +143,7 @@ function saveDataToDb($data, $cID) {
         'canone' => valOrNull($offerta, 'canone', 'price'),
         'opzioni' => $opzioni,
         'attivazione' => valOrNull($offerta, 'attivazione', 'price'),
+        'gestione' => valOrNull($offerta, 'gestione', 'price'),
         'rag_sociale' => valOrNull($anagr, 'rag_sociale', 'str'),
         'azienda_indirizzo' => valOrNull($anagr, 'azienda_indirizzo', 'str'),
         'azienda_civico'=> valOrNull($anagr, 'azienda_civico', 'str'),
@@ -331,7 +333,6 @@ function handle_contratto_aziende() {
 
     // Se sono allo step 10, devo salvare i dati sul DB! 
     if( $data['step'] == 10 ){
-        error_log('Siamo allo step 10');
         saveDataToDb($data, $contrattoUID);
     } 
     // ... poi redirect

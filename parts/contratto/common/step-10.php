@@ -11,9 +11,10 @@ $pdf_file = generate_contratto_pdf($this->contrattoUID);
     </ul>
 </p>
 
-<p><a href="<?php echo $pdf_file;?>" target="_blank" class="btn-download"><i class="fas fa-download"></i>&nbsp;Scarica contratto in pdf</a></p>
+<p class="mb-3"><a href="<?php echo $pdf_file;?>" target="_blank" class="btn-download"><i class="fas fa-download"></i>&nbsp;Scarica contratto in pdf</a></p>
 
-<!-- <form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
+<!-- 
+<form method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="container mb-5" id="contratto_form">
     <input type="hidden" name="action" value="submit_contratto_aziende">
 	<input type="hidden" id="cuid" name="cuid" value="<?php echo $this->contrattoUID; ?>">
     

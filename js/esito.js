@@ -14,6 +14,7 @@ const cartNome = document.querySelector(`#cart-nome-offerta`);
 const cartFeatures = document.querySelector(`#cart-caratteristiche-offerta`);
 const cartCanone = document.querySelector(`#cart-canone`);
 const cartAttivazione = document.querySelector(`#cart-attivazione`);
+const cartGestione = document.querySelector(`#cart-gestione`);
 const cartNote = document.querySelector(`#cart-note`);
 
 // cart form fields
@@ -21,8 +22,8 @@ const cntNome = document.querySelector(`#cnt-nomeofferta`);
 //const cntFeatures = document.querySelector(`#cart-caratteristiche-offerta`);
 const cntCanone = document.querySelector(`#cnt-canone`);
 const cntAttivazione = document.querySelector(`#cnt-attivazione`);
+const cntGestione = document.querySelector(`#cnt-gestione`);
 const cntCosto = document.querySelector(`#cnt-costo`);
-//const cartNote = document.querySelector(`#cart-note`);
 
 const optionalCostsContainer = document.querySelector(`#costi-opzioni`);
 const totaleContainer = document.querySelector(`#cart-totale > span.costo`);
@@ -81,19 +82,20 @@ updateOfferData = () => {
   const offerID = selectedOffer.dataset.offer;
   const offerName = selectedOffer.dataset.name;
   const offerPrice = selectedOffer.dataset.price;
-  const offerNote = selectedOffer.dataset.note;
+  const offerNote = selectedOffer.dataset.note.replace("|", "<br>");
   const offerFeatures = selectedOffer.dataset.features;
   const offerMaxSpeed = +selectedOffer.dataset.maxspeed;
   let offerAttivazione = selectedOffer.dataset.attivazione;
+  let offerGestione = selectedOffer.dataset.gestione;
   const copVelocita = document.querySelector(`#cop-velocita`); // la velocità della linea dedotta dal verifica copertura
 
   const queryString = window.location.search;
   const urlParameters = new URLSearchParams(queryString);
   const [downSpeed, upSpeed] = urlParameters.get("sp").split("/");
 
-  console.log(`Speed: ${upSpeed}, ${downSpeed}`);
+  //console.log(`Speed: ${upSpeed}, ${downSpeed}`);
 
-  if (offerMaxSpeed < downSpeed) {
+  if (offerMaxSpeed < +downSpeed) {
     copVelocita.value = offerMaxSpeed;
   } else {
     copVelocita.value = downSpeed;
@@ -113,13 +115,25 @@ updateOfferData = () => {
 
   cartNome.textContent = offerName;
   cartCanone.textContent = getAmount(offerPrice).toFixed(2) + " €";
-  cartAttivazione.innerText = offerAttivazione == 0 ? "GRATUITA" : getAmount(offerAttivazione).toFixed(2) + " €";
-  cartNote.textContent = offerNote;
+
+  let strAttivazione = "";
+
+  if (offerAttivazione !== "0") {
+    strAttivazione = `<span style='text-decoration:line-through'>${getAmount(offerAttivazione).toFixed(
+      2
+    )} €</span><br>già incluso nell'offerta`;
+  }
+  cartAttivazione.innerHTML = strAttivazione;
+
+  cartGestione.innerText = offerGestione == 0 ? "GRATUITO" : getAmount(offerGestione).toFixed(2) + " €";
+
+  cartNote.innerHTML = offerNote;
   cartFeatures.innerHTML = formattedFeaturesList;
 
   cntNome.value = offerName;
   cntCanone.value = offerPrice;
-  cntAttivazione.value = offerAttivazione;
+  cntAttivazione.value = 0; // offerAttivazione;
+  cntGestione.value = offerGestione;
   cntCosto.value = offerPrice;
 
   document.querySelectorAll(".js_offer_selected_only").forEach((item) => item.classList.remove("hide"));

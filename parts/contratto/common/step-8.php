@@ -446,11 +446,21 @@
                 </div>
 
                 <div class="row px-3">
-                    <div class="col-9"><b>Attivazione</b></div>
+                    <div class="col-9"><b>Attivazione</b> (già inclusa)</div>
                     <div class="col-3 text-end">
-                        <?php echo floatval($offerta['attivazione']) == 0 ? 'GRATIS' : $offerta['attivazione'] ." €";?>
+                        <span style="text-decoration:line-through;">240,00 €</span>
+                        <?php //echo floatval($offerta['attivazione']) == 0 ? 'GRATIS' : $offerta['attivazione'] ." €";?>
                     </div>
                 </div>
+                
+                <?php if( floatval($offerta['gestione']) != 0 ): ?>
+                <div class="row px-3">
+                    <div class="col-9"><b>Contributo gestione pratica</b></div>
+                    <div class="col-3 text-end">
+                        <?php echo $offerta['gestione'] ." €";?>
+                    </div>
+                </div>
+                <?php endif; ?>
 
                 <?php if(isset($migrazione['linea_nuova']) && $migrazione['linea_nuova'] == '1'): ?>
                 <div class="row px-3">

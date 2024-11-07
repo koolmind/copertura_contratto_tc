@@ -42,6 +42,7 @@ class ContrattoOnLineShortcode {
                     'opzioni'       => $_POST['cnt-options'],
                     'costo'         => sanitize_text_field($_POST['cnt-costo']),
                     'attivazione'   => sanitize_text_field($_POST['cnt-attivazione']),
+                    'gestione'      => sanitize_text_field($_POST['cnt-gestione']),
                     'velocita'      => sanitize_text_field($_POST['cop_velocita']),
                 );
 

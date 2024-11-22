@@ -67,6 +67,15 @@ a.btn-download {
   -ms-border-radius: $b-radius;
   -o-border-radius: $b-radius;
 
+  &.small {
+    padding: 8px 16px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  }
+
   &:hover,
   &:focus {
     background-color: $blu-chiaro !important;

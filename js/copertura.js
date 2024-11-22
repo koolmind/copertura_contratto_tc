@@ -457,7 +457,6 @@
     let tipologieNonOfferte = ["Bitstream", "ULL", "Rame su AI"]; //"Bitstream Ethernet" riattivato
 
     if (tipologieNonOfferte.contains(consigliata.tipo)) {
-      console.log("non offerta");
       return {
         tipoCli: tipocliente,
         prodotto: null,
@@ -521,6 +520,7 @@
       .post(`${copertura_params.TCRS_WS_ROOT}wsbridge.php`, params)
       .then(function (response) {
         esito = analizza_dati(response.data.dati, tipoCli);
+        console.log(esito);
 
         // output della mappa (se disponinibile)
         if (esito.mappa) {
@@ -529,7 +529,6 @@
           mappaApparato.removeClass("nascondi");
         } else {
           renderEsito();
-          //writeToLog();
         }
       })
       .catch(function (error) {
@@ -588,7 +587,7 @@
     // compongo l'url per la pagina del risultato
     //let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
     let finalUrl = `${copertura_params.TCRS_SITE_URL}esito-copertura/?`;
-    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}`;
+    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}&eff=${urlParams.effSpeed}`;
 
     window.location.href = encodeURI(finalUrl);
     return;

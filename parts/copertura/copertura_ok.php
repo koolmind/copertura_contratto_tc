@@ -58,9 +58,19 @@ switch ($tecnologia) {
 
     <div class="copertura-result-header copertura-ok">
         <img src="<?php echo TC_ADDONS_ROOT_URL;?>/img/tick-round-out.svg" alt="copertura OK" class="ico-esito" />
-        <h2>Il tuo indirizzo "<?php echo $indirizzo; ?>" <br/>
-        è coperto con tecnologia <?php echo $tecToShow; ?> fino a <?php echo $speed; ?> Mbps.</h2>
-        <!-- <p>La linea Terrecablate sarà attivata con tecnologia <?php //echo $tecnologia;?> </p> -->
+        <h2>
+            Il tuo indirizzo "<?php echo $indirizzo; ?>" <br/>
+            è coperto con tecnologia <?php echo $tecToShow; ?> fino a <?php echo $speed; ?> Mbps.
+
+            <?php
+            
+            if($effSpeed!='null'){ // viene passato come stringa... 
+                list($effDown, $effUp) = explode( '/', $effSpeed );
+                printf( '<br /><span class="effSpeedMsg">La velocità stimata per la tua linea è di %s Mbps (down) / %s Mbps (up)</span> ', $effDown, $effUp);
+            }
+            ?>        
+        </h2>
+        
     </div>
 
     <div class="copertura-result">
@@ -81,15 +91,24 @@ switch ($tecnologia) {
                         $gestione = get_post_meta( $offerID, "costo_gestione", true );
                         $maxSpeedDown = get_post_meta( $offerID, "max_speed_down", true );
                         $note = trim(get_post_meta( $offerID, "note", true ));
-                        $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
                         $includeFritz = get_post_meta( $offerID, "include_fritz", true );
                         // $disclaimer = get_post_meta( $offerID, "disclaimer", true );
+                        $listino = get_post_meta( $offerID, "listino", true );
+                        $suffix = $tecToShow != 'FTTH' ? " ".$tecToShow : ""; 
+
+                        // nel caso in cui non sia FTTH, devo cambiare la dicitura sulla velocità della fibra
+                        $caratteristiche = get_post_meta( $offerID, "caratteristiche_offerta", true );
+                        if($down<1000){
+                            $caratteristiche = preg_replace('/1 Gbps/', $down . ' Mbps', $caratteristiche);
+                            $caratteristiche = preg_replace('/Fibra Ultraveloce/', 'Internet veloce', $caratteristiche);
+                        }
+
                         ?>
 
                         <div class="offer-single offer-box offer-details" 
                             id="offer-<?php echo $offerID; ?>" 
                             data-offer="<?php echo $offerID; ?>"
-                            data-name="<?php echo $titolo; ?>"
+                            data-name="<?php echo $titolo . $suffix; ?>"
                             data-price="<?php echo $prezzo; ?>"
                             data-maxspeed="<?php echo $maxSpeedDown; ?>"
                             data-attivazione="<?php echo $attivazione; ?>"
@@ -98,7 +117,13 @@ switch ($tecnologia) {
                             data-features="<?php echo $caratteristiche; ?>"      
                             data-has-fritz="<?php echo $includeFritz; ?>"                      
                             >
-                        <h2><?php echo get_the_title(); ?></h2>
+                            
+                            <h2><?php echo get_the_title() . $suffix ?></h2>
+
+                            <?php if($listino != null): ?>
+                                <a href="<?php echo wp_get_attachment_url( $listino ); ?>" target="_blank" class="btn-download small"><i class="fas fa-link"></i> Scheda prodotto</a>
+                            <?php endif; ?>
+
                         </div>
                     <?php endwhile; ?>
 

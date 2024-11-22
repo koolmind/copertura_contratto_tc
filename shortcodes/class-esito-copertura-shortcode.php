@@ -35,6 +35,7 @@ class EsitoCoperturaShortcode {
         $indirizzo = $via . ", " . $co . " (" . $prv . ")";
         
         $speed = isset($_GET['sp']) ? $_GET['sp'] : null;
+        $effSpeed = isset($_GET['eff']) ? $_GET['eff'] : null;
 
 
         print('<div class="copertura-result-wrapper">');

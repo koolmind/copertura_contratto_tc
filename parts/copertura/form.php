@@ -38,6 +38,7 @@ $tipoCli = isset($_GET['tc'])  ? $_GET['tc'] : null;
         <div class="input-wrapper">
             <input type="text" name="selIndirizzo" id="indirizzo" class="input-large" placeholder="non inserire via/piazza/..." disabled="disabled">
         </div>
+        <span class="help">indicare solo il nome, senza via/piazza/...</span>
     </div>
 
     <div class="form-row">

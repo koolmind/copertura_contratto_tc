@@ -3,16 +3,16 @@
 
     showSteps(8);
 
-    $offerta = $this->contrattoData['offerta'];
-    $anagrafica = $this->contrattoData['anagrafica'];
-    $attivazione = $this->contrattoData['attivazione'];
-    $servizi = $this->contrattoData['servizi'];
-    $migrazione = $this->contrattoData['migrazione'];
-    $gdpr = $this->contrattoData['gdpr'];
-    $pagamento = $this->contrattoData['pagamento'];
+    $offerta = stripslashes_deep($this->contrattoData['offerta']);
+    $anagrafica = stripslashes_deep($this->contrattoData['anagrafica']);
+    $attivazione = stripslashes_deep($this->contrattoData['attivazione']);
+    $servizi = stripslashes_deep($this->contrattoData['servizi']);
+    $migrazione = stripslashes_deep($this->contrattoData['migrazione']);
+    $gdpr = stripslashes_deep($this->contrattoData['gdpr']);
+    $pagamento = stripslashes_deep($this->contrattoData['pagamento']);
 
     // Output per la parte degli elenchi
-    $elenchi = $this->contrattoData['elenchi'];
+    $elenchi = stripslashes_deep($this->contrattoData['elenchi']);
     $strElenchi = "<div class='col-12'>Il cliente ";
     $strElenchi .= $elenchi['elenchi_consenso'] ? "<b>DESIDERA</b>" : "<b>NON DESIDERA</b>" ;
     $strElenchi .= " che il suo nome sia presente nei nuovi elenchi telefonci.</div>";
@@ -22,7 +22,7 @@
     $datiElenco = "";
     $datiElenco .= $elenchi['elenchi_cognome'] ? "<div class='col-12 col-md-4'><b>Cognome/Rag.Sociale:</b> {$elenchi['elenchi_cognome']}</div>" : "";
     $datiElenco .= $elenchi['elenchi_nome'] ? "<div class='col-12 col-md-4'><b>Nome:</b> {$elenchi['elenchi_nome']}</div>" : "";
-    $datiElenco .= $elenchi['elenchi_soloiniziale'] ? "<div class='col-12 col-md-4'><b>Solo Iniziale:</b> SI</b></div>": "";
+    $datiElenco .= (isset($elenchi['elenchi_soloiniziale']) && $elenchi['elenchi_soloiniziale']) ? "<div class='col-12 col-md-4'><b>Solo Iniziale:</b> SI</b></div>": "";
     $datiElenco .= $elenchi['elenchi_numero'] ? "<div class='col-12'><b>Numero tel.:</b> {$elenchi['elenchi_numero']}</div>" : "";
 
     $addr = "";
@@ -215,14 +215,14 @@
                             if(isset($migrazione['linea_migrazione']) && $migrazione['linea_migrazione'] == '1') echo " la MIGRAZIONE della sua linea ";
                             if(isset($migrazione['linea_nuova']) && $migrazione['linea_nuova'] == '1') echo " l'ATTIVAZIONE di una nuova linea ";
 
-                            if($migrazione['linea_portability'] == '1')
+                            if(isset($migrazione['linea_portability']) && $migrazione['linea_portability'] == '1')
                                 echo " CON PORTABILITÀ del suo numero.";
                             else 
                                 echo " SENZA PORTABILITÀ del suo numero."; ?>
                             </b>
                         </div>
 
-                        <?php if($migrazione['linea_portability'] == '1') { ?>
+                        <?php if(isset($migrazione['linea_portability']) && $migrazione['linea_portability'] == '1') { ?>
                         
                             <?php echo isset($migrazione['linea_codice_migrazione_1']) && $migrazione['linea_codice_migrazione_1']  ? '<div class="col-12 col-md-6">COD.MIGRAZIONE #1: <b>'. $migrazione['linea_codice_migrazione_1'] .'</b></div>' : ''; ?>
                             <?php echo isset($migrazione['linea_codice_migrazione_2']) && $migrazione['linea_codice_migrazione_2']  ? '<div class="col-12 col-md-6">COD.MIGRAZIONE #2: <b> '. $migrazione['linea_codice_migrazione_2'] .'</b></div>' : ''; ?>
@@ -350,6 +350,8 @@
                             }
                             ?>
                         </div>
+
+                        <?php if($pagamento['metodo_pagamento'] == 'sdd') : ?>
                         <div class="col-12">
                             <b>INTESTATARIO DEL CONTO: </b> <?php echo $pagamento['sdd_intestatario_cognome_nome'];?>
                         </div>
@@ -377,7 +379,7 @@
                             <b>LINEA/CONTRATTO: </b> <?php echo $pagamento['sdd_titolare_linea'];?>
                         </div>
                         <div class="col-12">
-                            <b>COGNOME e Nome / Ragione sociale: </b> <?php echo $pagamento['sdd_titolare_cognome_nome'];?>
+                            <b>COGNOME e NOME / Ragione sociale: </b> <?php echo $pagamento['sdd_titolare_cognome_nome'];?>
                         </div>
                         <div class="col-12">
                             <b>P.IVA/C.F. : </b> <?php echo $pagamento['sdd_titolare_codfisc_piva'];?>
@@ -385,7 +387,8 @@
                         <div class="col-12">
                             <b>Recapito telefonico alternativo: </b> <?php echo $pagamento['sdd_titolare_recapito'];?>
                         </div>
-                        <?php endif; ?>
+                        <?php endif; 
+                        endif; ?>
                     </div>                    
                 </div>
 

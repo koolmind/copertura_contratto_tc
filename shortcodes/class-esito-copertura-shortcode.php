@@ -30,7 +30,7 @@ class EsitoCoperturaShortcode {
         
         $via = isset($_GET['via']) ? $_GET['via'] : null;
         $nc = isset($_GET['nc']) ? $_GET['nc'] : null;
-        $co = isset($_GET['co']) ? $_GET['co'] : null;
+        $co = isset($_GET['co']) ? wp_unslash($_GET['co']) : null;
         $prv = isset($_GET['prv']) ? $_GET['prv'] : null;
         $indirizzo = $via . ", " . $co . " (" . $prv . ")";
         

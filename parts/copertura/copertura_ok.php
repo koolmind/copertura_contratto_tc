@@ -64,7 +64,7 @@ switch ($tecnologia) {
 
             <?php
             
-            if($effSpeed!='null'){ // viene passato come stringa... 
+            if(intval($effSpeed) !== 0 ){ // può essere null, "null" o "N.D."
                 list($effDown, $effUp) = explode( '/', $effSpeed );
                 printf( '<br /><span class="effSpeedMsg">La velocità stimata per la tua linea è di %s Mbps (down) / %s Mbps (up)</span> ', $effDown, $effUp);
             }
@@ -257,7 +257,6 @@ switch ($tecnologia) {
                         <input type="hidden" name="cop_indirizzo" id="cop-indirizzo" value="<?php echo $via; ?>" />  
                         <input type="hidden" name="cop_civico" id="cop-civico" value="<?php echo $nc; ?>" />  
                         <input type="hidden" name="cop_citta" id="cop-citta" value="<?php echo $co; ?>" />  
-                        <!-- <input type="hidden" name="cop_cap" id="cop-cap" value="<?php echo $cap; ?>" />   -->
                         <input type="hidden" name="cop_provincia" id="cop-provincia" value="<?php echo $prv; ?>" />  
                         <input type="hidden" name="cop_velocita" id="cop-velocita" value="<?php echo $down; ?>" />  
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>

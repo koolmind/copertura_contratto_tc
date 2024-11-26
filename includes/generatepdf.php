@@ -6,6 +6,7 @@ require_once(TC_ADDONS_ROOT . 'vendor/fpdf/custompdf.php');
 
 
 function decodeUTF8($text) {
+    $text = preg_replace('/[\\\\]*/', '', $text); // tolgo tutti gli slash prima degli apostrofi. con stripslshes ne rimane uno.
     // Usa mb_convert_encoding se disponibile
     if (function_exists('mb_convert_encoding')) {
         return mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
@@ -16,6 +17,7 @@ function decodeUTF8($text) {
     }
     // Se nessuna delle due è disponibile, restituisci il testo originale
     // (potrebbe causare problemi con caratteri non-ASCII)
+
     return $text;
 }
 

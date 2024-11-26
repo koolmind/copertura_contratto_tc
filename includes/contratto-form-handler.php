@@ -43,7 +43,7 @@ function loadDataFromTransient($transientKey, $dataSection, $newPrefix, $prepend
 function tcGetFieldValue( $haystack, $needle, $output=true ) {
 	$out = null;
 	
-	if( $haystack && isset($haystack[$needle]) ) $out = esc_attr($haystack[$needle]);
+	if( $haystack && isset($haystack[$needle]) ) $out = sanitize_text_field(wp_unslash($haystack[$needle]));
 
 	if (!$output) return $out;
 
@@ -108,7 +108,7 @@ function valOrNull($section, $item, $type) {
     }
 
     if($type === 'str') {
-        return strval($section[$item]);
+        return esc_sql(strval($section[$item]));
     }
 }
 

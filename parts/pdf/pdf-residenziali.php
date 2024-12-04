@@ -175,7 +175,7 @@ switch ($cnt['tipo_accesso']) {
         break;
 }
 
-$nomeCompletoOfferta = $cnt['nomeofferta'] . $specLabel;
+$nomeCompletoOfferta = $cnt['nomeofferta']; // . $specLabel;
 $opzioni = $cnt['opzioni'] !== null ? maybe_unserialize($cnt['opzioni']) : null;
 
 $pdf->AddPage();
@@ -1090,7 +1090,13 @@ if( trim($specLabel) === "FTTH" ){
 	$pdfSpec .= ($cnt['tipo_accesso'] == 'TCRS_GPON') ? '_IR' : '_FR';
 } 
 
-$schedaAgcomName = $pdfAgcom[$cnt['nomeofferta']][$pdfSpec];
+
+$nomeContratto = $cnt['nomeofferta'];
+if( strpos($cnt['nomeofferta'], 'ADSL') !== false || strpos($cnt['nomeofferta'], 'FTTC') !== false ){
+	$nomeContratto = substr($cnt['nomeofferta'],0,-5);
+} 
+
+$schedaAgcomName = $pdfAgcom[$nomeContratto][$pdfSpec];
 
 
 $pathToPdf = TC_ADDONS_ROOT . "stuff/agcom/".$schedaAgcomName;

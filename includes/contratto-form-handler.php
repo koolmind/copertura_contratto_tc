@@ -306,7 +306,10 @@ function handle_contratto_aziende() {
 
     if($goBack){
         // devo solo tornare allo step precedentemente compilato
-        array_pop($data['path']);
+        if(is_array($data['path'])) {
+            array_pop($data['path']);
+        }
+        
         $data['step'] = intval($data['path'][ count($data['path']) - 1]);        
     }
     

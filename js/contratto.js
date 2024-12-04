@@ -197,7 +197,8 @@ jQuery(document).ready(function ($) {
     }
 
     function checkIBAN(str) {
-      if (/^[A-Za-z]{2}[0-9]{2}[A-Za-z]{1}[0-9]{22}$/i.test(str)) return true;
+      //if (/^[A-Za-z]{2}[0-9]{2}[A-Za-z]{1}[0-9]{22}$/i.test(str)) return true;
+      if (/^[A-Za-z]{2}[0-9]{2}[A-Za-z]{1}[0-9]{10}[A-Za-z0-9]{2}[0-9]{10}$/.test(str)) return true;
 
       return false;
     }

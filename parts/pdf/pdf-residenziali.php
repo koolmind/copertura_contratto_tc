@@ -1049,6 +1049,7 @@ $columns = null;
 
 // GDPR
 $pathToPdf = TC_ADDONS_ROOT . "stuff/documento-gdpr-residenzali.pdf";
+error_log ("Aggiunta GDPR Residenziali: " . $pathToPdf);
 
 $pageCount = $pdf->setSourceFile($pathToPdf);
 

@@ -1,4 +1,5 @@
 <?php 
+error_log("Generazione contratto: " . $this->contrattoUID);
 $pdf_file = generate_contratto_pdf($this->contrattoUID);
 ?>
 

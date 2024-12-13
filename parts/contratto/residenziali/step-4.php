@@ -60,13 +60,13 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_codice_migrazione_1">Codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control tc-migration" maxlength="18" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control tc-migration" maxlength="20" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
                 <small class="text-danger form-message hide">Codice migrazione errato</small>
             </div>
 
             <div class="col-12 col-md-6  mb-4">
                 <label for="linea_codice_migrazione_2">Secondo codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_2]" id="linea_codice_migrazione_2" class="form-control tc-migration" placeholder="opzionale" maxlength="18" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_2'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_2]" id="linea_codice_migrazione_2" class="form-control tc-migration" placeholder="opzionale" maxlength="20" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_2'); ?>">
                 <small class="text-danger form-message hide">Codice migrazione errato</small>
             </div>
         </div>

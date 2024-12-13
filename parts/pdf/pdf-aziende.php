@@ -1080,6 +1080,7 @@ $columns = null;
 
 // GDPR
 $pathToPdf = TC_ADDONS_ROOT . "stuff/documento-gdpr-aziende.pdf";
+error_log ("Aggiunta GDPR Aziende: " . $pathToPdf);
 
 $pageCount = $pdf->setSourceFile($pathToPdf);
 

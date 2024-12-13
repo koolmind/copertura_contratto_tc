@@ -245,14 +245,14 @@ function saveDataToDb($data, $cID) {
     $R1 = $wpdb->insert($table_contratti, $toSave);
     
     if ($wpdb->last_error) {
-         error_log("Errore MySQL durante l'inserimento: " . $wpdb->last_error);
-     } else {
-         error_log("Nessun errore MySQL riportato, ma nessuna riga inserita");
-     }
+        error_log("CONTRATTO ". $cID . " - Errore MySQL durante l'inserimento: " . $wpdb->last_error);
+    } else {
+        error_log("CONTRATTO ". $cID . " - Nessun errore MySQL riportato, ma nessuna riga inserita");
+    }
 
-     $contrattoID = $wpdb->insert_id;
+    $contrattoID = $wpdb->insert_id;
 
-     error_log('Query SQL generata: ' . $wpdb->last_query);
+    error_log("CONTRATTO ". $cID . " -  Query SQL generata: " . $wpdb->last_query);
     
     error_log("Inizio salvataggio Dati Elenco");
     // SALVO I DATI PER GLI ELENCHI
@@ -279,17 +279,13 @@ function saveDataToDb($data, $cID) {
 
     $R2 = $wpdb->insert($table_elenchi, $toSaveElenchi);
 
+    if ($wpdb->last_error) {
+       error_log("ELENCHI ". $cID . " - Errore MySQL durante l'inserimento: " . $wpdb->last_error);
+    } else {
+       error_log("ELENCHI ". $cID . " - Nessun errore MySQL riportato, ma nessuna riga inserita");
+    }
 
-
-    // if ($wpdb->last_error) {
-    //     error_log("Errore MySQL durante l'inserimento: " . $wpdb->last_error);
-    // } else {
-    //     error_log("Nessun errore MySQL riportato, ma nessuna riga inserita");
-    // }
-
-    // error_log('Query SQL generata: ' . $wpdb->last_query);
-
-    // create Pdf?
+    error_log('Query SQL generata: ' . $wpdb->last_query);
 
     return;
 }

@@ -455,6 +455,28 @@
                         <?php //echo floatval($offerta['attivazione']) == 0 ? 'GRATIS' : $offerta['attivazione'] ." €";?>
                     </div>
                 </div>
+
+
+                <?php 
+                    if(isset($migrazione['linea_portability']) && $migrazione['linea_portability'] == '1') { 
+                        $contatoreLinee = 0;
+                        for( $i=1; $i<=4; $i++ ){
+                            if( isset($migrazione['linea_numero_'.$i]) && $migrazione['linea_numero_'.$i] ) $contatoreLinee++;
+                        }
+
+                        if($contatoreLinee > 0) { 
+
+                            $contributoPortabiity = ($contatoreLinee * 15).",00 €";
+                ?>
+                        
+                        <div class="row px-3">
+                            <div class="col-9"><b>Contributo number portability</b> (x<?php echo $contatoreLinee; ?>)</div>
+                            <div class="col-3 text-end"><span><?php echo $contributoPortabiity; ?></span></div>
+                        </div>
+                <?php
+                        }
+                    }
+                ?>
                 
                 <?php if( floatval($offerta['gestione']) != 0 ): ?>
                 <div class="row px-3">

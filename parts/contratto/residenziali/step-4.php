@@ -24,7 +24,7 @@
         <legend>4. Migrazione o attivazione nuova linea</legend>
         
         <div class="row">
-            <div class="col mb-4 d-flex flex-column flex-md-row gap-5">
+            <div class="col mb-2 d-flex flex-column flex-md-row gap-5">
                 <div class="form-check check-zone">
                     <input class="form-check-input" type="checkbox" value="1" id="linea_migrazione" name="dati[linea_migrazione]" data-check-linea <?php echo $cbMigrazione ? 'checked="checked" ': ''?>>
                     <label class="form-check-label" for="linea_migrazione">Voglio migrare la mia linea</label>
@@ -37,9 +37,10 @@
 
                 <div class="form-check check-zone">
                     <input class="form-check-input" type="checkbox" value="1" id="linea_portability" name="dati[linea_portability]" data-check-linea <?php echo $cbPortability ? 'checked="checked" ': ''?> >
-                    <label class="form-check-label" for="linea_portability">Voglio mantenere il mio numero telefonico</label>
+                    <label class="form-check-label" for="linea_portability">Voglio mantenere il mio numero telefonico <sup>(1)</sup></label>
                 </div>
             </div>
+            <span class="note_info d-block mb-4"><sup>(1)</sup> Il servizio di <b>Number Portability</b> comporta un costo una tantum di 15,00 euro per ciascun numero.</span>
         </div>
 
 		<div class="row mx-0 mb-4">

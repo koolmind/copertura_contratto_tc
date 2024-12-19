@@ -99,23 +99,7 @@ jQuery(document).ready(function ($) {
       }
     }
 
-    // metodo di pagamento
-    if (checkPagamentoFields) {
-      const pagamentoCC = $("#pagamentoCC");
-      const pagamentoSDD = $("#pagamentoSDD");
-
-      if (!pagamentoCC.is(":checked") && !pagamentoSDD.is(":checked")) {
-        hasErrors = true;
-        console.log(`errore pagam`);
-        pagamentoCC.addClass("is-invalid");
-        pagamentoSDD.addClass("is-invalid");
-      } else {
-        pagamentoCC.removeClass("is-invalid");
-        pagamentoSDD.removeClass("is-invalid");
-      }
-    }
-
-    // metodo di pagamento
+    // Consenso Elenchi
     if (checkElenchiFields) {
       const consensoElenchiOK = $("#consensoElenchiOK");
       const consensoElenchiKO = $("#consensoElenchiKO");
@@ -151,6 +135,24 @@ jQuery(document).ready(function ($) {
         }
       }
     });
+
+    // metodo di pagamento (lo eseguo dopo perché deve sovrascrivere il controllo precedente)
+    if (checkPagamentoFields) {
+      const pagamentoCC = $("#pagamentoCC");
+      const pagamentoSDD = $("#pagamentoSDD");
+
+      if (!pagamentoCC.is(":checked") && !pagamentoSDD.is(":checked")) {
+        hasErrors = true;
+        console.log(`errore pagam`);
+        pagamentoCC.addClass("is-invalid");
+        pagamentoSDD.addClass("is-invalid");
+      } else {
+        if (pagamentoCC.is(":checked")) hasErrors = false; // mi accerto che il controllo venga superato anche se i campi SDD, essendo vuoti, hanno sicuramente la classe is-invalid
+
+        pagamentoCC.removeClass("is-invalid");
+        pagamentoSDD.removeClass("is-invalid");
+      }
+    }
 
     // controllo tutti i campi che hanno bisogno di un controllo formale sull'input,
     // siano essi obbligatori o meno (se non sono vuoti, li controllo)

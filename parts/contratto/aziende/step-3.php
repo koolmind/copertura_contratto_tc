@@ -15,9 +15,6 @@
    
     <fieldset id="fields-indirizzo-dispositivo" class="mt-3">
         <legend>3. Indirizzo di invio del dispositivo</legend>
-        <!-- <div class="d-flex justify-content-end my-3">
-            <button type="button" id="fill-from-stored-data" class="btn-standard btn-alt" data-sourcesection="attivazione" disabled><i class="fas fa-sync"></i> come attivazione</button>
-        </div> -->
 
         <div class="my-3">
             <h4>Vuoi che il dispositivo sia inviato ad un indirizzo diverso?</h4>
@@ -27,29 +24,29 @@
         <div class="row">
             <div class="col-12 col-md-8 mb-4">
                 <label for="servizi_indirizzo">Indirizzo (via/piazza)</label>
-                <input type="text" name="dati[servizi_indirizzo]" id="servizi_indirizzo" class="form-control tc-required" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'servizi_indirizzo'); ?>">
+                <input type="text" name="dati[servizi_indirizzo]" id="servizi_indirizzo" class="form-control tc-required"  maxlength="100" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'servizi_indirizzo'); ?>">
             </div>
 
             <div class="col-12 col-md-4 mb-4">
                 <label for="servizi_civico">Numero civico</label>
-                <input type="text" name="dati[servizi_civico]" id="servizi_civico" class="form-control tc-required" placeholder="n. civico"  value="<?php tcGetFieldValue($fields,'servizi_civico'); ?>">
+                <input type="text" name="dati[servizi_civico]" id="servizi_civico" class="form-control tc-required" maxlength="10"  placeholder="n. civico"  value="<?php tcGetFieldValue($fields,'servizi_civico'); ?>">
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 col-md-4 mb-4">
                 <label for="servizi_citta">Città</label>
-                <input type="text" name="dati[servizi_citta]" id="servizi_citta" class="form-control tc-required" placeholder="città"  value="<?php tcGetFieldValue($fields,'servizi_citta'); ?>">
+                <input type="text" name="dati[servizi_citta]" id="servizi_citta" class="form-control tc-required"  maxlength="50" placeholder="città"  value="<?php tcGetFieldValue($fields,'servizi_citta'); ?>">
             </div>
 
             <div class="col-6 col-md-4 mb-4">
                 <label for="servizi_provincia">Provincia</label>
-                <input type="text" name="dati[servizi_provincia]" id="servizi_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'servizi_provincia'); ?>" maxlength="2">
+                <input type="text" name="dati[servizi_provincia]" id="servizi_provincia" class="form-control tc-required"  maxlength="2" placeholder="provincia" value="<?php tcGetFieldValue($fields,'servizi_provincia'); ?>" maxlength="2">
             </div>
 
             <div class="col-6 col-md-4 mb-4">
                 <label for="servizi_cap">CAP</label>
-                <input type="text" name="dati[servizi_cap]" id="servizi_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'servizi_cap'); ?>">
+                <input type="text" name="dati[servizi_cap]" id="servizi_cap" class="form-control tc-required"  maxlength="5" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'servizi_cap'); ?>">
             </div>
         <div>
     </fieldset>

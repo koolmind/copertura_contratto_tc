@@ -520,8 +520,6 @@
       .post(`${copertura_params.TCRS_WS_ROOT}wsbridge.php`, params)
       .then(function (response) {
         esito = analizza_dati(response.data.dati, tipoCli);
-        console.log(esito);
-
         // output della mappa (se disponinibile)
         if (esito.mappa) {
           renderMap(esito.mappa);

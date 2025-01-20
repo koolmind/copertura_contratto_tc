@@ -46,7 +46,7 @@ $tipoCli = isset($_GET['tc'])  ? $_GET['tc'] : null;
         <div class="input-wrapper">
             <select name="civico" id="selCivico" class="input-small" disabled="disabled"></select>
         </div>
-        <span class="help">in caso di assenza del numero civico inserire quello più prossimo</span>
+        <span class="help">in caso di assenza del tuo numero civico segnacelo, scrivendo a <a href="mailto:info@terrecablate.it">info@terrecablate.it</a></span>
     </div>
     
 

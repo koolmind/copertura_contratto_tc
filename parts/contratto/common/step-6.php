@@ -55,7 +55,7 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
             <div class="row">
                 <div class="col-12 col-md-6 mb-4">
                     <label for="sdd_intestatario_cognome_nome">COGNOME e NOME / RAGIONE SOCIALE</label>
-                    <input type="text" name="dati[sdd_intestatario_cognome_nome]" id="sdd_intestatario_cognome_nome" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'sdd_intestatario_cognome_nome'); ?>">
+                    <input type="text" name="dati[sdd_intestatario_cognome_nome]" id="sdd_intestatario_cognome_nome" class="form-control tc-required"  maxlength="100" value="<?php tcGetFieldValue($fields,'sdd_intestatario_cognome_nome'); ?>">
                 </div>
 
                 <div class="col-12 col-md-6  mb-4">
@@ -79,7 +79,7 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
             <div class="row">
                 <div class="col-12 col-md-6 mb-4">
                     <label for="sdd_sottoscrittore_cognome_nome">COGNOME e NOME</label>
-                    <input type="text" name="dati[sdd_sottoscrittore_cognome_nome]" id="sdd_sottoscrittore_cognome_nome" class="form-control tc-required" value="<?php tcGetFieldValue($fields,'sdd_sottoscrittore_cognome_nome'); ?>">
+                    <input type="text" name="dati[sdd_sottoscrittore_cognome_nome]" id="sdd_sottoscrittore_cognome_nome" class="form-control tc-required"  maxlength="100" value="<?php tcGetFieldValue($fields,'sdd_sottoscrittore_cognome_nome'); ?>">
                 </div>
 
                 <div class="col-12 col-md-6  mb-4">
@@ -93,12 +93,12 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
             <div class="row">
                 <div class="col-12 mb-4">
                     <label for="sdd_titolare_linea">LINEA TELEFONICA / CONTRATTO</label>
-                    <input type="text" name="dati[sdd_titolare_linea]" id="sdd_titolare_linea" class="form-control" value="<?php tcGetFieldValue($fields,'sdd_titolare_linea'); ?>">
+                    <input type="text" name="dati[sdd_titolare_linea]" id="sdd_titolare_linea" class="form-control"  maxlength="50" value="<?php tcGetFieldValue($fields,'sdd_titolare_linea'); ?>">
                 </div>
 
                 <div class="col-12 col-md-6 mb-4">
                     <label for="sdd_titolare_cognome_nome">COGNOME e NOME / RAGIONE SOCIALE</label>
-                    <input type="text" name="dati[sdd_titolare_cognome_nome]" id="sdd_titolare_cognome_nome" class="form-control" value="<?php tcGetFieldValue($fields,'sdd_titolare_cognome_nome'); ?>">
+                    <input type="text" name="dati[sdd_titolare_cognome_nome]" id="sdd_titolare_cognome_nome" class="form-control"  maxlength="100" value="<?php tcGetFieldValue($fields,'sdd_titolare_cognome_nome'); ?>">
                 </div>
 
                 <div class="col-12 col-md-6  mb-4">
@@ -108,7 +108,7 @@ non saranno trattati e non risiederanno in alcun Database di Terrecablate Reti e
 
                 <div class="col-12 mb-4">
                     <label for="sdd_titolare_recapito">RECAPITO TELEFONICO ALTERNATIVO</label>
-                    <input type="text" name="dati[sdd_titolare_recapito]" id="sdd_titolare_recapito" class="form-control" value="<?php tcGetFieldValue($fields,'sdd_titolare_recapito'); ?>">
+                    <input type="text" name="dati[sdd_titolare_recapito]" id="sdd_titolare_recapito" class="form-control"  maxlength="50" value="<?php tcGetFieldValue($fields,'sdd_titolare_recapito'); ?>">
                 </div>
             </div>
     </fieldset>

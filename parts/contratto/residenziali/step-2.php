@@ -21,29 +21,29 @@
         <div class="row">
             <div class="col-12 col-md-8 mb-4">
                 <label for="attivazione_indirizzo">Indirizzo (via/piazza)</label>
-                <input type="text" name="dati[attivazione_indirizzo]" id="attivazione_indirizzo" class="form-control tc-required" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'attivazione_indirizzo'); ?>">
+                <input type="text" name="dati[attivazione_indirizzo]" id="attivazione_indirizzo" class="form-control tc-required" placeholder="via/piazza" maxlength="100" readonly="readonly" value="<?php tcGetFieldValue($fields,'attivazione_indirizzo'); ?>">
             </div>
         
             <div class="col-12 col-md-4 mb-4">
                 <label for="attivazione_civico">Numero civico</label>
-                <input type="text" name="dati[attivazione_civico]" id="attivazione_civico" class="form-control tc-required" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'attivazione_civico'); ?>">
+                <input type="text" name="dati[attivazione_civico]" id="attivazione_civico" class="form-control tc-required" placeholder="n. civico" maxlength="10"  readonly="readonly" value="<?php tcGetFieldValue($fields,'attivazione_civico'); ?>">
             </div>
         </div>
         
         <div class="row">
             <div class="col-12 col-md-4 mb-4">
                 <label for="attivazione_citta">Città</label>
-                <input type="text" name="dati[attivazione_citta]" id="attivazione_citta" class="form-control tc-required" placeholder="città" value="<?php tcGetFieldValue($fields,'attivazione_citta'); ?>">
+                <input type="text" name="dati[attivazione_citta]" id="attivazione_citta" class="form-control tc-required" placeholder="città" maxlength="50" readonly="readonly" value="<?php tcGetFieldValue($fields,'attivazione_citta'); ?>">
             </div>
             
             <div class="col-6 col-md-4 mb-4">
                 <label for="attivazione_provincia">Provincia</label>
-                <input type="text" name="dati[attivazione_provincia]" id="attivazione_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'attivazione_provincia'); ?>" maxlength="2">
+                <input type="text" name="dati[attivazione_provincia]" id="attivazione_provincia" class="form-control tc-required" placeholder="provincia" maxlength="2" readonly="readonly" value="<?php tcGetFieldValue($fields,'attivazione_provincia'); ?>" maxlength="2">
             </div>
             
             <div class="col-6 col-md-4 mb-4">
                 <label for="attivazione_cap">CAP</label>
-                <input type="text" name="dati[attivazione_cap]" id="attivazione_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'attivazione_cap'); ?>">
+                <input type="text" name="dati[attivazione_cap]" id="attivazione_cap" class="form-control tc-required" placeholder="c.a.p." maxlength="5" value="<?php tcGetFieldValue($fields,'attivazione_cap'); ?>">
             </div>
         </div>
     </fieldset>

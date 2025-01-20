@@ -81,11 +81,11 @@
         <div class="row">
             <div class="col-12 col-md-4 mb-4">
                 <label for="elenchi_cognome">Cognome / Ragione sociale:</label>
-                <input type="text" name="dati[elenchi_cognome]" id="elenchi_cognome" class="form-control" value="<?php tcGetFieldValue($fields,'elenchi_cognome'); ?>">
+                <input type="text" name="dati[elenchi_cognome]" id="elenchi_cognome" class="form-control"  maxlength="100" value="<?php tcGetFieldValue($fields,'elenchi_cognome'); ?>">
             </div>
             <div class="col-12 col-md-4 mb-4">
                 <label for="elenchi_nome">Nome:</label>
-                <input type="text" name="dati[elenchi_nome]" id="elenchi_nome" class="form-control" value="<?php tcGetFieldValue($fields,'elenchi_nome'); ?>">
+                <input type="text" name="dati[elenchi_nome]" id="elenchi_nome" class="form-control"  maxlength="50" value="<?php tcGetFieldValue($fields,'elenchi_nome'); ?>">
             </div>
             <div class="col-12 col-md-4 mb-4">
                 <div class="form-check d-flex align-items-center gap-2">
@@ -98,36 +98,36 @@
         <div class="row">
 			<div class="tc-input col-12 mb-4">
 				<label for="elenchi_numero">Numero telefonico</label>
-				<input type="text" name="dati[elenchi_numero]" id="elenchi_numero" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'elenchi_numero'); ?>">
+				<input type="text" name="dati[elenchi_numero]" id="elenchi_numero" class="form-control"  maxlength="20" placeholder="" value="<?php tcGetFieldValue($fields,'elenchi_numero'); ?>">
 			</div>		
 		</div>
 
         <div class="row">
 			<div class="tc-input col-12 col-md-8 mb-4">
 				<label for="elenchi_indirizzo">Indirizzo (via/piazza)</label>
-				<input type="text" name="dati[elenchi_indirizzo]" id="elenchi_indirizzo" class="form-control" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'elenchi_indirizzo'); ?>">
+				<input type="text" name="dati[elenchi_indirizzo]" id="elenchi_indirizzo" class="form-control"  maxlength="100" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'elenchi_indirizzo'); ?>">
 			</div>
 		
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="elenchi_civico">Numero civico</label>
-				<input type="text" name="dati[elenchi_civico]" id="elenchi_civico" class="form-control" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'elenchi_civico'); ?>">
+				<input type="text" name="dati[elenchi_civico]" id="elenchi_civico" class="form-control"  maxlength="10" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'elenchi_civico'); ?>">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="elenchi_citta">Comune</label>
-				<input type="text" name="dati[elenchi_citta]" id="elenchi_citta" class="form-control" placeholder="città" value="<?php tcGetFieldValue($fields,'elenchi_citta'); ?>">
+				<input type="text" name="dati[elenchi_citta]" id="elenchi_citta" class="form-control"  maxlength="50" placeholder="città" value="<?php tcGetFieldValue($fields,'elenchi_citta'); ?>">
 			</div>
 		
             <div class="tc-input col-6 col-md-4 mb-4">
 				<label for="elenchi_cap">CAP</label>
-				<input type="text" name="dati[elenchi_cap]" id="elenchi_cap" class="form-control" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'elenchi_cap'); ?>">
+				<input type="text" name="dati[elenchi_cap]" id="elenchi_cap" class="form-control"  maxlength="5" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'elenchi_cap'); ?>">
 			</div>
 
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="elenchi_provincia">Provincia</label>
-				<input type="text" name="dati[elenchi_provincia]" id="elenchi_provincia" class="form-control" placeholder="provincia" value="<?php tcGetFieldValue($fields,'elenchi_provincia'); ?>" maxlength="2">
+				<input type="text" name="dati[elenchi_provincia]" id="elenchi_provincia" class="form-control"  maxlength="2" placeholder="provincia" value="<?php tcGetFieldValue($fields,'elenchi_provincia'); ?>" maxlength="2">
 			</div>
 		</div>
 
@@ -136,12 +136,12 @@
         <div class="row">
             <div class="col-12 mb-4">
                 <label for="elenchi_titolo">Titolo di studio / Specializzazione:</label>
-                <input type="text" name="dati[elenchi_titolo]" id="elenchi_titolo" class="form-control" value="<?php tcGetFieldValue($fields,'elenchi_titolo'); ?>">
+                <input type="text" name="dati[elenchi_titolo]" id="elenchi_titolo" class="form-control"  maxlength="30" value="<?php tcGetFieldValue($fields,'elenchi_titolo'); ?>">
                 <span class="note_info">Può indicarlo in forma abbreviata (es.: dott., prof., avv., ing., rag., geom.)</span>
             </div>
             <div class="col-12 mb-4">
                 <label for="elenchi_professione">Professione / Attività:</label>
-                <input type="text" name="dati[elenchi_professione]" id="elenchi_professione" class="form-control" value="<?php tcGetFieldValue($fields,'elenchi_professione'); ?>">
+                <input type="text" name="dati[elenchi_professione]" id="elenchi_professione" class="form-control"  maxlength="50" value="<?php tcGetFieldValue($fields,'elenchi_professione'); ?>">
                 <span class="note_info">(Solo per chi svolge attività di rilevanza economica, non previsto per utenze residenziali)</span>
             </div>
         </div>

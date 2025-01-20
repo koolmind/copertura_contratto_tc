@@ -62,13 +62,13 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_codice_migrazione_1">Codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control tc-migration" maxlength="20" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_1]" id="linea_codice_migrazione_1" class="form-control tc-migration" maxlength="50" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_1'); ?>">
 				<small class="text-danger form-message hide">Codice migrazione errato</small>
             </div>
 
             <div class="col-12 col-md-6  mb-4">
                 <label for="linea_codice_migrazione_2">Secondo codice di migrazione + carattere di controllo</label>
-                <input type="text" name="dati[linea_codice_migrazione_2]" id="linea_codice_migrazione_2" class="form-control tc-migration" placeholder="opzionale" maxlength="20" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_2'); ?>">
+                <input type="text" name="dati[linea_codice_migrazione_2]" id="linea_codice_migrazione_2" class="form-control tc-migration" placeholder="opzionale" maxlength="50" value="<?php tcGetFieldValue($fields,'linea_codice_migrazione_2'); ?>">
 				<small class="text-danger form-message hide">Codice migrazione errato</small>
             </div>
         </div>
@@ -76,22 +76,22 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_1">Numero telefonico #1</label>
-                <input type="text" name="dati[linea_numero_1]" id="linea_numero_1" class="form-control" value="<?php tcGetFieldValue($fields,'linea_numero_1'); ?>">
+                <input type="text" name="dati[linea_numero_1]" id="linea_numero_1" class="form-control"  maxlength="20" value="<?php tcGetFieldValue($fields,'linea_numero_1'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_2">Numero telefonico #2</label>
-                <input type="text" name="dati[linea_numero_2]" id="linea_numero_2" class="form-control" placeholder="opzionale" value="<?php tcGetFieldValue($fields,'linea_numero_2'); ?>">
+                <input type="text" name="dati[linea_numero_2]" id="linea_numero_2" class="form-control" placeholder="opzionale"  maxlength="20" value="<?php tcGetFieldValue($fields,'linea_numero_2'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_3">Numero telefonico #3</label>
-                <input type="text" name="dati[linea_numero_3]" id="linea_numero_3" class="form-control" placeholder="opzionale" value="<?php tcGetFieldValue($fields,'linea_numero_3'); ?>">
+                <input type="text" name="dati[linea_numero_3]" id="linea_numero_3" class="form-control" placeholder="opzionale" maxlength="20"  value="<?php tcGetFieldValue($fields,'linea_numero_3'); ?>">
             </div>
 
             <div class="col-12 col-md-6 mb-4">
                 <label for="linea_numero_4">Numero telefonico #4</label>
-                <input type="text" name="dati[linea_numero_4]" id="linea_numero_4" class="form-control" placeholder="opzionale" value="<?php tcGetFieldValue($fields,'linea_numero_4'); ?>">
+                <input type="text" name="dati[linea_numero_4]" id="linea_numero_4" class="form-control" placeholder="opzionale"  maxlength="20" value="<?php tcGetFieldValue($fields,'linea_numero_4'); ?>">
             </div>
         </div>        
     </fieldset>
@@ -106,47 +106,47 @@
 		<div class="row">
 			<div class="col-13 col-md-6 mb-4">
 				<label for="linea_rag_sociale">Denominazione / Ragione sociale o Cognome</label>
-				<input type="text" name="dati[linea_rag_sociale]" id="linea_rag_sociale" class="form-control tc-required" placeholder="ragione sociale" value="<?php tcGetFieldValue($fields,'linea_rag_sociale'); ?>">
+				<input type="text" name="dati[linea_rag_sociale]" id="linea_rag_sociale" class="form-control tc-required" placeholder="ragione sociale"  maxlength="100" value="<?php tcGetFieldValue($fields,'linea_rag_sociale'); ?>">
 			</div>
             <div class="col-12 col-md-6 mb-4">
 				<label for="linea_azienda_nome">Nome</label>
-				<input type="text" name="dati[linea_azienda_nome]" id="linea_azienda_nome" class="form-control" placeholder="" value="<?php tcGetFieldValue($fields,'linea_azienda_nome'); ?>">
+				<input type="text" name="dati[linea_azienda_nome]" id="linea_azienda_nome" class="form-control" placeholder=""  maxlength="50" value="<?php tcGetFieldValue($fields,'linea_azienda_nome'); ?>">
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="tc-input col-12 col-md-8 mb-4">
 				<label for="linea_azienda_indirizzo">Sede (via/piazza)</label>
-				<input type="text" name="dati[linea_azienda_indirizzo]" id="linea_azienda_indirizzo" class="form-control tc-required" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'linea_azienda_indirizzo'); ?>">
+				<input type="text" name="dati[linea_azienda_indirizzo]" id="linea_azienda_indirizzo" class="form-control tc-required"  maxlength="100" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'linea_azienda_indirizzo'); ?>">
 			</div>
 		
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_azienda_civico">Numero civico</label>
-				<input type="text" name="dati[linea_azienda_civico]" id="linea_azienda_civico" class="form-control tc-required" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'linea_azienda_civico'); ?>">
+				<input type="text" name="dati[linea_azienda_civico]" id="linea_azienda_civico" class="form-control tc-required"  maxlength="10" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'linea_azienda_civico'); ?>">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_azienda_citta">Città</label>
-				<input type="text" name="dati[linea_azienda_citta]" id="linea_azienda_citta" class="form-control tc-required" placeholder="città" value="<?php tcGetFieldValue($fields,'linea_azienda_citta'); ?>">
+				<input type="text" name="dati[linea_azienda_citta]" id="linea_azienda_citta" class="form-control tc-required"  maxlength="50" placeholder="città" value="<?php tcGetFieldValue($fields,'linea_azienda_citta'); ?>">
 			</div>
 		
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="linea_azienda_provincia">Provincia</label>
-				<input type="text" name="dati[linea_azienda_provincia]" id="linea_azienda_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_azienda_provincia'); ?>" maxlength="2">
+				<input type="text" name="dati[linea_azienda_provincia]" id="linea_azienda_provincia" class="form-control tc-required"  maxlength="2" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_azienda_provincia'); ?>" maxlength="2">
 			</div>
 		
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="linea_azienda_cap">CAP</label>
-				<input type="text" name="dati[linea_azienda_cap]" id="linea_azienda_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_azienda_cap'); ?>">
+				<input type="text" name="dati[linea_azienda_cap]" id="linea_azienda_cap" class="form-control tc-required"  maxlength="5" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_azienda_cap'); ?>">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="linea_azienda_piva_cf">Partita IVA / Codice Fiscale</label>
-				<input type="text" name="dati[linea_azienda_piva_cf]" id="linea_azienda_piva_cf" class="form-control tc-required" placeholder="p.iva o cod. fiscale" value="<?php tcGetFieldValue($fields,'linea_azienda_piva_cf'); ?>" data-checkfcn='cf_piva'>
+				<input type="text" name="dati[linea_azienda_piva_cf]" id="linea_azienda_piva_cf" class="form-control tc-required"  maxlength="16" placeholder="p.iva o cod. fiscale" value="<?php tcGetFieldValue($fields,'linea_azienda_piva_cf'); ?>" data-checkfcn='cf_piva'>
 			</div>
 		</div>
 
@@ -170,12 +170,12 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_cognome">Cognome</label>
-				<input type="text" name="dati[linea_cliente_cognome]" id="linea_cliente_cognome" class="form-control tc-required" placeholder="cognome" value="<?php tcGetFieldValue($fields,'linea_cliente_cognome'); ?>">
+				<input type="text" name="dati[linea_cliente_cognome]" id="linea_cliente_cognome" class="form-control tc-required" placeholder="cognome"  maxlength="50" value="<?php tcGetFieldValue($fields,'linea_cliente_cognome'); ?>">
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_nome">Nome</label>
-				<input type="text" name="dati[linea_cliente_nome]" id="linea_cliente_nome" class="form-control tc-required" placeholder="nome" value="<?php tcGetFieldValue($fields,'linea_cliente_nome'); ?>">
+				<input type="text" name="dati[linea_cliente_nome]" id="linea_cliente_nome" class="form-control tc-required" placeholder="nome"  maxlength="50" value="<?php tcGetFieldValue($fields,'linea_cliente_nome'); ?>">
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
@@ -202,12 +202,12 @@
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_luogo_nascita">Luogo di nascita</label>
-				<input type="text" name="dati[linea_cliente_luogo_nascita]" id="linea_cliente_luogo_nascita" class="form-control tc-required" placeholder="luogo di nascita" value="<?php tcGetFieldValue($fields,'linea_cliente_luogo_nascita'); ?>">
+				<input type="text" name="dati[linea_cliente_luogo_nascita]" id="linea_cliente_luogo_nascita" class="form-control tc-required"  maxlength="50" placeholder="luogo di nascita" value="<?php tcGetFieldValue($fields,'linea_cliente_luogo_nascita'); ?>">
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_provincia_nascita">Provincia</label>
-				<input type="text" name="dati[linea_cliente_provincia_nascita]" id="linea_cliente_provincia_nascita" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_cliente_provincia_nascita'); ?>" maxlength="2">
+				<input type="text" name="dati[linea_cliente_provincia_nascita]" id="linea_cliente_provincia_nascita" class="form-control tc-required"  maxlength="2" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_cliente_provincia_nascita'); ?>" maxlength="2">
 			</div>
 		</div>
 			
@@ -215,12 +215,12 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="linea_cliente_cod_fiscale">Codice Fiscale</label>
-				<input type="text" name="dati[linea_cliente_cod_fiscale]" id="linea_cliente_cod_fiscale" class="form-control tc-required" placeholder="codice fiscale" value="<?php tcGetFieldValue($fields,'linea_cliente_cod_fiscale'); ?>" data-checkfcn='cf_piva'>
+				<input type="text" name="dati[linea_cliente_cod_fiscale]" id="linea_cliente_cod_fiscale" class="form-control tc-required"  maxlength="16" placeholder="codice fiscale" value="<?php tcGetFieldValue($fields,'linea_cliente_cod_fiscale'); ?>" data-checkfcn='cf_piva'>
 			</div>
 
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="linea_cliente_nazionalita">Nazionalità</label>
-				<input type="text" name="dati[linea_cliente_nazionalita]" id="linea_cliente_nazionalita" class="form-control tc-required" placeholder="nazionalità" value="<?php tcGetFieldValue($fields,'linea_cliente_nazionalita'); ?>">
+				<input type="text" name="dati[linea_cliente_nazionalita]" id="linea_cliente_nazionalita" class="form-control tc-required"  maxlength="50" placeholder="nazionalità" value="<?php tcGetFieldValue($fields,'linea_cliente_nazionalita'); ?>">
 			</div>
 		</div>
 
@@ -242,14 +242,14 @@
 
 			<div class="tc-input col-12 col-md-6 mb-4">
 				<label for="linea_cliente_doc_numero">Numero documento</label>
-				<input type="text" name="dati[linea_cliente_doc_numero]" id="linea_cliente_doc_numero" class="form-control tc-required" placeholder="numero del cocumento" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_numero'); ?>">
+				<input type="text" name="dati[linea_cliente_doc_numero]" id="linea_cliente_doc_numero" class="form-control tc-required"  maxlength="30" placeholder="numero del documento" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_numero'); ?>">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_doc_emittente">Rilasciato da</label>
-				<input type="text" name="dati[linea_cliente_doc_emittente]" id="linea_cliente_doc_emittente" class="form-control tc-required" placeholder="rilasciato da" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_emittente'); ?>">
+				<input type="text" name="dati[linea_cliente_doc_emittente]" id="linea_cliente_doc_emittente" class="form-control tc-required"  maxlength="50" placeholder="rilasciato da" value="<?php tcGetFieldValue($fields,'linea_cliente_doc_emittente'); ?>">
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
@@ -266,29 +266,29 @@
 		<div class="row">
 			<div class="tc-input col-12 col-md-8 mb-4">
 				<label for="linea_cliente_indirizzo">Residenza (o domicilio italiano), via</label>
-				<input type="text" name="dati[linea_cliente_indirizzo]" id="linea_cliente_indirizzo" class="form-control tc-required" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'linea_cliente_indirizzo'); ?>">
+				<input type="text" name="dati[linea_cliente_indirizzo]" id="linea_cliente_indirizzo" class="form-control tc-required"  maxlength="100" placeholder="via/piazza" value="<?php tcGetFieldValue($fields,'linea_cliente_indirizzo'); ?>">
 			</div>
 
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_civico">Numero civico</label>
-				<input type="text" name="dati[linea_cliente_civico]" id="linea_cliente_civico" class="form-control tc-required" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'linea_cliente_civico'); ?>">
+				<input type="text" name="dati[linea_cliente_civico]" id="linea_cliente_civico" class="form-control tc-required"  maxlength="10" placeholder="n. civico" value="<?php tcGetFieldValue($fields,'linea_cliente_civico'); ?>">
 			</div>
 		</div>
 		
 		<div class="row">
 			<div class="tc-input col-12 col-md-4 mb-4">
 				<label for="linea_cliente_citta">Città</label>
-				<input type="text" name="dati[linea_cliente_citta]" id="linea_cliente_citta" class="form-control tc-required" placeholder="città" value="<?php tcGetFieldValue($fields,'linea_cliente_citta'); ?>">
+				<input type="text" name="dati[linea_cliente_citta]" id="linea_cliente_citta" class="form-control tc-required"  maxlength="50" placeholder="città" value="<?php tcGetFieldValue($fields,'linea_cliente_citta'); ?>">
 			</div>
 
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="linea_cliente_provincia">Provincia</label>
-				<input type="text" name="dati[linea_cliente_provincia]" id="linea_cliente_provincia" class="form-control tc-required" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_cliente_provincia'); ?>" maxlength="2">
+				<input type="text" name="dati[linea_cliente_provincia]" id="linea_cliente_provincia" class="form-control tc-required"  maxlength="2" placeholder="provincia" value="<?php tcGetFieldValue($fields,'linea_cliente_provincia'); ?>" maxlength="2">
 			</div>
 
 			<div class="tc-input col-6 col-md-4 mb-4">
 				<label for="linea_cliente_cap">CAP</label>
-				<input type="text" name="dati[linea_cliente_cap]" id="linea_cliente_cap" class="form-control tc-required" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_cliente_cap'); ?>">
+				<input type="text" name="dati[linea_cliente_cap]" id="linea_cliente_cap" class="form-control tc-required"  maxlength="5" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'linea_cliente_cap'); ?>">
 			</div>
 		</div>
 

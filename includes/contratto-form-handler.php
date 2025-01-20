@@ -186,6 +186,7 @@ function saveDataToDb($data, $cID) {
         'servizi_citta' => valOrNull($serv, 'servizi_citta', 'str'),
         'servizi_provincia' => valOrNull($serv, 'servizi_provincia', 'str'),
         'servizi_cap' => valOrNull($serv, 'servizi_cap', 'str'),
+        'servizi_note' => valOrNull($serv, 'servizi_note', 'str'),
         'linea_migrazione' => valOrNull($mig, 'linea_migrazione', 'bool'),
         'linea_nuova' => valOrNull($mig, 'linea_nuova', 'bool'),
         'linea_portability' => valOrNull($mig, 'linea_portability', 'bool'),

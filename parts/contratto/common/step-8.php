@@ -195,12 +195,13 @@
                     <h4 class="titolo">CONSEGNA APPARECCHIATURE</h4>    
                     <div class="row px-2">
                         <div class="col-12">
-                        <?php printf("Il modem e gli accessori saranno consegnati in:<br> <b>%s, %s - %s %s (%s)</b>",
+                        <?php printf("Il modem e gli accessori saranno consegnati in:<br> <b>%s, %s - %s %s (%s)</b><br>Nome sul campanello:<b>%s</b>",
                                 $servizi['servizi_indirizzo'],
                                 $servizi['servizi_civico'],
                                 $servizi['servizi_cap'],
                                 $servizi['servizi_citta'],
-                                $servizi['servizi_provincia'] );
+                                $servizi['servizi_provincia'],
+                                $servizi['servizi_note'] );
                         ?>
                         </div>
                     </div>                    

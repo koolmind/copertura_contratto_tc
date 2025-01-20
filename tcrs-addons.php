@@ -127,6 +127,7 @@ class PangeaTerrecablateAddons {
             servizi_citta varchar(50) DEFAULT '',
             servizi_provincia char(2) DEFAULT '',
             servizi_cap char(5) DEFAULT '',
+            servizi_note varchar(100) DEFAULT '',
             linea_migrazione tinyint(1) NOT NULL DEFAULT 0,
             linea_nuova tinyint(1) NOT NULL DEFAULT 0,
             linea_portability tinyint(1) NOT NULL DEFAULT 0,

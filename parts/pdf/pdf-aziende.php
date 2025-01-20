@@ -289,6 +289,10 @@ $col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['servizi_prov
 $col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['servizi_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
+$col = array();
+$col[] = array('text' => decodeUTF8('Note (nome sul campanello): '. strtoupper($cnt['servizi_note']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
 $pdf->WriteTable($columns);
 $columns = null;
 

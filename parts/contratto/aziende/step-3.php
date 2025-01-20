@@ -49,6 +49,14 @@
                 <input type="text" name="dati[servizi_cap]" id="servizi_cap" class="form-control tc-required"  maxlength="5" placeholder="c.a.p." value="<?php tcGetFieldValue($fields,'servizi_cap'); ?>">
             </div>
         <div>
+
+        <div class="row">
+            <div class="col-12">
+                <label for="servizi_note">Note</label>
+                <input type="text" name="dati[servizi_note]" id="servizi_note" class="form-control tc-required"  maxlength="100" placeholder="indicare il nome riportato sul campanello"  value="<?php tcGetFieldValue($fields,'servizi_note'); ?>">
+                <span class="help">Indicare il nome sul campanello per garantire un corretto recapito del pacco</span>
+            </div>
+        <div>
     </fieldset>
 
     <div class="contratto_nav_buttons d-flex justify-content-between mt-4">

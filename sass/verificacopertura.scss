@@ -417,4 +417,24 @@ ul#cart-caratteristiche-offerta {
     font-style: italic;
     padding-left: 12px;
   }
+
+  .sondaggio {
+    margin-top: 12px;
+
+    label {
+      width: 320px;
+      color: $blu-medio;
+      font-weight: bold;
+    }
+
+    small {
+      padding-left: 12px;
+    }
+
+    .two-cols {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
+  }
 }

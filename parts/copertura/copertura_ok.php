@@ -259,6 +259,7 @@ switch ($tecnologia) {
                         <input type="hidden" name="cop_citta" id="cop-citta" value="<?php echo $co; ?>" />  
                         <input type="hidden" name="cop_provincia" id="cop-provincia" value="<?php echo $prv; ?>" />  
                         <input type="hidden" name="cop_velocita" id="cop-velocita" value="<?php echo $down; ?>" />  
+                        <input type="hidden" name="sondaggio" value="<?php echo $sondaggio; ?>" />  
                         <button type="submit" class="btn-standard btn-offerta" name="btn_acquista_offerta"><span>acquista</span><i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>

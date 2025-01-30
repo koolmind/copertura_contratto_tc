@@ -49,6 +49,30 @@ $tipoCli = isset($_GET['tc'])  ? $_GET['tc'] : null;
         <span class="help">in caso di assenza del tuo numero civico segnacelo, scrivendo a <a href="mailto:info@terrecablate.it">info@terrecablate.it</a></span>
     </div>
     
+    <hr />
+    
+    <div class="form-row sondaggio">
+        <label>COME HAI CONOSCIUTO TERRECABLATE?</label>
+        <small>Per motivi puramente statistici ci farebbe piacere se volessi indicarci come hai conosciuto l'offerta di Terrecablate. La tua risposta sarà utilizzata in maniera aggregata e non sarà collegata ai tuoi dati personali.</small>
+        <div class="two-cols">
+            <div class="input-wrapper">
+                <select id="selCome" class="input-large">
+                    <option value="">- scelgi un'opzione -</option>
+                    <option value="passaparola">Passaparola (amici, familiari, colleghi)</option>
+                    <option value="social">Social media (Facebook, Instagram, TikTok, ecc.)</option>
+                    <option value="motori">Ricerca su Google o altri motori di ricerca</option>
+                    <option value="pubblicita">Pubblicità (volantini, cartelloni, spot online o radio, sponsorizzazioni)</option>
+                    <option value="cliente">Sono già cliente</option>
+                    <option value="altro">Altro</option>
+                </select>
+            </div>
+            <div class="input-wrapper hide">
+                <input type="text" id="refAltro" class="input-large" placeholder="specifica, se vuoi..." maxlength="30" >
+            </div>
+            <input type="hidden" name="come" id="come" value=""/>
+        </div>
+    </div>
+    
 
     <input type="hidden" name="tipoCli" value="<?php echo $tipoCli; ?>">
     <button type="submit" id="btnVerifica" class="btn-standard" name="vc" value="1">Verifica Copertura</button>

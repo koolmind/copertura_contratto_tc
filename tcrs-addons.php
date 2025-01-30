@@ -11,6 +11,17 @@
 
  if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+ global $sondaggio_items;
+
+ $sondaggio_items = array(
+    "passaparola"   => "Passaparola",
+    "social"        => "Social media",
+    "motori"        => "Ricerca sui motori",
+    "pubblicita"    => "Pubblicità",
+    "cliente"       => "Già cliente"
+ );
+
+
  $upload_dir = wp_upload_dir();
  $contratti_dir = $upload_dir['basedir'] . '/tcrs-contratti/';
  $contratti_url = $upload_dir['baseurl'] . '/tcrs-contratti/';
@@ -70,6 +81,7 @@ class PangeaTerrecablateAddons {
         global $wpdb;
         $table_contratti = $wpdb->prefix . 'contratti';
         $table_elenchi = $wpdb->prefix . 'elenchi';
+        $table_logs = $wpdb->prefix . 'contrattilog';
         $charset_collate = $wpdb->get_charset_collate();
 
         
@@ -181,7 +193,8 @@ class PangeaTerrecablateAddons {
             accettazione_contratto tinyint(1) NOT NULL DEFAULT 0,
             firma_contratto tinyint(1) NOT NULL DEFAULT 0,
             approvazione_articoli_contratto tinyint(1) NOT NULL DEFAULT 0,
-            data_proposta_contratto timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            sondaggio varchar(30) DEFAULT '',
+            data_proposta_contratto timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,            
             PRIMARY KEY (id)
         ) $charset_collate;";
 
@@ -208,15 +221,30 @@ class PangeaTerrecablateAddons {
             PRIMARY KEY (id)
         ) $charset_collate;";
 
+
+        $sqlLogs = "CREATE TABLE IF NOT EXISTS $table_logs (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            dataora timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            indirizzo varchar(100) NOT NULL DEFAULT '',
+            cap varchar(5) NOT NULL DEFAULT '',
+            comune varchar(50) NOT NULL DEFAULT '',            
+            provincia varchar(2) NOT NULL DEFAULT '',
+            PRIMARY KEY (id)
+        ) $charset_collate;";
+
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         
         $resC = dbDelta($sqlContratti);        
-        error_log('Processo Delta');
+        error_log('Processo Contratti');
         error_log(print_r($resC, true));
 
         $resE = dbDelta($sqlElenchi);        
-        error_log('Processo Delta2');
+        error_log('Processo Elenchi');
         error_log(print_r($resE, true));
+
+        $resL = dbDelta($sqlLogs);        
+        error_log('Processo Logs');
+        error_log(print_r($resL, true));
 
         // creo la cartella per i contratti
         

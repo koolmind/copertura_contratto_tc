@@ -464,3 +464,19 @@ ul#cart-caratteristiche-offerta i.fa {
   font-style: italic;
   padding-left: 12px;
 }
+.copertura .sondaggio {
+  margin-top: 12px;
+}
+.copertura .sondaggio label {
+  width: 320px;
+  color: #005985;
+  font-weight: bold;
+}
+.copertura .sondaggio small {
+  padding-left: 12px;
+}
+.copertura .sondaggio .two-cols {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}

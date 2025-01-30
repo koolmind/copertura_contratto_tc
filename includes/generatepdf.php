@@ -3,8 +3,6 @@ require_once(TC_ADDONS_ROOT . 'vendor/fpdf/fpdf.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdi2/src/autoload.php');
 require_once(TC_ADDONS_ROOT . 'vendor/fpdf/custompdf.php');
 
-
-
 function decodeUTF8($text) {
     $text = preg_replace('/[\\\\]*/', '', $text); // tolgo tutti gli slash prima degli apostrofi. con stripslshes ne rimane uno.
     // Usa mb_convert_encoding se disponibile
@@ -112,8 +110,37 @@ function generate_contratto_pdf($cuid) {
     $fileContrattoId = get_option("contratto_".$cnt['target']."_pdf_file");
     $fileContratto = get_attached_file( $fileContrattoId );
     
+
+    // determino il valore espresso nel campo sondaggio (come hai conosciuto TC)
+    global $sondaggio_items;
+
+    $sondaggio_value = "non risponde."; // campo vuoto
+
+    if ( $cnt['sondaggio'] != null && trim($cnt['sondaggio'])!='' ): // campo non vuoto 
+        if ( isset( $sondaggio_items[ $cnt['sondaggio'] ] ) ) :
+            $sondaggio_value = $sondaggio_items[$cnt['sondaggio']]; // uno dei valori della tendina
+        else:
+            $sondaggio_value = $cnt['sondaggio']; // campo altro con eventuale specifica
+        endif;
+    endif;
+
     include(TC_ADDONS_ROOT .  "parts/pdf/pdf-{$cnt['target']}.php");
 
+    if(file_exists($pdf_file_path)) { // variabile proveniente dall'include
+        // Salvo i dati base del contratto su db
+        $table_log = $wpdb->prefix . 'contrattilog';
+        $logData = array(
+            'indirizzo' => preg_replace('/[\\\\]*/', '', $cnt['attivazione_indirizzo']),
+            'cap' => $cnt['attivazione_cap'],
+            'comune' => preg_replace('/[\\\\]*/', '', $cnt['attivazione_citta']),
+            'provincia' => $cnt['attivazione_provincia']
+        );
+        $resLog = $wpdb->insert(
+            $table_log,
+            $logData,
+            array('%s', '%s', '%s', '%s')
+        );
+    }
 
     return $pdf_file_url;  // variabile proveniente dall'include
 }

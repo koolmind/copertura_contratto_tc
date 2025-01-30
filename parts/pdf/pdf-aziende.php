@@ -163,6 +163,13 @@ $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',6);
 $pdf->MultiCell(0,$lineHeight, '* Allegare fotocopia del documento indicato');
 
+$pdf->Ln(4);
+$pdf->SetFont('FFDin','B',8);
+$pdf->SetTextColor(0, 86, 122);
+$pdf->MultiCell(0,$lineHeight, "Come hai conosciuto Terrecablate?");
+$pdf->SetTextColor(0,0,0);
+$pdf->MultiCell(0,$lineHeight, $sondaggio_value);
+
 $pdf->Ln(10);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
@@ -188,7 +195,6 @@ $columns[] = $col;
 
 $pdf->WriteTable($columns);
 $columns = null;
-
 
 // ***********	PAGINA 2 ***************
 

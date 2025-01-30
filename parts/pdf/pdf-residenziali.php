@@ -130,6 +130,13 @@ $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',6);
 $pdf->MultiCell(0,$lineHeight, '* Allegare fotocopia del documento indicato');
 
+$pdf->Ln(4);
+$pdf->SetFont('FFDin','B',8);
+$pdf->SetTextColor(0, 86, 122);
+$pdf->MultiCell(0,$lineHeight, "Come hai conosciuto Terrecablate?");
+$pdf->SetTextColor(0,0,0);
+$pdf->MultiCell(0,$lineHeight, $sondaggio_value);
+
 $pdf->Ln(10);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',14);
@@ -155,7 +162,6 @@ $columns[] = $col;
 
 $pdf->WriteTable($columns);
 $columns = null;
-
 
 // ***********	PAGINA 2 ***************
 
@@ -496,12 +502,10 @@ if($cnt["linea_portability"]):
 	$pdf->SetFont('FFDin','',9);
 	$pdf->MultiCell(0,$lineHeight, decodeUTF8("** Campo obbligatorio: il cliente deve dare precisa indicazione della volontà di mantenere il proprio numero di telefono sia firmando il punto b) che barrando la casella indicata nella sezione 5. Qualora venga omessa una delle due indicazioni Terrecablate NON potrà effettuare e quindi NON effettuerà la portabilità del numero telefonico che quindi verrà sostituito con un numero nuovo.") );
 
-
 	$pdf->Ln(12);
 	$pdf->SetFont('FFDin','B',10);
 	$pdf->SetTextColor(0,0,0);
-	$pdf->MultiCell(0,$lineHeight, "NOTE: ");
-
+	$pdf->MultiCell(0,$lineHeight, "NOTE:");
 endif;
 
 // ***********	PAGINA 4 ***************

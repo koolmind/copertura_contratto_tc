@@ -32,11 +32,14 @@ class EsitoCoperturaShortcode {
         $nc = isset($_GET['nc']) ? $_GET['nc'] : null;
         $co = isset($_GET['co']) ? wp_unslash($_GET['co']) : null;
         $prv = isset($_GET['prv']) ? $_GET['prv'] : null;
-        $indirizzo = $via . ", " . $co . " (" . $prv . ")";
+        $indirizzo = $via . ", " . $nc ." - " . $co . " (" . $prv . ")";
         
+        $sondaggio = isset($_GET['snd']) ? $_GET['snd'] : null;
+
         $speed = isset($_GET['sp']) ? $_GET['sp'] : null;
         $effSpeed = isset($_GET['eff']) ? $_GET['eff'] : null;
 
+        
 
         print('<div class="copertura-result-wrapper">');
         

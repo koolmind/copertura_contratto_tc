@@ -240,6 +240,7 @@ function saveDataToDb($data, $cID) {
         'accettazione_contratto' => valOrNull($firme, 'accettazione_contratto', 'bool'),
         'firma_contratto' => valOrNull($firme, 'firma_contratto', 'bool'),
         'approvazione_articoli_contratto' => valOrNull($firme, 'approvazione_articoli_contratto', 'bool'),
+        'sondaggio' => valOrNull($offerta, 'sondaggio', 'str'),
         'data_proposta_contratto' => date("Y-m-d H:i:s")
     );
 

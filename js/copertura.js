@@ -33,12 +33,16 @@
   const btnBadMap = $("#btnBadMap");
   const btnGoodMap = $("#btnGoodMap");
 
+  const selCome = $("#selCome");
+  const refAltro = $("#refAltro");
+
   let tipoCli = undefined;
   let sProvincia = undefined;
   let sComune = undefined;
   let sIndirizzo = undefined;
   let sParticella = undefined;
   let sCivico = undefined;
+  let sSondaggio = undefined;
   let sDatiCop = "";
   let btnContratto = "";
   let bonusGradient = "";
@@ -119,6 +123,7 @@
     sIndirizzo = undefined;
     sParticella = undefined;
     sCivico = undefined;
+    sSondaggio = undefined;
 
     pulisci(selProvincia, "select");
     pulisci(selComune, "select");
@@ -353,6 +358,9 @@
     renderEsito();
   });
 
+  selCome.on("change", manageAltroField);
+  refAltro.on("input", manageAltroSpecification);
+
   // INIT
   function init() {
     var params = new URLSearchParams(window.location.search);
@@ -421,6 +429,23 @@
           }
         </div>`;
     }
+  }
+
+  function manageAltroField(e) {
+    const altroContainer = $(refAltro).parent();
+    const sondagioVal = e.target.value;
+
+    sSondaggio = sondagioVal;
+
+    if (sondagioVal == "altro") {
+      altroContainer.removeClass("hide");
+    } else {
+      altroContainer.addClass("hide");
+    }
+  }
+
+  function manageAltroSpecification(e) {
+    sSondaggio = "Altro: " + e.target.value;
   }
 
   function getConnessioneParams(tipoCliente, tipoConn, speedConn) {
@@ -516,6 +541,7 @@
     params.append("indirizzo", sIndirizzo);
     params.append("particella", sParticella);
     params.append("civico", sCivico);
+    params.append("sondaggio", sSondaggio);
     axios
       .post(`${copertura_params.TCRS_WS_ROOT}wsbridge.php`, params)
       .then(function (response) {
@@ -541,11 +567,11 @@
     urlParams = {
       ...urlParams,
       tipoCliente: tipoCli,
-      //indirizzo: `${sParticella} ${sIndirizzo} ${sCivico}, ${sComune} (${sProvincia})`,
       via: `${fixAccents(sParticella)} ${fixAccents(sIndirizzo)}`,
       ncivico: sCivico,
       comune: fixAccents(sComune),
       provincia: sProvincia,
+      sondaggio: sSondaggio,
     };
 
     if (esito.connessione) {
@@ -585,7 +611,7 @@
     // compongo l'url per la pagina del risultato
     //let finalUrl = "http://tcdev.terrecablate.it/esito-copertura/?";
     let finalUrl = `${copertura_params.TCRS_SITE_URL}esito-copertura/?`;
-    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}&eff=${urlParams.effSpeed}`;
+    finalUrl += `cli=${urlParams.tipoCliente}&t=${urlParams.tecnologia}&e=${urlParams.esclusivita}&via=${urlParams.via}&nc=${urlParams.ncivico}&co=${urlParams.comune}&prv=${urlParams.provincia}&sp=${urlParams.speed}&cop=${urlParams.copertura}&eff=${urlParams.effSpeed}&snd=${urlParams.sondaggio}`;
 
     window.location.href = encodeURI(finalUrl);
     return;

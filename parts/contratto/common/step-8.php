@@ -401,10 +401,10 @@
                         
                         <hr class="my-2" />
                         <div class="col-12">
-                            Il cliente: <b><?php echo $elenchi['elenchi_nomedanumero'] == '1' ? "DESIDERA ": "NON DESIDERA" ?></b> che si possa risalire al suoi nome a partire da altri dati.
+                            Il cliente: <b><?php echo isset($elenchi['elenchi_nomedanumero']) && $elenchi['elenchi_nomedanumero'] == '1' ? "DESIDERA ": "NON DESIDERA" ?></b> che si possa risalire al suoi nome a partire da altri dati.
                         </div>
                         <div class="col-12">
-                            Il cliente: <b><?php echo $elenchi['elenchi_posta'] == '1' ? "DESIDERA ": "NON DESIDERA" ?></b> ricevere pubblicità cartacea per posta.
+                            Il cliente: <b><?php echo isset($elenchi['elenchi_posta']) && $elenchi['elenchi_posta'] == '1' ? "DESIDERA ": "NON DESIDERA" ?></b> ricevere pubblicità cartacea per posta.
                         </div>
                     </div>                    
                 </div>

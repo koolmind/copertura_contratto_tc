@@ -243,6 +243,38 @@ if($opzioni):
     $columns = null;
 endif;
 
+// -- SEZIONE SPECIALE PER I PRE-CONTRATTI. Le opzioni non sono impostate, quindi vanno mostrate come caselle compilabili
+if ($isPreContratto) :
+	$pdf->SetFont('FFDin','',8);
+	$scelte = getAllAvailableOptions($cnt['target'], $cnt['nomeofferta']);
+	if(!empty($scelte)):
+		$pdf->SetTextColor(0, 86, 122);
+	    $pdf->SetFont('FFDin','',10);
+    	$pdf->MultiCell(0,$lineHeight, 'OPZIONI AGGIUNTIVE');
+		$pdf->SetTextColor(0,0,0);
+		$pdf->MultiCell(0,$lineHeight, 'Per maggiori informazioni sulle opzioni, si visitare il sito intenet: https://www.terrecablate.it/privati/');		
+		
+		$pdf->Ln(2);
+    	$pdf->SetFont('FFDin','',10);
+    	$pdf->SetTextColor(0,0,0);
+    
+    	$columns = null;
+    	foreach($scelte as $opt):
+        	$p = number_format(floatval($opt['prezzo']), 2,',','.');
+			$txt  = "[  ] " . strtoupper($opt['title']) . " ( +" . $p . " euro";
+			$txt .= $opt['isMultipla'] ? "/cad )          Quantità: " : " )";			
+        	
+        	$col = array();
+        	$col[] = array('text' => decodeUTF8( $txt ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+        	$columns[] = $col;
+    	endforeach;
+
+    	$pdf->WriteTable($columns);
+    	$columns = null;
+	endif;
+endif;
+// -- FINE SEZIONE SPECIALE PER I PRE-CONTRATTI.
+
 $pdf->Ln(4);
 $pdf->SetTextColor(0, 86, 122);
 $pdf->SetFont('FFDin','',10);
@@ -281,9 +313,10 @@ $linea_port = $cnt['linea_portability'];
 $linea_new = $cnt['linea_nuova'];
 $linea_mig = $cnt['linea_migrazione'];
 
-if($linea_new) {
-    $txt = "Il cliente richiede l'ATTIVAZIONE di un a NUOVA LINEA.";
-    if($linea_port) 
+$txt = "";
+if($linea_new || $isPreContratto) {
+    $txt = "Il cliente richiede l'ATTIVAZIONE di una NUOVA LINEA.";
+    if($linea_port) // qui col pre-contratto non si entra mai
         $txt .= "Richiede inoltre la PORTABILITY del/i numero/i telefonico/i.";
 }
 
@@ -301,18 +334,21 @@ $pdf->SetFont('FFDin','',10);
 $pdf->MultiCell(0,$lineHeight, decodeUTF8("Si specifica che non sarà possibile effettuare la migrazione diretta nel caso in cui il servizio attualmente attivo sia basato su linea di accesso in rame (solo voce o xDSL) ed il servizio richiesto a Terrecablate sia basato su linea di accesso in fibra (FTTH), o viceversa. In questo caso verrà effettuata l'attivazione del servizio richiesto su una nuova linea e l'eventuale portabilità del numero (Number Portability) sarà effettuata in un momento successivo rispetto all'attivazione della nuova linea. In questo caso, resterà in carico al titolare della linea attualmente attiva l'eventuale comunicazione di disdetta da inviare all'attuale operatore, successivamente all'avvenuto passaggio del numero.") );
 
 
-if($cnt["linea_portability"]):
+if($cnt["linea_portability"] || $isPreContratto ):
 	$pdf->Ln(10);
 
 	$pdf->SetTextColor(0, 86, 122);
 	$pdf->SetFont('FFDin','',14);
 	$pdf->MultiCell(0,$lineHeight, '5. Tipologia linea e Mantenimento del numero (Number Portability)');
-	// $pdf->Ln(4);
-	// $pdf->SetFont('FFDin','',10);
-	// $pdf->SetTextColor(0, 86, 122);
-	// $pdf->MultiCell(0,$lineHeight, decodeUTF8("Da compilare solo da parte dei titolari di linee telefoniche attualmente attive") );
 
-	$pdf->Ln(4);
+	if($isPreContratto):
+		$pdf->Ln(4);
+		$pdf->SetTextColor(0, 0, 0);
+		$pdf->SetFont('FFDin','',10);
+		$pdf->MultiCell(0,$lineHeight, decodeUTF8("[  ] Desidero mantenere l'attuale numero telefonico") );		
+	endif;
+
+	$pdf->Ln(6);
 	$col = array();
 
 	$col[] = array('text' => decodeUTF8('NUMERO/I'), 'width' => '100', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $blu, 'textcolor' => $bianco, 'drawcolor' => $nero, 'linewidth' => '0.3', 'linearea' => 'TLBR');
@@ -329,8 +365,6 @@ if($cnt["linea_portability"]):
 	if($cnt['linea_numero_1'] && $cnt['linea_codice_migrazione_1']) {
 		$txtNum = $cnt['linea_numero_1'];
 		$txtNum .= $cnt['linea_numero_2'] ? "\n{$cnt['linea_numero_2']}" : "";
-		// $txtNum .= $cnt['linea_numero_3'] ? "\n{$cnt['linea_numero_3']}" : "";
-		// $txtNum .= $cnt['linea_numero_4'] ? "\n{$cnt['linea_numero_4']}" : "";
 
 		$txtMig = $cnt['linea_codice_migrazione_1'];
 		$txtMig .= $cnt['linea_codice_migrazione_2'] ? "\n{$cnt['linea_codice_migrazione_2']}" : "";
@@ -358,43 +392,11 @@ if($cnt["linea_portability"]):
 	$pdf->SetFont('FFDin','',10);
 	$pdf->SetTextColor(0, 0, 0);
 
-
-	// $col = array();
-	// $col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['linea_rag_sociale']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $col[] = array('text' => decodeUTF8('Denominazione/Ragione sociale o Cognome: '. strtoupper($cnt['linea_azienda_nome']) ), 'width' => '100', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $columns[] = $col;
-
-	// $col = array();
-	// $col[] = array('text' => decodeUTF8('Sede Via/Piazza: '. strtoupper($cnt['linea_azienda_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['linea_azienda_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $columns[] = $col;
-
-	// $col = array();
-	// $col[] = array('text' => decodeUTF8('Città: '. strtoupper($cnt['linea_azienda_citta']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_azienda_provincia']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $col[] = array('text' => decodeUTF8('CAP: '. strtoupper($cnt['linea_azienda_cap']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $columns[] = $col;
-
-	// $col = array();
-	// $col[] = array('text' => decodeUTF8('Partita IVA / Codice Fiscale: '. strtoupper($cnt['linea_azienda_piva_cf']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $columns[] = $col;
-
-
-	// $col = array();
-	// $col[] = array('text' => decodeUTF8('Ruolo: '. strtoupper($cnt['linea_cliente_ruolo']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $columns[] = $col;
-
 	$col = array();
 	$col[] = array('text' => decodeUTF8('Cognome: '. strtoupper($cnt['linea_cliente_cognome']) ), 'width' => '68', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$col[] = array('text' => decodeUTF8('Nome: '. strtoupper($cnt['linea_cliente_nome']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$col[] = array('text' => decodeUTF8('Sesso: '. getSesso($cnt['linea_cliente_sesso']) ), 'width' => '66', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 	$columns[] = $col;
-
-	// $col = array();
-	// $col[] = array('text' => decodeUTF8('Data di nascita: '. showDate($cnt['linea_cliente_data_nascita']) ), 'width' => '58', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $col[] = array('text' => decodeUTF8('Luogo di nascita: '. strtoupper($cnt['linea_cliente_luogo_nascita']) ), 'width' => '96', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $col[] = array('text' => decodeUTF8('Provincia: '. strtoupper($cnt['linea_cliente_provincia_nascita']) ), 'width' => '46', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
-	// $columns[] = $col;
 
 	$col = array();
 	$col[] = array('text' => decodeUTF8('Residente in Via/Piazza: '. strtoupper($cnt['linea_cliente_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
@@ -525,13 +527,13 @@ $pdf->MultiCell(0,4, decodeUTF8("Letta e compresa l'informativa privacy riportat
 
 // Consenso trattamento dati: commerciale
 $pdf->Ln(2);
-$temp = $cnt['consenso_marketing'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO";
+$temp = $cnt['consenso_marketing'] === NULL ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : ( $cnt['consenso_marketing'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO");
 $pdf->MultiCell(0,4, $temp, 0,'C');
 $pdf->MultiCell(0,4, decodeUTF8("al trattamento dei dati personali da parte di Terrecablate per l'invio di comunicazioni promozionali e di marketing, incluso l'invio di newsletter e ricerche di mercato, attraverso strumenti automatizzati (sms, mms, email, notifiche push, fax) e non (posta cartacea, telefono con operatore). ") );
 
 // Consenso trattamento dati: profilazione
 $pdf->Ln(2);
-$temp = $cnt['consenso_profilazione'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO";
+$temp = $cnt['consenso_profilazione'] === NULL ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : ( $cnt['consenso_profilazione'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO");
 $pdf->MultiCell(0,4, $temp, 0,'C');
 $pdf->MultiCell(0,4, decodeUTF8("al trattamento dei dati personali da parte di Terrecablate per l'''analisi delle scelte d'''acquisto e delle preferenze comportamentali nei Punti Amici e sul sito web, al fine di meglio strutturare comunicazioni e proposte commerciali personalizzate, per effettuare analisi generali per fini di orientamento strategico e di intelligence commerciale e, in genere, per attività di profilazione.") );
 
@@ -650,7 +652,7 @@ $columns = null;
 
 
 // ***********	PAGINA Bonfico ***************
-if($cnt['metodo_pagamento'] == 'sdd'):
+if($cnt['metodo_pagamento'] == 'sdd' || $cnt['metodo_pagamento'] == '2') :
 	$pdf->AddPage();
 	$pdf->Image($fileHeaderPath, 0, 5, 210,25.7);
 	$pdf->Image($fileFooterPath, 0, 278, 210,16);
@@ -932,8 +934,8 @@ $pdf->WriteTable($columns);
 $columns = null;
 
 $pdf->SetTextColor(0,0,0);
-$temp = $ele['elenchi_consenso'] ? "\n[X] SI     [ ] NO" : "[ ] SI     [X] NO";
-$temp .= $ele['elenchi_servabbonati'] ? "\nDESIDERO " : "\nNON DESIDERO ";
+$temp = !isset($ele['elenchi_consenso']) ? "[ ] SI     [ ] NO" : ( $ele['elenchi_consenso']==1 ? "\n[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
+$temp .= !isset($ele['elenchi_servabbonati']) ? "\n[ ] DESIDERO " : ( $ele['elenchi_servabbonati'] ? "\nDESIDERO " : "\nNON DESIDERO " );
 $temp .= "che i dati da me indicati possano essere foniti a chi ne faccia richiesta ad un Servizio di informazione abbonati)\n";
 $pdf->MultiCell(0,$lineHeight, $temp, 1,'C');
 
@@ -1002,7 +1004,7 @@ $col[] = array('text' =>decodeUTF8("Una persona che non conosce o che non ricord
 $columns[] = $col;
 
 $col = array();
-$temp = $ele['elenchi_nomedanumero'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO";
+$temp = !isset($ele['elenchi_nomedanumero']) ? "[ ] SI     [ ] NO"  : ( $ele['elenchi_nomedanumero'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
 $col[] = array('text' => $temp, 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
@@ -1020,7 +1022,7 @@ $columns[] = $col;
 
 $col = array();
 $temp = decodeUTF8("Se SI, iI simbolo della bustina indicherà questa Sua scelta.      ");
-$temp .= $ele['elenchi_posta'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO";
+$temp .= !isset($ele['elenchi_posta']) ? "[ ] SI     [ ] NO" : ( $ele['elenchi_posta'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
 $col[] = array('text' => $temp, 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 

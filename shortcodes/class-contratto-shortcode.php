@@ -25,14 +25,24 @@ class ContrattoOnLineShortcode {
         
         $this->contrattoUID = $this->getContrattoID();
 
+        $percorsoStandard = true; // normale esecuzione del contratto
+
         if( isset( $_GET['tcdebug'] ) ) {
             $tc_pdf_file = generate_contratto_pdf($this->contrattoUID);
             echo '<p class="mb-3"><a href="' . $tc_pdf_file .'" target="_blank" class="btn-download"><i class="fas fa-download"></i>&nbsp;Scarica contratto in pdf</a></p>';
+            $percorsoStandard = false;            
+        }
+
+        // caso speciale: Pre-Contratto
+        if (substr($this->contrattoUID,0,2) !== 'C-') {
+            $tc_pdf_file = generate_contratto_pdf($this->contrattoUID, true);
+            echo '<p class="mb-3"><a href="' . $tc_pdf_file .'" target="_blank" class="btn-download"><i class="fas fa-download"></i>&nbsp;Scarica il Pre-Contratto in pdf ('. $this->contrattoUID .')</a></p>';
+            $percorsoStandard = false;
         }
 
         
         // eseguo lo shortcode solo su frontend, su admin crasha per mancanza di parametri
-        if ( ! is_admin() && ! \Elementor\Plugin::$instance->editor->is_edit_mode() && $this->contrattoUID!==null) {        
+        if ( ! is_admin() && ! \Elementor\Plugin::$instance->editor->is_edit_mode() && $this->contrattoUID!==null && $percorsoStandard) {        
             
             // CARICO I DATI DAL TRANSIENT
             $this->contrattoData = $this->loadContrattoData($this->contrattoUID);

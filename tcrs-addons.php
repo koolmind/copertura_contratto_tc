@@ -226,6 +226,7 @@ class PangeaTerrecablateAddons {
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             dataora timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             indirizzo varchar(100) NOT NULL DEFAULT '',
+            civico varchar(10) NOT NULL DEFAULT '',
             cap varchar(5) NOT NULL DEFAULT '',
             comune varchar(50) NOT NULL DEFAULT '',            
             provincia varchar(2) NOT NULL DEFAULT '',

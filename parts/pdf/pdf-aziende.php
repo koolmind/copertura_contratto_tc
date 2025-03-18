@@ -616,13 +616,13 @@ $pdf->MultiCell(0,4, decodeUTF8("Letta e compresa l'informativa privacy riportat
 
 // Consenso trattamento dati: commerciale
 $pdf->Ln(2);
-$temp = $cnt['consenso_marketing'] === NULL ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : ( $cnt['consenso_marketing'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO");
+$temp = $cnt['consenso_marketing'] === NULL ? "[ ] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : ( $cnt['consenso_marketing'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO");
 $pdf->MultiCell(0,4, $temp, 0,'C');
 $pdf->MultiCell(0,4, decodeUTF8("al trattamento dei dati personali da parte di Terrecablate per l'invio di comunicazioni promozionali e di marketing, incluso l'invio di newsletter e ricerche di mercato, attraverso strumenti automatizzati (sms, mms, email, notifiche push, fax) e non (posta cartacea, telefono con operatore). ") );
 
 // Consenso trattamento dati: profilazione
 $pdf->Ln(2);
-$temp = $cnt['consenso_profilazione'] === NULL ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : ( $cnt['consenso_profilazione'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO");
+$temp = $cnt['consenso_profilazione'] === NULL ? "[ ] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : ( $cnt['consenso_profilazione'] ? "[X] PRESTO IL CONSENSO     [ ] NEGO IL CONSENSO" : "[ ] PRESTO IL CONSENSO     [X] NEGO IL CONSENSO");
 $pdf->MultiCell(0,4, $temp, 0,'C');
 $pdf->MultiCell(0,4, decodeUTF8("al trattamento dei dati personali da parte di Terrecablate per l'''analisi delle scelte d'''acquisto e delle preferenze comportamentali nei Punti Amici e sul sito web, al fine di meglio strutturare comunicazioni e proposte commerciali personalizzate, per effettuare analisi generali per fini di orientamento strategico e di intelligence commerciale e, in genere, per attività di profilazione.") );
 
@@ -1023,8 +1023,8 @@ $pdf->WriteTable($columns);
 $columns = null;
 
 $pdf->SetTextColor(0,0,0);
-$temp = !isset($ele['elenchi_consenso']) ? "[ ] SI     [ ] NO" : ( $ele['elenchi_consenso']==1 ? "\n[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
-$temp .= !isset($ele['elenchi_servabbonati']) ? "\n[ ] DESIDERO " : ( $ele['elenchi_servabbonati'] ? "\nDESIDERO " : "\nNON DESIDERO " );
+$temp = ( !isset($ele['elenchi_consenso']) || NULL === $ele['elenchi_consenso'] ) ? "[ ] SI     [ ] NO" : ( $ele['elenchi_consenso']==1 ? "\n[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
+$temp .= ( !isset($ele['elenchi_servabbonati']) || NULL === $ele['elenchi_servabbonati'] ) ? "\n[ ] DESIDERO " : ( $ele['elenchi_servabbonati'] ? "\nDESIDERO " : "\nNON DESIDERO " );
 $temp .= "che i dati da me indicati possano essere foniti a chi ne faccia richiesta ad un Servizio di informazione abbonati)\n";
 $pdf->MultiCell(0,$lineHeight, $temp, 1,'C');
 
@@ -1093,7 +1093,7 @@ $col[] = array('text' =>decodeUTF8("Una persona che non conosce o che non ricord
 $columns[] = $col;
 
 $col = array();
-$temp = !isset($ele['elenchi_nomedanumero']) ? "[ ] SI     [ ] NO"  : ( $ele['elenchi_nomedanumero'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
+$temp = ( !isset($ele['elenchi_nomedanumero']) || NULL === $ele['elenchi_nomedanumero'] ) ? "[ ] SI     [ ] NO"  : ( $ele['elenchi_nomedanumero'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
 $col[] = array('text' => $temp, 'width' => '200', 'height' => $cellHeight, 'align' => 'C', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 
@@ -1111,7 +1111,7 @@ $columns[] = $col;
 
 $col = array();
 $temp = decodeUTF8("Se SI, iI simbolo della bustina indicherà questa Sua scelta.      ");
-$temp .= !isset($ele['elenchi_posta']) ? "[ ] SI     [ ] NO" : ( $ele['elenchi_posta'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
+$temp .= ( !isset($ele['elenchi_posta']) || NULL === $ele['elenchi_posta'] ) ? "[ ] SI     [ ] NO" : ( $ele['elenchi_posta'] ? "[X] SI     [ ] NO" : "[ ] SI     [X] NO" );
 $col[] = array('text' => $temp, 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $blu, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;
 

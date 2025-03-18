@@ -191,7 +191,7 @@ jQuery(document).ready(function ($) {
       }
 
       // è un CF valido?
-      if (/^[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]$/.test(str)) {
+      if (/^[a-z]{6}[0-9]{2}[a-z][0-9]{2}[a-z]([0-9]{3}|[0-9]{2}[a-z])[a-z]$/i.test(str)) {
         return true;
       }
 

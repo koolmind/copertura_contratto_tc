@@ -145,6 +145,10 @@ $col[] = array('text' => decodeUTF8('Scadenza: '. showDate($cnt['cliente_doc_sca
 $columns[] = $col;
 
 $col = array();
+$col[] = array('text' => decodeUTF8('Nazionalità: '. strtoupper($cnt['cliente_nazionalita']) ), 'width' => '200', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
+$columns[] = $col;
+
+$col = array();
 $col[] = array('text' => decodeUTF8('Residenza (o domicilio italiano): '. strtoupper($cnt['cliente_indirizzo']) ), 'width' => '160', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $col[] = array('text' => decodeUTF8('N°: '. strtoupper($cnt['cliente_civico']) ), 'width' => '40', 'height' => $cellHeight, 'align' => 'L', 'font_name' => '', 'font_size' => '', 'font_style' => '', 'fillcolor' => $bianco, 'textcolor' => $nero, 'drawcolor' => $blu, 'linewidth' => '0.3', 'linearea' => 'B');
 $columns[] = $col;

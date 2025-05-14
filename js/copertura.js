@@ -149,8 +149,10 @@
   }
 
   function validazione() {
+    console.log(`val: ${tipoCli}`);
     if (
       tipoCli == undefined ||
+      (tipoCli != undefined && tipoCli != "residenziali" && tipoCli != "aziende") ||
       sProvincia == undefined ||
       sComune == undefined ||
       sIndirizzo == undefined ||
@@ -158,7 +160,7 @@
     ) {
       Swal.fire({
         title: "Impossibile procedere",
-        text: "Alcune informazioni sono mancanti. Controlla di aver correttamente impostato la tipologia di contratto.",
+        text: "Alcune informazioni sono errate o mancanti. Controlla di aver correttamente impostato la tipologia di contratto.",
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -364,7 +366,7 @@
   // INIT
   function init() {
     var params = new URLSearchParams(window.location.search);
-    tipoCli = params.get("tipoCli") ?? undefined;
+    tipoCli = params.get("tc") ?? undefined;
     loadProvince();
   }
 
